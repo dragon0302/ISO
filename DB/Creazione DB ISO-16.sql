@@ -1,12 +1,12 @@
 drop schema  ISO16;
 create schema ISO16;
 
-create table carello(
-    ID_carello int  primary key not null
+CREATE TABLE carrello(
+    ID_carrello int  primary key not null
 );
 
 CREATE TABLE prodotto(
-    ID INTEGER PRIMARY KEY NOT NULL,
+    ID_prodotto INTEGER PRIMARY KEY NOT NULL,
     Nome CHAR(20) NOT NULL,
     MediaValutazione DOUBLE NOT NULL,
     Taglia CHAR(3) NOT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE prodotto(
     Categoria CHAR NOT NULL
 );
 
-create TABLE metodoPagamento(
+CREATE TABLE metodoPagamento(
     NumeroCarta DOUBLE PRIMARY KEY NOT NULL,
     DataScadenza CHAR(5) NOT NULL,
     CVV DOUBLE NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE Utente (
     Amministratore TINYINT(1) DEFAULT 0 CHECK (Amministratore IN (0,1))
 );
 
-create table ordine(
+CREATE TABLE ordine(
     ID_ordine integer  primary key NOT NULL,
     Data_ordine DATE not null,
     Prezzo_tot float not null
