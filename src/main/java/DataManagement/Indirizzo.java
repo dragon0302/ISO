@@ -1,9 +1,9 @@
-package DataManagment;
+package DataManagement;
 
 public class Indirizzo {
 
   private int ID_Indirizzo;
-  private String città;
+  private String citta;
   private String provincia;
   private String cap;
   private String via;
@@ -14,9 +14,9 @@ public class Indirizzo {
   private boolean fatturazione;
   private String CF_utente;
 
-  public Indirizzo(int ID_Indirizzo, String città, String provincia, String cap, String via, int civico, String scala, String indirizzo2, String note, boolean fatturazione, String CF_utente) {
+  public Indirizzo(int ID_Indirizzo, String citta, String provincia, String cap, String via, int civico, String scala, String indirizzo2, String note, boolean fatturazione, String CF_utente) {
     this.ID_Indirizzo = ID_Indirizzo;
-    this.città = città;
+    this.citta = citta;
     this.provincia = provincia;
     this.cap = cap;
     this.via = via;
@@ -37,11 +37,11 @@ public class Indirizzo {
   }
 
   public String getCittà() {
-    return città;
+    return citta;
   }
 
-  public void setCittà(String città) {
-    this.città = città;
+  public void setCittà(String citta) {
+    this.citta = citta;
   }
 
   public String getProvincia() {

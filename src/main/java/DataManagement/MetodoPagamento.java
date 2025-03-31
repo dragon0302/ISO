@@ -1,4 +1,4 @@
-package DataManagment;
+package DataManagement;
 
 import java.util.Date;
 
