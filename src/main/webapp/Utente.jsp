@@ -11,7 +11,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>prova del Utente</title>
+    <title>Prova Utente</title>
 </head>
 <body>
 <h2>Catalogo</h2>
@@ -43,8 +43,8 @@
     <label for="DataNascita">Data di Nascita<textarea name="DataNascita" id="DataNascita" required placeholder="Inserire la data di nascita"></textarea></label>
 
     <label>Amministratore:</label>
-    <label><input type="radio" name="Amministratore" value="Y" required> M</label>
-    <label><input type="radio" name="Amministratore" value="N" required> F</label>
+    <label><input type="radio" name="Amministratore" value="1" required> Y</label>
+    <label><input type="radio" name="Amministratore" value="0" required> N</label>
 
     <input type="submit" value="add">
     </form>
