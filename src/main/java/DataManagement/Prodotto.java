@@ -3,15 +3,15 @@ package DataManagement;
 public class Prodotto {
     private String id_prodotto;
     private String nome;
-    private Double media_valuazione;
+    private Double media_valutazione;
     private String taglia;
     private String descrizione;
     private String categoria;
 
-    public Prodotto(String id_prodotto, String nome, Double media_valuazione, String taglia, String descrizione, String categoria) {
+    public Prodotto(String id_prodotto, String nome, Double media_valutazione, String taglia, String descrizione, String categoria) {
         this.id_prodotto = id_prodotto;
         this.nome = nome;
-        this.media_valuazione = media_valuazione;
+        this.media_valutazione = media_valutazione;
         this.taglia = taglia;
         this.descrizione = descrizione;
         this.categoria = categoria;
@@ -33,12 +33,12 @@ public class Prodotto {
         this.nome = nome;
     }
 
-    public Double getMedia_valuazione() {
-        return media_valuazione;
+    public Double getMedia_valutazione() {
+        return media_valutazione;
     }
 
-    public void setMedia_valuazione(Double media_valuazione) {
-        this.media_valuazione = media_valuazione;
+    public void setMedia_valutazione(Double media_valutazione) {
+        this.media_valutazione = media_valutazione;
     }
 
     public String getTaglia() {
