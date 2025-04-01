@@ -17,7 +17,7 @@
 <h2>Catalogo</h2>
 <h3>Inserimento</h3>
 
-<form action="logIN" method="POST">
+    <form action="logIN" method="POST">
 
     <%--@declare id="nomeutente"--%>
     <%--@declare id="password"--%>
@@ -30,30 +30,23 @@
 
     <label for="NomeUtente">User<textarea name="NomeUtente" id="NomeUtente" maxlength="50" required placeholder="Inserire il proprio user"></textarea></label>
 
-    <label for="Password">password<textarea name="PW" maxlength="255"></textarea></label>
+    <label for="Password">password<textarea name="Password" id="Password" maxlength="255" required placeholder="Inserire la Password"></textarea></label>
 
-    <label for="Nome">Nome<textarea></textarea></label>
+    <label for="Nome">Nome<textarea name="Nome" id="Nome" maxlength="50" required placeholder="Inserire il proprio nome"></textarea></label>
 
-    <label for="Cognome">Cognome<textarea></textarea></label>
+    <label for="Cognome">Cognome<textarea name="Cognome" id="Cognome" maxlength="50" required placeholder="Inserire il proprio cognome"></textarea></label>
 
-    <label for="Sesso">Sesso<textarea></textarea></label>
+    <label>Sesso:</label>
+    <label><input type="radio" name="sesso" value="M" required> M</label>
+    <label><input type="radio" name="sesso" value="F" required> F</label>
 
-    <label for="DataNascita">...<textarea></textarea></label>
+    <label for="DataNascita">Data di Nascita<textarea name="DataNascita" id="DataNascita" required placeholder="Inserire la data di nascita"></textarea></label>
 
-    <label for="Amministratore">...<textarea></textarea></label>
+    <label>Amministratore:</label>
+    <label><input type="radio" name="Amministratore" value="Y" required> M</label>
+    <label><input type="radio" name="Amministratore" value="N" required> F</label>
 
     <input type="submit" value="add">
-</form>
-
-<%
-
-    String messagio = (String) request.getAttribute("messagio");
-    if (messagio != null && !messagio.isEmpty()){
-%>
-
-<p><%=messagio%></p>
-
-<%}%>
-
+    </form>
 </body>
 </html>
