@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>prova del Prodotto</title>
+    <title>Prova Prodotto</title>
 </head>
 <body>
 
@@ -32,9 +32,9 @@
 
     <label for="Taglia">Taglia prodotto<textarea name="Taglia" id="Taglia" maxlength="3" required placeholder="Inserire taglia del prodotto"></textarea></label>
 
-    <label for="Descrizione">Data di Nascita<textarea name="Descrizione" id="Descrizione" maxlength="500" required placeholder="Inserire la desscrizione del prodotto"></textarea></label>
+    <label for="Descrizione">Descrizione<textarea name="Descrizione" id="Descrizione" maxlength="500" required placeholder="Inserire la desscrizione del prodotto"></textarea></label>
 
-    <label for="Categoria">Data di Nascita<textarea name="Categoria" id="Categoria" maxlength="20" required placeholder="Inserire la Categoria del prodotto"></textarea></label>
+    <label for="Categoria">Categoria<textarea name="Categoria" id="Categoria" maxlength="20" required placeholder="Inserire la Categoria del prodotto"></textarea></label>
 
     <input type="submit" value="add">
 
