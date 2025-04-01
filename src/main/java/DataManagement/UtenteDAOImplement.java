@@ -9,8 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class UtenteDAOImplement implements UtenteDAO {
+
     private static DataSource ds;
-    private static final String TABLE_NAME = "utente";
+    private static final String TABLE_NAME = "Utente";
 
     static {
         try {
@@ -22,14 +23,30 @@ public class UtenteDAOImplement implements UtenteDAO {
             System.out.println("Naming Exception: " + e.getMessage());
         }
     }
-    public synchronized void doSave(Utente utente) throws SQLException{
+
+    public synchronized void DoSave(Utente utente) throws SQLException {
         Connection conn = null;
         PreparedStatement query = null;
+
         try {
             conn = ds.getConnection();
-            query = conn.prepareStatement("INSERT INTO" + TABLE_NAME +  "(CF, NomeUtente, Password, Nome, Cognome, Sesso, DataNascita, Amministratore) VALUES (?,?,?,?,?,?,?,?);");
+            System.out.println("prova");
+            query = conn.prepareStatement("INSERT INTO Utente (CF, NomeUtente, Password, Nome, Cognome, Sesso, DataNascita, Amministratore) VALUES (?,?,?,?,?,?,?,?);");
+
+            query.setString(1, utente.getCf());
+            query.setString(2, utente.getNomeutente());
+            query.setString(3, utente.getPassword());
+            query.setString(4, utente.getNome());
+            query.setString(5, utente.getCognome());
+            query.setString(6, utente.getSesso());
+            query.setDate(7, utente.getDataNascita());
+            query.setBoolean(8, utente.isAmministratore());
+
             query.executeUpdate();
-        }finally {
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
             try {
                 if (query != null) {
                     query.close();
@@ -41,4 +58,5 @@ public class UtenteDAOImplement implements UtenteDAO {
             }
         }
     }
+
 }

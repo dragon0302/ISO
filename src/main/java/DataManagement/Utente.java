@@ -6,15 +6,17 @@ public class Utente {
     private String cf;
     private String nomeutente;
     private String nome;
+    private String Cognome;
     private String password;
     private String sesso;
     private Date DataNascita;
     private boolean isAmministratore;
 
-    public Utente(String cf, String nomeutente, String nome, String password, String sesso, Date dataNascita, boolean isAmministratore) {
+    public Utente(String cf, String nomeutente, String nome,String cognome, String password, String sesso, Date dataNascita, boolean isAmministratore) {
         this.cf = cf;
         this.nomeutente = nomeutente;
         this.nome = nome;
+        this.Cognome = cognome;
         this.password = password;
         this.sesso = sesso;
         DataNascita = dataNascita;
@@ -45,6 +47,14 @@ public class Utente {
         this.nome = nome;
     }
 
+    public String getCognome() {
+        return Cognome;
+    }
+
+    public void setCognome(String cognome) {
+        Cognome = cognome;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -61,8 +71,8 @@ public class Utente {
         this.sesso = sesso;
     }
 
-    public Date getDataNascita() {
-        return DataNascita;
+    public java.sql.Date getDataNascita() {
+        return (java.sql.Date) DataNascita;
     }
 
     public void setDataNascita(Date dataNascita) {
