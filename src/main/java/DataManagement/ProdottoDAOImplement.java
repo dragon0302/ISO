@@ -6,7 +6,11 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import static java.util.Arrays.stream;
 
 public class ProdottoDAOImplement implements ProdottoDAO{
     private static DataSource ds;
@@ -27,7 +31,7 @@ public class ProdottoDAOImplement implements ProdottoDAO{
         PreparedStatement query = null;
         try {
             conn = ds.getConnection();
-            query = conn.prepareStatement("INSERT INTO" + TABLE_NAME +  "(ID_prodotto, Nome, MediaValutazione, Taglia, Descrizione, Categoria) VALUES (?,?,?,?,?,?);");
+            query = conn.prepareStatement("INSERT INTO " + TABLE_NAME +  "(ID_prodotto, Nome, MediaValutazione, Taglia, Descrizione, Categoria) VALUES (?,?,?,?,?,?);");
             query.executeUpdate();
         }finally {
             try {
@@ -40,5 +44,25 @@ public class ProdottoDAOImplement implements ProdottoDAO{
                 }
             }
         }
+    }
+    public synchronized ArrayList<Prodotto> getProdotti() throws SQLException{
+        Connection conn = ds.getConnection();
+        PreparedStatement query = null;
+        ResultSet rs = null;
+        ArrayList<Prodotto> prodotti = new ArrayList<>();
+        while (rs.next()) {
+            String idProdotto = rs.getString("ID_prodotto");
+            String nomeProdotto = rs.getString("Nome");
+            Double mediaValutazione = Double.valueOf(rs.getString("MediaValutazione"));
+            String taglia = rs.getString("Taglia");
+            String descrizione = rs.getString("Descrizione");
+            String categoria = rs.getString("Categoria");
+            Prodotto p = new Prodotto(idProdotto,nomeProdotto,mediaValutazione,taglia,descrizione,categoria);
+        }
+        return prodotti;
+    }
+    public synchronized void deleteProdotto(Prodotto prodotto) throws SQLException{
+        Connection conn = ds.getConnection();
+        PreparedStatement query = conn.prepareStatement("DELETE FROM " + TABLE_NAME + " WHERE ID_prodotto = " + prodotto.getId_prodotto());
     }
 }
