@@ -47,8 +47,8 @@ public class ProdottoDAOImplement implements ProdottoDAO{
     }
     public synchronized ArrayList<Prodotto> getProdotti() throws SQLException{
         Connection conn = ds.getConnection();
-        PreparedStatement query = null;
-        ResultSet rs = null;
+        PreparedStatement query = conn.prepareStatement("SELECT * FROM " + TABLE_NAME);
+        ResultSet rs = query.executeQuery();
         ArrayList<Prodotto> prodotti = new ArrayList<>();
         while (rs.next()) {
             String idProdotto = rs.getString("ID_prodotto");
@@ -57,7 +57,8 @@ public class ProdottoDAOImplement implements ProdottoDAO{
             String taglia = rs.getString("Taglia");
             String descrizione = rs.getString("Descrizione");
             String categoria = rs.getString("Categoria");
-            Prodotto p = new Prodotto(idProdotto,nomeProdotto,mediaValutazione,taglia,descrizione,categoria);
+            Double prezzo = rs.getDouble("Prezzo");
+            Prodotto p = new Prodotto(idProdotto,nomeProdotto,mediaValutazione,taglia,descrizione,categoria,prezzo);
         }
         return prodotti;
     }

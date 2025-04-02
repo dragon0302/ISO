@@ -7,14 +7,16 @@ public class Prodotto {
     private String taglia;
     private String descrizione;
     private String categoria;
+    private Double prezzo;
 
-    public Prodotto(String id_prodotto, String nome, Double media_valutazione, String taglia, String descrizione, String categoria) {
+    public Prodotto(String id_prodotto, String nome, Double media_valutazione, String taglia, String descrizione, String categoria, Double prezzo) {
         this.id_prodotto = id_prodotto;
         this.nome = nome;
         this.media_valutazione = media_valutazione;
         this.taglia = taglia;
         this.descrizione = descrizione;
         this.categoria = categoria;
+        this.prezzo = prezzo;
     }
 
     public String getId_prodotto() {
@@ -64,4 +66,8 @@ public class Prodotto {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
+
+    public Double getPrezzo() {return prezzo;}
+
+    public void setPrezzo(Double prezzo) {}
 }
