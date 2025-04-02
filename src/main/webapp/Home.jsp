@@ -36,6 +36,13 @@
                 </ul>
             </aside>
 
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Prezzo (€)</th>
+                <th>Descrizione</th>
+            </tr>
+
             <section class="content">
                 <div class="banner">Banner</div>
 
