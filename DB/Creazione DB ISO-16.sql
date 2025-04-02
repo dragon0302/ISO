@@ -24,7 +24,8 @@ CREATE TABLE prodotto(
                          MediaValutazione DOUBLE NOT NULL check ( MediaValutazione >= 0 && MediaValutazione <= 10 ),
                          Taglia CHAR(3) NOT NULL,
                          Descrizione VARCHAR(500) NOT NULL,
-                         Categoria VARCHAR(20) NOT NULL
+                         Categoria VARCHAR(20) NOT NULL,
+                         Prezzo DOUBLE NOT NULL
 );
 
 CREATE TABLE metodoPagamento(
