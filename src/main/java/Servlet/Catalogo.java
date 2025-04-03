@@ -25,7 +25,7 @@ public class Catalogo extends HttpServlet {
 
             request.setAttribute("prodotti", prodotti);
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/Home.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/Sig-up.jsp");
             dispatcher.forward(request, response);
         }catch (Exception e) {
             e.printStackTrace();
