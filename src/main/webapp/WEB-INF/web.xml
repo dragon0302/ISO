@@ -6,6 +6,6 @@
         version="6.0">
     <display-name>iso-16</display-name>
     <welcome-file-list>
-        <welcome-file>Log_in.jsp</welcome-file>
+        <welcome-file>Sig-up.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
