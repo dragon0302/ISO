@@ -31,7 +31,7 @@ public class UtenteDAOImplement implements UtenteDAO {
         try {
             conn = ds.getConnection();
             System.out.println("prova");
-            query = conn.prepareStatement("INSERT INTO Utente (CF, NomeUtente, Password, Nome, Cognome, Sesso, DataNascita, Amministratore) VALUES (?,?,?,?,?,?,?,?);");
+            query = conn.prepareStatement("INSERT INTO " + TABLE_NAME + " (CF, NomeUtente, Password, Nome, Cognome, Sesso, DataNascita, Amministratore) VALUES (?,?,?,?,?,?,?,?);");
 
             query.setString(1, utente.getCf());
             query.setString(2, utente.getNomeutente());
