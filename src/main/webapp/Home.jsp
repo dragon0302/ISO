@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="DataManagement.Prodotto" %>
+
 <!DOCTYPE html>
 <html lang="it">
     <head>
@@ -27,14 +28,14 @@
         </header>
 
         <main>
-            <aside class="hide-sidebar">
-                <h3>Categorie dei prodotti</h3>
-                <ul>
-                    <li> Categoria 1 </li>
-                    <li> Categoria 2 </li>
-                    <li> Categoria 3 </li>
-                </ul>
-            </aside>
+                <aside class="hide-sidebar">
+                    <h3>Categorie dei prodotti</h3>
+                    <ul>
+                        <li> Categoria 1 </li>
+                        <li> Categoria 2 </li>
+                        <li> Categoria 3 </li>
+                    </ul>
+                </aside>
 
             <tr>
                 <th>ID</th>
@@ -47,15 +48,17 @@
                 <div class="banner">Banner</div>
 
                 <h2>Novità</h2>
+
                 <div class="product-slider">
                     <%
+
                         List<Prodotto> prodottiNovita = (List<Prodotto>) request.getAttribute("prodottiNovita");
                         if (prodottiNovita != null) {
                             for (Prodotto p : prodottiNovita) {
                     %>
                     <div class="product">
                         <h3><%= p.getNome() %></h3>
-                        <%-- <p>Prezzo: €<%= p.getPrezzo() %></p> --%>
+                        <p>Prezzo: €<%= p.getPrezzo() %></p>
                         <p><%= p.getDescrizione() %></p>
                         <a href="prodotto.jsp?id=<%= p.getId_prodotto() %>">Dettagli</a>
                     </div>
@@ -72,13 +75,13 @@
                 <h2>Prodotti più acquistati</h2>
                 <div class="product-slider">
                     <%
-                        List<Prodotto> prodottiPopolari = (List<Prodotto>) request.getAttribute("prodottiPopolari");
+                        List<Prodotto> prodottiPopolari = (List<Prodotto>) request.getAttribute("prodotti");
                         if (prodottiPopolari != null) {
                             for (Prodotto p : prodottiPopolari) {
                     %>
                     <div class="product">
                         <h3><%= p.getNome() %></h3>
-                        <%-- <p>Prezzo: €<%= p.getPrezzo() %></p> --%>
+                        <p>Prezzo: €<%= p.getPrezzo() %></p>
                         <p><%= p.getDescrizione() %></p>
                         <a href="prodotto.jsp?id=<%= p.getId_prodotto() %>">Dettagli</a>
                     </div>

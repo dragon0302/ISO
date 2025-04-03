@@ -1,7 +1,7 @@
 package DataManagement;
 
 public class Prodotto {
-    private String id_prodotto;
+    private int id_prodotto;
     private String nome;
     private Double media_valutazione;
     private String taglia;
@@ -9,7 +9,7 @@ public class Prodotto {
     private String categoria;
     private Double prezzo;
 
-    public Prodotto(String id_prodotto, String nome, Double media_valutazione, String taglia, String descrizione, String categoria, Double prezzo) {
+    public Prodotto(int id_prodotto, String nome, Double media_valutazione, String taglia, String descrizione, String categoria, Double prezzo) {
         this.id_prodotto = id_prodotto;
         this.nome = nome;
         this.media_valutazione = media_valutazione;
@@ -19,11 +19,11 @@ public class Prodotto {
         this.prezzo = prezzo;
     }
 
-    public String getId_prodotto() {
+    public int getId_prodotto() {
         return id_prodotto;
     }
 
-    public void setId_prodotto(String id_prodotto) {
+    public void setId_prodotto(int id_prodotto) {
         this.id_prodotto = id_prodotto;
     }
 

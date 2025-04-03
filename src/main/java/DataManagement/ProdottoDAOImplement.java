@@ -14,7 +14,7 @@ import static java.util.Arrays.stream;
 
 public class ProdottoDAOImplement implements ProdottoDAO{
     private static DataSource ds;
-    private static final String TABLE_NAME = "indirizzo";
+    private static final String TABLE_NAME = "prodotto";
 
     static {
         try {
@@ -51,7 +51,7 @@ public class ProdottoDAOImplement implements ProdottoDAO{
         ResultSet rs = query.executeQuery();
         ArrayList<Prodotto> prodotti = new ArrayList<>();
         while (rs.next()) {
-            String idProdotto = rs.getString("ID_prodotto");
+            int idProdotto = rs.getInt("ID_prodotto");
             String nomeProdotto = rs.getString("Nome");
             Double mediaValutazione = Double.valueOf(rs.getString("MediaValutazione"));
             String taglia = rs.getString("Taglia");
@@ -59,6 +59,7 @@ public class ProdottoDAOImplement implements ProdottoDAO{
             String categoria = rs.getString("Categoria");
             Double prezzo = rs.getDouble("Prezzo");
             Prodotto p = new Prodotto(idProdotto,nomeProdotto,mediaValutazione,taglia,descrizione,categoria,prezzo);
+            prodotti.add(p);
         }
         return prodotti;
     }
