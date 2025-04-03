@@ -52,5 +52,12 @@
 
     <input type="submit" value="add">
     </form>
+
+    <footer>
+        <a href="#">About Us</a>
+        <a href="#">Contattaci</a>
+        <a href="#">Termini e condizioni</a>
+        <a href="#">Assistenza</a>
+    </footer>
 </body>
 </html>
