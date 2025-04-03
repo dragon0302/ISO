@@ -78,7 +78,7 @@
                 justify-content: center;
                 gap: 50px; /* Distanza tra le immagini laterali e il form di inserimento */
                 margin-top: 100px; /* Distanza tra la barra superiore fissa e il contenuto */
-                width: 100%;
+                width: 90%;
                 padding: 0 20px; /* Spazio ai lati del contenuto */
             }
 
@@ -253,8 +253,8 @@
                 </div>
                 <div class="form-group">
                     <label>Sesso: <span style="color:red;">*</span></label>
-                    <label><input type="radio" name="sesso" value="M" required> M</label>
-                    <label><input type="radio" name="sesso" value="F" required> F</label>
+                    <label>M<input type="radio" name="sesso" value="M" required></label>
+                    <label>F<input type="radio" name="sesso" value="F" required></label>
                 </div>
                 <div class="form-group">
                     <label for="DataNascita">Data di Nascita <span style="color:red;">*</span></label>
@@ -262,8 +262,8 @@
                 </div>
                 <div class="form-group">
                     <label>Amministratore: <span style="color:red;">*</span></label>
-                    <label><input type="radio" name="Amministratore" value="1" required> Y</label>
-                    <label><input type="radio" name="Amministratore" value="0" required> N</label>
+                    <label>Y<input type="radio" name="Amministratore" value="1" required></label>
+                    <label>N<input type="radio" name="Amministratore" value="0" required></label>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Aggiungi Utente">
