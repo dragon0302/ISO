@@ -231,6 +231,7 @@
         <div class="form-container">
             <h2>Catalogo - Inserimento Utente</h2>
             <form action="Utente" method="POST">
+                <input type="hidden" name="action" placeholder="insert">
                 <div class="form-group">
                     <label for="CodiceFiscale">Codice Fiscale <span style="color:red;">*</span></label>
                     <input name="CodiceFiscale" id="CodiceFiscale" maxlength="50" required placeholder="Inserire il proprio codice fiscale">
@@ -266,7 +267,7 @@
                     <label>N<input type="radio" name="Amministratore" value="0" required></label>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Aggiungi Utente">
+                    <input type="submit" value="Aggiungi ">
                 </div>
             </form>
         </div>
