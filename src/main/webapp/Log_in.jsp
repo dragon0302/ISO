@@ -239,10 +239,10 @@
 
 <!-- Footer con stile di barra inferiore -->
 <div class="footer-bar">
-    <a href="#">About Us</a>
-    <a href="#">Contattaci</a>
-    <a href="#">Termini e condizioni</a>
-    <a href="#">Assistenza</a>
+    <a href="About_Us.jsp">About Us</a>
+    <a href="contattaci.jsp">Contattaci</a>
+    <a href="Termini_e_condizioni.jsp">Termini e condizioni</a>
+    <a href="Assistenza.jsp">Assistenza</a>
 </div>
 
 </body>

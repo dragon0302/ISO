@@ -1,109 +1,63 @@
 <%--
   Created by IntelliJ IDEA.
   User: PRINCIPALE
-  Date: 02/04/2025
-  Time: 11:28
+  Date: 01/04/2025
+  Time: 11:13
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.List" %>
-<%@ page import="DataManagement.Prodotto" %>
+<<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
-<html lang="it">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Home Page</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-        <header>
-            <div class="logo">Logo</div>
-            <nav>
-                <input type="text" placeholder="Cerca..." class="search-bar">
-                <a href="#">Log-in</a>
-                <a href="#">Carrello</a>
-            </nav>
-        </header>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Prova Utente</title>
+</head>
+<body>
+<h2>Catalogo</h2>
+<h3>Inserimento</h3>
 
-        <main>
-                <aside class="hide-sidebar">
-                    <h3>Categorie dei prodotti</h3>
-                    <ul>
-                        <li> Categoria 1 </li>
-                        <li> Categoria 2 </li>
-                        <li> Categoria 3 </li>
-                    </ul>
-                </aside>
+    <form action="Utente" method="POST">
 
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Prezzo (€)</th>
-                <th>Descrizione</th>
-            </tr>
+    <%--@declare id="CodiceFiscale"--%>
+    <%--@declare id="nomeutente"--%>
+    <%--@declare id="password"--%>
+    <%--@declare id="Nome"--%>
+    <%--@declare id="Cognome"--%>
+    <%--@declare id="Sesso"--%>
+    <%--@declare id="DataNascita"--%>
+    <%--@declare id="Amministratore"--%>
 
-            <section class="content">
-                <div class="banner">Banner</div>
+    <input type="hidden" name="action" value="insert">
 
-                <h2>Novità</h2>
+    <label for="CodiceFiscale">Codice Fiscale<input name="CodiceFiscale" id="CodiceFiscale" maxlength="50" required placeholder="Inserire il proprio user"></input></label>
 
-                <div class="product-slider">
-                    <%
+    <label for="NomeUtente">User<input name="NomeUtente" id="NomeUtente" maxlength="50" required placeholder="Inserire il proprio user"></input></label>
 
-                        List<Prodotto> prodottiNovita = (List<Prodotto>) request.getAttribute("prodottiNovita");
-                        if (prodottiNovita != null) {
-                            for (Prodotto p : prodottiNovita) {
-                    %>
-                    <div class="product">
-                        <h3><%= p.getNome() %></h3>
-                        <p>Prezzo: €<%= p.getPrezzo() %></p>
-                        <p><%= p.getDescrizione() %></p>
-                        <a href="prodotto.jsp?id=<%= p.getId_prodotto() %>">Dettagli</a>
-                    </div>
-                    <%
-                            }
-                        } else {
-                    %>
-                    <p>Nessun prodotto trovato.</p>
-                    <%
-                        }
-                    %>
-                </div>
+    <label for="Password">password<input name="Password" id="Password" maxlength="255" required placeholder="Inserire la Password"></input></label>
 
-                <h2>Prodotti più acquistati</h2>
-                <div class="product-slider">
-                    <%
-                        List<Prodotto> prodottiPopolari = (List<Prodotto>) request.getAttribute("prodotti");
-                        if (prodottiPopolari != null) {
-                            for (Prodotto p : prodottiPopolari) {
-                    %>
-                    <div class="product">
-                        <h3><%= p.getNome() %></h3>
-                        <p>Prezzo: €<%= p.getPrezzo() %></p>
-                        <p><%= p.getDescrizione() %></p>
-                        <a href="prodotto.jsp?id=<%= p.getId_prodotto() %>">Dettagli</a>
-                    </div>
-                    <%
-                        }
-                    } else {
-                    %>
-                    <p>Nessun prodotto trovato.</p>
-                    <%
-                        }
-                    %>
-                </div>
+    <label for="Nome">Nome<input name="Nome" id="Nome" maxlength="50" required placeholder="Inserire il proprio nome"></input></label>
 
-            </section>
-        </main>
+    <label for="Cognome">Cognome<input name="Cognome" id="Cognome" maxlength="50" required placeholder="Inserire il proprio cognome"></input></label>
 
-        <footer>
-            <a href="#">About Us</a>
-            <a href="#">Contattaci</a>
-            <a href="#">Termini e condizioni</a>
-            <a href="#">Assistenza</a>
-        </footer>
+    <label>Sesso:</label>
+    <label><input type="radio" name="sesso" value="M" required> M</label>
+    <label><input type="radio" name="sesso" value="F" required> F</label>
 
-    </body>
+    <label for="DataNascita">Data di Nascita<input type="date" name="DataNascita" id="DataNascita" required placeholder="Inserire la data di nascita"></input></label>
+
+    <label>Amministratore:</label>
+    <label><input type="radio" name="Amministratore" value="1" required> Y</label>
+    <label><input type="radio" name="Amministratore" value="0" required> N</label>
+
+    <input type="submit" value="add">
+    </form>
+
+    <footer>
+        <a href="#">About Us</a>
+        <a href="#">Contattaci</a>
+        <a href="#">Termini e condizioni</a>
+        <a href="#">Assistenza</a>
+    </footer>
+</body>
 </html>
