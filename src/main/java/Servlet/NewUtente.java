@@ -23,7 +23,6 @@ public class NewUtente extends HttpServlet {
         String erroreCF = "Codice Fiscale errato";
         String erroreNomeUtente = "Nome utente gia esistente";
         String erroreData = "Data non coretta";
-        String erroreNull = "tutti i campi devo essere completati";
 
         try{
             if(action != null) {
@@ -51,7 +50,7 @@ public class NewUtente extends HttpServlet {
                 } else {
                     Utente utente = new Utente(CF, nomeUtenete, Password, Nome, Cognome, Sesso, dataNascita, Amministratore);
                     utenteDAO.DoSave(utente);
-                    response.sendRedirect("index.jsp");
+                    response.sendRedirect("Home.jsp");
                 }
             }
         }catch (Exception e){
