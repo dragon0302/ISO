@@ -10,11 +10,11 @@ VALUES
     (2, 'RSSMRA85P12F205Z'),
     (3, 'BNCLRA90T15C789Y');
 
-INSERT INTO prodotto (ID_prodotto, Nome, MediaValutazione, Taglia, Descrizione, Categoria)
+INSERT INTO prodotto (ID_prodotto, Nome, MediaValutazione, Taglia, Descrizione, Categoria, Prezzo)
 VALUES
-    (1, 'Maglia del cazzo', 5, 'XL', 'è una maglia con un cazzo', 'Rock'),
-    (2, 'Giacca di pelle', 4.5, 'L', 'Giacca nera in vera pelle', 'Rock'),
-    (3, 'Stivali borchiati', 4.8, '42', 'Stivali con borchie metalliche', 'Goth');
+    (1, 'Maglia del cazzo', 5, 'XL', 'è una maglia con un cazzo', 'Rock', 12.5),
+    (2, 'Giacca di pelle', 4.5, 'L', 'Giacca nera in vera pelle', 'Rock', 90),
+    (3, 'Stivali borchiati', 4.8, '42', 'Stivali con borchie metalliche', 'Goth', 72.72);
 
 INSERT INTO metodoPagamento (CF_Utente, NumeroCarta, DataScadenza, CVV, Tipo, Default_pagamento)
 VALUES
