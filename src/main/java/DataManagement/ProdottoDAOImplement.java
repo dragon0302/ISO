@@ -4,10 +4,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static java.util.Arrays.stream;
@@ -46,25 +44,83 @@ public class ProdottoDAOImplement implements ProdottoDAO{
         }
     }
     public synchronized ArrayList<Prodotto> getProdotti() throws SQLException{
-        Connection conn = ds.getConnection();
-        PreparedStatement query = conn.prepareStatement("SELECT * FROM " + TABLE_NAME);
-        ResultSet rs = query.executeQuery();
+        Connection conn = null;
+        PreparedStatement query2 = null;
         ArrayList<Prodotto> prodotti = new ArrayList<>();
-        while (rs.next()) {
-            int idProdotto = rs.getInt("ID_prodotto");
-            String nomeProdotto = rs.getString("Nome");
-            Double mediaValutazione = Double.valueOf(rs.getString("MediaValutazione"));
-            String taglia = rs.getString("Taglia");
-            String descrizione = rs.getString("Descrizione");
-            String categoria = rs.getString("Categoria");
-            Double prezzo = rs.getDouble("Prezzo");
-            Prodotto p = new Prodotto(idProdotto,nomeProdotto,mediaValutazione,taglia,descrizione,categoria,prezzo);
-            prodotti.add(p);
+
+        try {
+            conn.prepareStatement("SELECT * FROM " + TABLE_NAME);
+            ResultSet rs = query2.executeQuery();
+
+            while (rs.next()) {
+                int idProdotto = rs.getInt("ID_prodotto");
+                String nomeProdotto = rs.getString("Nome");
+                Double mediaValutazione = Double.valueOf(rs.getString("MediaValutazione"));
+                String taglia = rs.getString("Taglia");
+                String descrizione = rs.getString("Descrizione");
+                String categoria = rs.getString("Categoria");
+                Double prezzo = rs.getDouble("Prezzo");
+                Prodotto p = new Prodotto(idProdotto, nomeProdotto, mediaValutazione, taglia, descrizione, categoria, prezzo);
+                prodotti.add(p);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query2 != null) {
+                    query2.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
         }
         return prodotti;
     }
     public synchronized void deleteProdotto(Prodotto prodotto) throws SQLException{
         Connection conn = ds.getConnection();
-        PreparedStatement query = conn.prepareStatement("DELETE FROM " + TABLE_NAME + " WHERE ID_prodotto = " + prodotto.getId_prodotto());
+        PreparedStatement query3 = conn.prepareStatement("DELETE FROM " + TABLE_NAME + " WHERE ID_prodotto = " + prodotto.getId_prodotto());
+    }
+
+    public synchronized ArrayList<Prodotto> getProdottiRecenti() throws SQLException{
+        Connection conn = null;
+        PreparedStatement query4 = null;
+        ArrayList<Prodotto> prodottiRecenti = new ArrayList<>();
+        LocalDate ofsetDate= LocalDate.now().minusDays(7);
+
+        try {
+            conn = ds.getConnection();
+            query4 = conn.prepareStatement("select * from " + TABLE_NAME + " where DataInserimento >= ?");
+
+            query4.setDate(1, Date.valueOf(ofsetDate));
+
+            ResultSet rs = query4.executeQuery();
+
+            while (rs.next()) {
+                int idProdotto = rs.getInt("ID_prodotto");
+                String nomeProdotto = rs.getString("Nome");
+                Double mediaValutazione = Double.valueOf(rs.getString("MediaValutazione"));
+                String taglia = rs.getString("Taglia");
+                String descrizione = rs.getString("Descrizione");
+                String categoria = rs.getString("Categoria");
+                Double prezzo = rs.getDouble("Prezzo");
+                Prodotto p = new Prodotto(idProdotto,nomeProdotto,mediaValutazione,taglia,descrizione,categoria,prezzo);
+                prodottiRecenti.add(p);
+            }
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query4 != null) {
+                    query4.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+        return prodottiRecenti;
     }
 }

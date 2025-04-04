@@ -75,7 +75,7 @@
                 <h2>Prodotti più acquistati</h2>
                 <div class="product-slider">
                     <%
-                        List<Prodotto> prodottiPopolari = (List<Prodotto>) request.getAttribute("prodotti");
+                        List<Prodotto> prodottiPopolari = (List<Prodotto>) request.getAttribute("prodottiPiuAqqistati");
                         if (prodottiPopolari != null) {
                             for (Prodotto p : prodottiPopolari) {
                     %>

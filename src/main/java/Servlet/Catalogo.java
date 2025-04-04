@@ -21,9 +21,9 @@ public class Catalogo extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
-            List<Prodotto> prodotti = prodottoDAO.getProdotti();
+            List<Prodotto> prodotti = prodottoDAO.getProdottiRecenti();
 
-            request.setAttribute("prodotti", prodotti);
+            request.setAttribute("prodottiNovita", prodotti);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("/Home.jsp");
             dispatcher.forward(request, response);
