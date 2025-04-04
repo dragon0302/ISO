@@ -2,20 +2,20 @@ drop schema  ISO16;
 create schema ISO16;
 
 CREATE TABLE Utente (
-                        CF CHAR(16) PRIMARY KEY NOT NULL check ( char_length(CF) = 16 ),
-                        NomeUtente VARCHAR(50) NOT NULL,
-                        Password VARCHAR(255) NOT NULL,
-                        Nome VARCHAR(50) NOT NULL,
-                        Cognome VARCHAR(50) NOT NULL,
-                        Sesso CHAR(1) NOT NULL CHECK (Sesso IN ('M', 'F')),
-                        DataNascita DATE NOT NULL,
-                        Amministratore TINYINT(1) DEFAULT 0 CHECK (Amministratore IN (0,1))
+    CF CHAR(16) PRIMARY KEY NOT NULL check ( char_length(CF) = 16 ),
+    NomeUtente VARCHAR(50) NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    Nome VARCHAR(50) NOT NULL,
+    Cognome VARCHAR(50) NOT NULL,
+    Sesso CHAR(1) NOT NULL CHECK (Sesso IN ('M', 'F')),
+    DataNascita DATE NOT NULL,
+    Amministratore TINYINT(1) DEFAULT 0 CHECK (Amministratore IN (0,1))
 );
 
 CREATE TABLE carrello(
-                         ID_carrello int  primary key not null check ( ID_carrello > 0 ),
-                         CF_utente CHAR(16),
-                         foreign key (CF_utente) references Utente (CF)
+     ID_carrello int  primary key not null check ( ID_carrello > 0 ),
+     CF_utente CHAR(16),
+     foreign key (CF_utente) references Utente (CF)
 );
 
 CREATE TABLE prodotto(
@@ -27,6 +27,16 @@ CREATE TABLE prodotto(
      Categoria VARCHAR(20) NOT NULL,
      Prezzo DOUBLE NOT NULL,
      DataInserimento DATE not null default curdate()
+);
+
+CREATE TABLE acquisto(
+    ID_acquisto integer primary key not null check ( ID_acquisto > 0 ),
+    CodiceSconto TINYINT(1) DEFAULT 0 CHECK (CodiceSconto IN (0,1)),
+    Quantità INTEGER NOT NULL ,
+    ID_Carello INTEGER NOT NULL ,
+    ID_Prodotto INTEGER NOT NULL ,
+    FOREIGN KEY (ID_Carello) references carrello(ID_carrello),
+    FOREIGN KEY (ID_Prodotto) references prodotto(ID_prodotto)
 );
 
 CREATE TABLE metodoPagamento(
