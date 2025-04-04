@@ -65,7 +65,7 @@ public class UtenteDAOImplement implements UtenteDAO {
 
         try {
             conn = ds.getConnection();
-            query2 = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE CF = ?");
+            query2 = conn.prepareStatement("SELECT CF FROM " + TABLE_NAME + " WHERE CF = ?");
 
             query2.setString(1, CF);
 
@@ -99,7 +99,7 @@ public class UtenteDAOImplement implements UtenteDAO {
 
         try {
             conn = ds.getConnection();
-            query3 = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE NomeUtente = ?");
+            query3 = conn.prepareStatement("SELECT NomeUtente FROM " + TABLE_NAME + " WHERE NomeUtente = ?");
 
             query3.setString(1, nomeUtente);
 
@@ -116,6 +116,39 @@ public class UtenteDAOImplement implements UtenteDAO {
             try {
                 if (query3 != null) {
                     query3.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+        return esistente;
+    }
+
+    public boolean isAmministratore(String CF) throws SQLException{
+        Connection conn = null;
+        PreparedStatement query4 = null;
+        boolean esistente = false;
+
+        try {
+            conn = ds.getConnection();
+            query4 = conn.prepareStatement("SELECT Amministratore FROM " + TABLE_NAME + " WHERE CF = ?");
+
+            query4.setString(1, CF);
+            ResultSet rs = query4.executeQuery();
+
+            if (rs.next()) {
+                esistente = true;
+            }else {
+                esistente = false;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query4 != null) {
+                    query4.close();
                 }
             } finally {
                 if (conn != null) {
