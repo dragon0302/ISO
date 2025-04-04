@@ -19,13 +19,14 @@ CREATE TABLE carrello(
 );
 
 CREATE TABLE prodotto(
-                         ID_prodotto INTEGER PRIMARY KEY NOT NULL check ( ID_prodotto > 0 ),
-                         Nome VARCHAR(20) NOT NULL,
-                         MediaValutazione DOUBLE NOT NULL check ( MediaValutazione >= 0 && MediaValutazione <= 10 ),
-                         Taglia VARCHAR(3) NOT NULL,
-                         Descrizione VARCHAR(500) NOT NULL,
-                         Categoria VARCHAR(20) NOT NULL,
-                         Prezzo DOUBLE NOT NULL
+     ID_prodotto INTEGER PRIMARY KEY NOT NULL check ( ID_prodotto > 0 ),
+     Nome VARCHAR(20) NOT NULL,
+     MediaValutazione DOUBLE NOT NULL check ( MediaValutazione >= 0 && MediaValutazione <= 10 ),
+     Taglia VARCHAR(3) NOT NULL,
+     Descrizione VARCHAR(500) NOT NULL,
+     Categoria VARCHAR(20) NOT NULL,
+     Prezzo DOUBLE NOT NULL,
+     DataInserimento DATE not null default curdate()
 );
 
 CREATE TABLE metodoPagamento(
@@ -39,25 +40,25 @@ CREATE TABLE metodoPagamento(
 );
 
 CREATE TABLE ordine(
-                       ID_ordine integer  primary key NOT NULL check ( ID_ordine > 0 ),
-                       Data_ordine DATE not null,
-                       Prezzo_tot float not null check ( Prezzo_tot > 0 ),
-                       Lista_prodotti varchar(500),
-                       ID_carrello int,
-                       foreign key (ID_carrello) references carrello (ID_carrello)
+   ID_ordine integer  primary key NOT NULL check ( ID_ordine > 0 ),
+   Data_ordine DATE not null,
+   Prezzo_tot float not null check ( Prezzo_tot > 0 ),
+   Lista_prodotti varchar(500),
+   ID_carrello int,
+   foreign key (ID_carrello) references carrello (ID_carrello)
 );
 
 CREATE TABLE indirizzo (
-                           ID_indirizzo INT PRIMARY KEY NOT NULL check ( ID_indirizzo > 0 ),
-                           città VARCHAR(50) NOT NULL,
-                           Provincia VARCHAR(50) NOT NULL,
-                           CAP CHAR(5) NOT NULL check ( char_length(CAP) = 5 ),
-                           Via VARCHAR(100) NOT NULL,
-                           Civico int NOT NULL check ( Civico > 0 ),
-                           Scala char(1) check ( char_length(Scala) = 1 ),
-                           Indirizzo2 VARCHAR(100) NULL,
-                           Note VARCHAR(255) NULL,
-                           Fatturazione TINYINT(1) DEFAULT 0 NOT NULL,
-                           CF_utente CHAR(16),
-                           foreign key (CF_utente) references Utente (CF)
+   ID_indirizzo INT PRIMARY KEY NOT NULL check ( ID_indirizzo > 0 ),
+   città VARCHAR(50) NOT NULL,
+   Provincia VARCHAR(50) NOT NULL,
+   CAP CHAR(5) NOT NULL check ( char_length(CAP) = 5 ),
+   Via VARCHAR(100) NOT NULL,
+   Civico int NOT NULL check ( Civico > 0 ),
+   Scala char(1) check ( char_length(Scala) = 1 ),
+   Indirizzo2 VARCHAR(100) NULL,
+   Note VARCHAR(255) NULL,
+   Fatturazione TINYINT(1) DEFAULT 0 NOT NULL,
+   CF_utente CHAR(16),
+   foreign key (CF_utente) references Utente (CF)
 );
