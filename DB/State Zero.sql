@@ -30,8 +30,8 @@ VALUES
 
 INSERT INTO indirizzo (CF_Utente, ID_indirizzo, città, Provincia, CAP, Via, Civico, Indirizzo2, Note, Fatturazione)
 VALUES
-    ('RSSMRA85P12F205Z', 2, 'Roma', 'RM', 00185, 'Via dei Fori Imperiali', '10', 'Interno 3', 'Suonare Rossi', 1),
-    ('BNCLRA90T15C789Y', 3, 'Milano', 'MI', 20121, 'Corso Buenos Aires', '5', 'Scala B', 'Lasciare alla portineria', 0);
+    ('RSSMRA85P12F205Z', 2, 'Roma', 'RM', '00185', 'Via dei Fori Imperiali', '10', 'Interno 3', 'Suonare Rossi', 1),
+    ('BNCLRA90T15C789Y', 3, 'Milano', 'MI', '20121', 'Corso Buenos Aires', '5', 'Scala B', 'Lasciare alla portineria', 0);
 
 INSERT INTO indirizzo (CF_Utente, ID_indirizzo, città, Provincia, CAP, Via, Civico, Scala, Indirizzo2, Note, Fatturazione)
 VALUES
