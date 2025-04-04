@@ -58,7 +58,7 @@ public class UtenteDAOImplement implements UtenteDAO {
         }
     }
 
-    public boolean CFEsistente(String CF) throws SQLException {
+    public synchronized boolean CFEsistente(String CF) throws SQLException {
         Connection conn = null;
         PreparedStatement query2 = null;
         boolean esistente = false;
@@ -92,7 +92,7 @@ public class UtenteDAOImplement implements UtenteDAO {
         return esistente;
     }
 
-    public boolean UtenteEsistente(String nomeUtente) throws SQLException {
+    public synchronized boolean UtenteEsistente(String nomeUtente) throws SQLException {
         Connection conn = null;
         PreparedStatement query3 = null;
         boolean esistente = false;
@@ -126,7 +126,7 @@ public class UtenteDAOImplement implements UtenteDAO {
         return esistente;
     }
 
-    public boolean isAmministratore(String CF) throws SQLException{
+    public synchronized boolean isAmministratore(String CF) throws SQLException{
         Connection conn = null;
         PreparedStatement query4 = null;
         boolean esistente = false;
