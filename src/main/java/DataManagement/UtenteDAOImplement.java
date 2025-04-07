@@ -158,4 +158,14 @@ public class UtenteDAOImplement implements UtenteDAO {
         }
         return esistente;
     }
+    public boolean isUtente(String nomeutente, String password) throws SQLException{
+        Connection conn = ds.getConnection();
+        PreparedStatement ql = conn.prepareStatement("SELECT nomeUtente, password FROM " + TABLE_NAME + " WHERE NomeUtente = ? AND Password = ?");
+        ql.setString(1,nomeutente);
+        ql.setString(2,password);
+        ResultSet rs = ql.executeQuery();
+        if (rs.next()) {
+            return true;
+        }else return false;
+    }
 }

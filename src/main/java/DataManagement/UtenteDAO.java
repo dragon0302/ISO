@@ -7,4 +7,5 @@ public interface UtenteDAO {
     public boolean CFEsistente(String CF) throws SQLException;
     public boolean UtenteEsistente(String nomeUtente) throws SQLException;
     public boolean isAmministratore(String CF) throws SQLException;
+    public boolean isUtente(String nomeutente, String password) throws SQLException;
 }
