@@ -28,6 +28,16 @@
                 flex-direction: column;
             }
 
+            /* Stile errore */
+            .field-error {
+                color: red;
+                background-color: white;
+                padding: 5px 10px;
+                border-radius: 4px;
+                font-size: 13px;
+                margin-top: 5px;
+            }
+
             /* Stile della barra superiore con logo e barra di ricerca */
             .header-bar {
                 width: 100%;
@@ -197,7 +207,7 @@
 </head>
     <body>
 
-        <!-- Barra superiore con logo e barra di ricerca -->
+    <!-- Barra superiore con logo e barra di ricerca -->
         <div class="header-bar">
             <div class="logo-container">
                 <a href="home.jsp">
@@ -212,18 +222,6 @@
             </div>
         </div>
 
-        <!-- Mostra errore se presente -->
-        <%
-            String errore = (String) request.getAttribute("errore");
-            if (errore != null && !errore.isEmpty()) {
-        %>
-        <div class="error-message">
-            <p><%= errore %></p>
-        </div>
-        <%
-            }
-        %>
-
         <!-- Contenitore centrale con immagini laterali e form di inserimento -->
         <div class="content-wrapper">
             <img src="left-image.png" alt="Immagine Sinistra" class="side-image">
@@ -235,11 +233,29 @@
                 <div class="form-group">
                     <label for="CodiceFiscale">Codice Fiscale <span style="color:red;">*</span></label>
                     <input name="CodiceFiscale" id="CodiceFiscale" maxlength="50" required placeholder="Inserire il proprio codice fiscale">
+                    <%
+                        String Errore_CF = (String) request.getAttribute("Errore_CF");
+                        if (Errore_CF != null) {
+                    %>
+                    <div class="field-error"><%= Errore_CF %></div>
+                    <%
+                        }
+                    %>
                 </div>
                 <div class="form-group">
                     <label for="NomeUtente">Nome Utente <span style="color:red;">*</span></label>
                     <input name="NomeUtente" id="NomeUtente" maxlength="50" required placeholder="Inserire il proprio nome utente">
                 </div>
+
+                <%
+                    String Errore_NU = (String) request.getAttribute("Errore_NU");
+                    if (Errore_NU != null) {
+                %>
+                <div class="field-error"><%= Errore_NU %></div>
+                <%
+                    }
+                %>
+
                 <div class="form-group">
                     <label for="Password">Password <span style="color:red;">*</span></label>
                     <input name="Password" id="Password" maxlength="255" required placeholder="Inserire la password">
@@ -261,6 +277,16 @@
                     <label for="DataNascita">Data di Nascita <span style="color:red;">*</span></label>
                     <input type="date" name="DataNascita" id="DataNascita" required placeholder="Inserire la data di nascita">
                 </div>
+
+                <%
+                    String Errore_DN = (String) request.getAttribute("Errore_DN");
+                    if (Errore_DN != null) {
+                %>
+                <div class="field-error"><%= Errore_DN %></div>
+                <%
+                    }
+                %>
+
                 <div class="form-group">
                     <label>Amministratore: <span style="color:red;">*</span></label>
                     <label>Y<input type="radio" name="Amministratore" value="1" required></label>
