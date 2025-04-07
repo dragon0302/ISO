@@ -228,7 +228,7 @@
 
         <div class="form-container">
             <h2>Catalogo - Inserimento Utente</h2>
-            <form action="Sig-up" method="POST">
+            <form action="Sign-up" method="POST">
                 <input type="hidden" name="action" placeholder="insert">
                 <div class="form-group">
                     <label for="CodiceFiscale">Codice Fiscale <span style="color:red;">*</span></label>
