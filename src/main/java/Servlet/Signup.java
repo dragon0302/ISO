@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 
-@WebServlet("/Sig-up")
-public class Sigup extends HttpServlet {
+@WebServlet("/Sign-up")
+public class Signup extends HttpServlet {
     UtenteDAO utenteDAO = new UtenteDAOImplement();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response){
