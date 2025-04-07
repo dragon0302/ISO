@@ -123,4 +123,48 @@ public class ProdottoDAOImplement implements ProdottoDAO{
         }
         return prodottiRecenti;
     }
+
+    @Override
+    public Prodotto getProdottoByID(int idProdotto) throws SQLException {
+
+        Connection conn = null;
+        PreparedStatement query5 = null;
+        Prodotto prodotto = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query5 = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE ID_prodotto = ?");
+
+            query5.setInt(1, idProdotto);
+
+            ResultSet rs = query5.executeQuery();
+
+            if (rs.next()) {
+                int ID = rs.getInt("ID_prodotto");
+                String nomeProdotto = rs.getString("Nome");
+                Double mediaValutazione = Double.valueOf(rs.getString("MediaValutazione"));
+                String taglia = rs.getString("Taglia");
+                String descrizione = rs.getString("Descrizione");
+                String categoria = rs.getString("Categoria");
+                Double prezzo = rs.getDouble("Prezzo");
+
+                prodotto = new Prodotto(ID,nomeProdotto,mediaValutazione,taglia,descrizione,categoria,prezzo);
+            }
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query5 != null) {
+                    query5.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+        return prodotto;
+    }
 }
