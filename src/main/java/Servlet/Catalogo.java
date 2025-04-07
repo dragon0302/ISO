@@ -1,8 +1,6 @@
 package Servlet;
 
-import DataManagement.Prodotto;
-import DataManagement.ProdottoDAO;
-import DataManagement.ProdottoDAOImplement;
+import DataManagement.*;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,13 +15,26 @@ import java.util.List;
 @WebServlet("/Catalogo")
 public class Catalogo extends HttpServlet {
     ProdottoDAO prodottoDAO = new ProdottoDAOImplement();
+    AcquistoDAO acquistoDAO = new AcquistoDAOImplementi();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
-            List<Prodotto> prodotti = prodottoDAO.getProdottiRecenti();
+            List<Prodotto> prodottiRecenti = prodottoDAO.getProdottiRecenti();
+            List<Integer> IDprodottiPiuAcquistati = acquistoDAO.getProdottiPiuAqquistati();
+            List<Prodotto> prodottiPiuAcquistai = new ArrayList<>();
 
-            request.setAttribute("prodottiNovita", prodotti);
+            //System.out.println(acquistoDAO.getProdottiPiuAqquistati());
+            for (int ID : IDprodottiPiuAcquistati) {
+
+                System.out.println(ID);
+                Prodotto prodotto = prodottoDAO.getProdottoByID(ID);
+                prodottiPiuAcquistai.add(prodotto);
+
+            }
+
+            request.setAttribute("prodottiNovita", prodottiRecenti);
+            request.setAttribute("prodottiPiuAqqistati", prodottiPiuAcquistai);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("/Home.jsp");
             dispatcher.forward(request, response);
