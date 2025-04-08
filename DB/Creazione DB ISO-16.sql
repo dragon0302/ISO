@@ -26,7 +26,7 @@ CREATE TABLE prodotto(
      Descrizione VARCHAR(500) NOT NULL,
      Categoria VARCHAR(20) NOT NULL,
      Prezzo DOUBLE NOT NULL,
-     DataInserimento DATE not null default curdate()
+     DataInserimento DATE not null default (curdate())
 );
 
 CREATE TABLE acquisto(
