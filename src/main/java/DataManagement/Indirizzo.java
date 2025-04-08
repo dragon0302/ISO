@@ -110,4 +110,5 @@ public class Indirizzo {
   public void setCF_utente(String CF_utente) {
     this.CF_utente = CF_utente;
   }
+
 }

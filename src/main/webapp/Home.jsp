@@ -13,7 +13,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Ricerca & Filtri</title>
+    <title>Home</title>
 
     <!-- STILI CSS PER LA STRUTTURA E IL DESIGN -->
     <style>
@@ -164,6 +164,25 @@
         .filter:hover .dropdown {
             display: block;
         }
+
+        .product-slider{
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .product {
+            display: flex; /* attiva il layout flessibile */
+            flex-direction: row; /* orizzontale (default, ma esplicito è meglio) */
+            gap: 5px; /* spazio tra gli elementi */
+        }
+
+        .box {
+            background-color: #8B2635;
+            color: white;
+            padding: 50px;
+            border-radius: 50px;
+        }
+
     </style>
 </head>
     <body>
@@ -200,23 +219,20 @@
 
                 <div class="product-slider">
                     <%
-
                         List<Prodotto> prodottiNovita = (List<Prodotto>) request.getAttribute("prodottiNovita");
                         if (prodottiNovita != null) {
                             for (Prodotto p : prodottiNovita) {
                     %>
                     <div class="product">
-                        <h3><%= p.getNome() %></h3>
-                        <p>Prezzo: €<%= p.getPrezzo() %></p>
-                        <p><%= p.getDescrizione() %></p>
-                        <p><%= p.getId_prodotto() %></p>
-                        <a href="prodotto.jsp?id=<%= p.getId_prodotto() %>">Dettagli</a>
-
-                        <form action="Catalogo" method="post">
-                            <input type="hidden" name="idProdotto" value="<%= p.getId_prodotto() %>">
-                            <button type="submit" class="btn">Aggiungi al carrello</button>
-                        </form>
-
+                        <div class="box">
+                            <h3><%= p.getNome() %></h3>
+                            <p>Prezzo: €<%= p.getPrezzo() %></p>
+                            <p><%= p.getDescrizione() %></p>
+                            <a href="prodotto.jsp?id=<%= p.getId_prodotto() %>">Dettagli</a>
+                            <div class="right-section">
+                                <a class="btn Aggiungi">Aggiungi al carrello</a>
+                            </div>
+                        </div>
                     </div>
                     <%
                             }
@@ -236,14 +252,13 @@
                             for (Prodotto p : prodottiPopolari) {
                     %>
                     <div class="product">
-                        <h3><%= p.getNome() %></h3>
-                        <p>Prezzo: €<%= p.getPrezzo() %></p>
-                        <p><%= p.getDescrizione() %></p>
-                        <p><%= p.getId_prodotto() %></p>
-                        <a href="prodotto.jsp?id=<%= p.getId_prodotto() %>">Dettagli</a>
-
-                        <div class="right-section">
-                            <a class="btn Aggiungi">Aggiungi al carrello</a>
+                        <div class="box"><h3 ><%= p.getNome() %></h3>
+                            <p >Prezzo: €<%= p.getPrezzo() %></p>
+                            <p ><%= p.getDescrizione() %></p>
+                            <a href="prodotto.jsp?id=<%= p.getId_prodotto() %>">Dettagli</a>
+                            <div class="right-section">
+                                <a class="btn Aggiungi">Aggiungi al carrello</a>
+                            </div>
                         </div>
 
                     </div>

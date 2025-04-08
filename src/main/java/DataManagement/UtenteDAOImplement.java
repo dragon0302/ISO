@@ -28,7 +28,7 @@ public class UtenteDAOImplement implements UtenteDAO {
     public synchronized void DoSave(Utente utente) throws SQLException {
         Connection conn = null;
         PreparedStatement query = null;
-        CarelloDAO carelloDAO = new CarelloDAOImplement();
+        CarrelloDAO carrelloDAO = new CarrelloDAOImplement();
         Carrello carrello = null;
 
         try {
@@ -43,10 +43,9 @@ public class UtenteDAOImplement implements UtenteDAO {
             query.setString(6, utente.getSesso());
             query.setDate(7, utente.getDataNascita());
             query.setBoolean(8, utente.isAmministratore());
-
             query.executeUpdate();
             carrello = new Carrello(utente.getCf());
-            carelloDAO.DoSave(carrello);
+            carrelloDAO.DoSave(carrello);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {

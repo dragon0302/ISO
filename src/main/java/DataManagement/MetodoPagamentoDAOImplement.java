@@ -28,6 +28,13 @@ public class MetodoPagamentoDAOImplement implements MetodoPagamentoDAO {
         try {
             conn = ds.getConnection();
             query = conn.prepareStatement("INSERT INTO" + TABLE_NAME +  " (CF_Utente, NumeroCarta, DataScadenza, CVV, Tipo, Default_pagamento) VALUES (?,?,?,?,?,?)");
+            query = conn.prepareStatement("INSERT INTO" + TABLE_NAME +  " (CF_Utente, NumeroCarta, DataScadenza, CVV, Tipo, Default_pagamento) VALUES (?,?,?,?,?,?)");
+            query.setString(1,metodopagamento.getCF_utente());
+            query.setDouble(2,metodopagamento.getNumerocarta());
+            //query.setDate(3,metodopagamento.getDataScadenza());
+            query.setDouble(4,metodopagamento.getCvv());
+            query.setString(5,metodopagamento.getTipo());
+            query.setBoolean(6, metodopagamento.isDefaultPagamento());
             query.executeUpdate();
         }finally {
             try {

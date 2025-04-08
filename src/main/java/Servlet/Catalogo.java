@@ -15,7 +15,7 @@ import java.util.List;
 @WebServlet("/Catalogo")
 public class Catalogo extends HttpServlet {
     ProdottoDAO prodottoDAO = new ProdottoDAOImplement();
-    AcquistoDAO acquistoDAO = new AcquistoDAOImplementi();
+    AcquistoDAO acquistoDAO = new AcquistoDAOImplement();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

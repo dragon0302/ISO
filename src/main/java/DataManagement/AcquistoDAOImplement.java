@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class AcquistoDAOImplementi implements AcquistoDAO {
+public class AcquistoDAOImplement implements AcquistoDAO {
 
     private static DataSource ds;
     private static final String TABLE_NAME = "acquisto";
