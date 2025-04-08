@@ -11,12 +11,161 @@
 
 <!DOCTYPE html>
 <html lang="it">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Home Page</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Ricerca & Filtri</title>
+
+    <!-- STILI CSS PER LA STRUTTURA E IL DESIGN -->
+    <style>
+        /* Rimuove margini di default e imposta font */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Contenitore principale dell'header */
+        header {
+            background-color: #f4f4f4;
+            padding: 10px 20px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        /* Riga superiore con logo + barra di ricerca + bottoni */
+        .top-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        /* Contenitore del logo (parte sinistra) */
+        .logo-container {
+            flex: 1;
+        }
+
+        /* Stile del logo */
+        .logo-container img {
+            height: 60px;
+        }
+
+        /* Contenitore barra di ricerca + login + signup (parte destra) */
+        .search-actions {
+            flex: 3;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Posizionamento barra di ricerca */
+        .search-container {
+            position: relative;
+        }
+
+        /* Input della barra di ricerca */
+        .search-container input {
+            padding: 8px;
+            width: 250px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        /* Suggerimenti dinamici (dropdown) */
+        .suggestions {
+            position: absolute;
+            top: 36px;
+            left: 0;
+            right: 0;
+            background-color: white;
+            border: 1px solid #ccc;
+            z-index: 10;
+        }
+
+        /* Singolo suggerimento */
+        .suggestions div {
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        /* Hover su suggerimento */
+        .suggestions div:hover {
+            background-color: #eee;
+        }
+
+        /* Stili base dei bottoni */
+        .btn {
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Bottone Log-in: bordo nero, trasparente */
+        .login-btn {
+            border: 1px solid #000;
+            background-color: transparent;
+            color: #000;
+        }
+
+        /* Bottone Sign-up: sfondo nero, testo bianco */
+        .singup-btn {
+            background-color: #000;
+            color: #fff;
+            border: none;
+        }
+
+        /* Barra filtri sotto la riga principale */
+        .filter-bar {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* Contenitore di ogni filtro */
+        .filter {
+            position: relative;
+        }
+
+        /* Link filtro principale */
+        .filter > a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Dropdown che appare al passaggio sopra */
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 25px;
+            left: 0;
+            background-color: white;
+            border: 1px solid #ccc;
+            min-width: 120px;
+            z-index: 100;
+        }
+
+        /* Voci nel menu a tendina */
+        .dropdown a {
+            display: block;
+            padding: 5px 10px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        /* Hover sulle voci del dropdown */
+        .dropdown a:hover {
+            background-color: #eee;
+        }
+
+        /* Visualizza il dropdown quando si passa sopra il filtro */
+        .filter:hover .dropdown {
+            display: block;
+        }
+    </style>
+</head>
     <body>
         <header>
             <div class="logo">Logo</div>
