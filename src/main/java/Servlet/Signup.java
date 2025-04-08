@@ -36,17 +36,17 @@ public class Signup extends HttpServlet {
                 boolean Amministratore = Boolean.parseBoolean(request.getParameter("Amministratore"));
 
                 if (CF.length() != 16) {
-                    request.setAttribute("Errore_CF", erroreCF);
-                    request.getRequestDispatcher("/Sig-up.jsp").forward(request, response);
+                    request.setAttribute("errore", erroreCF);
+                    request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
                 }else if(utenteDAO.CFEsistente(CF)){
-                    request.setAttribute("Errore_CF", erroreCF);
-                    request.getRequestDispatcher("/Sig-up.jsp").forward(request, response);
+                    request.setAttribute("errore", erroreCF);
+                    request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
                 }else if (utenteDAO.UtenteEsistente(nomeUtenete)) {
-                    request.setAttribute("Errore_NU", erroreNomeUtente);
-                    request.getRequestDispatcher("/Sig-up.jsp").forward(request, response);
+                    request.setAttribute("errore", erroreNomeUtente);
+                    request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
                 } else if (dataNascita.compareTo(new Date(1900,1,1)) < 0 && dataNascita.compareTo(Date.valueOf(LocalDate.now())) > 0) {
-                    request.setAttribute("Errore_DN", erroreData);
-                    request.getRequestDispatcher("/Sig-up.jsp").forward(request, response);
+                    request.setAttribute("errore", erroreData);
+                    request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
                 } else {
                     Utente utente = new Utente(CF, nomeUtenete, Password, Nome, Cognome, Sesso, dataNascita, Amministratore);
                     utenteDAO.DoSave(utente);
