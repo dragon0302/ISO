@@ -209,11 +209,13 @@
                         <h3><%= p.getNome() %></h3>
                         <p>Prezzo: €<%= p.getPrezzo() %></p>
                         <p><%= p.getDescrizione() %></p>
+                        <p><%= p.getId_prodotto() %></p>
                         <a href="prodotto.jsp?id=<%= p.getId_prodotto() %>">Dettagli</a>
 
-                        <div class="right-section">
-                            <a class="btn Aggiungi">Aggiungi al carrello</a>
-                        </div>
+                        <form action="Catalogo" method="post">
+                            <input type="hidden" name="idProdotto" value="<%= p.getId_prodotto() %>">
+                            <button type="submit" class="btn">Aggiungi al carrello</button>
+                        </form>
 
                     </div>
                     <%
@@ -237,6 +239,7 @@
                         <h3><%= p.getNome() %></h3>
                         <p>Prezzo: €<%= p.getPrezzo() %></p>
                         <p><%= p.getDescrizione() %></p>
+                        <p><%= p.getId_prodotto() %></p>
                         <a href="prodotto.jsp?id=<%= p.getId_prodotto() %>">Dettagli</a>
 
                         <div class="right-section">
