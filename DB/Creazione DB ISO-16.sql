@@ -14,6 +14,7 @@ CREATE TABLE Utente (
 
 CREATE TABLE carrello(
      ID_carrello int  primary key not null auto_increment,
+     Lista_prodotti varchar(500),
      CF_utente CHAR(16),
      foreign key (CF_utente) references Utente (CF)
 );
