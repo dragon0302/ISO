@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class CarelloDAOImplement implements CarelloDAO {
+public class CarrelloDAOImplement implements CarrelloDAO {
 
     private static DataSource ds;
     private static final String TABLE_NAME = "carrello";
