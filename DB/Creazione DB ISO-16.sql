@@ -13,13 +13,13 @@ CREATE TABLE Utente (
 );
 
 CREATE TABLE carrello(
-     ID_carrello int  primary key not null check ( ID_carrello > 0 ),
+     ID_carrello int  primary key not null auto_increment,
      CF_utente CHAR(16),
      foreign key (CF_utente) references Utente (CF)
 );
 
 CREATE TABLE prodotto(
-     ID_prodotto INTEGER PRIMARY KEY NOT NULL check ( ID_prodotto > 0 ),
+     ID_prodotto INTEGER PRIMARY KEY NOT NULL auto_increment,
      Nome VARCHAR(20) NOT NULL,
      MediaValutazione DOUBLE NOT NULL check ( MediaValutazione >= 0 && MediaValutazione <= 10 ),
      Taglia VARCHAR(3) NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE prodotto(
 );
 
 CREATE TABLE acquisto(
-    ID_acquisto integer primary key not null check ( ID_acquisto > 0 ),
+    ID_acquisto integer primary key not null auto_increment,
     CodiceSconto TINYINT(1) DEFAULT 0 CHECK (CodiceSconto IN (0,1)),
     Quantità INTEGER NOT NULL ,
     ID_Carello INTEGER NOT NULL ,
@@ -50,7 +50,7 @@ CREATE TABLE metodoPagamento(
 );
 
 CREATE TABLE ordine(
-   ID_ordine integer  primary key NOT NULL check ( ID_ordine > 0 ),
+   ID_ordine integer  primary key NOT NULL auto_increment,
    Data_ordine DATE not null,
    Prezzo_tot float not null check ( Prezzo_tot > 0 ),
    Lista_prodotti varchar(500),
@@ -59,7 +59,7 @@ CREATE TABLE ordine(
 );
 
 CREATE TABLE indirizzo (
-   ID_indirizzo INT PRIMARY KEY NOT NULL check ( ID_indirizzo > 0 ),
+   ID_indirizzo INT PRIMARY KEY NOT NULL auto_increment,
    città VARCHAR(50) NOT NULL,
    Provincia VARCHAR(50) NOT NULL,
    CAP CHAR(5) NOT NULL check ( char_length(CAP) = 5 ),

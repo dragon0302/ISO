@@ -29,7 +29,7 @@ public class ProdottoDAOImplement implements ProdottoDAO{
         PreparedStatement query = null;
         try {
             conn = ds.getConnection();
-            query = conn.prepareStatement("INSERT INTO " + TABLE_NAME +  "(ID_prodotto, Nome, MediaValutazione, Taglia, Descrizione, Categoria) VALUES (?,?,?,?,?,?);");
+            query = conn.prepareStatement("INSERT INTO " + TABLE_NAME +  "(Nome, MediaValutazione, Taglia, Descrizione, Categoria) VALUES (?,?,?,?,?);");
             query.executeUpdate();
         }finally {
             try {
@@ -60,7 +60,7 @@ public class ProdottoDAOImplement implements ProdottoDAO{
                 String descrizione = rs.getString("Descrizione");
                 String categoria = rs.getString("Categoria");
                 Double prezzo = rs.getDouble("Prezzo");
-                Prodotto p = new Prodotto(idProdotto, nomeProdotto, mediaValutazione, taglia, descrizione, categoria, prezzo);
+                Prodotto p = new Prodotto( nomeProdotto, mediaValutazione, taglia, descrizione, categoria, prezzo);
                 prodotti.add(p);
             }
         } catch (Exception e) {
@@ -105,7 +105,7 @@ public class ProdottoDAOImplement implements ProdottoDAO{
                 String descrizione = rs.getString("Descrizione");
                 String categoria = rs.getString("Categoria");
                 Double prezzo = rs.getDouble("Prezzo");
-                Prodotto p = new Prodotto(idProdotto,nomeProdotto,mediaValutazione,taglia,descrizione,categoria,prezzo);
+                Prodotto p = new Prodotto(nomeProdotto,mediaValutazione,taglia,descrizione,categoria,prezzo);
                 prodottiRecenti.add(p);
             }
         }catch (Exception e) {
@@ -141,7 +141,6 @@ public class ProdottoDAOImplement implements ProdottoDAO{
             ResultSet rs = query5.executeQuery();
 
             if (rs.next()) {
-                int ID = rs.getInt("ID_prodotto");
                 String nomeProdotto = rs.getString("Nome");
                 Double mediaValutazione = Double.valueOf(rs.getString("MediaValutazione"));
                 String taglia = rs.getString("Taglia");
@@ -149,7 +148,7 @@ public class ProdottoDAOImplement implements ProdottoDAO{
                 String categoria = rs.getString("Categoria");
                 Double prezzo = rs.getDouble("Prezzo");
 
-                prodotto = new Prodotto(ID,nomeProdotto,mediaValutazione,taglia,descrizione,categoria,prezzo);
+                prodotto = new Prodotto(nomeProdotto,mediaValutazione,taglia,descrizione,categoria,prezzo);
             }
 
         }catch (Exception e) {

@@ -28,6 +28,8 @@ public class UtenteDAOImplement implements UtenteDAO {
     public synchronized void DoSave(Utente utente) throws SQLException {
         Connection conn = null;
         PreparedStatement query = null;
+        CarelloDAO carelloDAO = new CarelloDAOImplement();
+        Carrello carrello = null;
 
         try {
             conn = ds.getConnection();
@@ -43,6 +45,8 @@ public class UtenteDAOImplement implements UtenteDAO {
             query.setBoolean(8, utente.isAmministratore());
 
             query.executeUpdate();
+            carrello = new Carrello(utente.getCf());
+            carelloDAO.DoSave(carrello);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {

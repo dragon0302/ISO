@@ -32,13 +32,12 @@ public class AcquistoDAOImplementi implements AcquistoDAO {
 
         try{
             conn= ds.getConnection();
-            query = conn.prepareStatement("INSERT INTO " + TABLE_NAME + " (ID_acquisto, CodiceSconto, Quantita, ID_Carello, ID_Prodotto) VALUES (?,?,?,?,?)");
+            query = conn.prepareStatement("INSERT INTO " + TABLE_NAME + " ( CodiceSconto, Quantita, ID_Carello, ID_Prodotto) VALUES (?,?,?,?)");
 
-            query.setInt(1, acquisto.getID_acquisto());
-            query.setBoolean(2,acquisto.isCodiceSconto());
-            query.setInt(3, acquisto.getQuantita());
-            query.setInt(4, acquisto.getID_Carello());
-            query.setInt(5, acquisto.getID_Prodotto());
+            query.setBoolean(1,acquisto.isCodiceSconto());
+            query.setInt(2, acquisto.getQuantita());
+            query.setInt(3, acquisto.getID_Carello());
+            query.setInt(4, acquisto.getID_Prodotto());
 
             query.executeUpdate();
         }catch (Exception e) {

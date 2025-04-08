@@ -9,8 +9,7 @@ public class Prodotto {
     private String categoria;
     private Double prezzo;
 
-    public Prodotto(int id_prodotto, String nome, Double media_valutazione, String taglia, String descrizione, String categoria, Double prezzo) {
-        this.id_prodotto = id_prodotto;
+    public Prodotto(String nome, Double media_valutazione, String taglia, String descrizione, String categoria, Double prezzo) {
         this.nome = nome;
         this.media_valutazione = media_valutazione;
         this.taglia = taglia;
@@ -21,10 +20,6 @@ public class Prodotto {
 
     public int getId_prodotto() {
         return id_prodotto;
-    }
-
-    public void setId_prodotto(int id_prodotto) {
-        this.id_prodotto = id_prodotto;
     }
 
     public String getNome() {

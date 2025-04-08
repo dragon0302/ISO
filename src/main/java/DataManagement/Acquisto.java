@@ -7,8 +7,7 @@ public class Acquisto {
     int ID_Carello;
     int ID_Prodotto;
 
-    public Acquisto(int Id_acquisto, boolean CodiceSconto, int quantita, int ID_Carello, int ID_Prodotto) {
-        this.ID_acquisto = Id_acquisto;
+    public Acquisto(boolean CodiceSconto, int quantita, int ID_Carello, int ID_Prodotto) {
         this.CodiceSconto = CodiceSconto;
         this.quantita = quantita;
         this.ID_Carello = ID_Carello;
@@ -17,10 +16,6 @@ public class Acquisto {
 
     public int getID_acquisto() {
         return ID_acquisto;
-    }
-
-    public void setID_acquisto(int ID_acquisto) {
-        this.ID_acquisto = ID_acquisto;
     }
 
     public boolean isCodiceSconto() {

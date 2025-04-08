@@ -14,8 +14,7 @@ public class Indirizzo {
   private boolean fatturazione;
   private String CF_utente;
 
-  public Indirizzo(int ID_Indirizzo, String citta, String provincia, String cap, String via, int civico, String scala, String indirizzo2, String note, boolean fatturazione, String CF_utente) {
-    this.ID_Indirizzo = ID_Indirizzo;
+  public Indirizzo(String citta, String provincia, String cap, String via, int civico, String scala, String indirizzo2, String note, boolean fatturazione, String CF_utente) {
     this.citta = citta;
     this.provincia = provincia;
     this.cap = cap;
@@ -30,10 +29,6 @@ public class Indirizzo {
 
   public int getID_Indirizzo() {
     return ID_Indirizzo;
-  }
-
-  public void setID_Indirizzo(int ID_Indirizzo) {
-    this.ID_Indirizzo = ID_Indirizzo;
   }
 
   public String getCittà() {
