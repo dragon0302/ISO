@@ -210,6 +210,11 @@
                         <p>Prezzo: €<%= p.getPrezzo() %></p>
                         <p><%= p.getDescrizione() %></p>
                         <a href="prodotto.jsp?id=<%= p.getId_prodotto() %>">Dettagli</a>
+
+                        <div class="right-section">
+                            <a class="btn Aggiungi">Aggiungi al carrello</a>
+                        </div>
+
                     </div>
                     <%
                             }
@@ -233,7 +238,13 @@
                         <p>Prezzo: €<%= p.getPrezzo() %></p>
                         <p><%= p.getDescrizione() %></p>
                         <a href="prodotto.jsp?id=<%= p.getId_prodotto() %>">Dettagli</a>
+
+                        <div class="right-section">
+                            <a class="btn Aggiungi">Aggiungi al carrello</a>
+                        </div>
+
                     </div>
+
                     <%
                         }
                     } else {
@@ -243,6 +254,7 @@
                         }
                     %>
                 </div>
+
 
             </section>
         </main>
