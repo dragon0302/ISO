@@ -8,10 +8,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class CarelloDAOImplement {
+public class CarelloDAOImplement implements CarelloDAO {
 
     private static DataSource ds;
-    private static final String TABLE_NAME = "carello";
+    private static final String TABLE_NAME = "carrello";
 
     static {
         try {
@@ -30,10 +30,14 @@ public class CarelloDAOImplement {
 
         try {
             conn = ds.getConnection();
-            query = conn.prepareStatement("INSERT INTO" + TABLE_NAME +  "(ID_carrello, CF_utente) VALUES (?,?)");
+            query = conn.prepareStatement("INSERT INTO " + TABLE_NAME +  " ( CF_utente) VALUES (?)");
+
+            query.setString(1,carrello.getCf_utente());
 
             query.executeUpdate();
-        }finally {
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
             try {
                 if (query != null) {
                     query.close();
