@@ -24,14 +24,16 @@ public class Catalogo extends HttpServlet {
             List<Integer> IDprodottiPiuAcquistati = acquistoDAO.getProdottiPiuAqquistati();
             List<Prodotto> prodottiPiuAcquistai = new ArrayList<>();
 
-            //System.out.println(acquistoDAO.getProdottiPiuAqquistati());
             for (int ID : IDprodottiPiuAcquistati) {
 
-                System.out.println(ID);
+
                 Prodotto prodotto = prodottoDAO.getProdottoByID(ID);
+                prodotto.setId_prodotto(ID);
                 prodottiPiuAcquistai.add(prodotto);
 
             }
+
+            String idProdotto = request.getParameter("idProdotto");
 
             request.setAttribute("prodottiNovita", prodottiRecenti);
             request.setAttribute("prodottiPiuAqqistati", prodottiPiuAcquistai);
@@ -41,5 +43,9 @@ public class Catalogo extends HttpServlet {
         }catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
     }
 }

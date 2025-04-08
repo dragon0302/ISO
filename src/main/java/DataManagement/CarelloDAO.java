@@ -5,5 +5,6 @@ import java.sql.SQLException;
 public interface CarelloDAO {
 
     public void DoSave(Carrello carello) throws SQLException;
+    public void ProdottiCarello(int idProdotto,int idCarrello) throws SQLException;
 
 }
