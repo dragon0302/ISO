@@ -28,12 +28,11 @@
             flex-direction: column;
         }
 
-
         /* Stile della barra superiore con logo e barra di ricerca */
         header {
             width: 100%;
             background-color: #8B2635; /* Colore di sfondo per il header */
-            padding: 10px 20px
+            padding: 10px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
