@@ -22,6 +22,10 @@ public class Prodotto {
         return id_prodotto;
     }
 
+    public void setId_prodotto(int id_prodotto) {
+        this.id_prodotto = id_prodotto;
+    }
+
     public String getNome() {
         return nome;
     }
