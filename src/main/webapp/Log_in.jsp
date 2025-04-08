@@ -226,9 +226,14 @@
                 <input type="submit" value="Accedi">
             </div>
         </form>
-        <div class="error-message">
-            <!-- Qui verranno visualizzati eventuali messaggi di errore -->
-        </div>
+        <%
+            String Errore_USER_PASS = (String) request.getAttribute("Errore_USER_PASS");
+            if (Errore_USER_PASS != null) {
+        %>
+        <div class="field-error"><%= Errore_USER_PASS %></div>
+        <%
+            }
+        %>
     </div>
 
     <img src="right-image.png" alt="Immagine Destra" class="side-image">
