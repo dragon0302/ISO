@@ -23,6 +23,7 @@
     <%--@declare id="Descrizione"--%>
     <%--@declare id="Categoria"--%>
     <%--input type="hidden" name="action" value="insert"--%>
+    <%--@declare id="ADD"--%>
 
     <label for="ID_Prodotto">User<textarea name="ID_Prodotto" id="ID_Prodotto" required placeholder="Inserire l'ID del Prodotto"></textarea></label>
 
@@ -35,6 +36,10 @@
     <label for="Descrizione">Descrizione<textarea name="Descrizione" id="Descrizione" maxlength="500" required placeholder="Inserire la desscrizione del prodotto"></textarea></label>
 
     <label for="Categoria">Categoria<textarea name="Categoria" id="Categoria" maxlength="20" required placeholder="Inserire la Categoria del prodotto"></textarea></label>
+
+    <div class="right-section">
+        <a class="btn Aggiungi">Aggiungi al carrello</a>
+    </div>
 
     <input type="submit" value="add">
 
