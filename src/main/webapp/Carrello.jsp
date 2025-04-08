@@ -1,4 +1,7 @@
-<%--
+<%@ page import="DataManagement.ProdottoDAOImplement" %>
+<%@ page import="DataManagement.Prodotto" %>
+<%@ page import="DataManagement.ProdottoDAO" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: PRINCIPALE
   Date: 01/04/2025
@@ -12,16 +15,34 @@
     <meta charset="UTF-8">
     <title>Ricerca & Filtri</title>
     <style>
+        /* Stile generale della pagina */
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
+            background-color: #000000; /* Sfondo nero */
+            color: white; /* Testo bianco per contrasto */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 1px;
+            flex-direction: column;
         }
 
+
+        /* Stile della barra superiore con logo e barra di ricerca */
         header {
-            background-color: #f4f4f4;
-            padding: 10px 20px;
-            border-bottom: 1px solid #ccc;
+            width: 100%;
+            background-color: #8B2635; /* Colore di sfondo per il header */
+            padding: 10px 20px
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-bottom: 1px solid #000000;
         }
+
 
         /* Container principale per la barra superiore */
         .top-header {
@@ -102,7 +123,7 @@
 
         .filter > a {
             text-decoration: none;
-            color: #333;
+            color: #f4f4f4;
             font-weight: bold;
         }
 
@@ -113,7 +134,7 @@
             top: 25px;
             left: 0;
             background-color: white;
-            border: 1px solid #ccc;
+            border: 1px solid #000000;
             min-width: 120px;
             z-index: 100;
         }
@@ -160,11 +181,114 @@
             border: none;
         }
 
+        /* Stile del footer */
+        .footer-bar {
+            width: 100%;
+            background-color: #222; /* Colore di sfondo diverso per il footer */
+            padding: 15px 0;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .footer-bar a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        /* Media query per dispositivi mobili */
+        @media (max-width: 768px) {
+            /* Barra superiore: logo e barra di ricerca */
+            .header-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px;
+            }
+
+            .logo-container img {
+                width: 80px; /* Ridurre la dimensione del logo su dispositivi più piccoli */
+            }
+
+            .search-bar input[type="text"] {
+                width: 100%; /* La barra di ricerca occuperà tutta la larghezza */
+                margin-top: 10px;
+            }
+
+            .search-bar input[type="submit"] {
+                width: 100%; /* Il pulsante di ricerca occupa tutta la larghezza */
+                margin-top: 5px;
+            }
+
+            /* Stili per il layout della barra orizzontale dei prodotti */
+            .product-bar {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+                border-bottom: 1px solid #f4f4f4;
+            }
+
+            .product-bar img {
+                width: 80px;
+                height: auto;
+            }
+
+            .product-bar .descrizione {
+                flex: 2;
+                padding-left: 10px;
+            }
+
+            .product-bar .prezzo-quantita {
+                text-align: right;
+            }
+
+            .product-bar .prezzo {
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+            .product-bar .quantita {
+                color: gray;
+            }
+        }
+
     </style>
 </head>
 <body>
 
 <header>
+
+    <div class="top-header">
+        <%
+            // Recupera i prodotti dal database
+            ProdottoDAO prodottoDAO = new ProdottoDAOImplement();
+            List<Prodotto> prodotti = prodottoDAO.getProdotti();
+        %>
+
+        <!-- Visualizza la barra orizzontale per ogni prodotto -->
+        <%
+            for (Prodotto prodotto : prodotti) {
+        %>
+        <div class="product-bar">
+            <!-- Immagine -->
+            <!--img src="<//%= prodotto.getImmagine() %>" alt="Immagine prodotto"-->
+
+            <!-- Descrizione -->
+            <div class="descrizione">
+                <%= prodotto.getDescrizione() %>
+            </div>
+
+            <!-- Prezzo e quantità -->
+            <div class="prezzo-quantita">
+                <div class="prezzo">€ <%= prodotto.getPrezzo() %></div>
+                <label for="numero">Scegli un numero:</label>
+                <input type="number" id="numero" name="numero" min="0" max="100" step="1">
+            </div>
+        </div>
+        <% } %>
+
+    </div>
+
     <div class="top-header">
         <!-- Parte 1 - Logo a sinistra -->
         <div class="logo-container">
@@ -270,6 +394,13 @@
         });
     }
 </script>
+
+<div class="footer-bar">
+    <a href="About_Us.jsp">About Us</a>
+    <a href="contattaci.jsp">Contattaci</a>
+    <a href="Termini_e_condizioni.jsp">Termini e condizioni</a>
+    <a href="Assistenza.jsp">Assistenza</a>
+</div>
 
 </body>
 </html>

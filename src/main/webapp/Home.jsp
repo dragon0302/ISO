@@ -13,7 +13,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Ricerca & Filtri</title>
+    <title>Home</title>
 
     <!-- STILI CSS PER LA STRUTTURA E IL DESIGN -->
     <style>
