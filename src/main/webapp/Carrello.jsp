@@ -1,7 +1,8 @@
 <%@ page import="DataManagement.ProdottoDAOImplement" %>
 <%@ page import="DataManagement.Prodotto" %>
 <%@ page import="DataManagement.ProdottoDAO" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: PRINCIPALE
   Date: 01/04/2025
@@ -260,8 +261,7 @@
     <div class="top-header">
         <%
             // Recupera i prodotti dal database
-            ProdottoDAO prodottoDAO = new ProdottoDAOImplement();
-            List<Prodotto> prodotti = prodottoDAO.getProdotti();
+            ArrayList<Prodotto> prodotti = (ArrayList<Prodotto>) request.getAttribute("prodotticarello");
         %>
 
         <!-- Visualizza la barra orizzontale per ogni prodotto -->
