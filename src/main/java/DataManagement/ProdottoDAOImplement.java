@@ -106,6 +106,7 @@ public class ProdottoDAOImplement implements ProdottoDAO{
                 String categoria = rs.getString("Categoria");
                 Double prezzo = rs.getDouble("Prezzo");
                 Prodotto p = new Prodotto(nomeProdotto,mediaValutazione,taglia,descrizione,categoria,prezzo);
+                p.setId_prodotto(idProdotto);
                 prodottiRecenti.add(p);
             }
         }catch (Exception e) {
