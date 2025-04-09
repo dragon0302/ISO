@@ -33,8 +33,6 @@ public class Catalogo extends HttpServlet {
 
             }
 
-            String idProdotto = request.getParameter("idProdotto");
-
             request.setAttribute("prodottiNovita", prodottiRecenti);
             request.setAttribute("prodottiPiuAqqistati", prodottiPiuAcquistai);
 

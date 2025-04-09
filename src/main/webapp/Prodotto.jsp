@@ -17,7 +17,7 @@
 <body>
 
 <%
-    Utente utente = (Utente) request.getAttribute("Utente")
+    Utente utente = (Utente) request.getAttribute("Utente");
     Prodotto prodotto = (Prodotto) request.getAttribute("Prodotto");
     if (prodotto == null){
         %>
