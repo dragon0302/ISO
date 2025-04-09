@@ -261,11 +261,9 @@
     <div class="top-header">
         <%
             // Recupera i prodotti dal database
-            ArrayList<Prodotto> prodotti = (ArrayList<Prodotto>) request.getAttribute("prodotticarello");
-        %>
+            ArrayList<Prodotto> prodotti = (ArrayList<Prodotto>) session.getAttribute("carrello");
 
-        <!-- Visualizza la barra orizzontale per ogni prodotto -->
-        <%
+            //Visualizza la barra orizzontale per ogni prodotto -->
             for (Prodotto prodotto : prodotti) {
         %>
         <div class="product-bar">

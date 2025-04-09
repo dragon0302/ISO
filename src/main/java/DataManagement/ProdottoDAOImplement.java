@@ -142,6 +142,7 @@ public class ProdottoDAOImplement implements ProdottoDAO{
             ResultSet rs = query5.executeQuery();
 
             if (rs.next()) {
+                int ID = rs.getInt("ID_prodotto");
                 String nomeProdotto = rs.getString("Nome");
                 Double mediaValutazione = Double.valueOf(rs.getString("MediaValutazione"));
                 String taglia = rs.getString("Taglia");
@@ -150,6 +151,7 @@ public class ProdottoDAOImplement implements ProdottoDAO{
                 Double prezzo = rs.getDouble("Prezzo");
 
                 prodotto = new Prodotto(nomeProdotto,mediaValutazione,taglia,descrizione,categoria,prezzo);
+                prodotto.setId_prodotto(ID);
             }
 
         }catch (Exception e) {
