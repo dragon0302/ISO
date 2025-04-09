@@ -22,7 +22,7 @@ public class Login extends HttpServlet {
                 String password = request.getParameter("password");
                 u.isUtente(username,password);
                 if (u.isUtente(username,password) == false){
-                    request.setAttribute("errore", errore);
+                    request.setAttribute("Errore_USER_PASS", errore);
                     request.getRequestDispatcher("/Log_in.jsp").forward(request, response);
                 }else {
                     response.sendRedirect("Home.jsp");

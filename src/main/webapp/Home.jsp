@@ -229,9 +229,12 @@
                             <p>Prezzo: €<%= p.getPrezzo() %></p>
                             <p><%= p.getDescrizione() %></p>
                             <a href="prodotto.jsp?id=<%= p.getId_prodotto() %>">Dettagli</a>
-                            <div class="right-section">
-                                <a class="btn Aggiungi">Aggiungi al carrello</a>
-                            </div>
+                            <form action="Carrello" method="post">
+                                <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
+                                <button type="submit" class="btn-aggiungi">
+                                    Aggiungi al carrello
+                                </button>
+                            </form>
                         </div>
                     </div>
                     <%
@@ -256,9 +259,12 @@
                             <p >Prezzo: €<%= p.getPrezzo() %></p>
                             <p ><%= p.getDescrizione() %></p>
                             <a href="prodotto.jsp?id=<%= p.getId_prodotto() %>">Dettagli</a>
-                            <div class="right-section">
-                                <a class="btn Aggiungi">Aggiungi al carrello</a>
-                            </div>
+                            <form action="Carrello" method="post">
+                                <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
+                                <button type="submit" class="btn-aggiungi">
+                                    Aggiungi al carrello
+                                </button>
+                            </form>
                         </div>
 
                     </div>
