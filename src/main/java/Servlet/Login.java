@@ -24,6 +24,8 @@ public class Login extends HttpServlet {
                 if (u.isUtente(username,password) == false){
                     request.setAttribute("errore", errore);
                     request.getRequestDispatcher("/Log_in.jsp").forward(request, response);
+                }else if (u.isUtente(username,password) == true){
+                    response.sendRedirect("Home.jsp");
                 }
             }
         } catch (SQLException e) {
