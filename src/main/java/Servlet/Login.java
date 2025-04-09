@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class Login extends HttpServlet {
@@ -20,9 +21,19 @@ public class Login extends HttpServlet {
                 String username = request.getParameter("username");
                 String password = request.getParameter("password");
                 u.isUtente(username,password);
+                if (u.isUtente(username,password) == false){
+                    request.setAttribute("errore", errore);
+                    request.getRequestDispatcher("/Log_in.jsp").forward(request, response);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ServletException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }
