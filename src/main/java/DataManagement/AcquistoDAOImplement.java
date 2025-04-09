@@ -36,7 +36,7 @@ public class AcquistoDAOImplement implements AcquistoDAO {
 
             query.setBoolean(1,acquisto.isCodiceSconto());
             query.setInt(2, acquisto.getQuantita());
-            query.setInt(3, acquisto.getID_Carello());
+            query.setInt(3, acquisto.getID_Carrello());
             query.setInt(4, acquisto.getID_Prodotto());
 
             query.executeUpdate();

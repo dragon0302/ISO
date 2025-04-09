@@ -50,4 +50,33 @@ public class CarrelloDAOImplement implements CarrelloDAO {
         }
     }
 
+    public void ProdottiCarello(int idProdotto,int idCarrello) throws SQLException{
+
+        Connection conn = null;
+        PreparedStatement query2 = null;
+
+        try {
+            conn = ds.getConnection();
+            query2 = conn.prepareStatement("update " + TABLE_NAME + " set Lista_prodotti = concat_ws(',',Lista_prodotti ,?) where ID_carrello = ?");
+
+            query2.setString(1,String.valueOf(idProdotto));
+            query2.setInt(2,idCarrello);
+
+            query2.executeUpdate();
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query2 != null) {
+                    query2.close();
+                }
+            }finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+
+    }
+
 }
