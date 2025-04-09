@@ -228,7 +228,7 @@
                             <h3><%= p.getNome() %></h3>
                             <p>Prezzo: €<%= p.getPrezzo() %></p>
                             <p><%= p.getDescrizione() %></p>
-                            <a href="prodotto.jsp?id=<%= p.getId_prodotto() %>">Dettagli</a>
+                            <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
                             <form action="Carrello" method="post">
                                 <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
                                 <button type="submit" class="btn-aggiungi">
