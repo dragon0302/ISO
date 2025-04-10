@@ -15,6 +15,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="DataManagement.Prodotto" %>
+<%@ page import="com.mysql.cj.Session" %>
 
 <!DOCTYPE html>
 <html lang="it">
@@ -422,7 +423,11 @@
 
         <!-- Parte 3 - Bottoni di Sign-up e Log-in a destra -->
         <div class="right-section">
-            <% if (role == null) { %>
+            <%
+                String role = (String) session.getAttribute("role");
+                String username = (String) session.getAttribute("username");
+
+                if (role == null) { %>
             <!-- Se l'utente non è loggato, mostra i bottoni di login e signup -->
             <a class="btn login-btn" href="Log_in.jsp">Log In</a>
             <a class="btn signup-btn" href="Sign-up.jsp">Sign Up</a>
