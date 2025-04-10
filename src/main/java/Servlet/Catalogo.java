@@ -37,15 +37,9 @@ public class Catalogo extends HttpServlet {
             request.setAttribute("prodottiNovita", prodottiRecenti);
             request.setAttribute("prodottiPiuAqqistati", prodottiPiuAcquistai);
 
-            if (servletPath.contains("/Catalogo")) {
-                System.out.println("Catalogo");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/Home.jsp");
-                dispatcher.forward(request, response);
-            }else if (servletPath.contains("/ProdottoS")) {
-                System.out.println("ProdottoS");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/Prodotto.jsp");
-                dispatcher.forward(request, response);
-            }
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/Home.jsp");
+            dispatcher.forward(request, response);
+
         }catch (Exception e) {
             e.printStackTrace();
         }
