@@ -22,6 +22,8 @@ public class Carrello extends HttpServlet {
         try {
 
             String prodottoID = request.getParameter("prodottoID");
+            String sourcePage = request.getParameter("SourcePage");
+            String redirectPage = null;
             Cookie[] cookies = request.getCookies();
             Cookie cookieCart = null;
             String CartValue = null;
@@ -66,7 +68,13 @@ public class Carrello extends HttpServlet {
 
             session.setAttribute("carrello", carrello);
 
-            response.sendRedirect("Catalogo");
+            if("Prodotto".equals(sourcePage)) {
+                redirectPage = "ProdottoS?id=" + prodottoID;
+            }else if("Home".equals(sourcePage)) {
+                redirectPage = "Catalogo";
+            }
+
+            response.sendRedirect(redirectPage);
 
         }catch (Exception e) {
             e.printStackTrace();

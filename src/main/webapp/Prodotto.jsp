@@ -33,6 +33,7 @@
 <form action="Carrello" method="post">
 <!--input type="hidden" name="CF_Utente" value="<//%= utente.getCf() %>"-->
 <input type="hidden" name="prodottoID" value="<%= prodotto.getId_prodotto() %>">
+    <input type="hidden" name="SourcePage" value="Prodotto">
 <button type="submit" class="btn">Aggiungi al carrelo</button>
 </form>
 <%
