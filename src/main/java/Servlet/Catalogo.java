@@ -23,6 +23,7 @@ public class Catalogo extends HttpServlet {
             List<Prodotto> prodottiRecenti = prodottoDAO.getProdottiRecenti();
             List<Integer> IDprodottiPiuAcquistati = acquistoDAO.getProdottiPiuAqquistati();
             List<Prodotto> prodottiPiuAcquistai = new ArrayList<>();
+            String servletPath = request.getServletPath();
 
             for (int ID : IDprodottiPiuAcquistati) {
 
@@ -33,13 +34,12 @@ public class Catalogo extends HttpServlet {
 
             }
 
-            String idProdotto = request.getParameter("idProdotto");
-
             request.setAttribute("prodottiNovita", prodottiRecenti);
             request.setAttribute("prodottiPiuAqqistati", prodottiPiuAcquistai);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("/Home.jsp");
             dispatcher.forward(request, response);
+
         }catch (Exception e) {
             e.printStackTrace();
         }

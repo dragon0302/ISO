@@ -17,9 +17,10 @@
 <body>
 
 <%
-    Utente utente = (Utente) request.getAttribute("Utente")
+    Utente utente = (Utente) request.getAttribute("Utente");
     Prodotto prodotto = (Prodotto) request.getAttribute("Prodotto");
-    if (prodotto == null){
+
+    if (prodotto != null){
         %>
 
 <h2>Dettagli Prodotto</h2>
@@ -28,9 +29,13 @@
 <p><strong>Taglia:</strong> <%= prodotto.getTaglia() %></p>
 <p><strong>Descrizione:</strong> <%= prodotto.getDescrizione() %></p>
 <p><strong>Categoria:</strong> <%= prodotto.getCategoria() %></p>
-<p><strong>Prezzo:</strong> <%= prodotto.getCategoria() %></p>
-<input type="hidden" name="CF_Utente" value="<%= utente.getCf() %>">
+<p><strong>Prezzo:</strong> <%= prodotto.getPrezzo() %></p>
+<form action="Carrello" method="post">
+<!--input type="hidden" name="CF_Utente" value="<//%= utente.getCf() %>"-->
+<input type="hidden" name="prodottoID" value="<%= prodotto.getId_prodotto() %>">
+    <input type="hidden" name="SourcePage" value="Prodotto">
 <button type="submit" class="btn">Aggiungi al carrelo</button>
+</form>
 <%
 }
 %>
