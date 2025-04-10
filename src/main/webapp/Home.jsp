@@ -223,8 +223,6 @@
                 gap: 40px;
                 scroll-behavior: smooth;
             }
-
-            <<<<<<< HEAD
                         /* Card prodotto quadrata */
                     .product {
                         flex: 0 0 250px;
@@ -581,7 +579,6 @@
                     <a href="prodotto.jsp?id=<%= p.getId_prodotto() %>">Dettagli</a>
                     <div class="right-section">
                         <a class="btn Aggiungi">Aggiungi al carrello</a>
-                        =======
                         <div class="product-slider">
                             <%
                                 List<Prodotto> prodottiNovita = (List<Prodotto>) request.getAttribute("prodottiNovita");
@@ -602,13 +599,11 @@
                                         </button>
                                     </form>
                                 </div>
-                                >>>>>>> origin/master
                             </div>
                         </div>
 
-                        <<<<<<< HEAD
+
                     </div>
-                    =======
                     <h2>Prodotti più acquistati</h2>
                     <div class="product-slider">
                             <%
@@ -629,8 +624,6 @@
                                     </button>
                                 </form>
                             </div>
-                            >>>>>>> origin/master
-
                             <%
                                 }
                             } else {
