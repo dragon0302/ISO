@@ -264,25 +264,27 @@
             ArrayList<Prodotto> prodotti = (ArrayList<Prodotto>) session.getAttribute("carrello");
 
             //Visualizza la barra orizzontale per ogni prodotto -->
-            for (Prodotto prodotto : prodotti) {
+            if (prodotti != null){
+                for (Prodotto prodotto : prodotti) {
         %>
-        <div class="product-bar">
-            <!-- Immagine -->
-            <!--img src="<//%= prodotto.getImmagine() %>" alt="Immagine prodotto"-->
+            <div class="product-bar">
+                <!-- Immagine -->
+                <!--img src="<//%= prodotto.getImmagine() %>" alt="Immagine prodotto"-->
 
-            <!-- Descrizione -->
-            <div class="descrizione">
-                <%= prodotto.getDescrizione() %>
-            </div>
+                <!-- Descrizione -->
+                <div class="descrizione">
+                    <%= prodotto.getDescrizione() %>
+                </div>
 
-            <!-- Prezzo e quantità -->
-            <div class="prezzo-quantita">
-                <div class="prezzo">€ <%= prodotto.getPrezzo() %></div>
-                <label for="numero">Scegli un numero:</label>
-                <input type="number" id="numero" name="numero" min="0" max="100" step="1">
+                <!-- Prezzo e quantità -->
+                <div class="prezzo-quantita">
+                    <div class="prezzo">€ <%= prodotto.getPrezzo() %></div>
+                    <label for="numero">Scegli un numero:</label>
+                    <input type="number" id="numero" name="numero" min="0" max="100" step="1">
+                </div>
             </div>
-        </div>
-        <% } %>
+        <%  }
+        }%>
 
     </div>
 
