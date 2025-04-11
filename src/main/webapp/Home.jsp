@@ -356,7 +356,7 @@
         <!-- Parte 1 - Logo a sinistra -->
         <div class="logo-container">
             <a href="Home.jsp">
-                <img src="logo.png" alt="Logo">
+                <!--img src="logo.png" alt="Logo"-->
             </a>
         </div>
 
@@ -546,6 +546,7 @@
         <div class="product-slider">
             <%
                 List<Prodotto> prodottiNovita = (List<Prodotto>) request.getAttribute("prodottiNovita");
+
                 if (prodottiNovita != null) {
                     for (Prodotto p : prodottiNovita) {
             %>
@@ -554,10 +555,14 @@
                     <h3><%= p.getNome() %></h3>
                     <p>Prezzo: €<%= p.getPrezzo() %></p>
                     <p><%= p.getDescrizione() %></p>
-                    <a href="prodotto.jsp?id=<%= p.getId_prodotto() %>">Dettagli</a>
-                    <div class="right-section">
-                        <a class="btn Aggiungi">Aggiungi al carrello</a>
-                    </div>
+                    <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
+                    <form action="Carrello" method="post">
+                        <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
+                        <input type="hidden" name="SourcePage" value="Home">
+                        <button type="submit" class="btn-aggiungi">
+                            Aggiungi al carrello
+                        </button>
+                    </form>
                 </div>
             </div>
             <%
@@ -581,65 +586,23 @@
                 <div class="box"><h3 ><%= p.getNome() %></h3>
                     <p >Prezzo: €<%= p.getPrezzo() %></p>
                     <p ><%= p.getDescrizione() %></p>
-                    <a href="prodotto.jsp?id=<%= p.getId_prodotto() %>">Dettagli</a>
-                    <div class="right-section">
-                        <a class="btn Aggiungi">Aggiungi al carrello</a>
-                        <div class="product-slider">
-                            <%
-                                List<Prodotto> prodottiNovita = (List<Prodotto>) request.getAttribute("prodottiNovita");
-                                if (prodottiNovita != null) {
-                                    for (Prodotto p : prodottiNovita) {
-                            %>
-                            <div class="product">
-                                <div class="box">
-                                    <h3><%= p.getNome() %></h3>
-                                    <p>Prezzo: €<%= p.getPrezzo() %></p>
-                                    <p><%= p.getDescrizione() %></p>
-                                    <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
-                                    <form action="Carrello" method="post">
-                                        <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
-                                        <input type="hidden" name="SourcePage" value="Home">
-                                        <button type="submit" class="btn-aggiungi">
-                                            Aggiungi al carrello
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <h2>Prodotti più acquistati</h2>
-                    <div class="product-slider">
-                            <%
-                        List<Prodotto> prodottiPopolari = (List<Prodotto>) request.getAttribute("prodottiPiuAqqistati");
-                        if (prodottiPopolari != null) {
-                            for (Prodotto p : prodottiPopolari) {
-                    %>
-                        <div class="product">
-                            <div class="box"><h3 ><%= p.getNome() %></h3>
-                                <p >Prezzo: €<%= p.getPrezzo() %></p>
-                                <p ><%= p.getDescrizione() %></p>
-                                <a href="prodotto.jsp?id=<%= p.getId_prodotto() %>">Dettagli</a>
-                                <form action="Carrello" method="post">
-                                    <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
-                                    <input type="hidden" name="SourcePage" value="Home">
-                                    <button type="submit" class="btn-aggiungi">
-                                        Aggiungi al carrello
-                                    </button>
-                                </form>
-                            </div>
-                            <%
-                                }
-                            } else {
-                            %>
-                            <p>Nessun prodotto trovato.</p>
-                            <%
-                                }
-                            %>
-                        </div>
-
-
+                    <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
+                    <form action="Carrello" method="post">
+                        <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
+                        <button type="submit" class="btn-aggiungi">
+                            Aggiungi al carrello
+                        </button>
+                    </form>
+                </div>
+            </div>
+                        <%
+                }
+            } else {
+            %>
+                    <p>Nessun prodotto trovato.</p>
+                        <%
+                }
+            %>
     </section>
 </main>
 

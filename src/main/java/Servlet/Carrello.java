@@ -38,6 +38,8 @@ public class Carrello extends HttpServlet {
                 }
             }
 
+            System.out.println(prodottoID);
+
             if(cookieCart == null) {
                 CartValue = prodottoID;
                 cookieCart = new Cookie("Cart", CartValue);
@@ -46,7 +48,7 @@ public class Carrello extends HttpServlet {
                 response.addCookie(cookieCart);
             }else {
                 CartValue = cookieCart.getValue();
-                if(!CartValue.contains(prodottoID)) {
+                if(!CartValue.contains(String.valueOf(prodottoID))) {
                     CartValue += "|" + prodottoID;
                     cookieCart.setValue(CartValue);
                     response.addCookie(cookieCart);
