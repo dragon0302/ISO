@@ -23,10 +23,12 @@ public class Carrello extends HttpServlet {
 
             String prodottoID = request.getParameter("prodottoID");
             String sourcePage = request.getParameter("SourcePage");
+            HttpSession session = request.getSession();
             String redirectPage = null;
             Cookie[] cookies = request.getCookies();
             Cookie cookieCart = null;
             String CartValue = null;
+            Prodotto prodotto = null;
 
             if (cookies != null) {
                 for (Cookie c : cookies) {
@@ -55,9 +57,16 @@ public class Carrello extends HttpServlet {
                 }
             }
 
-            Prodotto prodotto = prodottoDAO.getProdottoByID(Integer.parseInt(prodottoID));
+            prodotto = prodottoDAO.getProdottoByID(Integer.parseInt(prodottoID));
 
-            HttpSession session = request.getSession();
+            Integer numero = (Integer) session.getAttribute("numero_" + prodottoID);
+            System.out.println("servlet " + numero);
+            if(numero == null) {
+                numero = 1;
+            } else {
+                numero++;
+            }
+            session.setAttribute("numero", numero);
 
             List<Prodotto> carrello = (List<Prodotto>) session.getAttribute("carrello");
 
@@ -66,7 +75,15 @@ public class Carrello extends HttpServlet {
                 session.setAttribute("carrello", carrello);
             }
 
-            carrello.add(prodotto);
+            if (carrello.size() == 0) {
+                carrello.add(prodotto);
+            }
+
+            for (int i = 0; i < carrello.size(); i++) {
+                if (carrello.get(i).getId_prodotto() != prodotto.getId_prodotto()) {
+                    carrello.add(prodotto);
+                }
+            }
 
             session.setAttribute("carrello", carrello);
 
