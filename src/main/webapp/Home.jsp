@@ -16,6 +16,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="DataManagement.Prodotto" %>
 <%@ page import="com.mysql.cj.Session" %>
+<%@ page import="DataManagement.Utente" %>
 
 <!DOCTYPE html>
 <html lang="it">
@@ -424,18 +425,17 @@
         <!-- Parte 3 - Bottoni di Sign-up e Log-in a destra -->
         <div class="right-section">
             <%
-                String role = (String) session.getAttribute("role");
-                String username = (String) session.getAttribute("username");
+                Utente utente = (Utente) session.getAttribute("utente");
 
-                if (role == null) { %>
+                if (utente == null) { %>
             <!-- Se l'utente non è loggato, mostra i bottoni di login e signup -->
             <a class="btn login-btn" href="Log_in.jsp">Log In</a>
             <a class="btn signup-btn" href="Sign-up.jsp">Sign Up</a>
             <% } else { %>
             <!-- Se l'utente è loggato, mostra il nome utente o il menu amministratore -->
-            <% if (role.equals("admin")) { %>
+            <% if (utente.isAmministratore()) { %>
             <!-- Amministratore: aggiungi i bottoni di gestione e il menu a tendina -->
-            <span class="username" onclick="toggleUserMenu()"><%= username != null ? username.toUpperCase() : "" %></span>
+            <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente()!= null ? utente.getNomeutente().toUpperCase() : "" %></span>
             <div id="userMenu" class="user-menu">
                 <ul>
                     <li><a href="profile.jsp">Profilo</a></li>
@@ -454,7 +454,7 @@
             <button class="btn" onclick="openDeleteModal()">Elimina</button>
             <% } else { %>
             <!-- Utente non amministratore: solo il nome utente e il menu a tendina -->
-            <span class="username" onclick="toggleUserMenu()"><%= username != null ? username.toUpperCase() : "" %></span>
+            <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
             <div id="userMenu" class="user-menu">
                 <ul>
                     <li><a href="profile.jsp">Profilo</a></li>

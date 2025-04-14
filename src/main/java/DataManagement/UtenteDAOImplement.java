@@ -43,7 +43,7 @@ public class UtenteDAOImplement implements UtenteDAO {
             query.setString(6, utente.getSesso());
             query.setDate(7, utente.getDataNascita());
             query.setBoolean(8, utente.isAmministratore());
-            query.executeUpdate();
+            query.execute();
             carrello = new Carrello(utente.getCf());
             carrelloDAO.DoSave(carrello);
         } catch (Exception e) {
@@ -161,14 +161,101 @@ public class UtenteDAOImplement implements UtenteDAO {
         }
         return esistente;
     }
+
     public boolean isUtente(String nomeutente, String password) throws SQLException{
-        Connection conn = ds.getConnection();
-        PreparedStatement ql = conn.prepareStatement("SELECT nomeUtente, password FROM " + TABLE_NAME + " WHERE NomeUtente = ? AND Password = ?");
-        ql.setString(1,nomeutente);
-        ql.setString(2,password);
-        ResultSet rs = ql.executeQuery();
-        if (rs.next()) {
-            return true;
-        }else return false;
+
+        Connection conn = null;
+        PreparedStatement query5 = null;
+        boolean esiste = false ;
+
+        try {
+            conn = ds.getConnection();
+            query5 = conn.prepareStatement("SELECT nomeUtente, password FROM " + TABLE_NAME + " WHERE NomeUtente = ? AND Password = ?");
+            query5.setString(1, nomeutente);
+            query5.setString(2, password);
+            ResultSet rs = query5.executeQuery();
+            if (rs.next()) {
+                esiste = true;
+            } else {
+                esiste = false;
+            }
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query5 != null) {
+                    query5.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+        return esiste;
+    }
+
+    public String getCF(String nomeUtente) throws SQLException{
+        Connection conn = null;
+        PreparedStatement query6 = null;
+        String CF = null;
+
+        try {
+            conn = ds.getConnection();
+            query6 = conn.prepareStatement( "select CF from " + TABLE_NAME + " where NomeUtente = ?;");
+
+            query6.setString(1, nomeUtente);
+
+            ResultSet rs = query6.executeQuery();
+
+            if (rs.next()) {
+                CF = rs.getString("CF");
+            }
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query6 != null) {
+                    query6.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+        return CF;
+    }
+
+    public Utente getUtente(String NomeUtente) throws SQLException{
+
+        Connection conn = null;
+        PreparedStatement query7 = null;
+        Utente utente = null;
+
+        try {
+            conn = ds.getConnection();
+            query7 = conn.prepareStatement("select * from " + TABLE_NAME + " where NomeUtente = ?;");
+
+            query7.setString(1, NomeUtente);
+            ResultSet rs = query7.executeQuery();
+
+            if (rs.next()) {
+                utente = new Utente(rs.getString("CF"),rs.getString("NomeUtente"),rs.getString("Password"),rs.getString("Nome"),rs.getString("Cognome"),rs.getString("Sesso"),rs.getDate("DataNascita"),rs.getBoolean("Amministratore"));
+            }
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query7 != null) {
+                    query7.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+        return utente;
     }
 }
