@@ -12,7 +12,7 @@ public class Utente {
     private Date DataNascita;
     private boolean isAmministratore;
 
-    public Utente(String cf, String nomeutente, String nome,String cognome, String password, String sesso, Date dataNascita, boolean isAmministratore) {
+    public Utente(String cf, String nomeutente, String password, String nome,String cognome, String sesso, Date dataNascita, boolean isAmministratore) {
         this.cf = cf;
         this.nomeutente = nomeutente;
         this.nome = nome;
