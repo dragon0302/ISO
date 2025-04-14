@@ -1,11 +1,11 @@
 package Servlet;
+import DataManagement.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/Indirizzo")
 public class Indirizzo extends HttpServlet {
-    Indirizzo indirizzo = new Indirizzo();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response){
         String errore = "errore";
@@ -18,10 +18,14 @@ public class Indirizzo extends HttpServlet {
             String CF_Utente = request.getSession().getAttribute("CF_utente").toString();
             String città = request.getParameter("città");
             String provincia = request.getParameter("Provincia");
+            String via = request.getParameter("via");
             String CAP = request.getParameter("CAP");
-            String civico = request.getParameter("civico");
-            String Indirizzo2 = request.getParameter("Indirizzo2");
+            String scala = request.getParameter("scala");
+            Integer civico = Integer.valueOf(request.getParameter("civico"));
+            String indirizzo2 = request.getParameter("Indirizzo2");
             String note = request.getParameter("note");
+            boolean fatturazione = (boolean) request.getSession().getAttribute("fatturazione");
+
 
             if (CF_Utente.length() != 16) {
                 request.setAttribute("erroreCF", errore_CF);
@@ -32,6 +36,10 @@ public class Indirizzo extends HttpServlet {
             } else if(provincia.length() != 2) {
                 request.setAttribute("errore Provincia", errore_Prov);
                 request.getRequestDispatcher("/Indirizzo.jsp").forward(request, response);
+            }else {
+                DataManagement.Indirizzo indirizzo = new DataManagement.Indirizzo(città,provincia,CAP,via,civico,scala,indirizzo2,note,fatturazione,CF_Utente);
+
+                response.sendRedirect("Indirizzo.jsp");
             }
         }catch (Exception e){
             e.printStackTrace();
