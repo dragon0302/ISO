@@ -262,13 +262,11 @@
         <%
             // Recupera i prodotti dal database
             ArrayList<Prodotto> prodotti = (ArrayList<Prodotto>) session.getAttribute("carrello");
-            int quantita = (int) session.getAttribute("numero");
-            int id = 0;
+            ArrayList<Integer> quantita = (ArrayList<Integer>) session.getAttribute("Quantità");
 
             //Visualizza la barra orizzontale per ogni prodotto -->
             if (prodotti != null){
-                for (Prodotto prodotto : prodotti) {
-                  id++;
+                for (int i = 0; i < prodotti.size(); i++) {
         %>
             <div class="product-bar">
                 <!-- Immagine -->
@@ -276,14 +274,14 @@
 
                 <!-- Descrizione -->
                 <div class="descrizione">
-                    <%= prodotto.getDescrizione() %>
+                    <%= prodotti.get(i).getDescrizione() %>
                 </div>
 
                 <!-- Prezzo e quantità -->
                 <div class="prezzo-quantita">
-                    <div class="prezzo">€ <%= prodotto.getPrezzo() %></div>
-                    <label for="numero_<%= id %>">Scegli un numero:</label>
-                    <input type="number" id="numero" name="numero_<%= id %>" min="0" max="100" step="1" value= <%= quantita %>>
+                    <div class="prezzo">€ <%= prodotti.get(i).getPrezzo() %></div>
+                    <label for="numero">Scegli un numero:</label>
+                    <input type="number" id="numero" name="numero" min="0" max="100" step="1" value= <%= quantita.get(i) %>>
                 </div>
             </div>
         <%  }

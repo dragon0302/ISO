@@ -24,11 +24,16 @@ public class Carrello extends HttpServlet {
             String prodottoID = request.getParameter("prodottoID");
             String sourcePage = request.getParameter("SourcePage");
             HttpSession session = request.getSession();
+            String regex = "(?<=-|^)\\(I" + prodottoID + "!\\d+\\)(?=-|$)";
             String redirectPage = null;
             Cookie[] cookies = request.getCookies();
             Cookie cookieCart = null;
             String CartValue = null;
+            String newQuantita = null;
             Prodotto prodotto = null;
+            int quantita = 0;
+            int Nprodotti = 0;
+            Boolean contenuto = true;
 
             if (cookies != null) {
                 for (Cookie c : cookies) {
@@ -40,52 +45,90 @@ public class Carrello extends HttpServlet {
                 }
             }
 
-            System.out.println(prodottoID);
-
             if(cookieCart == null) {
-                CartValue = prodottoID;
+                quantita = 1;
+                CartValue = ("(I" + prodottoID + "!" + quantita + ")").trim();
                 cookieCart = new Cookie("Cart", CartValue);
                 cookieCart.setMaxAge(30 * 24 * 60 * 60);
                 cookieCart.setPath("/ISO_16_war_exploded");
                 response.addCookie(cookieCart);
             }else {
                 CartValue = cookieCart.getValue();
-                if(!CartValue.contains(String.valueOf(prodottoID))) {
-                    CartValue += "|" + prodottoID;
+                if(!CartValue.contains("I" + prodottoID)) {
+                    quantita = 1;
+                    CartValue += ("-" + "(I" + prodottoID + "!" + quantita + ")").trim();
                     cookieCart.setValue(CartValue);
+                    response.addCookie(cookieCart);
+                } else {
+                    String[] Cprodotti = CartValue.split("-");
+                    StringBuilder newCartValue = new StringBuilder();
+
+                    for (String item : Cprodotti) {
+                        if (item.contains("I" + prodottoID)) {
+                            // Estrai e incrementa quantità
+                            quantita = Integer.parseInt(item.split("!")[1].replace(")", ""));
+                            quantita++;
+                            // Ricostruisci l'item
+                            item = "(I" + prodottoID + "!" + quantita + ")";
+                        }
+                        if(!newCartValue.isEmpty()) {
+                            newCartValue.append("-");
+                        }
+                        newCartValue.append(item);
+                    }
+
+                    // Aggiorna il cookie
+                    cookieCart.setValue(newCartValue.toString());
                     response.addCookie(cookieCart);
                 }
             }
 
             prodotto = prodottoDAO.getProdottoByID(Integer.parseInt(prodottoID));
 
-            Integer numero = (Integer) session.getAttribute("numero_" + prodottoID);
-            System.out.println("servlet " + numero);
-            if(numero == null) {
-                numero = 1;
-            } else {
-                numero++;
-            }
-            session.setAttribute("numero", numero);
-
             List<Prodotto> carrello = (List<Prodotto>) session.getAttribute("carrello");
+            List<Integer> Nquantita = (List<Integer>) session.getAttribute("Quantità");
 
             if (carrello == null) {
                 carrello = new ArrayList<>();
                 session.setAttribute("carrello", carrello);
             }
 
-            if (carrello.size() == 0) {
+            if (carrello.isEmpty()) {
                 carrello.add(prodotto);
+                Nprodotti = carrello.size();
             }
 
+
             for (int i = 0; i < carrello.size(); i++) {
-                if (carrello.get(i).getId_prodotto() != prodotto.getId_prodotto()) {
-                    carrello.add(prodotto);
+                if (carrello.get(i).getId_prodotto() == prodotto.getId_prodotto()) {
+                    contenuto = false;
                 }
             }
 
+            if(contenuto){
+                carrello.add(prodotto);
+            }
+
+            if (Nquantita == null) {
+                Nquantita = new ArrayList<>();
+                session.setAttribute("quantità", Nquantita);
+            }
+
+            if(carrello.size() > Nquantita.size()) {
+
+                Nquantita.add(quantita);
+            }else {
+
+                for (int i = 0; i < carrello.size(); i++) {
+
+                    if (carrello.get(i).getId_prodotto() == Integer.parseInt(prodottoID)) {
+                        Nquantita.set(i, quantita);
+                    }
+
+                }
+            }
             session.setAttribute("carrello", carrello);
+            session.setAttribute("Quantità", Nquantita);
 
             if("Prodotto".equals(sourcePage)) {
                 redirectPage = "ProdottoS?id=" + prodottoID;
