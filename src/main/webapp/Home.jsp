@@ -424,6 +424,7 @@
 
         <!-- Parte 3 - Bottoni di Sign-up e Log-in a destra -->
         <div class="right-section">
+            <a class="btn" href="Carrello.jsp">Carrello</a>
             <%
                 Utente utente = (Utente) session.getAttribute("utente");
 
@@ -589,6 +590,7 @@
                     <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
                     <form action="Carrello" method="post">
                         <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
+                        <input type="hidden" name="SourcePage" value="Home">
                         <button type="submit" class="btn-aggiungi">
                             Aggiungi al carrello
                         </button>
