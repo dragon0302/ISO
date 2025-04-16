@@ -277,7 +277,10 @@
                     <label for="DataNascita">Data di Nascita <span style="color:red;">*</span></label>
                     <input type="date" name="DataNascita" id="DataNascita" required placeholder="Inserire la data di nascita">
                 </div>
-
+                <div class="form-group">
+                    <label for="E-mail">E-mail <span style="color:red;">*</span> </label>
+                    <input name="E-mail" id="E-mail" maxlength="40" required placeholder="Inserire la propria e-mail">
+                </div>
                 <%
                     String Errore_DN = (String) request.getAttribute("Errore_DN");
                     if (Errore_DN != null) {
@@ -287,11 +290,6 @@
                     }
                 %>
 
-                <div class="form-group">
-                    <label>Amministratore: <span style="color:red;">*</span></label>
-                    <label>Y<input type="radio" name="Amministratore" value="1" required></label>
-                    <label>N<input type="radio" name="Amministratore" value="0" required></label>
-                </div>
                 <div class="form-group">
                     <input type="submit" value="Aggiungi ">
                 </div>
