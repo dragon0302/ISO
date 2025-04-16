@@ -8,7 +8,7 @@ CREATE TABLE Utente (
     Salt VARCHAR(255) NOT NULL ,
     Nome VARCHAR(50) NOT NULL,
     Cognome VARCHAR(50) NOT NULL,
-    -- Email VARCHAR(50) NOT NULL ,
+    Email VARCHAR(50) NOT NULL ,
     Sesso CHAR(1) NOT NULL CHECK (Sesso IN ('M', 'F')),
     DataNascita DATE NOT NULL,
     Amministratore TINYINT(1) DEFAULT 0 CHECK (Amministratore IN (0,1))
