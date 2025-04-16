@@ -24,15 +24,12 @@ public class Carrello extends HttpServlet {
             String prodottoID = request.getParameter("prodottoID");
             String sourcePage = request.getParameter("SourcePage");
             HttpSession session = request.getSession();
-            String regex = "(?<=-|^)\\(I" + prodottoID + "!\\d+\\)(?=-|$)";
             String redirectPage = null;
             Cookie[] cookies = request.getCookies();
             Cookie cookieCart = null;
-            String CartValue = null;
-            String newQuantita = null;
+            String CartValue;
             Prodotto prodotto = null;
             int quantita = 0;
-            int Nprodotti = 0;
             Boolean contenuto = true;
 
             if (cookies != null) {
@@ -95,7 +92,6 @@ public class Carrello extends HttpServlet {
 
             if (carrello.isEmpty()) {
                 carrello.add(prodotto);
-                Nprodotti = carrello.size();
             }
 
 
