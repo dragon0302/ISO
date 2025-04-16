@@ -94,7 +94,6 @@ public class ProdottoDAOImplement implements ProdottoDAO{
             query4 = conn.prepareStatement("select * from " + TABLE_NAME + " where DataInserimento >= ?");
 
             query4.setDate(1, Date.valueOf(ofsetDate));
-            System.out.println("prova");
 
             ResultSet rs = query4.executeQuery();
 
@@ -109,8 +108,6 @@ public class ProdottoDAOImplement implements ProdottoDAO{
                 Prodotto p = new Prodotto(nomeProdotto,mediaValutazione,taglia,descrizione,categoria,prezzo);
                 p.setId_prodotto(idProdotto);
                 prodottiRecenti.add(p);
-
-                System.out.println(prodottiRecenti);
             }
         }catch (Exception e) {
             System.out.println(e.getMessage());

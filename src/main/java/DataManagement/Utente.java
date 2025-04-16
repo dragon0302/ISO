@@ -9,19 +9,19 @@ public class Utente {
     private String Cognome;
     private String password;
     private String salt;
-    //private String email;
+    private String email;
     private String sesso;
     private Date DataNascita;
     private boolean isAmministratore;
 
-    public Utente(String cf, String nomeutente, String password,String salt, String nome,String cognome/*,String email*/, String sesso, Date dataNascita, boolean isAmministratore) {
+    public Utente(String cf, String nomeutente, String password,String salt, String nome,String cognome,String email, String sesso, Date dataNascita, boolean isAmministratore) {
         this.cf = cf;
         this.nomeutente = nomeutente;
         this.nome = nome;
         this.Cognome = cognome;
         this.password = password;
         this.salt = salt;
-        //this.email = email;
+        this.email = email;
         this.sesso = sesso;
         DataNascita = dataNascita;
         this.isAmministratore = isAmministratore;
@@ -75,13 +75,13 @@ public class Utente {
         this.salt = salt;
     }
 
-    /*public String getEmail() {
+    public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }*/
+    }
 
     public String getSesso() {
         return sesso;

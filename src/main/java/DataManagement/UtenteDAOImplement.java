@@ -36,7 +36,7 @@ public class UtenteDAOImplement implements UtenteDAO {
 
         try {
             conn = ds.getConnection();
-            query = conn.prepareStatement("INSERT INTO " + TABLE_NAME + " (CF, NomeUtente, Password,Salt, Nome, Cognome/*,Email*/, Sesso, DataNascita, Amministratore) VALUES (?,?,?,?,?,?,?,?,?/*,?*/);");
+            query = conn.prepareStatement("INSERT INTO " + TABLE_NAME + " (CF, NomeUtente, Password,Salt, Nome, Cognome,Email, Sesso, DataNascita, Amministratore) VALUES (?,?,?,?,?,?,?,?,?,?);");
 
             query.setString(1, utente.getCf());
             query.setString(2, utente.getNomeutente());
@@ -44,10 +44,10 @@ public class UtenteDAOImplement implements UtenteDAO {
             query.setString(4, utente.getSalt());
             query.setString(5, utente.getNome());
             query.setString(6, utente.getCognome());
-            //query.setString(7, utente.getEmail());
-            query.setString(7, utente.getSesso());
-            query.setDate(8, utente.getDataNascita());
-            query.setBoolean(9, utente.isAmministratore());
+            query.setString(7, utente.getEmail());
+            query.setString(8, utente.getSesso());
+            query.setDate(9, utente.getDataNascita());
+            query.setBoolean(10, utente.isAmministratore());
             query.execute();
             carrello = new Carrello(utente.getCf());
             carrelloDAO.DoSave(carrello);
@@ -202,7 +202,6 @@ public class UtenteDAOImplement implements UtenteDAO {
             if (rs3.next()) {
                 Pesiste = encod.verifyPassword(password, rs3.getString("Password"),rs3.getString("Salt"));
             }
-            System.out.println(Pesiste);
 
             query5.setString(1, nomeutente);
             rs1 = query5.executeQuery();
@@ -229,16 +228,16 @@ public class UtenteDAOImplement implements UtenteDAO {
 
     public String getCF(String nomeUtente) throws SQLException{
         Connection conn = null;
-        PreparedStatement query6 = null;
+        PreparedStatement query8 = null;
         String CF = null;
 
         try {
             conn = ds.getConnection();
-            query6 = conn.prepareStatement( "select CF from " + TABLE_NAME + " where NomeUtente = ?;");
+            query8 = conn.prepareStatement( "select CF from " + TABLE_NAME + " where NomeUtente = ?;");
 
-            query6.setString(1, nomeUtente);
+            query8.setString(1, nomeUtente);
 
-            ResultSet rs = query6.executeQuery();
+            ResultSet rs = query8.executeQuery();
 
             if (rs.next()) {
                 CF = rs.getString("CF");
@@ -247,8 +246,8 @@ public class UtenteDAOImplement implements UtenteDAO {
             System.out.println(e.getMessage());
         } finally {
             try {
-                if (query6 != null) {
-                    query6.close();
+                if (query8 != null) {
+                    query8.close();
                 }
             } finally {
                 if (conn != null) {
@@ -262,25 +261,25 @@ public class UtenteDAOImplement implements UtenteDAO {
     public Utente getUtente(String NomeUtente) throws SQLException{
 
         Connection conn = null;
-        PreparedStatement query7 = null;
+        PreparedStatement query9 = null;
         Utente utente = null;
 
         try {
             conn = ds.getConnection();
-            query7 = conn.prepareStatement("select * from " + TABLE_NAME + " where NomeUtente = ?;");
+            query9 = conn.prepareStatement("select * from " + TABLE_NAME + " where NomeUtente = ?;");
 
-            query7.setString(1, NomeUtente);
-            ResultSet rs = query7.executeQuery();
+            query9.setString(1, NomeUtente);
+            ResultSet rs = query9.executeQuery();
 
             if (rs.next()) {
-                utente = new Utente(rs.getString("CF"),rs.getString("NomeUtente"),rs.getString("Password"),rs.getString("Salt"),rs.getString("Nome"),rs.getString("Cognome")/*,rs.getString("email")*/,rs.getString("Sesso"),rs.getDate("DataNascita"),rs.getBoolean("Amministratore"));
+                utente = new Utente(rs.getString("CF"),rs.getString("NomeUtente"),rs.getString("Password"),rs.getString("Salt"),rs.getString("Nome"),rs.getString("Cognome"),rs.getString("email"),rs.getString("Sesso"),rs.getDate("DataNascita"),rs.getBoolean("Amministratore"));
             }
         }catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
             try {
-                if (query7 != null) {
-                    query7.close();
+                if (query9 != null) {
+                    query9.close();
                 }
             } finally {
                 if (conn != null) {
@@ -289,5 +288,37 @@ public class UtenteDAOImplement implements UtenteDAO {
             }
         }
         return utente;
+    }
+
+    public boolean EmailEsistente(String email) throws SQLException{
+        Connection conn = null;
+        PreparedStatement query10 = null;
+        boolean esiste = false ;
+
+        try {
+            conn = ds.getConnection();
+            query10 = conn.prepareStatement("select Email from " + TABLE_NAME + " where Email = ?;");
+            query10.setString(1, email);
+
+            ResultSet rs = query10.executeQuery();
+
+            if (rs.next()) {
+                esiste = true;
+            }
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query10 != null) {
+                    query10.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+        return esiste;
     }
 }

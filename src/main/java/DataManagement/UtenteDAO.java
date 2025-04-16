@@ -10,4 +10,5 @@ public interface UtenteDAO {
     public boolean isUtente(String nomeutente, String password) throws SQLException;
     public String getCF(String nomeUtente) throws SQLException;
     public Utente getUtente(String NomeUtente) throws SQLException;
+    public boolean EmailEsistente(String email) throws SQLException;
 }
