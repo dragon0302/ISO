@@ -5,15 +5,17 @@ CREATE TABLE Utente (
     CF CHAR(16) PRIMARY KEY NOT NULL check ( char_length(CF) = 16 ),
     NomeUtente VARCHAR(50) NOT NULL,
     Password VARCHAR(255) NOT NULL,
+    Salt VARCHAR(255) NOT NULL ,
     Nome VARCHAR(50) NOT NULL,
     Cognome VARCHAR(50) NOT NULL,
+    -- Email VARCHAR(50) NOT NULL ,
     Sesso CHAR(1) NOT NULL CHECK (Sesso IN ('M', 'F')),
     DataNascita DATE NOT NULL,
     Amministratore TINYINT(1) DEFAULT 0 CHECK (Amministratore IN (0,1))
 );
 
 CREATE TABLE carrello(
-     ID_carrello int  primary key not null auto_increment,
+     ID_carrello int primary key not null auto_increment,
      Lista_prodotti varchar(500),
      CF_utente CHAR(16),
      foreign key (CF_utente) references Utente (CF)

@@ -1,5 +1,7 @@
 package DataManagement;
 
+import com.example.iso16.EncodingPassword;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -8,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Base64;
 
 public class UtenteDAOImplement implements UtenteDAO {
 
@@ -33,16 +36,18 @@ public class UtenteDAOImplement implements UtenteDAO {
 
         try {
             conn = ds.getConnection();
-            query = conn.prepareStatement("INSERT INTO " + TABLE_NAME + " (CF, NomeUtente, Password, Nome, Cognome, Sesso, DataNascita, Amministratore) VALUES (?,?,?,?,?,?,?,?);");
+            query = conn.prepareStatement("INSERT INTO " + TABLE_NAME + " (CF, NomeUtente, Password,Salt, Nome, Cognome/*,Email*/, Sesso, DataNascita, Amministratore) VALUES (?,?,?,?,?,?,?,?,?/*,?*/);");
 
             query.setString(1, utente.getCf());
             query.setString(2, utente.getNomeutente());
             query.setString(3, utente.getPassword());
-            query.setString(4, utente.getNome());
-            query.setString(5, utente.getCognome());
-            query.setString(6, utente.getSesso());
-            query.setDate(7, utente.getDataNascita());
-            query.setBoolean(8, utente.isAmministratore());
+            query.setString(4, utente.getSalt());
+            query.setString(5, utente.getNome());
+            query.setString(6, utente.getCognome());
+            //query.setString(7, utente.getEmail());
+            query.setString(7, utente.getSesso());
+            query.setDate(8, utente.getDataNascita());
+            query.setBoolean(9, utente.isAmministratore());
             query.execute();
             carrello = new Carrello(utente.getCf());
             carrelloDAO.DoSave(carrello);
@@ -166,15 +171,42 @@ public class UtenteDAOImplement implements UtenteDAO {
 
         Connection conn = null;
         PreparedStatement query5 = null;
+        PreparedStatement query6 = null;
+        PreparedStatement query7 = null;
+        ResultSet rs1;
+        ResultSet rs2;
+        ResultSet rs3;
         boolean esiste = false ;
+        boolean Uesiste= false;
+        boolean Pesiste= false;
+        EncodingPassword encod = new EncodingPassword();
 
         try {
             conn = ds.getConnection();
-            query5 = conn.prepareStatement("SELECT nomeUtente, password FROM " + TABLE_NAME + " WHERE NomeUtente = ? AND Password = ?");
+            query5 = conn.prepareStatement("SELECT nomeUtente FROM " + TABLE_NAME + " WHERE NomeUtente = ?");
+            query6 = conn.prepareStatement("select Salt, Password from " + TABLE_NAME + " where CF = ?");
+            query7 = conn.prepareStatement("select CF from " + TABLE_NAME + " where NomeUtente = ?");
+
+            query7.setString(1, nomeutente);
+
+            rs2 = query7.executeQuery();
+            if (rs2.next()) {
+                Uesiste = true;
+            }
+
+            if (Uesiste) {
+                query6.setString(1, rs2.getString(1));
+            };
+            rs3 = query6.executeQuery();
+
+            if (rs3.next()) {
+                Pesiste = encod.verifyPassword(password, rs3.getString("Password"),rs3.getString("Salt"));
+            }
+            System.out.println(Pesiste);
+
             query5.setString(1, nomeutente);
-            query5.setString(2, password);
-            ResultSet rs = query5.executeQuery();
-            if (rs.next()) {
+            rs1 = query5.executeQuery();
+            if (rs1.next() && Pesiste) {
                 esiste = true;
             } else {
                 esiste = false;
@@ -241,7 +273,7 @@ public class UtenteDAOImplement implements UtenteDAO {
             ResultSet rs = query7.executeQuery();
 
             if (rs.next()) {
-                utente = new Utente(rs.getString("CF"),rs.getString("NomeUtente"),rs.getString("Password"),rs.getString("Nome"),rs.getString("Cognome"),rs.getString("Sesso"),rs.getDate("DataNascita"),rs.getBoolean("Amministratore"));
+                utente = new Utente(rs.getString("CF"),rs.getString("NomeUtente"),rs.getString("Password"),rs.getString("Salt"),rs.getString("Nome"),rs.getString("Cognome")/*,rs.getString("email")*/,rs.getString("Sesso"),rs.getDate("DataNascita"),rs.getBoolean("Amministratore"));
             }
         }catch (Exception e) {
             System.out.println(e.getMessage());

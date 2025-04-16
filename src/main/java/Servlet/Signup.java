@@ -3,6 +3,7 @@ package Servlet;
 import DataManagement.Utente;
 import DataManagement.UtenteDAO;
 import DataManagement.UtenteDAOImplement;
+import com.example.iso16.EncodingPassword;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 @WebServlet("/Sign-up")
 public class Signup extends HttpServlet {
     UtenteDAO utenteDAO = new UtenteDAOImplement();
+    EncodingPassword encod = new EncodingPassword();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response){
 
@@ -33,6 +35,9 @@ public class Signup extends HttpServlet {
             Date dataNascita = Date.valueOf(request.getParameter("DataNascita"));
             boolean Amministratore = Boolean.parseBoolean(request.getParameter("Amministratore"));
 
+            String salt = encod.genereitSalt();
+            String encodedPassword = encod.codePassword(Password,salt);
+
             if (CF.length() != 16) {
                 request.setAttribute("errore", erroreCF);
                 request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
@@ -46,7 +51,7 @@ public class Signup extends HttpServlet {
                 request.setAttribute("errore", erroreData);
                 request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
             } else {
-                Utente utente = new Utente(CF, nomeUtenete, Password, Nome, Cognome, Sesso, dataNascita, Amministratore);
+                Utente utente = new Utente(CF, nomeUtenete, encodedPassword,salt, Nome, Cognome, Sesso, dataNascita, Amministratore);
                 utenteDAO.DoSave(utente);
                 response.sendRedirect("Home.jsp");
             }
