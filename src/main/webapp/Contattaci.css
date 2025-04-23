@@ -1,0 +1,52 @@
+/* Stile per la sezione di contatto */
+.contact-info {
+    background-color: #1a1a1a; /* Sfondo scuro per contrastare con il testo chiaro */
+    color: #f4f4f4; /* Colore del testo bianco per buona leggibilità */
+    padding: 40px 20px; /* Spazio interno (padding) per creare margini intorno ai contenuti */
+    border-radius: 8px; /* Angoli arrotondati per un aspetto più morbido */
+    max-width: 800px; /* Larghezza massima per mantenere il contenuto compatto */
+    margin: 40px auto; /* Centra la sezione nella pagina */
+}
+
+/* Stile per il titolo della sezione di contatto */
+.contact-info h1 {
+    font-size: 28px; /* Dimensione del font del titolo */
+    font-weight: bold; /* Grassetto per il titolo */
+    color: #8B2635; /* Colore personalizzato per il titolo */
+    text-align: center; /* Allinea il titolo al centro */
+    margin-bottom: 20px; /* Spazio sotto il titolo */
+}
+
+/* Stile per la descrizione generale della sezione */
+.contact-info p {
+    font-size: 16px; /* Dimensione del font del paragrafo */
+    text-align: center; /* Allinea il testo al centro */
+    margin-bottom: 30px; /* Spazio sotto il paragrafo */
+}
+
+/* Stile per l'elenco dei numeri di telefono */
+.contact-info ul {
+    list-style-type: none; /* Rimuove i punti elenco standard */
+    padding-left: 0; /* Rimuove il padding a sinistra */
+    font-size: 16px; /* Dimensione del font dell'elenco */
+}
+
+.contact-info ul li {
+    background-color: #333; /* Colore di sfondo per ogni elemento della lista */
+    padding: 12px; /* Spazio interno per separare meglio il testo */
+    margin-bottom: 10px; /* Spazio tra gli elementi della lista */
+    border-radius: 6px; /* Angoli arrotondati per gli elementi della lista */
+    transition: background-color 0.3s ease; /* Aggiungi un effetto di transizione al colore di sfondo */
+}
+
+/* Cambia il colore di sfondo quando si passa con il mouse sopra un elemento della lista */
+.contact-info ul li:hover {
+    background-color: #8B2635; /* Colore di sfondo quando il mouse è sopra */
+    cursor: pointer; /* Cambia il cursore per farlo sembrare cliccabile */
+}
+
+/* Stile per i numeri di telefono (strong) */
+.contact-info ul li strong {
+    font-weight: bold; /* Grassetto per i nomi dei numeri di telefono */
+    color: #8B2635; /* Colore personalizzato per i nomi dei numeri */
+}

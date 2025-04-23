@@ -1,47 +1,53 @@
+/* Stile base per il body dell'intera pagina */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #000000;
-    color: white;
-    margin: 0;
-    padding-top: 100px;
-    padding-bottom: 80px;
+    font-family: Arial, sans-serif;     /* Font principale */
+    background-color: #000000;          /* Sfondo nero */
+    color: white;                       /* Testo bianco */
+    margin: 0;                          /* Rimuove margini */
+    padding-top: 100px;                 /* Spazio sopra per non coprire contenuto con header */
+    padding-bottom: 80px;              /* Spazio sotto per non coprire contenuto con footer */
 }
 
+/* Header fisso in alto */
 header {
     width: 100%;
-    background-color: #8B2635;
+    background-color: #8B2635;         /* Colore rosso scuro */
     padding: 10px 20px;
-    display: flex;
+    display: flex;                     /* Disposizione flex */
     align-items: center;
     justify-content: space-between;
     position: fixed;
     top: 0;
     left: 0;
     border-bottom: 1px solid #000000;
-    z-index: 100;
+    z-index: 100;                      /* Sta sopra gli altri elementi */
 }
 
+/* Contenitore top-header */
 .top-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    flex-wrap: wrap;
+    flex-wrap: wrap;                   /* Va a capo se lo spazio finisce */
 }
 
+/* Contenitore del logo */
 .logo-container {
     flex: 1;
 }
 .logo-container img {
-    height: 60px;
+    height: 60px;                      /* Altezza logo */
 }
 
+/* Sezione centrale dell'header */
 .center-section {
     flex: 2;
     text-align: center;
     width: 100%;
 }
 
+/* Contenitore barra di ricerca */
 .search-container {
     position: relative;
     width: 60%;
@@ -53,6 +59,8 @@ header {
     border-radius: 4px;
     border: 1px solid #ccc;
 }
+
+/* Suggerimenti di ricerca */
 .suggestions {
     position: absolute;
     top: 36px;
@@ -70,6 +78,7 @@ header {
     background-color: #eee;
 }
 
+/* Barra dei filtri (categorie musicali ad esempio) */
 .filter-bar {
     display: flex;
     gap: 20px;
@@ -91,6 +100,8 @@ header {
     color: #f4f4f4;
     font-weight: bold;
 }
+
+/* Dropdown che appare al passaggio del mouse */
 .dropdown {
     display: none;
     position: absolute;
@@ -111,14 +122,17 @@ header {
     background-color: #eee;
 }
 .filter:hover .dropdown {
-    display: block;
+    display: block; /* Mostra il dropdown al passaggio del mouse */
 }
 
+/* Sezione destra dell'header con i bottoni login/signup */
 .right-section {
     display: flex;
     gap: 10px;
     align-items: center;
 }
+
+/* Stile base per bottoni */
 .btn {
     padding: 8px 12px;
     border-radius: 4px;
@@ -126,17 +140,22 @@ header {
     text-decoration: none;
     cursor: pointer;
 }
+
+/* Bottone login (bordo nero, sfondo trasparente) */
 .login-btn {
     border: 1px solid #000;
     background-color: transparent;
     color: #000;
 }
+
+/* Bottone signup (sfondo nero, testo bianco) */
 .signup-btn {
     background-color: #000;
     color: #fff;
     border: none;
 }
 
+/* Footer fisso in basso */
 .footer-bar {
     width: 100%;
     background-color: #222;
@@ -153,6 +172,7 @@ header {
     text-decoration: none;
 }
 
+/* Slider prodotti (es. album in vetrina) */
 .product-slider {
     display: flex;
     flex-wrap: nowrap;
@@ -164,6 +184,7 @@ header {
     margin: 20px auto;
 }
 
+/* Singolo prodotto (card) */
 .product {
     flex: 0 0 250px;
     aspect-ratio: 1 / 1;
@@ -176,9 +197,10 @@ header {
     transition: transform 0.3s;
 }
 .product:hover {
-    transform: scale(1.03);
+    transform: scale(1.03); /* Ingrandisce leggermente al passaggio del mouse */
 }
 
+/* Contenitore interno della card */
 .box {
     display: flex;
     flex-direction: column;
@@ -186,6 +208,8 @@ header {
     padding: 12px;
     box-sizing: border-box;
 }
+
+/* Immagine del prodotto */
 .product-img {
     width: 100%;
     height: 50%;
@@ -193,17 +217,23 @@ header {
     border-radius: 8px;
     margin-bottom: 10px;
 }
+
+/* Titolo del prodotto */
 .box h3 {
     color: white;
     font-size: 16px;
     margin: 0 0 5px;
 }
+
+/* Descrizione del prodotto */
 .box p {
     color: #ccc;
     font-size: 13px;
     margin: 3px 0;
     flex-grow: 1;
 }
+
+/* Link all'interno della card (es. "Scopri di più") */
 .box a {
     text-decoration: none;
     background-color: #8B2635;
@@ -216,6 +246,7 @@ header {
     margin-top: 6px;
 }
 
+/* Menu utente (es. dopo login) */
 .user-menu {
     display: none;
     position: absolute;
@@ -225,9 +256,28 @@ header {
     padding: 10px;
 }
 .user-menu.show {
-    display: block;
+    display: block; /* Mostrato quando ha la classe .show */
 }
 
+/* Link stile bottone per navbar e footer */
+a.btn-link {
+    padding: 8px 12px;
+    border-radius: 4px;
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+a.btn-link:hover {
+    background-color: #8B2635;
+    color: #fff;
+}
+
+/* MEDIA QUERY: per schermi piccoli (telefono) */
 @media (max-width: 768px) {
     .header-bar {
         flex-direction: column;
