@@ -6,221 +6,189 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="DataManagement.Utente" %>
 <!DOCTYPE html>
 <html lang="it">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sig-up</title>
-        <style>
-            /* Stile generale della pagina */
-            body {
-                font-family: Arial, sans-serif;
-                background-color: #374A67; /* Sfondo nero */
-                color: white; /* Testo bianco per contrasto */
-                display: flex;
-                justify-content: center;
-                align-items: flex-start; /* Modificato per allineare il contenuto in alto */
-                min-height: 100vh;
-                margin: 0;
-                padding-top: 70px; /* Spazio tra il contenuto e la barra superiore */
-                padding-bottom: 70px; /* Spazio tra il contenuto e la barra inferiore */
-                flex-direction: column;
-            }
-
-            /* Stile errore */
-            .field-error {
-                color: red;
-                background-color: white;
-                padding: 5px 10px;
-                border-radius: 4px;
-                font-size: 13px;
-                margin-top: 5px;
-            }
-
-            /* Stile della barra superiore con logo e barra di ricerca */
-            .header-bar {
-                width: 100%;
-                background-color: #444; /* Colore di sfondo per il header */
-                padding: 15px 0;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                position: fixed; /* Fissiamo la barra superiore */
-                top: 0;
-                left: 0;
-                padding: 10px 20px;
-                z-index: 1000; /* Mantiene la barra sopra il contenuto */
-            }
-
-            /* Stile del logo */
-            .logo-container img {
-                width: 100px;
-                height: auto;
-            }
-
-            /* Stile della barra di ricerca */
-            .search-bar input[type="text"] {
-                padding: 8px;
-                font-size: 14px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                width: 200px;
-            }
-
-            .search-bar input[type="submit"] {
-                padding: 8px;
-                background-color: #4CAF50;
-                color: white;
-                border: none;
-                cursor: pointer;
-                border-radius: 4px;
-            }
-
-            .search-bar input[type="submit"]:hover {
-                background-color: #45a049;
-            }
-
-            /* Contenitore centrale che include immagini laterali e il form di inserimento */
-            .content-wrapper {
-                display: flex;
-                align-items: flex-start;
-                justify-content: center;
-                gap: 50px; /* Distanza tra le immagini laterali e il form di inserimento */
-                margin-top: 100px; /* Distanza tra la barra superiore fissa e il contenuto */
-                width: 90%;
-                padding: 0 20px; /* Spazio ai lati del contenuto */
-            }
-
-            /* Stile delle immagini laterali */
-            .side-image {
-                width: 150px;
-                height: auto;
-                position: sticky;
-                top: 50px; /* L'immagine resterà a 20px dal top quando si scorre */
-            }
-
-            /* Stile del contenitore del form */
-            .form-container {
-                background-color: #333;
-                padding: 30px;
-                border-radius: 5px;
-                box-shadow: 0 4px 8px rgba(0.1, 0.1, 0.1, 0.2);
-                width: 100%;
-                max-width: 400px; /* Max width per il form */
-                z-index: 1; /* Garantisce che il form sia sopra le immagini laterali */
-            }
-
-            .form-container h2 {
-                text-align: center;
-                margin-bottom: 30px;
-            }
-
-            /* Stile dei campi del form */
-            .form-group {
-                margin-bottom: 20px;
-            }
-
-            .form-group label {
-                display: block;
-                margin-bottom: 15px;
-            }
-
-            .form-group input {
-                width: 95%;
-                padding: 8px;
-                font-size: 14px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-            }
-
-            /* Stile del pulsante di invio */
-            .form-group input[type="submit"] {
-                background-color: #4CAF50;
-                color: white;
-                cursor: pointer;
-            }
-
-            .form-group input[type="submit"]:hover {
-                background-color: #45a049;
-            }
-
-            /* Stile del footer */
-            .footer-bar {
-                width: 100%;
-                background-color: #222; /* Colore di sfondo diverso per il footer */
-                padding: 15px 0;
-                text-align: center;
-                position: fixed; /* Fissa il footer in basso */
-                bottom: 0;
-                left: 0;
-                z-index: 1000; /* Mantiene il footer sopra il contenuto */
-            }
-
-            .footer-bar a {
-                color: white;
-                margin: 0 15px;
-                text-decoration: none;
-            }
-
-            /* Media query per dispositivi mobili */
-            @media (max-width: 768px) {
-                /* Barra superiore: logo e barra di ricerca */
-                .header-bar {
-                    flex-direction: column;
-                    align-items: flex-start;
-                    padding: 15px;
-                }
-
-                .logo-container img {
-                    width: 80px; /* Ridurre la dimensione del logo su dispositivi più piccoli
-                }
-
-                .search-bar input[type="text"] {
-                    width: 100%; /* La barra di ricerca occuperà tutta la larghezza */
-                    margin-top: 10px;
-                }
-
-                .search-bar input[type="submit"] {
-                    width: 100%; /* Il pulsante di ricerca occupa tutta la larghezza */
-                    margin-top: 5px;
-                }
-
-                /* Layout delle immagini laterali e form */
-                .content-wrapper {
-                    flex-direction: column;
-                    gap: 20px;
-                    margin-top: 20px;
-                }
-
-                .side-image {
-                    width: 100px; /* Ridurre la dimensione delle immagini laterali su disposit
-                    position: relative; /* Impedisce alle immagini di essere sticky sui dispos
-                }
-
-                .form-container {
-                    width: 80%; /* Rendere il form più largo su schermi piccoli */
-                    padding: 20px;
-                }
-            }
-        </style>
+        <!-- Link al file CSS esterno per lo styling della pagina-->
+        <link rel="stylesheet" href="sfondo.css">
 </head>
-    <body>
 
-    <!-- Barra superiore con logo e barra di ricerca -->
-        <div class="header-bar">
+    <header>
+        <div class="top-header">
+            <!-- Parte 1 - Logo a sinistra -->
             <div class="logo-container">
-                <a href="home.jsp">
-                    <img src="logo.png" alt="Logo">
+                <a href="Home.jsp">
+                    <!--img src="logo.png" alt="Logo"-->
                 </a>
             </div>
-            <div class="search-bar">
-                <form action="search.jsp" method="GET">
-                    <input type="text" name="query" placeholder="Cerca...">
-                    <input type="submit" value="Cerca">
-                </form>
+
+            <!-- Parte 2 - Barra di ricerca centrata e filtri sotto -->
+            <div class="center-section">
+                <!-- Barra di ricerca -->
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Cerca prodotti..." onkeyup="showSuggestions(this.value)">
+                    <div class="suggestions" id="suggestionBox"></div>
+                </div>
+
+                <!-- Filtri sotto la barra di ricerca -->
+                <div class="filter-bar">
+                    <div class="filter">
+                        <a href="#">ROCK</a>
+                        <div class="dropdown">
+                            <a href="#">AC/DC</a>
+                            <a href="#">Aerosmith</a>
+                            <a href="#">Led Zeppelin</a>
+                        </div>
+                    </div>
+                    <div class="filter">
+                        <a href="#">POP</a>
+                        <div class="dropdown">
+                            <a href="#">Adele</a>
+                            <a href="#">Beyoncé</a>
+                            <a href="#">Madonna</a>
+                        </div>
+                    </div>
+                    <div class="filter">
+                        <a href="#">JAZZ</a>
+                        <div class="dropdown">
+                            <a href="#">Coltrane</a>
+                            <a href="#">Davis</a>
+                            <a href="#">Fitzgerald</a>
+                        </div>
+                    </div>
+                    <div class="filter">
+                        <a href="#">METAL</a>
+                        <div class="dropdown">
+                            <a href="#">Iron Maiden</a>
+                            <a href="#">Metallica</a>
+                            <a href="#">Slayer</a>
+                        </div>
+                    </div>
+                    <div class="filter">
+                        <a href="#">RAP</a>
+                        <div class="dropdown">
+                            <a href="#">Drake</a>
+                            <a href="#">Eminem</a>
+                            <a href="#">Kanye</a>
+                        </div>
+                    </div>
+                    <div class="filter">
+                        <a href="#">Abbigliamento</a>
+                        <div class="dropdown">
+                            <a href="#">Cappelli</a>
+                            <a href="#">Felpe</a>
+                            <a href="#">T-shirt</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Parte 3 - Bottoni di Sign-up e Log-in a destra -->
+            <div class="right-section">
+                <a class="btn" href="Carrello.jsp">Carrello</a>
+                <%
+                    Utente utente = (Utente) session.getAttribute("utente");
+
+                    if (utente == null) { %>
+                <!-- Se l'utente non è loggato, mostra i bottoni di login e signup -->
+                <a class="btn login-btn" href="Log_in.jsp">Log In</a>
+                <a class="btn signup-btn" href="Sign-up.jsp">Sign Up</a>
+                <% } else { %>
+                <!-- Se l'utente è loggato, mostra il nome utente o il menu amministratore -->
+                <% if (utente.isAmministratore()) { %>
+                <!-- Amministratore: aggiungi i bottoni di gestione e il menu a tendina -->
+                <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente()!= null ? utente.getNomeutente().toUpperCase() : "" %></span>
+                <div id="userMenu" class="user-menu">
+                    <ul>
+                        <li><a href="profile.jsp">Profilo</a></li>
+                        <li><a href="settings.jsp">Impostazioni</a></li>
+                        <li><a href="cart.jsp">Carrello</a></li>
+                        <li><a href="logout.jsp">Log-out</a></li>
+                    </ul>
+                </div>
+                <!-- Bottoni amministratore -->
+                <button class="btn" onclick="openPriceSurveyModal()">Indagine per nnumero venduti</button>
+                <button class="btn" onclick="openAddProductModal()">Aggiungi Prodotto</button>
+                <button class="btn" onclick="openAddFilterModal()">Aggiungi Filtro</button>
+                <button class="btn" onclick="openDateSurveyModal()">Indagine per Data</button>
+                <button class="btn" onclick="openDeleteModal()">Elimina</button>
+                <% } else { %>
+                <!-- Utente non amministratore: solo il nome utente e il menu a tendina -->
+                <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
+                <div id="userMenu" class="user-menu">
+                    <ul>
+                        <li><a href="profile.jsp">Profilo</a></li>
+                        <li><a href="settings.jsp">Impostazioni</a></li>
+                        <li><a href="cart.jsp">Carrello</a></li>
+                        <li><a href="logout.jsp">Log-out</a></li>
+                    </ul>
+                </div>
+                <% } %>
+                <% } %>
             </div>
         </div>
+    </header>
+    <!-- JavaScript per suggerimenti live -->
+    <script>
+        const products = [
+            "AC/DC T-Shirt", "Adele CD", "Metallica Hoodie",
+            "Queen Vinyl", "Eminem Cap", "Jazz Mug",
+            "Taylor Swift Poster", "Iron Maiden Patch", "Led Zeppelin T-Shirt"
+        ];
+
+        function showSuggestions(value) {
+            const suggestionBox = document.getElementById('suggestionBox');
+            suggestionBox.innerHTML = '';
+            if (value.length === 0) return;
+
+            const filtered = products.filter(product =>
+                product.toLowerCase().includes(value.toLowerCase())
+            );
+
+            filtered.forEach(product => {
+                const div = document.createElement('div');
+                div.textContent = product;
+                div.onclick = () => {
+                    document.getElementById('searchInput').value = product;
+                    suggestionBox.innerHTML = '';
+                };
+                suggestionBox.appendChild(div);
+            });
+        }
+    </script>
+    <script>
+        function toggleUserMenu() {
+            document.getElementById("userMenu").classList.toggle("show");
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        function openAddProductModal() {
+            document.getElementById("addProductModal").style.display = "block";
+        }
+
+        function openPriceSurveyModal() {
+            document.getElementById("priceSurveyModal").style.display = "block";
+        }
+
+        function openAddFilterModal() {
+            document.getElementById("addFilterModal").style.display = "block";
+        }
+
+        function openDateSurveyModal() {
+            document.getElementById("dateSurveyModal").style.display = "block";
+        }
+
+        function openDeleteModal() {
+            document.getElementById("deleteModal").style.display = "block";
+        }
+    </script>
 
         <!-- Contenitore centrale con immagini laterali e form di inserimento -->
         <div class="content-wrapper">
@@ -301,10 +269,10 @@
 
         <!-- Footer con stile di barra inferiore -->
         <div class="footer-bar">
-            <a href="AboutUs.jsp">About Us</a>
-            <a href="Contattaci.jsp">Contattaci</a>
-            <a href="Termini_e_condizioni.jsp">Termini e condizioni</a>
-            <a href="Assistenza.jsp">Assistenza</a>
+            <a href="AboutUs.jsp" class="btn-link">About Us</a>
+            <a href="Contattaci.jsp" class="btn-link">Contattaci</a>
+            <a href="Termini_e_condizioni.jsp" class="btn-link">Termini e condizioni</a>
+            <a href="Assistenza.jsp" class="btn-link">Assistenza</a>
         </div>
 
     </body>
