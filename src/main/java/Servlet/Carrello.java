@@ -3,7 +3,7 @@ package Servlet;
 import DataManagement.Prodotto;
 import DataManagement.ProdottoDAO;
 import DataManagement.ProdottoDAOImplement;
-import jakarta.servlet.RequestDispatcher;
+import Utility.CookieManagement;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -25,60 +25,12 @@ public class Carrello extends HttpServlet {
             String sourcePage = request.getParameter("SourcePage");
             HttpSession session = request.getSession();
             String redirectPage = null;
-            Cookie[] cookies = request.getCookies();
-            Cookie cookieCart = null;
-            String CartValue;
             Prodotto prodotto = null;
-            int quantita = 0;
             Boolean contenuto = true;
+            int quantita = 0;
+            CookieManagement cookieManagement = new CookieManagement(request);
 
-            if (cookies != null) {
-                for (Cookie c : cookies) {
-                    if (c.getName().equals("Cart")) {
-                        cookieCart = c;
-                        CartValue = c.getValue();
-                        break;
-                    }
-                }
-            }
-
-            if(cookieCart == null) {
-                quantita = 1;
-                CartValue = ("(I" + prodottoID + "!" + quantita + ")").trim();
-                cookieCart = new Cookie("Cart", CartValue);
-                cookieCart.setMaxAge(30 * 24 * 60 * 60);
-                cookieCart.setPath("/ISO_16_war_exploded");
-                response.addCookie(cookieCart);
-            }else {
-                CartValue = cookieCart.getValue();
-                if(!CartValue.contains("I" + prodottoID)) {
-                    quantita = 1;
-                    CartValue += ("-" + "(I" + prodottoID + "!" + quantita + ")").trim();
-                    cookieCart.setValue(CartValue);
-                    response.addCookie(cookieCart);
-                } else {
-                    String[] Cprodotti = CartValue.split("-");
-                    StringBuilder newCartValue = new StringBuilder();
-
-                    for (String item : Cprodotti) {
-                        if (item.contains("I" + prodottoID)) {
-                            // Estrai e incrementa quantità
-                            quantita = Integer.parseInt(item.split("!")[1].replace(")", ""));
-                            quantita++;
-                            // Ricostruisci l'item
-                            item = "(I" + prodottoID + "!" + quantita + ")";
-                        }
-                        if(!newCartValue.isEmpty()) {
-                            newCartValue.append("-");
-                        }
-                        newCartValue.append(item);
-                    }
-
-                    // Aggiorna il cookie
-                    cookieCart.setValue(newCartValue.toString());
-                    response.addCookie(cookieCart);
-                }
-            }
+            quantita = cookieManagement.CookieCartManagement(prodottoID,response,request);
 
             prodotto = prodottoDAO.getProdottoByID(Integer.parseInt(prodottoID));
 
