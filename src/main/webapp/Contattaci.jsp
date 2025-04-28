@@ -73,13 +73,14 @@
 
         <!-- Descrizione generale per la sezione di contatto -->
         <p>For any questions, problems or requests, we are at your disposal. Contact us using one of the following telephone numbers:</p>
+        <p>Per qualsiasi domanda, problema o richiesta, siamo a vostra disposizione. Contattateci utilizzando uno dei seguenti numeri di telefono:</p>
 
         <!-- Elenco delle referenze telefoniche -->
         <ul>
-            <li><strong>Telefono referente Italiano:</strong> +39 123 456 7890</li>
-            <li><strong>English contact telephone:</strong> +44 234 567 8901</li>
-            <li><strong>Téléphone de contact français:</strong> +33 345 678 9012</li>
-            <li><strong>Deutsches Kontakttelefon:</strong> +49 854 958 888</li>
+            <li><strong>Telefono referente Italiano:</strong> +39 XXX XXX XXXX</li>
+            <li><strong>English contact telephone:</strong> +44 XXX XXX XXXX</li>
+            <li><strong>Téléphone de contact français:</strong> +33 XXX XXX XXXX</li>
+            <li><strong>Deutsches Kontakttelefon:</strong> +49 XXX XXX XXX</li>
         </ul>
     </section>
 </main>
