@@ -121,9 +121,7 @@
                 </ul>
             </div>
             <!-- Bottoni amministratore -->
-            <a class="btn admin-btn" href="admin_dashboard.jsp">Dashboard</a>
-            <a class="btn admin-btn" href="manage_products.jsp">Gestisci Prodotti</a>
-            <a class="btn admin-btn" href="view_orders.jsp">Ordini</a>
+            <button class="btn" onclick="openPriceSurveyModal()">Indagine per nnumero venduti</button>
             <button class="btn" onclick="openAddProductModal()">Aggiungi Prodotto</button>
             <button class="btn" onclick="openAddFilterModal()">Aggiungi Filtro</button>
             <button class="btn" onclick="openDateSurveyModal()">Indagine per Data</button>
@@ -183,6 +181,10 @@
 
     function openAddProductModal() {
         document.getElementById("addProductModal").style.display = "block";
+    }
+
+    function openPriceSurveyModal() {
+        document.getElementById("priceSurveyModal").style.display = "block";
     }
 
     function openAddFilterModal() {
