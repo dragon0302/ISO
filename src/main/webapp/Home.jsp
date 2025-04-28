@@ -99,7 +99,7 @@
 
         <!-- Parte 3 - Bottoni di Sign-up e Log-in a destra -->
         <div class="right-section">
-            <a class="btn" href="Carrello.jsp">Carrello</a>
+            <a class="btn-link" href="Carrello.jsp">Carrello</a>
             <%
                 Utente utente = (Utente) session.getAttribute("utente");
 
@@ -123,11 +123,11 @@
                 </ul>
             </div>
             <!-- Bottoni amministratore -->
-            <button class="btn" onclick="openPriceSurveyModal()">Indagine per nnumero venduti</button>
-            <button class="btn" onclick="openAddProductModal()">Aggiungi Prodotto</button>
-            <button class="btn" onclick="openAddFilterModal()">Aggiungi Filtro</button>
-            <button class="btn" onclick="openDateSurveyModal()">Indagine per Data</button>
-            <button class="btn" onclick="openDeleteModal()">Elimina</button>
+            <button class="btn-link" onclick="openPriceSurveyModal()">Indagine per numero venduti</button>
+            <button class="btn-link" onclick="openAddProductModal()">Aggiungi Prodotto</button>
+            <button class="btn-link" onclick="openAddFilterModal()">Aggiungi Filtro</button>
+            <button class="btn-link" onclick="openDateSurveyModal()">Indagine per Data</button>
+            <button class="btn-link" onclick="openDeleteModal()">Elimina</button>
             <% } else { %>
             <!-- Utente non amministratore: solo il nome utente e il menu a tendina -->
             <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
@@ -202,22 +202,6 @@
     }
 </script>
 <main>
-    <aside class="hide-sidebar">
-        <h3>Categorie dei prodotti</h3>
-        <ul>
-            <li> Categoria 1 </li>
-            <li> Categoria 2 </li>
-            <li> Categoria 3 </li>
-        </ul>
-    </aside>
-
-    <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Prezzo (€)</th>
-        <th>Descrizione</th>
-    </tr>
-
     <section class="content">
         <div class="banner">Banner</div>
 
