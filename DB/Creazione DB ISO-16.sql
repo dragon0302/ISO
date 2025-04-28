@@ -18,7 +18,7 @@ CREATE TABLE carrello(
      ID_carrello int primary key not null auto_increment,
      Lista_prodotti varchar(500),
      CF_utente CHAR(16),
-     foreign key (CF_utente) references Utente (CF)
+     foreign key (CF_utente) references Utente (CF) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE prodotto(
@@ -38,8 +38,8 @@ CREATE TABLE acquisto(
     Quantità INTEGER NOT NULL ,
     ID_Carello INTEGER NOT NULL ,
     ID_Prodotto INTEGER NOT NULL ,
-    FOREIGN KEY (ID_Carello) references carrello(ID_carrello),
-    FOREIGN KEY (ID_Prodotto) references prodotto(ID_prodotto)
+    FOREIGN KEY (ID_Carello) references carrello(ID_carrello) ON DELETE CASCADE ON UPDATE CASCADE ,
+    FOREIGN KEY (ID_Prodotto) references prodotto(ID_prodotto) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE metodoPagamento(
@@ -49,7 +49,7 @@ CREATE TABLE metodoPagamento(
     Tipo VARCHAR(20) NOT NULL,
     Default_pagamento BOOLEAN NOT NULL,
     CF_utente CHAR(16),
-    foreign key (CF_utente) references Utente (CF)
+    foreign key (CF_utente) references Utente (CF) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE ordine(
@@ -58,7 +58,7 @@ CREATE TABLE ordine(
    Prezzo_tot float not null check ( Prezzo_tot > 0 ),
    Lista_prodotti varchar(500),
    ID_carrello int,
-   foreign key (ID_carrello) references carrello (ID_carrello)
+   foreign key (ID_carrello) references carrello (ID_carrello) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE indirizzo (
@@ -73,5 +73,5 @@ CREATE TABLE indirizzo (
    Note VARCHAR(255) NULL,
    Fatturazione TINYINT(1) DEFAULT 0 NOT NULL,
    CF_utente CHAR(16),
-   foreign key (CF_utente) references Utente (CF)
+   foreign key (CF_utente) references Utente (CF) ON DELETE CASCADE ON UPDATE CASCADE
 );
