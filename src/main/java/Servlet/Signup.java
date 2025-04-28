@@ -1,9 +1,9 @@
 package Servlet;
 
-import DataManagement.Utente;
-import DataManagement.UtenteDAO;
-import DataManagement.UtenteDAOImplement;
-import com.example.iso16.EncodingPassword;
+import DataManagement.*;
+import DataManagement.Carrello;
+import Utility.CookieManagement;
+import Utility.EncodingPassword;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,10 +13,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 @WebServlet("/Sign-up")
 public class Signup extends HttpServlet {
     UtenteDAO utenteDAO = new UtenteDAOImplement();
+    CarrelloDAO carelloDao = new CarrelloDAOImplement();
     EncodingPassword encod = new EncodingPassword();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response){
@@ -25,6 +27,7 @@ public class Signup extends HttpServlet {
         String erroreNomeUtente = "Nome utente gia esistente";
         String erroreData = "Data non coretta";
         String erroreEmail = "Email non coretta";
+        CookieManagement cm = new CookieManagement(request);
 
         try{
             String CF = request.getParameter("CodiceFiscale");
@@ -57,7 +60,23 @@ public class Signup extends HttpServlet {
                 request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
             }else{
                 Utente utente = new Utente(CF, nomeUtenete, encodedPassword,salt, Nome, Cognome, Email, Sesso, dataNascita, Amministratore);
+                Carrello carrello = new Carrello(CF);
                 utenteDAO.DoSave(utente);
+                carelloDao.DoSave(carrello);
+
+                if (cm.CookieCartExist(request)){
+                    List<String> idProdotti = cm.GetAllID();
+                    String ProdottiId = null;
+                    String idCarello = null;
+
+                    idCarello = carelloDao.GetIdCarello(CF);
+
+                    for (String idProdotto : idProdotti){
+                        ProdottiId += "," + idProdotto;
+                    }
+                    carelloDao.SetProdottiCarello(ProdottiId,idCarello);
+                }
+
                 response.sendRedirect("Home.jsp");
             }
 
