@@ -1,8 +1,8 @@
 INSERT INTO Utente (CF, NomeUtente, Password,Salt, Nome, Cognome ,Email, Sesso, DataNascita, Amministratore)
 VALUES
-    ('DRKPTR70M26A345S', 'Dark P.', '7Hj4Fz3pXk2vPq9RtYwG8nO1mK5sAe2BbVcD6fJhIiUlNpLoQxZyX7C0W9Ed4Ma' , 'LxQ9vL2k8tR7wY1fZbN+cA==', 'Peater', 'Dark',  'c@r.v' ,'M', '1970-08-26', 0),
-    ('RSSMRA85P12F205Z', 'Rossi M.', '5TgY8uHj1mK9oLpXwE4sN2bVcQ7zR6fJhGtD3kPnAqSrMvWxZy0CdF4Ii9Ue2BaL','pG3hMqW5sVtBvN7kYr2x+Dw==', 'Mario', 'Rossi', 't@r.v' ,'M', '1985-09-12', 0),
-    ('BNCLRA90T15C789Y', 'Bianca L.', '4NkO9pL2mJ8hG1fD7sE5qW3xT0yV6bU2cA4zX7iHrKtYwMvP5lQ6nB9gFdSe1Ij', '9fR2tK8yXp1wL3vQ7mZ4sDg==', 'Laura', 'Bianchi', 's@r.v', 'F', '1990-12-15', 1);
+    ('DRKPTR70M26A345S', 'Nicola', 'cYX5/07EyQgA8Ah63IN2/dmpsnMt4e8QturmmZ4/RPM=' , 'Q2584p0qUxGwarulk9VK5w==', 'Peater', 'Dark',  'c@r.v' ,'M', '1970-08-26', 0),
+    ('RSSMRA85P12F205Z', 'Alessandro', 'SbcL99MLP6oiZT3GuaxW0gNF1Ntx7hmnpl+2hMso74Y=','31zUUg1WfxESIYvFeOyfGg==', 'Mario', 'Rossi', 't@r.v' ,'M', '1985-09-12', 0),
+    ('BNCLRA90T15C789Y', 'Alessia', 'CXC/y4lVzBmAv9tlQ8k74Q4K4vv8AqKvtp5N2FMgW/w=', 'j9lbC8Xm0ejsrhSmDX8vmw==', 'Laura', 'Bianchi', 's@r.v', 'F', '1990-12-15', 1);
 
 INSERT INTO carrello (CF_utente)
 VALUES
