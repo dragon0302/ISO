@@ -25,7 +25,7 @@
     <title>ISO-16</title>
 
     <link rel="stylesheet" href="sfondo.css">
-
+    <link rel="stylesheet" href="Home.css">
 <body>
 <header>
     <div class="top-header">
@@ -127,7 +127,6 @@
             <button class="btn-link" onclick="openAddProductModal()">Aggiungi Prodotto</button>
             <button class="btn-link" onclick="openAddFilterModal()">Aggiungi Filtro</button>
             <button class="btn-link" onclick="openDateSurveyModal()">Indagine per Data</button>
-            <button class="btn-link" onclick="openDeleteModal()">Elimina</button>
             <% } else { %>
             <!-- Utente non amministratore: solo il nome utente e il menu a tendina -->
             <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
@@ -204,10 +203,13 @@
 <main>
     <section class="content">
         <div class="banner">Banner</div>
-
+        <%
+            if(utente == null){
+        %>
         <h2>Novità</h2>
 
         <div class="product-slider">
+
             <%
                 List<Prodotto> prodottiNovita = (List<Prodotto>) request.getAttribute("prodottiNovita");
 
@@ -236,9 +238,51 @@
             <p>Nessun prodotto trovato.</p>
             <%
                 }
+            }else{
             %>
-        </div>
 
+                <h2>Novità</h2>
+
+                <div class="product-slider">
+
+                    <%
+                        List<Prodotto> prodottiNovita = (List<Prodotto>) request.getAttribute("prodottiNovita");
+
+                        if (prodottiNovita != null) {
+                            for (Prodotto p : prodottiNovita) {
+                    %>
+                    <div class="product">
+                        <div class="box">
+                            <h3><%= p.getNome() %></h3>
+                            <p>Prezzo: €<%= p.getPrezzo() %></p>
+                            <p><%= p.getDescrizione() %></p>
+                            <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
+                            <form action="Carrello" method="post">
+                                <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
+                                <input type="hidden" name="SourcePage" value="Home">
+                                <button type="submit" class="btn-aggiungi">
+                                    Aggiungi al carrello
+                                </button>
+                                <button class="btn-elimina" onclick="openDeleteModal()">
+                                    Elimina
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <%
+                        }
+                    } else {
+                    %>
+                    <p>Nessun prodotto trovato.</p>
+                    <%
+                            }
+                        }
+                    %>
+
+        </div>
+        <%
+            if(utente == null){
+        %>
         <h2>Prodotti più acquistati</h2>
         <div class="product-slider">
                 <%
@@ -260,14 +304,50 @@
                     </form>
                 </div>
             </div>
-                        <%
+                <%
                 }
             } else {
             %>
-                    <p>Nessun prodotto trovato.</p>
-                        <%
+            <p>Nessun prodotto trovato.</p>
+                <%
                 }
+            } else {
             %>
+
+                    <h2>Prodotti più acquistati</h2>
+                    <div class="product-slider">
+                            <%
+                List<Prodotto> prodottiPopolari = (List<Prodotto>) request.getAttribute("prodottiPiuAqqistati");
+                if (prodottiPopolari != null) {
+                    for (Prodotto p : prodottiPopolari) {
+            %>
+                        <div class="product">
+                            <div class="box"><h3 ><%= p.getNome() %></h3>
+                                <p >Prezzo: €<%= p.getPrezzo() %></p>
+                                <p ><%= p.getDescrizione() %></p>
+                                <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
+                                <form action="Carrello" method="post">
+                                    <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
+                                    <input type="hidden" name="SourcePage" value="Home">
+                                    <button type="submit" class="btn-aggiungi">
+                                        Aggiungi al carrello
+                                    </button>
+                                    <button class="btn-elimina" onclick="openDeleteModal()">
+                                        Elimina
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                            <%
+                }
+            } else {
+            %>
+                        <p>Nessun prodotto trovato.</p>
+                            <%
+                }
+            }
+            %>
+
     </section>
 </main>
 
