@@ -483,17 +483,27 @@ public class OrdineDAOImplement implements OrdineDAO {
             }
         }
     }
-    public synchronized ArrayList<String> getAllOrdersFromUtente(Utente utente) throws SQLException {
-        ArrayList<String> p = new ArrayList<>();
+    public synchronized ArrayList<Prodotto> getAllOrdersFromUtente(Utente utente) throws SQLException {
+        ArrayList<Prodotto> p = new ArrayList<>();
         Connection conn = null;
         PreparedStatement query = null;
         ResultSet rs = null;
+        String nome,desc,taglia,cat;
+        Double mv,prz;
+        Integer id;
         try {
             query = conn.prepareStatement("SELECT Lista_prodotti" + " FROM Ordine JOIN Carrello on Ordine.ID_Carrello = carrello.ID_Carrello" + " WHERE Carrello.CF_Utente = ? ");
             query.setString(1,utente.getCf());
             rs = query.executeQuery();
             while (rs.next()) {
-                p.add(rs.getString(1));
+                nome = rs.getString("Nome");
+                desc = rs.getString("Descrizione");
+                taglia = rs.getString("Taglia");
+                cat = rs.getString("Categoria");
+                mv = rs.getDouble("MediaValutazione");
+                id = rs.getInt("ID_prodotto");
+                prz = rs.getDouble("Prezzo");
+                p.add(new Prodotto(nome,mv,taglia,desc,cat,prz));
             }
         }catch (Exception e) {
             System.out.println(e.getMessage());
