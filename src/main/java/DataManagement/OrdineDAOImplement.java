@@ -483,4 +483,32 @@ public class OrdineDAOImplement implements OrdineDAO {
             }
         }
     }
+    public synchronized ArrayList<String> getAllOrdersFromUtente(Utente utente) throws SQLException {
+        ArrayList<String> p = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement query = null;
+        ResultSet rs = null;
+        try {
+            query = conn.prepareStatement("SELECT Lista_prodotti" + " FROM Ordine JOIN Carrello on Ordine.ID_Carrello = carrello.ID_Carrello" + " WHERE Carrello.CF_Utente = ? ");
+            query.setString(1,utente.getCf());
+            rs = query.executeQuery();
+            while (rs.next()) {
+                p.add(rs.getString(1));
+            }
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+        return p;
+    }
+
 }
