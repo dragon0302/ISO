@@ -151,16 +151,16 @@ public class OrdineDAOImplement implements OrdineDAO {
             }
         }
     }
-    public void editsalt (Utente utente,String new_salt) throws SQLException {
+    public void editpassword (Utente utente,String new_password) throws SQLException {
         Connection conn = null;
         PreparedStatement query = null;
 
         try {
 
             conn = ds.getConnection();
-            query = conn.prepareStatement("UPDATE utente" +  " SET nomeutente = ?" + "WHERE nomeutente = ?");
-            query.setString(1, new_salt);
-            query.setString(2, utente.getNomeutente());
+            query = conn.prepareStatement("UPDATE utente" +  " SET Password = ?" + "WHERE CF = ?");
+            query.setString(1, new_password);
+            query.setString(2, utente.getCf());
 
             ResultSet rs = query.executeQuery();
 
@@ -178,16 +178,16 @@ public class OrdineDAOImplement implements OrdineDAO {
             }
         }
     }
-    public void editnome (Utente utente,String new_nome) throws SQLException {
+    public void editNome (Utente utente,String new_nome) throws SQLException {
         Connection conn = null;
         PreparedStatement query = null;
 
         try {
 
             conn = ds.getConnection();
-            query = conn.prepareStatement("UPDATE utente" +  " SET Nome = ?" + "WHERE Nome = ?");
+            query = conn.prepareStatement("UPDATE utente" +  " SET Nome = ?" + "WHERE CF = ?");
             query.setString(1, new_nome);
-            query.setString(2, utente.getNome());
+            query.setString(2, utente.getCf());
 
             ResultSet rs = query.executeQuery();
 
@@ -205,6 +205,10 @@ public class OrdineDAOImplement implements OrdineDAO {
             }
         }
     }
+
+
+
+
     public void editCognome(Utente utente,String new_cognome) throws SQLException {
         Connection conn = null;
         PreparedStatement query = null;
@@ -212,9 +216,9 @@ public class OrdineDAOImplement implements OrdineDAO {
         try {
 
             conn = ds.getConnection();
-            query = conn.prepareStatement("UPDATE utente" +  " SET Cognome = ?" + "WHERE Cognome = ?");
+            query = conn.prepareStatement("UPDATE utente" +  " SET Cognome = ?" + "WHERE CF = ?");
             query.setString(1, new_cognome);
-            query.setString(2, utente.getCognome());
+            query.setString(2, utente.getCf());
 
             ResultSet rs = query.executeQuery();
 
@@ -233,4 +237,250 @@ public class OrdineDAOImplement implements OrdineDAO {
         }
     }
 
+    public void editSesso(Utente utente,String new_sesso) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE utente" +  " SET Sesso = ?" + "WHERE CF = ?");
+            query.setString(1, new_sesso);
+            query.setString(2, utente.getCf());
+
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+    public void editAdminPrivileges(Utente utente,boolean new_admin) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE utente" +  " SET Amministratore = ?" + "WHERE CF = ?");
+            query.setBoolean(1, new_admin);
+            query.setString(2, utente.getCf());
+
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+    public void editDataNascita(Utente utente,java.sql.Date new_dn) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE utente" +  " SET DataNascita = ?" + "WHERE CF = ?");
+            query.setDate(1, new_dn);
+            query.setString(2, utente.getCf());
+
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+    public void editIDProdotto(Prodotto prodotto,int new_id) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE prodotto" +  " SET ID_Prodotto = ?" + "WHERE ID_Prodotto = ?");
+            query.setInt(1, new_id);
+            query.setInt(2, prodotto.getId_prodotto());
+
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+
+    public void editNomeProdotto(Prodotto prodotto,String new_nomeprodotto) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE prodotto" +  " SET Nome = ?" + "WHERE ID_Prodotto = ?");
+            query.setString(1, new_nomeprodotto);
+            query.setInt(2, prodotto.getId_prodotto());
+
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+    public void editMediaValutazione(Prodotto prodotto,Double new_mv) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE prodotto" +  " SET MediaValutazione = ?" + "WHERE ID_prodotto = ?");
+            query.setDouble(1, new_mv);
+            query.setInt(2, prodotto.getId_prodotto());
+
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+
+    public void editTaglia(Prodotto prodotto,String new_taglia) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE prodotto" +  " SET Taglia = ?" + "WHERE ID_prodotto = ?");
+            query.setString(1, new_taglia);
+            query.setInt(2, prodotto.getId_prodotto());
+
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+    public void editDescrizione(Prodotto prodotto,String new_descrizione) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE prodotto" +  " SET Descrizione = ?" + "WHERE ID_prodotto = ?");
+            query.setString(1, new_descrizione);
+            query.setInt(2, prodotto.getId_prodotto());
+
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+
+    public void editCategoria(Prodotto prodotto,String new_categoria) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE prodotto" +  " SET Categoria = ?" + "WHERE ID_Prodotto = ?");
+            query.setString(1, new_categoria);
+            query.setInt(2, prodotto.getId_prodotto());
+
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
 }
