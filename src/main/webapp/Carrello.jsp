@@ -3,6 +3,7 @@
 <%@ page import="DataManagement.Prodotto" %>
 <%@ page import="com.mysql.cj.Session" %>
 <%@ page import="DataManagement.Utente" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -11,8 +12,6 @@
     <link rel="stylesheet" href="sfondo.css">
 </head>
 <body>
-
-<header>
 
     <header>
         <div class="top-header">
@@ -186,6 +185,34 @@
             document.getElementById("deleteModal").style.display = "block";
         }
     </script>
+
+        <%
+        // Recupera i prodotti dal database
+        ArrayList<Prodotto> prodotti = (ArrayList<Prodotto>) session.getAttribute("carrello");
+        ArrayList<Integer> quantita = (ArrayList<Integer>) session.getAttribute("Quantità");
+
+        //Visualizza la barra orizzontale per ogni prodotto -->
+        if (prodotti != null){
+            for (int i = 0; i < prodotti.size(); i++) {
+    %>
+    <div class="product-bar">
+        <!-- Immagine -->
+        <!--img src="<//%= prodotto.getImmagine() %>" alt="Immagine prodotto"-->
+
+        <!-- Descrizione -->
+        <div class="descrizione">
+            <%= prodotti.get(i).getDescrizione() %>
+        </div>
+
+        <!-- Prezzo e quantità -->
+        <div class="prezzo-quantita">
+            <div class="prezzo">€ <%= prodotti.get(i).getPrezzo() %></div>
+            <label for="numero">Scegli un numero:</label>
+            <input type="number" id="numero" name="numero" min="0" max="100" step="1" value= <%= quantita.get(i) %>>
+        </div>
+    </div>
+        <%  }
+    }%>
 
 <div class="footer-bar">
     <a href="About_Us.jsp" class="btn-link">About Us</a>
