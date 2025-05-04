@@ -6,7 +6,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class CarrelloDAOImplement implements CarrelloDAO {
 
@@ -77,6 +79,78 @@ public class CarrelloDAOImplement implements CarrelloDAO {
             }
         }
 
+    }
+
+    public void UpdateProductCarello(List<String> idsProduct, String CF) throws SQLException {
+
+        Connection conn = null;
+        PreparedStatement query3 = null;
+        String temp = null;
+
+        for (String id : idsProduct) {
+
+            if (temp == null) {
+                temp = id;
+            }else {
+                temp += "," + id;
+            }
+
+        }
+
+        try {
+            conn = ds.getConnection();
+            query3 = conn.prepareStatement("UPDATE " + TABLE_NAME + " set Lista_prodotti = ? where CF_utente = ?");
+
+            query3.setString(1,temp);
+            query3.setString(2,CF);
+
+            query3.executeUpdate();
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query3 != null) {
+                    query3.close();
+                }
+            }finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+
+    }
+
+    public Integer GetIdCarrello(String CF) throws SQLException {
+
+        Connection conn = null;
+        PreparedStatement query4 = null;
+        int idCarrello = 0;
+
+        try {
+            conn = ds.getConnection();
+            query4 = conn.prepareStatement("select ID_carrello from " + TABLE_NAME + " where CF_utente = ?");
+
+            query4.setString(1,CF);
+            ResultSet rs = query4.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query4 != null) {
+                    query4.close();
+                }
+            }finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+        return null;
     }
 
 }
