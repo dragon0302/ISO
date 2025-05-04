@@ -35,7 +35,7 @@ CREATE TABLE prodotto(
 CREATE TABLE acquisto(
     ID_acquisto integer primary key not null auto_increment,
     CodiceSconto TINYINT(1) DEFAULT 0 CHECK (CodiceSconto IN (0,1)),
-    Quantità INTEGER NOT NULL ,
+    Quantita INTEGER NOT NULL ,
     ID_Carello INTEGER NOT NULL ,
     ID_Prodotto INTEGER NOT NULL ,
     FOREIGN KEY (ID_Carello) references carrello(ID_carrello) ON DELETE CASCADE ON UPDATE CASCADE ,

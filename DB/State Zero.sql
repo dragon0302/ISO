@@ -36,11 +36,11 @@ VALUES
 INSERT INTO indirizzo (CF_Utente, città, Provincia, CAP, Via, Civico, Scala, Indirizzo2, Note, Fatturazione)
 VALUES
     ('DRKPTR70M26A345S', 'L''Aquila', 'AQ', 65342, 'Via vattelappesca', '2', 'A', 'nessuno', 'nessuna', 0);
-INSERT INTO acquisto( CodiceSconto, Quantità, ID_Carello, ID_Prodotto)
+INSERT INTO acquisto( CodiceSconto, Quantita, ID_Carello, ID_Prodotto)
 VALUES
     (1,2,1,1),
     (0,10,2,2);
 
-INSERT INTO acquisto( Quantità, ID_Carello, ID_Prodotto)
+INSERT INTO acquisto( Quantita, ID_Carello, ID_Prodotto)
 VALUES
     (1,3,3);
