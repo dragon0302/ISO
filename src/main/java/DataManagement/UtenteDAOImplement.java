@@ -1,6 +1,6 @@
 package DataManagement;
 
-import com.example.iso16.EncodingPassword;
+import Utility.EncodingPassword;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Base64;
 
 public class UtenteDAOImplement implements UtenteDAO {
 
@@ -31,8 +30,6 @@ public class UtenteDAOImplement implements UtenteDAO {
     public synchronized void DoSave(Utente utente) throws SQLException {
         Connection conn = null;
         PreparedStatement query = null;
-        CarrelloDAO carrelloDAO = new CarrelloDAOImplement();
-        Carrello carrello = null;
 
         try {
             conn = ds.getConnection();
@@ -49,8 +46,6 @@ public class UtenteDAOImplement implements UtenteDAO {
             query.setDate(9, utente.getDataNascita());
             query.setBoolean(10, utente.isAmministratore());
             query.execute();
-            carrello = new Carrello(utente.getCf());
-            carrelloDAO.DoSave(carrello);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
