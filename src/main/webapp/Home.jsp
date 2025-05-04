@@ -99,7 +99,7 @@
 
         <!-- Parte 3 - Bottoni di Sign-up e Log-in a destra -->
         <div class="right-section">
-            <a class="btn-link" href="Carrello.jsp">Carrello</a>
+            <a class="btn-link" href="Carrello">Carrello</a>
             <%
                 Utente utente = (Utente) session.getAttribute("utente");
 
@@ -116,7 +116,7 @@
                 <ul>
                     <li><a href="profile.jsp">Profilo</a></li>
                     <li><a href="settings.jsp">Impostazioni</a></li>
-                    <li><a href="cart.jsp">Carrello</a></li>
+                    <li><a href="Carrello.jsp">Carrello</a></li>
                     <form action="Logout" method="get">
                         <li><button>Log-out</button></li>
                     </form>
@@ -135,7 +135,7 @@
                 <ul>
                     <li><a href="profile.jsp">Profilo</a></li>
                     <li><a href="settings.jsp">Impostazioni</a></li>
-                    <li><a href="cart.jsp">Carrello</a></li>
+                    <li><a href="Carrello.jsp">Carrello</a></li>
                     <li><a href="logout.jsp">Log-out</a></li>
                 </ul>
             </div>
@@ -220,7 +220,7 @@
                     <p>Prezzo: €<%= p.getPrezzo() %></p>
                     <p><%= p.getDescrizione() %></p>
                     <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
-                    <form action="Carrello" method="post">
+                    <form action="ProductCartMenegment" method="post">
                         <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
                         <input type="hidden" name="SourcePage" value="Home">
                         <button type="submit" class="btn-aggiungi">
@@ -251,7 +251,7 @@
                     <p >Prezzo: €<%= p.getPrezzo() %></p>
                     <p ><%= p.getDescrizione() %></p>
                     <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
-                    <form action="Carrello" method="post">
+                    <form action="ProductCartMenegment" method="post">
                         <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
                         <input type="hidden" name="SourcePage" value="Home">
                         <button type="submit" class="btn-aggiungi">
