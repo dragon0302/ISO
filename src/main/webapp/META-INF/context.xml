@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Context>
+    <!-- dati Database -->
     <Resource name="jdbc/ISO16"
               auth="Container"
               type="javax.sql.DataSource"
               username="root"
               password="Tomilgatto10"
               driverClassName="com.mysql.cj.jdbc.Driver"
-              url="jdbc:mysql://localhost:3306/ISO16?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
+              url="jdbc:mysql://localhost:3306/ISO16?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"
+    />
+
+    <!-- dati paypal -->
+    <Resource name="paypal/APIconfig"
+              auth="Container"
+              type="java.util.Properties"
+              factory="org.apache.naming.factory.BeanFactory"
+              clientID="AYncKTNsqJgOCOGFRItuTyFME3USy26Ei5-0Ni3KLCE6lynBp0iuGw5vSG3-8X7MI0Lve6fjfXfWAu0N"
+              clientSicret="EJavtiVRGewcs290FDHDskz-xW8KbdUh03KG3dcK4HLuK0l2P8rya7TamWAXUpqgI4R7-V67cBKONvOV"
+              mode="sandbox"
+    />
 </Context>
