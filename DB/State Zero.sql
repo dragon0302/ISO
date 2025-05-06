@@ -1,8 +1,8 @@
 INSERT INTO Utente (CF, NomeUtente, Password,Salt, Nome, Cognome ,Email, Sesso, DataNascita, Amministratore)
 VALUES
-    ('DRKPTR70M26A345S', 'Nicola', 'ElhLz9SrdRrEa9t7LlyAoOQ7f2Wo4An5p3grMw3WX0I=' , '/btZYR0x9ni3sbMOtyuskQ==', 'Peater', 'Dark',  'c@r.v' ,'M', '1970-08-26', 0),
-    ('RSSMRA85P12F205Z', 'Carlo', 'em4KHom8bEpkoNfix3pTc7Sr5QaF2oxF6GoMDb9gy1E=','WQbTprM5BiIatNNKLA5xOw==', 'Mario', 'Rossi', 't@r.v' ,'M', '1985-09-12', 0),
-    ('BNCLRA90T15C789Y', 'Alessio', 'cAzpwoxBPyHwJhVtIjft739ievdVnkvEpvCuvl8uEfM=', 'MEq/BbF1J5h3uHxphf2KHQ==', 'Laura', 'Bianchi', 's@r.v', 'F', '1990-12-15', 1);
+    ('DRKPTR70M26A345S', 'Nicola', 'cYX5/07EyQgA8Ah63IN2/dmpsnMt4e8QturmmZ4/RPM=' , 'Q2584p0qUxGwarulk9VK5w==', 'Peater', 'Dark',  'c@r.v' ,'M', '1970-08-26', 0),
+    ('RSSMRA85P12F205Z', 'Alessandro', 'SbcL99MLP6oiZT3GuaxW0gNF1Ntx7hmnpl+2hMso74Y=','31zUUg1WfxESIYvFeOyfGg==', 'Mario', 'Rossi', 't@r.v' ,'M', '1985-09-12', 0),
+    ('BNCLRA90T15C789Y', 'Alessia', 'CXC/y4lVzBmAv9tlQ8k74Q4K4vv8AqKvtp5N2FMgW/w=', 'j9lbC8Xm0ejsrhSmDX8vmw==', 'Laura', 'Bianchi', 's@r.v', 'F', '1990-12-15', 1);
 
 INSERT INTO carrello (CF_utente)
 VALUES
@@ -36,11 +36,11 @@ VALUES
 INSERT INTO indirizzo (CF_Utente, città, Provincia, CAP, Via, Civico, Scala, Indirizzo2, Note, Fatturazione)
 VALUES
     ('DRKPTR70M26A345S', 'L''Aquila', 'AQ', 65342, 'Via vattelappesca', '2', 'A', 'nessuno', 'nessuna', 0);
-INSERT INTO acquisto( CodiceSconto, Quantità, ID_Carello, ID_Prodotto)
+INSERT INTO acquisto( CodiceSconto, Quantita, ID_Carello, ID_Prodotto)
 VALUES
     (1,2,1,1),
     (0,10,2,2);
 
-INSERT INTO acquisto( Quantità, ID_Carello, ID_Prodotto)
+INSERT INTO acquisto( Quantita, ID_Carello, ID_Prodotto)
 VALUES
     (1,3,3);

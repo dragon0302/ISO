@@ -63,7 +63,7 @@ public class AcquistoDAOImplement implements AcquistoDAO {
 
         try {
             conn = ds.getConnection();
-            query2 = conn.prepareStatement("select distinct ID_prodotto from " + TABLE_NAME + " where Quantità >= 10");
+            query2 = conn.prepareStatement("select distinct ID_prodotto from " + TABLE_NAME + " where Quantita >= 10");
 
             ResultSet rs = query2.executeQuery();
 

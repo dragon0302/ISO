@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class CarrelloDAOImplement implements CarrelloDAO {
 
@@ -51,7 +52,7 @@ public class CarrelloDAOImplement implements CarrelloDAO {
         }
     }
 
-    public void GetProdottiCarello(int idProdotto,int idCarrello) throws SQLException{
+    public void ProdottiCarello(int idProdotto,int idCarrello) throws SQLException{
 
         Connection conn = null;
         PreparedStatement query2 = null;
@@ -80,17 +81,28 @@ public class CarrelloDAOImplement implements CarrelloDAO {
 
     }
 
-    public void SetProdottiCarello(String idProdotti,String idCarello) throws SQLException {
+    public void UpdateProductCarello(List<String> idsProduct, String CF) throws SQLException {
 
         Connection conn = null;
         PreparedStatement query3 = null;
+        String temp = null;
+
+        for (String id : idsProduct) {
+
+            if (temp == null) {
+                temp = id;
+            }else {
+                temp += "," + id;
+            }
+
+        }
 
         try {
             conn = ds.getConnection();
-            query3 = conn.prepareStatement("update " + TABLE_NAME + " set Lista_prodotti = ? where ID_carrello = ?");
+            query3 = conn.prepareStatement("UPDATE " + TABLE_NAME + " set Lista_prodotti = ? where CF_utente = ?");
 
-            query3.setString(1,idProdotti);
-            query3.setString(2,idCarello);
+            query3.setString(1,temp);
+            query3.setString(2,CF);
 
             query3.executeUpdate();
         }catch (Exception e) {
@@ -109,20 +121,21 @@ public class CarrelloDAOImplement implements CarrelloDAO {
 
     }
 
-    public String GetIdCarello(String CF_utente) throws SQLException{
+    public Integer GetIdCarrello(String CF) throws SQLException {
+
         Connection conn = null;
         PreparedStatement query4 = null;
-        String idCarello = null;
+        int idCarrello = 0;
 
         try {
             conn = ds.getConnection();
-            query4 = conn.prepareStatement("SELECT ID_carrello from " + TABLE_NAME + " WHERE CF_utente = ?");
+            query4 = conn.prepareStatement("select ID_carrello from " + TABLE_NAME + " where CF_utente = ?");
 
-            query4.setString(1,CF_utente);
+            query4.setString(1,CF);
             ResultSet rs = query4.executeQuery();
 
             if (rs.next()) {
-                idCarello = String.valueOf(rs.getInt(1));
+                return rs.getInt(1);
             }
         }catch (Exception e) {
             System.out.println(e.getMessage());
@@ -137,7 +150,7 @@ public class CarrelloDAOImplement implements CarrelloDAO {
                 }
             }
         }
-        return idCarello;
+        return null;
     }
 
 }

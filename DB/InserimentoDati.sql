@@ -1,5 +1,5 @@
-INSERT INTO utente (CF, NomeUtente, Password, Nome, Cognome, Sesso, DataNascita, Amministratore)
-VALUES (?,?,?,?,?,?,?,?);
+INSERT INTO utente (CF, NomeUtente, Password, Nome, Cognome, Mail, Sesso, DataNascita, Amministratore)
+VALUES (?,?,?,?,?,?,?,?,?);
 
 INSERT INTO carrello (ID_carrello, CF_utente)
 VALUES (?,?);

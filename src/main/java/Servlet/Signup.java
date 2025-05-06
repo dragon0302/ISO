@@ -2,7 +2,7 @@ package Servlet;
 
 import DataManagement.*;
 import DataManagement.Carrello;
-import Utility.CookieManagement;
+import Utility.CookieManagemnt;
 import Utility.EncodingPassword;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,21 +13,22 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/Sign-up")
 public class Signup extends HttpServlet {
     UtenteDAO utenteDAO = new UtenteDAOImplement();
-    CarrelloDAO carelloDao = new CarrelloDAOImplement();
+    CarrelloDAO carrelloDAO = new CarrelloDAOImplement();
     EncodingPassword encod = new EncodingPassword();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response){
 
+        CookieManagemnt cm = new CookieManagemnt(request);
         String erroreCF = "Codice Fiscale errato";
         String erroreNomeUtente = "Nome utente gia esistente";
         String erroreData = "Data non coretta";
         String erroreEmail = "Email non coretta";
-        CookieManagement cm = new CookieManagement(request);
 
         try{
             String CF = request.getParameter("CodiceFiscale");
@@ -62,22 +63,24 @@ public class Signup extends HttpServlet {
                 Utente utente = new Utente(CF, nomeUtenete, encodedPassword,salt, Nome, Cognome, Email, Sesso, dataNascita, Amministratore);
                 Carrello carrello = new Carrello(CF);
                 utenteDAO.DoSave(utente);
-                carelloDao.DoSave(carrello);
+                carrelloDAO.DoSave(carrello);
+                AcquistoDAO acquistoDAO = new AcquistoDAOImplement();
 
-                if (cm.CookieCartExist(request)){
-                    List<String> idProdotti = cm.GetAllID();
-                    String ProdottiId = null;
-                    String idCarello = null;
+                if (cm.checkCookieCart()){
 
-                    idCarello = carelloDao.GetIdCarello(CF);
+                    List<String> ids = cm.AllCookieId();
 
-                    for (String idProdotto : idProdotti){
-                        ProdottiId += "," + idProdotto;
+                    for (String id : ids) {
+                        System.out.println(Integer.parseInt(id));
+                        Acquisto acquisto = new Acquisto(false,cm.getCookieProductQuantity(id), carrelloDAO.GetIdCarrello(CF),Integer.parseInt(id));
+                        acquistoDAO.DoSave(acquisto);
                     }
-                    carelloDao.SetProdottiCarello(ProdottiId,idCarello);
+
+                    carrelloDAO.UpdateProductCarello(ids,CF);
+
                 }
 
-                response.sendRedirect("Home.jsp");
+                response.sendRedirect("Catalogo");
             }
 
         }catch (Exception e){
