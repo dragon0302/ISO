@@ -10,6 +10,7 @@
     <meta charset="UTF-8">
     <title>Ricerca & Filtri</title>
     <link rel="stylesheet" href="sfondo.css">
+    <link rel="stylesheet" href="Carrello.css">
 </head>
 <body>
 
@@ -185,46 +186,49 @@
             document.getElementById("deleteModal").style.display = "block";
         }
     </script>
-    <div class="box">
-        <%
-        // Recupera i prodotti dal database
-        ArrayList<Prodotto> prodotti = (ArrayList<Prodotto>) session.getAttribute("carrello");
-        ArrayList<Integer> quantita = (ArrayList<Integer>) session.getAttribute("Quantità");
+    <div class="box-container">
+        <div class="box-prodotti">
+            <%
+            // Recupera i prodotti dal database
+            ArrayList<Prodotto> prodotti = (ArrayList<Prodotto>) session.getAttribute("carrello");
+            ArrayList<Integer> quantita = (ArrayList<Integer>) session.getAttribute("Quantità");
 
-        //Visualizza la barra orizzontale per ogni prodotto -->
-        if (prodotti != null){
-            for (int i = 0; i < prodotti.size(); i++) {
-    %>
-    <div class="product-bar">
-        <!-- Immagine -->
-        <!--img src="<//%= prodotto.getImmagine() %>" alt="Immagine prodotto"-->
+            //Visualizza la barra orizzontale per ogni prodotto -->
+            if (prodotti != null){
+                for (int i = 0; i < prodotti.size(); i++) {
+        %>
+        <div class="product-bar">
+            <!-- Immagine -->
+            <!--img src="<//%= prodotto.getImmagine() %>" alt="Immagine prodotto"-->
 
-        <!-- Descrizione -->
-        <div class="descrizione">
-            <%= prodotti.get(i).getDescrizione() %>
+            <!-- Descrizione -->
+            <div class="descrizione">
+                <%= prodotti.get(i).getDescrizione() %>
+            </div>
+
+            <!-- Prezzo e quantità -->
+            <div class="prezzo-quantita">
+                <div class="prezzo">€ <%= prodotti.get(i).getPrezzo() %></div>
+                <label for="numero">Scegli un numero:</label>
+                <input type="number" id="numero" name="numero" min="0" max="100" step="1" value= <%= quantita.get(i) %>>
+            </div>
         </div>
+            <%  }
+        }%>
 
-        <!-- Prezzo e quantità -->
-        <div class="prezzo-quantita">
-            <div class="prezzo">€ <%= prodotti.get(i).getPrezzo() %></div>
-            <label for="numero">Scegli un numero:</label>
-            <input type="number" id="numero" name="numero" min="0" max="100" step="1" value= <%= quantita.get(i) %>>
+            </div>
+
+
+        <div class="box-acquista">
+            <form>
+                action="ProductCartMenegment" method="post">
+    <%--            <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">--%>
+    <%--            <input type="hidden" name="SourcePage" value="Home">--%>
+                <button type="submit" class="btn-aggiungi">
+                    Vai al pagamento
+                </button>
+            </form>
         </div>
-    </div>
-        <%  }
-    }%>
-
-    </div>
-
-    <div class="box">
-        <form>
-            action="ProductCartMenegment" method="post">
-<%--            <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">--%>
-<%--            <input type="hidden" name="SourcePage" value="Home">--%>
-            <button type="submit" class="btn-aggiungi">
-                Vai al pagamento
-            </button>
-        </form>
     </div>
 
 <div class="footer-bar">

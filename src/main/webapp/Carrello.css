@@ -1,0 +1,86 @@
+.box-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+    gap: 20px;
+}
+
+/* Box prodotti: 3/4 della larghezza */
+.box-prodotti {
+    flex: 3;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(165, 10, 10, 0.96);
+}
+
+/* Box acquista: 1/4 della larghezza */
+.box-acquista {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(165, 10, 10, 0.96);
+    /*box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);*/
+    align-self: flex-start;
+}
+
+/* Singola barra prodotto */
+.product-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.descrizione {
+    flex: 2;
+    font-size: 16px;
+}
+
+.prezzo-quantita {
+    flex: 1;
+    text-align: right;
+}
+
+.prezzo {
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 5px;
+}
+
+input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Bottone acquisto */
+.btn-aggiungi {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #8B2635;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-aggiungi:hover {
+    background-color: #a13245;
+}
+
+/* Responsive per schermi piccoli */
+@media (max-width: 768px) {
+    .box-container {
+        flex-direction: column;
+    }
+
+    .box-prodotti,
+    .box-acquista {
+        flex: 1 1 100%;
+    }
+}
