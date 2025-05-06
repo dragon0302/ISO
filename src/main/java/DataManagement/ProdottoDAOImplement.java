@@ -169,4 +169,169 @@ public class ProdottoDAOImplement implements ProdottoDAO{
         }
         return prodotto;
     }
+    public void editIDProdotto(Prodotto prodotto,int new_id) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE " + TABLE_NAME + " SET ID_Prodotto = ? WHERE ID_Prodotto = ?");
+            query.setInt(1, new_id);
+            query.setInt(2, prodotto.getId_prodotto());
+
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+
+    public void editNomeProdotto(Prodotto prodotto,String new_nomeprodotto) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE " + TABLE_NAME + " SET Nome = ? WHERE ID_Prodotto = ?");
+            query.setString(1, new_nomeprodotto);
+            query.setInt(2, prodotto.getId_prodotto());
+
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+    public void editMediaValutazione(Prodotto prodotto,Double new_mv) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE " + TABLE_NAME + " SET MediaValutazione = ? WHERE ID_prodotto = ?");
+            query.setDouble(1, new_mv);
+            query.setInt(2, prodotto.getId_prodotto());
+
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+
+    public void editTaglia(Prodotto prodotto,String new_taglia) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE " + TABLE_NAME + " SET Taglia = ? WHERE ID_prodotto = ?");
+            query.setString(1, new_taglia);
+            query.setInt(2, prodotto.getId_prodotto());
+
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+    public void editDescrizione(Prodotto prodotto,String new_descrizione) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE " + TABLE_NAME + " SET Descrizione = ? WHERE ID_prodotto = ?");
+            query.setString(1, new_descrizione);
+            query.setInt(2, prodotto.getId_prodotto());
+
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+
+    public void editCategoria(Prodotto prodotto,String new_categoria) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE " + TABLE_NAME + " SET Categoria = ? WHERE ID_Prodotto = ?");
+            query.setString(1, new_categoria);
+            query.setInt(2, prodotto.getId_prodotto());
+
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
 }

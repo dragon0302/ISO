@@ -5,11 +5,13 @@ import DataManagement.OrdineDAOImplement;
 import DataManagement.Prodotto;
 import DataManagement.Utente;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Date;
 
 public class Fattura {
     OrdineDAOImplement oDAO = new OrdineDAOImplement();
+    Utente utente;
     private String CF_fatturato;
     private String nomeFatturato;
     private String cognomeFatturato;
@@ -26,8 +28,8 @@ public class Fattura {
     private StatoFattura statoFattura;
     private StatoPagamento statoPagamento;
 
-    public Fattura(Ordine ordine, Utente utente,String CF_fatturato, String nomeFatturato, String cognomeFatturato, String viaFatturato, Integer civicoFatturato, String scalaFatturato, String indirizzo2Fatturato, String cittàFatturato, String provinciaFatturato, String CAP_Fatturato, String tipoPagamento, ArrayList<Prodotto> listaProdotti, Date dataFatturazione, StatoFattura statoFattura, StatoPagamento statoPagamento) {
-        this.CF_fatturato = oDAO.getAllOrdersFromUtente();
+    public Fattura(Ordine ordine, Utente utente,String CF_fatturato, String nomeFatturato, String cognomeFatturato, String viaFatturato, Integer civicoFatturato, String scalaFatturato, String indirizzo2Fatturato, String cittàFatturato, String provinciaFatturato, String CAP_Fatturato, String tipoPagamento, ArrayList<Prodotto> listaProdotti, Date dataFatturazione, StatoFattura statoFattura, StatoPagamento statoPagamento) throws SQLException {
+        this.CF_fatturato = CF_fatturato;
         this.nomeFatturato = nomeFatturato;
         this.cognomeFatturato = cognomeFatturato;
         this.viaFatturato = viaFatturato;
