@@ -4,10 +4,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class OrdineDAOImplement implements OrdineDAO {
@@ -56,7 +53,7 @@ public class OrdineDAOImplement implements OrdineDAO {
         ResultSet rs = null;
         try{
             conn = ds.getConnection();
-            query = conn.prepareStatement("SELECT * FROM ORDINE");
+            query = conn.prepareStatement("SELECT * FROM " + TABLE_NAME);
             rs = query.executeQuery();
             while (rs.next()) {
                 Integer id_ordine = rs.getInt(1);
@@ -64,7 +61,8 @@ public class OrdineDAOImplement implements OrdineDAO {
                 Float prezzo = rs.getFloat(3);
                 String prodotti = rs.getString(4);
                 Integer id_carrello = rs.getInt(5);
-                Ordine o = new Ordine(id_ordine,data_ordine,prezzo,prodotti,id_carrello);
+                Ordine o = new Ordine(data_ordine,prezzo,prodotti,id_carrello);
+                o.setID_carrello(id_ordine);
                 l.add(o);
             }
         } catch (Exception e) {
@@ -79,7 +77,7 @@ public class OrdineDAOImplement implements OrdineDAO {
         ResultSet rs = null;
         try{
             conn = ds.getConnection();
-            query = conn.prepareStatement("SELECT * FROM ORDINE WHERE Data_ordine < ? AND ID_carrello > ?");
+            query = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE Data_ordine < ? AND ID_carrello > ?");
             query.setDate(1, d1);
             query.setDate(2, d2);
             rs = query.executeQuery();
@@ -89,7 +87,8 @@ public class OrdineDAOImplement implements OrdineDAO {
                 Float prezzo = rs.getFloat(3);
                 String prodotti = rs.getString(4);
                 Integer id_carrello = rs.getInt(5);
-                Ordine o = new Ordine(id_ordine,data_ordine,prezzo,prodotti,id_carrello);
+                Ordine o = new Ordine(data_ordine,prezzo,prodotti,id_carrello);
+                o.setIdOrdine(id_ordine);
                 l.add(o);
             }
         } catch (Exception e) {
@@ -98,34 +97,38 @@ public class OrdineDAOImplement implements OrdineDAO {
         return l;
     }
 
-    public synchronized ArrayList<Prodotto> getAllOrdersFromUtente(Utente utente) throws SQLException {
-        ArrayList<Prodotto> p = new ArrayList<>();
+    public ArrayList<Ordine> getOrdersByUser (int ID_carrello) throws SQLException{
+
         Connection conn = null;
-        PreparedStatement query = null;
-        ResultSet rs = null;
-        String nome,desc,taglia,cat;
-        Double mv,prz;
-        Integer id;
+        PreparedStatement query4 = null;
+        ArrayList<Ordine> ordini = new ArrayList<>();
+
         try {
-            query = conn.prepareStatement("SELECT Lista_prodotti" + " FROM Ordine JOIN Carrello on Ordine.ID_Carrello = carrello.ID_Carrello" + " WHERE Carrello.CF_Utente = ? ");
-            query.setString(1,utente.getCf());
-            rs = query.executeQuery();
+
+            conn = ds.getConnection();
+            query4 = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE ID_carrello = ?");
+
+            query4.setInt(1, ID_carrello);
+
+            ResultSet rs = query4.executeQuery();
+
             while (rs.next()) {
-                nome = rs.getString("Nome");
-                desc = rs.getString("Descrizione");
-                taglia = rs.getString("Taglia");
-                cat = rs.getString("Categoria");
-                mv = rs.getDouble("MediaValutazione");
-                id = rs.getInt("ID_prodotto");
-                prz = rs.getDouble("Prezzo");
-                p.add(new Prodotto(nome,mv,taglia,desc,cat,prz));
+                Integer id_ordine = rs.getInt(1);
+                Date DataOrdine = rs.getDate(2);
+                Float prezzo = rs.getFloat(3);
+                String prodotti = rs.getString(4);
+                Integer id_carrello = rs.getInt(5);
+                Ordine ordine = new Ordine(DataOrdine,prezzo,prodotti,id_carrello);
+                ordine.setID_carrello(id_ordine);
+                ordini.add(ordine);
             }
+
         }catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Naming Exeption: " + e.getMessage());
         } finally {
             try {
-                if (rs != null) {
-                    query.close();
+                if (query4 != null) {
+                    query4.close();
                 }
             } finally {
                 if (conn != null) {
@@ -133,7 +136,9 @@ public class OrdineDAOImplement implements OrdineDAO {
                 }
             }
         }
-        return p;
+
+        return ordini;
+
     }
 
 }
