@@ -10,8 +10,7 @@ public class Ordine {
     String prodotti;
     Integer ID_carrello;
 
-    public Ordine(Integer idOrdine, java.sql.Date data_ordine, Float totale, String prodotti, Integer ID_carrello) {
-        this.idOrdine = idOrdine;
+    public Ordine(java.sql.Date data_ordine, Float totale, String prodotti, Integer ID_carrello) {
         this.data_ordine = data_ordine;
         this.totale = totale;
         this.prodotti = prodotti;

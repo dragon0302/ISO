@@ -4,10 +4,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class OrdineDAOImplement implements OrdineDAO {
@@ -52,51 +49,119 @@ public class OrdineDAOImplement implements OrdineDAO {
     public ArrayList<Ordine> getOrders() throws SQLException {
         ArrayList<Ordine> l = new ArrayList<>();
         Connection conn = null;
-        PreparedStatement query = null;
+        PreparedStatement query2 = null;
         ResultSet rs = null;
         try{
             conn = ds.getConnection();
-            query = conn.prepareStatement("SELECT * FROM ORDINE");
-            rs = query.executeQuery();
+            query2 = conn.prepareStatement("SELECT * FROM " + TABLE_NAME);
+            rs = query2.executeQuery();
             while (rs.next()) {
                 Integer id_ordine = rs.getInt(1);
                 java.sql.Date data_ordine = rs.getDate(2);
                 Float prezzo = rs.getFloat(3);
                 String prodotti = rs.getString(4);
                 Integer id_carrello = rs.getInt(5);
-                Ordine o = new Ordine(id_ordine,data_ordine,prezzo,prodotti,id_carrello);
+                Ordine o = new Ordine(data_ordine,prezzo,prodotti,id_carrello);
+                o.setIdOrdine(id_ordine);
                 l.add(o);
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.out.println("Naming Exeption: " + e.getMessage());
+        } finally {
+            try {
+                if (query2 != null) {
+                    query2.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
         }
         return l;
     }
     public ArrayList<Ordine> getOrdersByData(java.sql.Date d1, java.sql.Date d2) throws SQLException {
         ArrayList<Ordine> l = new ArrayList<>();
         Connection conn = null;
-        PreparedStatement query = null;
+        PreparedStatement query3 = null;
         ResultSet rs = null;
         try{
             conn = ds.getConnection();
-            query = conn.prepareStatement("SELECT * FROM ORDINE WHERE Data_ordine < ? AND ID_carrello > ?");
-            query.setDate(1, d1);
-            query.setDate(2, d2);
-            rs = query.executeQuery();
+            query3 = conn.prepareStatement("SELECT * FROM "+ TABLE_NAME + " WHERE Data_ordine < ? AND ID_carrello > ?");
+            query3.setDate(1, d1);
+            query3.setDate(2, d2);
+            rs = query3.executeQuery();
             while (rs.next()) {
                 Integer id_ordine = rs.getInt(1);
                 java.sql.Date data_ordine = rs.getDate(2);
                 Float prezzo = rs.getFloat(3);
                 String prodotti = rs.getString(4);
                 Integer id_carrello = rs.getInt(5);
-                Ordine o = new Ordine(id_ordine,data_ordine,prezzo,prodotti,id_carrello);
+                Ordine o = new Ordine(data_ordine,prezzo,prodotti,id_carrello);
+                o.setID_carrello(id_ordine);
                 l.add(o);
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.out.println("Naming Exeption: " + e.getMessage());
+        } finally {
+            try {
+                if (query3 != null) {
+                    query3.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
         }
         return l;
     }
+
+
+    public ArrayList<Ordine> getOrdersByUser (int ID_carrello) throws SQLException{
+
+        Connection conn = null;
+        PreparedStatement query4 = null;
+        ArrayList<Ordine> ordini = new ArrayList<>();
+
+        try {
+
+            conn = ds.getConnection();
+            query4 = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE ID_carrello = ?");
+
+            query4.setInt(1, ID_carrello);
+
+            ResultSet rs = query4.executeQuery();
+
+            while (rs.next()) {
+                Integer id_ordine = rs.getInt(1);
+                Date DataOrdine = rs.getDate(2);
+                Float prezzo = rs.getFloat(3);
+                String prodotti = rs.getString(4);
+                Integer id_carrello = rs.getInt(5);
+                Ordine ordine = new Ordine(DataOrdine,prezzo,prodotti,id_carrello);
+                ordine.setID_carrello(id_ordine);
+                ordini.add(ordine);
+            }
+
+        }catch (Exception e) {
+            System.out.println("Naming Exeption: " + e.getMessage());
+        } finally {
+            try {
+                if (query4 != null) {
+                    query4.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+
+        return ordini;
+
+    }
+
     public void editCF (Utente utente,String new_cf) throws SQLException {
         Connection conn = null;
         PreparedStatement query = null;
