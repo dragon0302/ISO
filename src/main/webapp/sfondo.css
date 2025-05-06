@@ -247,6 +247,52 @@ a.btn-link:hover {
     color: #fff;
 }
 
+/* Contenitore interno della card */
+.box {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+/* Immagine del prodotto */
+.product-img {
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Titolo del prodotto */
+.box h3 {
+    color: white;
+    font-size: 16px;
+    margin: 0 0 5px;
+}
+
+/* Descrizione del prodotto */
+.box p {
+    color: #ffff;
+    font-size: 13px;
+    margin: 3px 0;
+    flex-grow: 1;
+}
+
+/* Link all'interno della card (es. "Scopri di più") */
+.box a {
+    text-decoration: none;
+    background-color: #8B2635;
+    color: white;
+    padding: 6px;
+    text-align: center;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
 /* MEDIA QUERY: per schermi piccoli (telefono) */
 @media (max-width: 768px) {
 

@@ -185,7 +185,7 @@
             document.getElementById("deleteModal").style.display = "block";
         }
     </script>
-
+    <div class="box">
         <%
         // Recupera i prodotti dal database
         ArrayList<Prodotto> prodotti = (ArrayList<Prodotto>) session.getAttribute("carrello");
@@ -213,6 +213,19 @@
     </div>
         <%  }
     }%>
+
+    </div>
+
+    <div class="box">
+        <form>
+            action="ProductCartMenegment" method="post">
+<%--            <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">--%>
+<%--            <input type="hidden" name="SourcePage" value="Home">--%>
+            <button type="submit" class="btn-aggiungi">
+                Vai al pagamento
+            </button>
+        </form>
+    </div>
 
 <div class="footer-bar">
     <a href="About_Us.jsp" class="btn-link">About Us</a>
