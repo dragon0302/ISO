@@ -1,9 +1,6 @@
 package DataManagement.Fatturazione;
 
-import DataManagement.Ordine;
-import DataManagement.OrdineDAOImplement;
-import DataManagement.Prodotto;
-import DataManagement.Utente;
+import DataManagement.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,25 +20,25 @@ public class Fattura {
     private String provinciaFatturato;
     private String CAP_Fatturato;
     private String tipoPagamento;
-    private ArrayList<Prodotto> listaProdotti;
+    private String listaProdotti; //TODO: Conversione da IDProdotti a ListaProdotti
     private Date dataFatturazione;
     private StatoFattura statoFattura;
     private StatoPagamento statoPagamento;
 
-    public Fattura(Ordine ordine, Utente utente,String CF_fatturato, String nomeFatturato, String cognomeFatturato, String viaFatturato, Integer civicoFatturato, String scalaFatturato, String indirizzo2Fatturato, String cittàFatturato, String provinciaFatturato, String CAP_Fatturato, String tipoPagamento, ArrayList<Prodotto> listaProdotti, Date dataFatturazione, StatoFattura statoFattura, StatoPagamento statoPagamento) throws SQLException {
-        this.CF_fatturato = CF_fatturato;
-        this.nomeFatturato = nomeFatturato;
-        this.cognomeFatturato = cognomeFatturato;
-        this.viaFatturato = viaFatturato;
-        this.civicoFatturato = civicoFatturato;
-        this.scalaFatturato = scalaFatturato;
-        this.indirizzo2Fatturato = indirizzo2Fatturato;
-        this.cittàFatturato = cittàFatturato;
-        this.provinciaFatturato = provinciaFatturato;
-        this.CAP_Fatturato = CAP_Fatturato;
-        this.tipoPagamento = tipoPagamento;
-        this.listaProdotti = listaProdotti;
-        this.dataFatturazione = dataFatturazione;
+    public Fattura(Ordine ordine, Utente utente, Indirizzo indirizzo, StatoFattura statoFattura, StatoPagamento statoPagamento) throws SQLException {
+        this.CF_fatturato = utente.getCf();
+        this.nomeFatturato = utente.getNome();
+        this.cognomeFatturato = utente.getCognome();
+        this.viaFatturato = indirizzo.getVia();
+        this.civicoFatturato = indirizzo.getCivico();
+        this.scalaFatturato = indirizzo.getScala();
+        this.indirizzo2Fatturato = indirizzo.getIndirizzo2();
+        this.cittàFatturato = indirizzo.getCittà();
+        this.provinciaFatturato = indirizzo.getProvincia();
+        this.CAP_Fatturato = indirizzo.getCap();
+        this.tipoPagamento = "PayPal";
+        this.listaProdotti = ordine.getProdotti();
+        this.dataFatturazione = ordine.getData_ordine();
         this.statoFattura = statoFattura;
         this.statoPagamento = statoPagamento;
     }
@@ -134,11 +131,11 @@ public class Fattura {
         this.tipoPagamento = tipoPagamento;
     }
 
-    public ArrayList<Prodotto> getListaProdotti() {
+    public String getListaProdotti() {
         return listaProdotti;
     }
 
-    public void setListaProdotti(ArrayList<Prodotto> listaProdotti) {
+    public void setListaProdotti(String listaProdotti) {
         this.listaProdotti = listaProdotti;
     }
 

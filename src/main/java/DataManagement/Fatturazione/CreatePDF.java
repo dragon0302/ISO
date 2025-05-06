@@ -15,7 +15,7 @@ import java.io.IOException;
 public class CreatePDF {
     public static void main(String[] args) throws IOException {
         String path="invoice.pdf";
-        String logoFile="C:\\Users\\Vittorio\\IdeaProjects\\ISO\\src\\main\\java\\DataManagement\\Fatturazione\\pdflogo.png";
+        String logoFile="pdflogo.png";
         ImageData logodata = ImageDataFactory.create(logoFile);
         Image img = new Image(logodata);
         PdfWriter pdf_writer = new PdfWriter(path);
