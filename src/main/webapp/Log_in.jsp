@@ -1,7 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.List" %>
-<%@ page import="DataManagement.Prodotto" %>
-<%@ page import="com.mysql.cj.Session" %>
 <%@ page import="DataManagement.Utente" %>
 <!DOCTYPE html>
 <html lang="it">
