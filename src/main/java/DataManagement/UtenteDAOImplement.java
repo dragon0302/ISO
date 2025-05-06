@@ -316,4 +316,225 @@ public class UtenteDAOImplement implements UtenteDAO {
         }
         return esiste;
     }
+    public void editCF (Utente utente,String new_cf) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE utente" +  " SET CF = ?" + "WHERE CF = ?");
+            query.setString(1, new_cf);
+            query.setString(2, utente.getCf());
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+
+    public void editNomeUtente (Utente utente,String new_nomeutente) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE utente" +  " SET nomeutente = ?" + "WHERE nomeutente = ?");
+            query.setString(1, new_nomeutente);
+            query.setString(2, utente.getNomeutente());
+
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+    public void editPassword (Utente utente,String new_password) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE utente" +  " SET Password = ?" + "WHERE CF = ?");
+            query.setString(1, new_password);
+            query.setString(2, utente.getCf());
+
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+    public void editNome (Utente utente,String new_nome) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE utente" +  " SET Nome = ?" + "WHERE CF = ?");
+            query.setString(1, new_nome);
+            query.setString(2, utente.getCf());
+
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+
+
+
+
+    public void editCognome(Utente utente,String new_cognome) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE utente" +  " SET Cognome = ?" + "WHERE CF = ?");
+            query.setString(1, new_cognome);
+            query.setString(2, utente.getCf());
+
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+
+    public void editSesso(Utente utente,String new_sesso) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE utente" +  " SET Sesso = ?" + "WHERE CF = ?");
+            query.setString(1, new_sesso);
+            query.setString(2, utente.getCf());
+
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+    public void editAdminPrivileges(Utente utente,boolean new_admin) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE utente" +  " SET Amministratore = ?" + "WHERE CF = ?");
+            query.setBoolean(1, new_admin);
+            query.setString(2, utente.getCf());
+
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+    public void editDataNascita(Utente utente,java.sql.Date new_dn) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE utente" +  " SET DataNascita = ?" + "WHERE CF = ?");
+            query.setDate(1, new_dn);
+            query.setString(2, utente.getCf());
+
+            ResultSet rs = query.executeQuery();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
 }
