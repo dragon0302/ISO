@@ -86,4 +86,66 @@ public class AcquistoDAOImplement implements AcquistoDAO {
         return prodottiPiuAqquistati;
     }
 
+    public void UpdateQuantity(int ProdottoID, int IDcarello) throws SQLException{
+
+        Connection conn = null;
+        PreparedStatement query3 = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query3 = conn.prepareStatement("update " + TABLE_NAME + " set Quantita = Quantita + 1 where (ID_Carello = ? and ID_Prodotto = ?)");
+
+            query3.setInt(1, IDcarello);
+            query3.setInt(2, ProdottoID);
+
+            query3.executeUpdate();
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query3 != null) {
+                    query3.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+
+    public Integer GetQuntita(int IDcarello,int ProdottoID) throws SQLException{
+
+        Connection conn = null;
+        PreparedStatement query4 = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query4 = conn.prepareStatement("SELECT Quantita FROM " + TABLE_NAME + " WHERE ID_Carello = ? and ID_Prodotto = ?");
+
+            query4.setInt(1, IDcarello);
+            query4.setInt(2, ProdottoID);
+
+            ResultSet rs = query4.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query4 != null) {
+                    query4.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+        return null;
+    }
 }
