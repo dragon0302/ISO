@@ -12,22 +12,24 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 @WebListener
 public class PaypalInizializer implements ServletContextListener {
 
     public void contextInitialized(ServletContextEvent sce) {
-
         try {
+            Context ctx = new InitialContext();
+            Context envCtx = (Context) ctx.lookup("java:/comp/env");
 
-            Context context = new InitialContext();
+            // Recupera i valori separatamente
+            String clientId = (String) envCtx.lookup("paypalClientID");
+            String clientSecret = (String) envCtx.lookup("paypalClientSecret");
+            String mode = (String) envCtx.lookup("paypalMode");
 
-            Properties properties = (Properties) context.lookup("java:/comp/env/paypal/APIConfig");
-
-            String clientId = properties.getProperty("clientID");
-            String clientSecret = properties.getProperty("clientSicret");
-            String mode = properties.getProperty("mode");
+            // Verifica che tutti i parametri siano presenti
+            if (clientId == null || clientSecret == null || mode == null) {
+                throw new RuntimeException("Configurazione PayPal incompleta");
+            }
 
             Map<String,String> ppConfig = new HashMap<>();
             ppConfig.put("mode", mode);
@@ -39,13 +41,10 @@ public class PaypalInizializer implements ServletContextListener {
             );
 
             APIContext apiContext = new APIContext(credential.getAccessToken());
-
             sce.getServletContext().setAttribute("paypalApiContext", apiContext);
 
-        }catch (NamingException | PayPalRESTException e) {
+        } catch (NamingException | PayPalRESTException e) {
             throw new RuntimeException("Configurazione PayPal fallita", e);
         }
-
     }
-
 }
