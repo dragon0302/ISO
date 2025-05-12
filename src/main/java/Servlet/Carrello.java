@@ -1,12 +1,13 @@
 package Servlet;
 
-import DataManagement.Prodotto;
-import DataManagement.ProdottoDAO;
-import DataManagement.ProdottoDAOImplement;
-import jakarta.servlet.RequestDispatcher;
+import DataManagement.*;
+import Utility.CookieManagemnt;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,132 +17,120 @@ import java.util.List;
 public class Carrello extends HttpServlet {
 
     ProdottoDAO prodottoDAO = new ProdottoDAOImplement();
+    CarrelloDAO carrelloDAO = new CarrelloDAOImplement();
+    AcquistoDAO acquistoDAO = new AcquistoDAOImplement();
+
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+
         try {
-
-            String prodottoID = request.getParameter("prodottoID");
-            String sourcePage = request.getParameter("SourcePage");
+            Utente utente = (Utente) request.getSession().getAttribute("utente");
+            CookieManagemnt cm = new CookieManagemnt(request);
             HttpSession session = request.getSession();
-            String redirectPage = null;
-            Cookie[] cookies = request.getCookies();
-            Cookie cookieCart = null;
-            String CartValue;
+            List<Integer> Nquantita = new ArrayList<>();
+            List<Prodotto> carrello = new ArrayList<>();
+            List<String> ids = new ArrayList<>();
             Prodotto prodotto = null;
-            int quantita = 0;
-            Boolean contenuto = true;
+            float prezzotatale = 0;
 
-            if (cookies != null) {
-                for (Cookie c : cookies) {
-                    if (c.getName().equals("Cart")) {
-                        cookieCart = c;
-                        CartValue = c.getValue();
-                        break;
-                    }
-                }
-            }
+            if (utente == null ) {
+                ids = cm.AllCookieId();
 
-            if(cookieCart == null) {
-                quantita = 1;
-                CartValue = ("(I" + prodottoID + "!" + quantita + ")").trim();
-                cookieCart = new Cookie("Cart", CartValue);
-                cookieCart.setMaxAge(30 * 24 * 60 * 60);
-                cookieCart.setPath("/ISO_16_war_exploded");
-                response.addCookie(cookieCart);
-            }else {
-                CartValue = cookieCart.getValue();
-                if(!CartValue.contains("I" + prodottoID)) {
-                    quantita = 1;
-                    CartValue += ("-" + "(I" + prodottoID + "!" + quantita + ")").trim();
-                    cookieCart.setValue(CartValue);
-                    response.addCookie(cookieCart);
-                } else {
-                    String[] Cprodotti = CartValue.split("-");
-                    StringBuilder newCartValue = new StringBuilder();
+                if (ids != null) {
 
-                    for (String item : Cprodotti) {
-                        if (item.contains("I" + prodottoID)) {
-                            // Estrai e incrementa quantità
-                            quantita = Integer.parseInt(item.split("!")[1].replace(")", ""));
-                            quantita++;
-                            // Ricostruisci l'item
-                            item = "(I" + prodottoID + "!" + quantita + ")";
-                        }
-                        if(!newCartValue.isEmpty()) {
-                            newCartValue.append("-");
-                        }
-                        newCartValue.append(item);
+                    carrello = (List<Prodotto>) session.getAttribute("carrello");
+                    Nquantita = (List<Integer>) session.getAttribute("Quantità");
+                    if (session.getAttribute("prezzotatale") == null) {
+                        prezzotatale = 0;
                     }
 
-                    // Aggiorna il cookie
-                    cookieCart.setValue(newCartValue.toString());
-                    response.addCookie(cookieCart);
+                    if (carrello == null) {
+                        carrello = new ArrayList<>();
+                        session.setAttribute("carrello", carrello);
+                    }
+
+                    for (String id : ids) {
+                        prodotto = prodottoDAO.getProdottoByID(Integer.parseInt(id));
+                        prezzotatale += prodotto.getPrezzo();
+
+                        if (carrello.isEmpty()) {
+                            carrello.add(prodotto);
+                        }
+
+                        Prodotto finalProdotto = prodotto;
+                        if (!(carrello.stream().anyMatch(p -> p.getId_prodotto() == finalProdotto.getId_prodotto()))) {
+                            carrello.add(prodotto);
+                        }
+
+                        if (Nquantita == null) {
+                            Nquantita = new ArrayList<>();
+                            session.setAttribute("quantità", Nquantita);
+                        }
+
+                        if (carrello.size() > Nquantita.size()) {
+
+                            Nquantita.add(cm.getCookieProductQuantity(id));
+                        } else {
+
+                            for (int i = 0; i < carrello.size(); i++) {
+
+                                if (carrello.get(i).getId_prodotto() == Integer.parseInt(id)) {
+                                    Nquantita.set(i, cm.getCookieProductQuantity(id));
+                                }
+
+                            }
+                        }
+                    }
                 }
-            }
-
-            prodotto = prodottoDAO.getProdottoByID(Integer.parseInt(prodottoID));
-
-            List<Prodotto> carrello = (List<Prodotto>) session.getAttribute("carrello");
-            List<Integer> Nquantita = (List<Integer>) session.getAttribute("Quantità");
-
-            if (carrello == null) {
-                carrello = new ArrayList<>();
-                session.setAttribute("carrello", carrello);
-            }
-
-            if (carrello.isEmpty()) {
-                carrello.add(prodotto);
-            }
-
-
-            for (int i = 0; i < carrello.size(); i++) {
-                if (carrello.get(i).getId_prodotto() == prodotto.getId_prodotto()) {
-                    contenuto = false;
-                }
-            }
-
-            if(contenuto){
-                carrello.add(prodotto);
-            }
-
-            if (Nquantita == null) {
-                Nquantita = new ArrayList<>();
-                session.setAttribute("quantità", Nquantita);
-            }
-
-            if(carrello.size() > Nquantita.size()) {
-
-                Nquantita.add(quantita);
             }else {
 
-                for (int i = 0; i < carrello.size(); i++) {
+                ids = carrelloDAO.GetProductCarello(carrelloDAO.GetIdCarrello(utente.getCf()));
 
-                    if (carrello.get(i).getId_prodotto() == Integer.parseInt(prodottoID)) {
-                        Nquantita.set(i, quantita);
+                for (String id : ids) {
+                    prodotto = prodottoDAO.getProdottoByID(Integer.parseInt(id));
+                    prezzotatale += prodotto.getPrezzo();
+
+
+                    if (carrello.isEmpty()) {
+                        carrello.add(prodotto);
                     }
 
+                    Prodotto finalProdotto = prodotto;
+                    if (!(carrello.stream().anyMatch(p -> p.getId_prodotto() == finalProdotto.getId_prodotto()))) {
+                        carrello.add(prodotto);
+                    }
+
+                    if (Nquantita == null) {
+                        Nquantita = new ArrayList<>();
+                        session.setAttribute("quantità", Nquantita);
+                    }
+
+                    if (carrello.size() > Nquantita.size()) {
+
+                        Nquantita.add(acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), Integer.parseInt(id)));
+                    } else {
+
+                        for (int i = 0; i < carrello.size(); i++) {
+
+                            if (carrello.get(i).getId_prodotto() == Integer.parseInt(id)) {
+                                Nquantita.set(i, acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), Integer.parseInt(id)));
+                            }
+
+                        }
+                    }
                 }
+
             }
+
+
             session.setAttribute("carrello", carrello);
             session.setAttribute("Quantità", Nquantita);
+            session.setAttribute("prezzotatale", prezzotatale);
 
-            if("Prodotto".equals(sourcePage)) {
-                redirectPage = "ProdottoS?id=" + prodottoID;
-            }else if("Home".equals(sourcePage)) {
-                redirectPage = "Catalogo";
-            }
-
-            response.sendRedirect(redirectPage);
-
+            response.sendRedirect("Carrello.jsp");
         }catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
-    }
-
 }
