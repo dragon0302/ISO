@@ -257,7 +257,7 @@
                             <p>Prezzo: €<%= p.getPrezzo() %></p>
                             <p><%= p.getDescrizione() %></p>
                             <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
-                            <form action="Carrello" method="post">
+                            <form action="ProductCartMenegment" method="post">
                                 <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
                                 <input type="hidden" name="SourcePage" value="Home">
                                 <button type="submit" class="btn-aggiungi">
