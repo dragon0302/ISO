@@ -7,9 +7,9 @@ public class Prodotto {
     private String taglia;
     private String descrizione;
     private String categoria;
-    private Double prezzo;
+    private float prezzo;
 
-    public Prodotto(String nome, Double media_valutazione, String taglia, String descrizione, String categoria, Double prezzo) {
+    public Prodotto(String nome, Double media_valutazione, String taglia, String descrizione, String categoria, float prezzo) {
         this.nome = nome;
         this.media_valutazione = media_valutazione;
         this.taglia = taglia;
@@ -66,7 +66,7 @@ public class Prodotto {
         this.categoria = categoria;
     }
 
-    public Double getPrezzo() {return prezzo;}
+    public float getPrezzo() {return prezzo;}
 
-    public void setPrezzo(Double prezzo) {}
+    public void setPrezzo(float prezzo) {}
 }

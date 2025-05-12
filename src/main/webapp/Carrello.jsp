@@ -211,7 +211,7 @@
             <div class="prezzo-quantita">
                 <div class="prezzo">€ <%= prodotti.get(i).getPrezzo() %></div>
                 <label for="numero">Scegli un numero:</label>
-                <input type="number" id="numero" name="numero" min="0" max="100" step="1" value= <%= quantita.get(i) %>>
+                    <input type="number" id="numero" name="numero" min="0" max="100" step="1" value= <%= quantita.get(i) %>>
             </div>
         </div>
             <%  }
