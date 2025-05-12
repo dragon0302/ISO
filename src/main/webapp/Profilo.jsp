@@ -1,8 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: PRINCIPALE
-  Date: 06/05/2025
-  Time: 20:06
+  Date: 02/04/2025
+  Time: 11:28
+  To change this template use File | Settings | File Templates.
+--%>
+<%--
+  Created by IntelliJ IDEA.
+  User: PRINCIPALE
+  Date: 02/04/2025
+  Time: 11:28
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -18,7 +25,7 @@
     <title>ISO-16</title>
 
     <link rel="stylesheet" href="sfondo.css">
-    <link rel="stylesheet" href="Lista_ordini.css">
+    <link rel="stylesheet" href="Home.css">
 <body>
 <header>
     <div class="top-header">
@@ -107,7 +114,7 @@
             <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente()!= null ? utente.getNomeutente().toUpperCase() : "" %></span>
             <div id="userMenu" class="user-menu">
                 <ul>
-                    <li><a href="Profilo.jsp">Profilo</a></li>
+                    <li><a href="profile.jsp">Profilo</a></li>
                     <li><a href="settings.jsp">Impostazioni</a></li>
                     <li><a href="Carrello.jsp">Carrello</a></li>
                     <form action="Logout" method="get">
@@ -195,43 +202,7 @@
 </script>
 <main>
 
-        <div class="box-all_order">
-            <h2>I miei ordini</h2>
-            <%
-                if (utente != null) {
-                    List<Ordine> ordini = utente.getListaOrdini(); // o metodo corretto
-
-                    if (ordini != null && !ordini.isEmpty()) {
-                        for (Ordine ordine : ordini) {
-                            List<Prodotto> prodotti = ordine.getProdotti(); // Assumi esistenza
-                            String imgPath = (prodotti != null && !prodotti.isEmpty())
-                                    ? prodotti.get(0).getImmagine() // es. "img/prodotto1.jpg"
-                                    : "img/default.jpg"; // immagine placeholder
-            %>
-            <div class="order-box">
-                <div class="order-image">
-                    <img src="<%= imgPath %>" alt="Immagine prodotto" />
-                </div>
-                <div class="order-info">
-                    <p><strong>Ordine #</strong><%= ordine.getId() %></p>
-                    <p><strong>Data:</strong> <%= ordine.getDataOrdine() %></p>
-                    <p><strong>Totale:</strong> € <%= ordine.getTotale() %></p>
-                    <p><strong>Stato:</strong> <%= ordine.getStato() %></p>
-                    <div class="order-actions">
-                        <a href="RiacquistaProdotti.jsp?idOrdine=<%= ordine.getId() %>" class="btn-small">Riacquista Prodotti</a>
-                        <a href="VediOrdine.jsp?idOrdine=<%= ordine.getId() %>" class="btn-small">Vedi Ordine</a>
-                    </div>
-                </div>
-            </div>
-            <%      }
-            } else { %>
-            <p>Non hai ancora effettuato ordini.</p>
-            <%      }
-            } else {
-            %>
-            <p>Effettua il <a href="Log_in.jsp">login</a> per visualizzare i tuoi ordini.</p>
-            <% } %>
-        </div>
+    ///////////////////////////////////////////////////////////////////
 
 </main>
 
