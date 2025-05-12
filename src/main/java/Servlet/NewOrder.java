@@ -1,7 +1,9 @@
 package Servlet;
 
 import DataManagement.*;
+import com.mysql.cj.Session;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,6 +14,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
+@WebServlet("/NewOrder")
 public class NewOrder extends HttpServlet {
 
     OrdineDAO ordineDAO = new OrdineDAOImplement();
@@ -25,19 +28,19 @@ public class NewOrder extends HttpServlet {
             String idProdotti = null;
 
             List<Prodotto> prodotti = (List<Prodotto>) session.getAttribute("carrello");
-            float PrezzoTotale = (float) request.getAttribute("prezzototale");
-            String CFutente = (String) session.getAttribute("cfutente");
+            float PrezzoTotale = (float) session.getAttribute("prezzotatale");
+            Utente utente = (Utente) session.getAttribute("utente");
 
             for (Prodotto prodotto : prodotti) {
 
                 if (idProdotti == null) {
-                    idProdotti = prodotto + ",";
+                    idProdotti = prodotto.getId_prodotto() + ",";
                 }else {
                     idProdotti += prodotto.getId_prodotto() + ",";
                 }
             }
 
-            Ordine ordine = new Ordine(Date.valueOf(LocalDate.now()),PrezzoTotale,idProdotti,carrelloDAO.GetIdCarrello(CFutente));
+            Ordine ordine = new Ordine(Date.valueOf(LocalDate.now()),PrezzoTotale,idProdotti,carrelloDAO.GetIdCarrello(utente.getCf()));
             ordineDAO.DoSave(ordine);
 
         }catch (Exception e) {

@@ -23,10 +23,7 @@ public class Catalogo extends HttpServlet {
             List<Prodotto> prodottiRecenti = prodottoDAO.getProdottiRecenti();
             List<Integer> IDprodottiPiuAcquistati = acquistoDAO.getProdottiPiuAqquistati();
             List<Prodotto> prodottiPiuAcquistai = new ArrayList<>();
-            String servletPath = request.getServletPath();
-
             for (int ID : IDprodottiPiuAcquistati) {
-
 
                 Prodotto prodotto = prodottoDAO.getProdottoByID(ID);
                 prodotto.setId_prodotto(ID);
