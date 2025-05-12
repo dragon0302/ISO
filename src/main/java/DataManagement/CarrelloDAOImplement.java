@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CarrelloDAOImplement implements CarrelloDAO {
@@ -143,6 +145,83 @@ public class CarrelloDAOImplement implements CarrelloDAO {
             try {
                 if (query4 != null) {
                     query4.close();
+                }
+            }finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+        return null;
+    }
+
+    public Boolean CeckProdotto(int idProdotto,String CF_utene) throws SQLException{
+
+        Connection conn = null;
+        PreparedStatement query5 = null;
+
+        try{
+            conn = ds.getConnection();
+            query5 = conn.prepareStatement("SELECT Lista_prodotti FROM " + TABLE_NAME + " WHERE CF_utente = ? and Lista_prodotti like CONCAT('%', ?, '%')");
+
+            query5.setString(1,CF_utene);
+            query5.setInt(2,idProdotto);
+
+            ResultSet rs = query5.executeQuery();
+
+            if(rs.next()){
+                return true;
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (query5 != null) {
+                    query5.close();
+                }
+            }finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+
+        return false;
+
+    }
+
+    public List<String> GetProductCarello(int idcarello) throws SQLException{
+
+        Connection conn = null;
+        PreparedStatement query6 = null;
+        List<String> list = new ArrayList<>();
+
+        try {
+
+            conn = ds.getConnection();
+            query6 = conn.prepareStatement("SELECT Lista_prodotti FROM " + TABLE_NAME + " WHERE ID_carrello = ?");
+
+            query6.setInt(1,idcarello);
+
+            ResultSet rs = query6.executeQuery();
+
+            if(rs.next()) {
+                String temp = rs.getString(1);
+
+                for (String id : temp.split(",")) {
+                    if (!id.equals("")) {
+                        list.add(id);
+                    }
+                }
+                return list;
+            }
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (query6 != null) {
+                    query6.close();
                 }
             }finally {
                 if (conn != null) {

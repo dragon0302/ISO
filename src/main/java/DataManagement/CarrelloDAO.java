@@ -9,5 +9,7 @@ public interface CarrelloDAO {
     public void ProdottiCarello(int idProdotto,int idCarrello) throws SQLException;
     public void UpdateProductCarello(List<String> idsProduct, String CF) throws SQLException;
     public Integer GetIdCarrello(String CF) throws SQLException;
+    public Boolean CeckProdotto(int idProdotto,String CF_utene) throws SQLException;
+    public List<String> GetProductCarello(int idcarello) throws SQLException;
 
 }
