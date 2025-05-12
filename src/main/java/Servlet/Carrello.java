@@ -32,7 +32,7 @@ public class Carrello extends HttpServlet {
             List<Prodotto> carrello = new ArrayList<>();
             List<String> ids = new ArrayList<>();
             Prodotto prodotto = null;
-            float prezzotatale = 0;
+            float prezzototale = 0;
 
             if (utente == null ) {
                 ids = cm.AllCookieId();
@@ -42,7 +42,7 @@ public class Carrello extends HttpServlet {
                     carrello = (List<Prodotto>) session.getAttribute("carrello");
                     Nquantita = (List<Integer>) session.getAttribute("Quantità");
                     if (session.getAttribute("prezzotatale") == null) {
-                        prezzotatale = 0;
+                        prezzototale = 0;
                     }
 
                     if (carrello == null) {
@@ -52,7 +52,7 @@ public class Carrello extends HttpServlet {
 
                     for (String id : ids) {
                         prodotto = prodottoDAO.getProdottoByID(Integer.parseInt(id));
-                        prezzotatale += prodotto.getPrezzo();
+                        prezzototale += prodotto.getPrezzo();
 
                         if (carrello.isEmpty()) {
                             carrello.add(prodotto);
@@ -86,10 +86,28 @@ public class Carrello extends HttpServlet {
             }else {
 
                 ids = carrelloDAO.GetProductCarello(carrelloDAO.GetIdCarrello(utente.getCf()));
+                carrello = (List<Prodotto>) session.getAttribute("carrello");
+                Nquantita = (List<Integer>) session.getAttribute("Quantità");
+
+
+                if (session.getAttribute("prezzotatale") == null) {
+                    prezzototale = 0;
+                }else {
+                    prezzototale = (float) session.getAttribute("prezzotatale");
+                }
+
+                if (carrello == null) {
+                    carrello = new ArrayList<>();
+                    session.setAttribute("carrello", carrello);
+                }
+
+                if (Nquantita == null) {
+                    Nquantita = new ArrayList<>();
+                    session.setAttribute("quantità", Nquantita);
+                }
 
                 for (String id : ids) {
                     prodotto = prodottoDAO.getProdottoByID(Integer.parseInt(id));
-                    prezzotatale += prodotto.getPrezzo();
 
 
                     if (carrello.isEmpty()) {
@@ -109,12 +127,19 @@ public class Carrello extends HttpServlet {
                     if (carrello.size() > Nquantita.size()) {
 
                         Nquantita.add(acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), Integer.parseInt(id)));
+                        prezzototale += prodotto.getPrezzo();
                     } else {
 
                         for (int i = 0; i < carrello.size(); i++) {
-
                             if (carrello.get(i).getId_prodotto() == Integer.parseInt(id)) {
+
+                                if(Nquantita.get(i) < acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), Integer.parseInt(id))){
+                                    int temp = acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), Integer.parseInt(id)) - Nquantita.get(i);
+                                    prezzototale += (prodotto.getPrezzo() * temp);
+                                }
+
                                 Nquantita.set(i, acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), Integer.parseInt(id)));
+
                             }
 
                         }
@@ -126,7 +151,7 @@ public class Carrello extends HttpServlet {
 
             session.setAttribute("carrello", carrello);
             session.setAttribute("Quantità", Nquantita);
-            session.setAttribute("prezzotatale", prezzotatale);
+            session.setAttribute("prezzotatale", prezzototale);
 
             response.sendRedirect("Carrello.jsp");
         }catch (Exception e) {
