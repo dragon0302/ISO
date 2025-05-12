@@ -192,6 +192,7 @@
             // Recupera i prodotti dal database
             ArrayList<Prodotto> prodotti = (ArrayList<Prodotto>) session.getAttribute("carrello");
             ArrayList<Integer> quantita = (ArrayList<Integer>) session.getAttribute("Quantità");
+            float prezzotatale = (float) session.getAttribute("prezzotatale");
 
             //Visualizza la barra orizzontale per ogni prodotto -->
             if (prodotti != null){
@@ -214,14 +215,19 @@
             </div>
         </div>
             <%  }
-        }%>
+                %>
+
+            <div>
+                <div class="PT">Prezzo Totale</div>
+                <div class="prezzo-totale"><%= prezzotatale%> </div>
+            </div>
+        <%}%>
 
             </div>
 
 
         <div class="box-acquista">
-            <form>
-                action="ProductCartMenegment" method="post">
+            <form action="NewOrder" method="post">
     <%--            <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">--%>
     <%--            <input type="hidden" name="SourcePage" value="Home">--%>
                 <button type="submit" class="btn-aggiungi">

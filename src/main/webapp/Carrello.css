@@ -37,11 +37,26 @@
 .descrizione {
     flex: 2;
     font-size: 16px;
+    color: #000000;
 }
 
 .prezzo-quantita {
     flex: 1;
     text-align: right;
+}
+
+.prezzo-totale {
+    font-weight: bold;
+    flex: 1;
+    text-align: right;
+    color: #000000;
+}
+
+.PT{
+    font-weight: bold;
+    flex: 1;
+    text-align: right;
+    color: #000000;
 }
 
 .prezzo {
