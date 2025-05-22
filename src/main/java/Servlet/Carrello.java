@@ -71,12 +71,15 @@ public class Carrello extends HttpServlet {
                         if (carrello.size() > Nquantita.size()) {
 
                             Nquantita.add(cm.getCookieProductQuantity(id));
+                            prezzototale = finalProdotto.getPrezzo() * cm.getCookieProductQuantity(id);
                         } else {
 
                             for (int i = 0; i < carrello.size(); i++) {
 
                                 if (carrello.get(i).getId_prodotto() == Integer.parseInt(id)) {
+                                    int dif = cm.getCookieProductQuantity(id) - Nquantita.get(i);
                                     Nquantita.set(i, cm.getCookieProductQuantity(id));
+                                    prezzototale += dif * finalProdotto.getPrezzo();
                                 }
 
                             }
@@ -127,7 +130,7 @@ public class Carrello extends HttpServlet {
                     if (carrello.size() > Nquantita.size()) {
 
                         Nquantita.add(acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), Integer.parseInt(id)));
-                        prezzototale += prodotto.getPrezzo();
+                        prezzototale += prodotto.getPrezzo() *acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), Integer.parseInt(id));
                     } else {
 
                         for (int i = 0; i < carrello.size(); i++) {
