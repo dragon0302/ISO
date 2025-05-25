@@ -15,146 +15,147 @@
         <title>Sig-up</title>
         <!-- Link al file CSS esterno per lo styling della pagina-->
         <link rel="stylesheet" href="sfondo.css">
+        <link rel="stylesheet" href="Sign-up.css">
 </head>
+    <body>
+        <header>
+            <div class="top-header">
+                <!-- Parte 1 - Logo a sinistra -->
+                <div class="logo-container">
+                    <a href="Home.jsp">
+                        <!--img src="logo.png" alt="Logo"-->
+                    </a>
+                </div>
 
-    <header>
-        <div class="top-header">
-            <!-- Parte 1 - Logo a sinistra -->
-            <div class="logo-container">
-                <a href="Home.jsp">
-                    <!--img src="logo.png" alt="Logo"-->
-                </a>
+                <!-- Parte 2 - Barra di ricerca centrata e filtri sotto -->
+                <div class="center-section">
+                    <!-- Barra di ricerca -->
+                    <div class="search-container">
+                        <input type="text" id="searchInput" placeholder="Cerca prodotti..." onkeyup="showSuggestions(this.value)">
+                        <div class="suggestions" id="suggestionBox"></div>
+                    </div>
+
+                    <!-- Filtri sotto la barra di ricerca -->
+                    <div class="filter-bar">
+                        <div class="filter">
+                            <a href="#">ROCK</a>
+                            <div class="dropdown">
+                                <a href="#">AC/DC</a>
+                                <a href="#">Aerosmith</a>
+                                <a href="#">Led Zeppelin</a>
+                            </div>
+                        </div>
+                        <div class="filter">
+                            <a href="#">POP</a>
+                            <div class="dropdown">
+                                <a href="#">Adele</a>
+                                <a href="#">Beyoncé</a>
+                                <a href="#">Madonna</a>
+                            </div>
+                        </div>
+                        <div class="filter">
+                            <a href="#">JAZZ</a>
+                            <div class="dropdown">
+                                <a href="#">Coltrane</a>
+                                <a href="#">Davis</a>
+                                <a href="#">Fitzgerald</a>
+                            </div>
+                        </div>
+                        <div class="filter">
+                            <a href="#">METAL</a>
+                            <div class="dropdown">
+                                <a href="#">Iron Maiden</a>
+                                <a href="#">Metallica</a>
+                                <a href="#">Slayer</a>
+                            </div>
+                        </div>
+                        <div class="filter">
+                            <a href="#">RAP</a>
+                            <div class="dropdown">
+                                <a href="#">Drake</a>
+                                <a href="#">Eminem</a>
+                                <a href="#">Kanye</a>
+                            </div>
+                        </div>
+                        <div class="filter">
+                            <a href="#">Abbigliamento</a>
+                            <div class="dropdown">
+                                <a href="#">Cappelli</a>
+                                <a href="#">Felpe</a>
+                                <a href="#">T-shirt</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Parte 3 - Bottoni di Sign-up e Log-in a destra -->
+                <div class="right-section">
+                    <a class="btn" href="Carrello.jsp">Carrello</a>
+                    <%
+                        Utente utente = (Utente) session.getAttribute("utente");
+
+                        if (utente == null) { %>
+                    <!-- Se l'utente non è loggato, mostra i bottoni di login e signup -->
+                    <a class="btn login-btn" href="Log_in.jsp">Log In</a>
+                    <a class="btn signup-btn" href="Sign-up.jsp">Sign Up</a>
+                    <% } else { %>
+                    <!-- Se l'utente è loggato, mostra il nome utente o il menu amministratore -->
+                    <% if (utente.isAmministratore()) { %>
+                    <!-- Amministratore: aggiungi i bottoni di gestione e il menu a tendina -->
+                    <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente()!= null ? utente.getNomeutente().toUpperCase() : "" %></span>
+                    <div id="userMenu" class="user-menu">
+                        <ul>
+                            <li><a href="Profilo.jsp">Profilo</a></li>
+                            <li><a href="Impostazioni.jsp">Impostazioni</a></li>
+                            <li><a href="Carrello.jsp">Carrello</a></li>
+                            <form action="Logout" method="get">
+                            <li><button>Log-out</button></li>
+                        </form>
+                        </ul>
+                    </div>
+                    <!-- Bottoni amministratore -->
+                    <button class="btn" onclick="openPriceSurveyModal()">Indagine per nnumero venduti</button>
+                    <button class="btn" onclick="openAddProductModal()">Aggiungi Prodotto</button>
+                    <button class="btn" onclick="openAddFilterModal()">Aggiungi Filtro</button>
+                    <button class="btn" onclick="openDateSurveyModal()">Indagine per Data</button>
+                    <button class="btn" onclick="openDeleteModal()">Elimina</button>
+                    <% } else { %>
+                    <!-- Utente non amministratore: solo il nome utente e il menu a tendina -->
+                    <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
+                    <div id="userMenu" class="user-menu">
+                        <ul>
+                            <li><a href="Profilo.jsp">Profilo</a></li>
+                            <li><a href="Impostazioni.jsp">Impostazioni</a></li>
+                            <li><a href="Carrello.jsp">Carrello</a></li>
+                            <form action="Logout" method="get">
+                            <li><button>Log-out</button></li>
+                        </form>
+                        </ul>
+                    </div>
+                    <% } %>
+                    <% } %>
+                </div>
             </div>
+        </header>
+        <!-- JavaScript per suggerimenti live -->
+        <script>
+            const products = [
+                "AC/DC T-Shirt", "Adele CD", "Metallica Hoodie",
+                "Queen Vinyl", "Eminem Cap", "Jazz Mug",
+                "Taylor Swift Poster", "Iron Maiden Patch", "Led Zeppelin T-Shirt"
+            ];
 
-            <!-- Parte 2 - Barra di ricerca centrata e filtri sotto -->
-            <div class="center-section">
-                <!-- Barra di ricerca -->
-                <div class="search-container">
-                    <input type="text" id="searchInput" placeholder="Cerca prodotti..." onkeyup="showSuggestions(this.value)">
-                    <div class="suggestions" id="suggestionBox"></div>
-                </div>
+            function showSuggestions(value) {
+                const suggestionBox = document.getElementById('suggestionBox');
+                suggestionBox.innerHTML = '';
+                if (value.length === 0) return;
 
-                <!-- Filtri sotto la barra di ricerca -->
-                <div class="filter-bar">
-                    <div class="filter">
-                        <a href="#">ROCK</a>
-                        <div class="dropdown">
-                            <a href="#">AC/DC</a>
-                            <a href="#">Aerosmith</a>
-                            <a href="#">Led Zeppelin</a>
-                        </div>
-                    </div>
-                    <div class="filter">
-                        <a href="#">POP</a>
-                        <div class="dropdown">
-                            <a href="#">Adele</a>
-                            <a href="#">Beyoncé</a>
-                            <a href="#">Madonna</a>
-                        </div>
-                    </div>
-                    <div class="filter">
-                        <a href="#">JAZZ</a>
-                        <div class="dropdown">
-                            <a href="#">Coltrane</a>
-                            <a href="#">Davis</a>
-                            <a href="#">Fitzgerald</a>
-                        </div>
-                    </div>
-                    <div class="filter">
-                        <a href="#">METAL</a>
-                        <div class="dropdown">
-                            <a href="#">Iron Maiden</a>
-                            <a href="#">Metallica</a>
-                            <a href="#">Slayer</a>
-                        </div>
-                    </div>
-                    <div class="filter">
-                        <a href="#">RAP</a>
-                        <div class="dropdown">
-                            <a href="#">Drake</a>
-                            <a href="#">Eminem</a>
-                            <a href="#">Kanye</a>
-                        </div>
-                    </div>
-                    <div class="filter">
-                        <a href="#">Abbigliamento</a>
-                        <div class="dropdown">
-                            <a href="#">Cappelli</a>
-                            <a href="#">Felpe</a>
-                            <a href="#">T-shirt</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                const filtered = products.filter(product =>
+                    product.toLowerCase().includes(value.toLowerCase())
+                );
 
-            <!-- Parte 3 - Bottoni di Sign-up e Log-in a destra -->
-            <div class="right-section">
-                <a class="btn" href="Carrello.jsp">Carrello</a>
-                <%
-                    Utente utente = (Utente) session.getAttribute("utente");
-
-                    if (utente == null) { %>
-                <!-- Se l'utente non è loggato, mostra i bottoni di login e signup -->
-                <a class="btn login-btn" href="Log_in.jsp">Log In</a>
-                <a class="btn signup-btn" href="Sign-up.jsp">Sign Up</a>
-                <% } else { %>
-                <!-- Se l'utente è loggato, mostra il nome utente o il menu amministratore -->
-                <% if (utente.isAmministratore()) { %>
-                <!-- Amministratore: aggiungi i bottoni di gestione e il menu a tendina -->
-                <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente()!= null ? utente.getNomeutente().toUpperCase() : "" %></span>
-                <div id="userMenu" class="user-menu">
-                    <ul>
-                        <li><a href="Profilo.jsp">Profilo</a></li>
-                        <li><a href="Impostazioni.jsp">Impostazioni</a></li>
-                        <li><a href="Carrello.jsp">Carrello</a></li>
-                        <form action="Logout" method="get">
-                        <li><button>Log-out</button></li>
-                    </form>
-                    </ul>
-                </div>
-                <!-- Bottoni amministratore -->
-                <button class="btn" onclick="openPriceSurveyModal()">Indagine per nnumero venduti</button>
-                <button class="btn" onclick="openAddProductModal()">Aggiungi Prodotto</button>
-                <button class="btn" onclick="openAddFilterModal()">Aggiungi Filtro</button>
-                <button class="btn" onclick="openDateSurveyModal()">Indagine per Data</button>
-                <button class="btn" onclick="openDeleteModal()">Elimina</button>
-                <% } else { %>
-                <!-- Utente non amministratore: solo il nome utente e il menu a tendina -->
-                <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
-                <div id="userMenu" class="user-menu">
-                    <ul>
-                        <li><a href="Profilo.jsp">Profilo</a></li>
-                        <li><a href="Impostazioni.jsp">Impostazioni</a></li>
-                        <li><a href="Carrello.jsp">Carrello</a></li>
-                        <form action="Logout" method="get">
-                        <li><button>Log-out</button></li>
-                    </form>
-                    </ul>
-                </div>
-                <% } %>
-                <% } %>
-            </div>
-        </div>
-    </header>
-    <!-- JavaScript per suggerimenti live -->
-    <script>
-        const products = [
-            "AC/DC T-Shirt", "Adele CD", "Metallica Hoodie",
-            "Queen Vinyl", "Eminem Cap", "Jazz Mug",
-            "Taylor Swift Poster", "Iron Maiden Patch", "Led Zeppelin T-Shirt"
-        ];
-
-        function showSuggestions(value) {
-            const suggestionBox = document.getElementById('suggestionBox');
-            suggestionBox.innerHTML = '';
-            if (value.length === 0) return;
-
-            const filtered = products.filter(product =>
-                product.toLowerCase().includes(value.toLowerCase())
-            );
-
-            filtered.forEach(product => {
-                const div = document.createElement('div');
+                filtered.forEach(product => {
+                    const div = document.createElement('div');
                 div.textContent = product;
                 div.onclick = () => {
                     document.getElementById('searchInput').value = product;
@@ -194,90 +195,66 @@
         }
     </script>
 
-        <!-- Contenitore centrale con immagini laterali e form di inserimento -->
+    <main>
         <div class="content-wrapper">
-            <img src="left-image.png" alt="Immagine Sinistra" class="side-image">
+            <!-- Immagini laterali fisse -->
+            <!-- img src="left-image.png" class="side-image left" alt="Immagine sinistra" -->
+            <!-- img src="right-image.png" class="side-image right" alt="Immagine destra" -->
 
-        <div class="form-container">
-            <h2>Catalogo - Inserimento Utente</h2>
-            <form action="Sign-up" method="POST">
-                <input type="hidden" name="action" placeholder="insert">
-                <div class="form-group">
-                    <label for="CodiceFiscale">Codice Fiscale <span style="color:red;">*</span></label>
-                    <input name="CodiceFiscale" id="CodiceFiscale" maxlength="50" required placeholder="Inserire il proprio codice fiscale">
-                    <%
-                        String Errore_CF = (String) request.getAttribute("Errore_CF");
-                        if (Errore_CF != null) {
-                    %>
-                    <div class="field-error"><%= Errore_CF %></div>
-                    <%
-                        }
-                    %>
-                </div>
-                <div class="form-group">
-                    <label for="NomeUtente">Nome Utente <span style="color:red;">*</span></label>
-                    <input name="NomeUtente" id="NomeUtente" maxlength="50" required placeholder="Inserire il proprio nome utente">
-                </div>
+            <!-- Box centrale con form -->
+            <div class="form-container">
+                <h2>Registrazione Utente</h2>
+                <form action="Sign-up" method="POST">
+                    <input type="hidden" name="action" value="insert">
 
-                <%
-                    String Errore_NU = (String) request.getAttribute("Errore_NU");
-                    if (Errore_NU != null) {
-                %>
-                <div class="field-error"><%= Errore_NU %></div>
-                <%
-                    }
-                %>
+                    <div class="form-group">
+                        <label for="CodiceFiscale">Codice Fiscale *</label>
+                        <input type="text" name="CodiceFiscale" id="CodiceFiscale" required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="Password">Password <span style="color:red;">*</span></label>
-                    <input name="Password" id="Password" maxlength="255" required placeholder="Inserire la password">
-                </div>
-                <div class="form-group">
-                    <label for="Nome">Nome <span style="color:red;">*</span></label>
-                    <input name="Nome" id="Nome" maxlength="50" required placeholder="Inserire il proprio nome">
-                </div>
-                <div class="form-group">
-                    <label for="Cognome">Cognome <span style="color:red;">*</span></label>
-                    <input name="Cognome" id="Cognome" maxlength="50" required placeholder="Inserire il proprio cognome">
-                </div>
-                <div class="form-group">
-                    <label>Sesso: <span style="color:red;">*</span></label>
-                    <label>M<input type="radio" name="sesso" value="M" required></label>
-                    <label>F<input type="radio" name="sesso" value="F" required></label>
-                </div>
-                <div class="form-group">
-                    <label for="DataNascita">Data di Nascita <span style="color:red;">*</span></label>
-                    <input type="date" name="DataNascita" id="DataNascita" required placeholder="Inserire la data di nascita">
-                </div>
-                <div class="form-group">
-                    <label for="E-mail">E-mail <span style="color:red;">*</span> </label>
-                    <input name="E-mail" id="E-mail" maxlength="40" required placeholder="Inserire la propria e-mail">
-                </div>
-                <%
-                    String Errore_DN = (String) request.getAttribute("Errore_DN");
-                    if (Errore_DN != null) {
-                %>
-                <div class="field-error"><%= Errore_DN %></div>
-                <%
-                    }
-                %>
+                    <div class="form-group">
+                        <label for="NomeUtente">Nome Utente *</label>
+                        <input type="text" name="NomeUtente" id="NomeUtente" required>
+                    </div>
 
-                <div class="form-group">
-                    <input type="submit" value="Aggiungi ">
-                </div>
-            </form>
+                    <div class="form-group">
+                        <label for="Password">Password *</label>
+                        <input type="password" name="Password" id="Password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Nome">Nome *</label>
+                        <input type="text" name="Nome" id="Nome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Cognome">Cognome *</label>
+                        <input type="text" name="Cognome" id="Cognome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sesso *</label>
+                        <label>M<input type="radio" name="sesso" value="M" required></label>
+                        <label>F<input type="radio" name="sesso" value="F" required></label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="DataNascita">Data di Nascita *</label>
+                        <input type="date" name="DataNascita" id="DataNascita" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="E-mail">E-mail *</label>
+                        <input type="email" name="E-mail" id="E-mail" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <input type="submit" value="Registrati">
+                    </div>
+                </form>
+            </div>
         </div>
-
-            <img src="right-image.png" alt="Immagine Destra" class="side-image">
-        </div>
-
-        <!-- Footer con stile di barra inferiore -->
-        <div class="footer-bar">
-            <a href="AboutUs.jsp" class="btn-link">About Us</a>
-            <a href="Contattaci.jsp" class="btn-link">Contattaci</a>
-            <a href="Termini_e_condizioni.jsp" class="btn-link">Termini e condizioni</a>
-            <a href="Assistenza.jsp" class="btn-link">Assistenza</a>
-        </div>
+    </main>
 
     </body>
 </html>
