@@ -14,6 +14,7 @@
     <meta charset="UTF-8">
     <title>Prodotto</title>
     <link rel="stylesheet" href="sfondo.css">
+    <link rel="stylesheet" href="Prodotto.css">
 </head>
 
 <header>
