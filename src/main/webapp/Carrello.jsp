@@ -101,10 +101,12 @@
                 <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente()!= null ? utente.getNomeutente().toUpperCase() : "" %></span>
                 <div id="userMenu" class="user-menu">
                     <ul>
-                        <li><a href="profile.jsp">Profilo</a></li>
-                        <li><a href="settings.jsp">Impostazioni</a></li>
-                        <li><a href="cart.jsp">Carrello</a></li>
-                        <li><a href="logout.jsp">Log-out</a></li>
+                        <li><a href="Profilo.jsp">Profilo</a></li>
+                        <li><a href="Impostazioni.jsp">Impostazioni</a></li>
+                        <li><a href="Carrello.jsp">Carrello</a></li>
+                        <form action="Logout" method="get">
+                            <li><button>Log-out</button></li>
+                        </form>
                     </ul>
                 </div>
                 <!-- Bottoni amministratore -->
@@ -118,10 +120,12 @@
                 <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
                 <div id="userMenu" class="user-menu">
                     <ul>
-                        <li><a href="profile.jsp">Profilo</a></li>
-                        <li><a href="settings.jsp">Impostazioni</a></li>
-                        <li><a href="cart.jsp">Carrello</a></li>
-                        <li><a href="logout.jsp">Log-out</a></li>
+                        <li><a href="Profilo.jsp">Profilo</a></li>
+                        <li><a href="Impostazioni.jsp">Impostazioni</a></li>
+                        <li><a href="Carrello.jsp">Carrello</a></li>
+                        <form action="Logout" method="get">
+                            <li><button>Log-out</button></li>
+                        </form>
                     </ul>
                 </div>
                 <% } %>
@@ -239,7 +243,7 @@
 
 <div class="footer-bar">
     <a href="About_Us.jsp" class="btn-link">About Us</a>
-    <a href="contattaci.jsp" class="btn-link">Contattaci</a>
+    <a href="Contattaci.jsp" class="btn-link">Contattaci</a>
     <a href="Termini_e_condizioni.jsp" class="btn-link">Termini e condizioni</a>
     <a href="Assistenza.jsp" class="btn-link">Assistenza</a>
 </div>

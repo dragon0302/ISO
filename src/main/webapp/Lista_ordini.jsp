@@ -108,7 +108,7 @@
             <div id="userMenu" class="user-menu">
                 <ul>
                     <li><a href="Profilo.jsp">Profilo</a></li>
-                    <li><a href="settings.jsp">Impostazioni</a></li>
+                    <li><a href="Impostazioni.jsp">Impostazioni</a></li>
                     <li><a href="Carrello.jsp">Carrello</a></li>
                     <form action="Logout" method="get">
                         <li><button>Log-out</button></li>
@@ -125,10 +125,12 @@
             <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
             <div id="userMenu" class="user-menu">
                 <ul>
-                    <li><a href="profile.jsp">Profilo</a></li>
-                    <li><a href="settings.jsp">Impostazioni</a></li>
+                    <li><a href="Profilo.jsp">Profilo</a></li>
+                    <li><a href="Impostazioni.jsp">Impostazioni</a></li>
                     <li><a href="Carrello.jsp">Carrello</a></li>
-                    <li><a href="logout.jsp">Log-out</a></li>
+                    <form action="Logout" method="get">
+                        <li><button>Log-out</button></li>
+                    </form>
                 </ul>
             </div>
             <% } %>

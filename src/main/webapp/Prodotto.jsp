@@ -105,9 +105,11 @@
             <div id="userMenu" class="user-menu">
                 <ul>
                     <li><a href="Profilo.jsp">Profilo</a></li>
-                    <li><a href="settings.jsp">Impostazioni</a></li>
+                    <li><a href="Impostazioni.jsp">Impostazioni</a></li>
                     <li><a href="Carrello.jsp">Carrello</a></li>
-                    <li><a href="logout.jsp">Log-out</a></li>
+                    <form action="Logout" method="get">
+                        <li><button>Log-out</button></li>
+                    </form>
                 </ul>
             </div>
             <!-- Bottoni amministratore -->
@@ -122,9 +124,11 @@
             <div id="userMenu" class="user-menu">
                 <ul>
                     <li><a href="Profilo.jsp">Profilo</a></li>
-                    <li><a href="settings.jsp">Impostazioni</a></li>
+                    <li><a href="Impostazioni.jsp">Impostazioni</a></li>
                     <li><a href="Carrello.jsp">Carrello</a></li>
-                    <li><a href="logout.jsp">Log-out</a></li>
+                    <form action="Logout" method="get">
+                        <li><button>Log-out</button></li>
+                    </form>
                 </ul>
             </div>
             <% } %>
