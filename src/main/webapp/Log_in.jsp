@@ -97,9 +97,9 @@
             <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente()!= null ? utente.getNomeutente().toUpperCase() : "" %></span>
             <div id="userMenu" class="user-menu">
                 <ul>
-                    <li><a href="profile.jsp">Profilo</a></li>
+                    <li><a href="Profilo.jsp">Profilo</a></li>
                     <li><a href="settings.jsp">Impostazioni</a></li>
-                    <li><a href="cart.jsp">Carrello</a></li>
+                    <li><a href="Carrello.jsp">Carrello</a></li>
                     <li><a href="logout.jsp">Log-out</a></li>
                 </ul>
             </div>
@@ -114,9 +114,9 @@
             <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
             <div id="userMenu" class="user-menu">
                 <ul>
-                    <li><a href="profile.jsp">Profilo</a></li>
+                    <li><a href="Profilo.jsp">Profilo</a></li>
                     <li><a href="settings.jsp">Impostazioni</a></li>
-                    <li><a href="cart.jsp">Carrello</a></li>
+                    <li><a href="Carrello.jsp">Carrello</a></li>
                     <li><a href="logout.jsp">Log-out</a></li>
                 </ul>
             </div>
@@ -206,7 +206,7 @@
 
 <!-- Contenitore centrale con immagini laterali e login -->
 <div class="content-wrapper">
-    <img src="left-image.png" alt="Immagine Sinistra" class="side-image">
+    <1--img src="left-image.png" alt="Immagine Sinistra" class="side-image"-->
 
     <div class="login-container">
         <h2>Accedi</h2>
@@ -233,13 +233,13 @@
         %>
     </div>
 
-    <img src="right-image.png" alt="Immagine Destra" class="side-image">
+    <!-- img src="right-image.png" alt="Immagine Destra" class="side-image" -->
 </div>
 
 <!-- Footer con stile di barra inferiore -->
 <div class="footer-bar">
     <a href="About_Us.jsp" class="btn-link">About Us</a>
-    <a href="contattaci.jsp" class="btn-link">Contattaci</a>
+    <a href="Contattaci.jsp" class="btn-link">Contattaci</a>
     <a href="Termini_e_condizioni.jsp" class="btn-link">Termini e condizioni</a>
     <a href="Assistenza.jsp" class="btn-link">Assistenza</a>
 </div>
