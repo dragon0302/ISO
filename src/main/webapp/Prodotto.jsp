@@ -103,9 +103,9 @@
             <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente()!= null ? utente.getNomeutente().toUpperCase() : "" %></span>
             <div id="userMenu" class="user-menu">
                 <ul>
-                    <li><a href="profile.jsp">Profilo</a></li>
+                    <li><a href="Profilo.jsp">Profilo</a></li>
                     <li><a href="settings.jsp">Impostazioni</a></li>
-                    <li><a href="cart.jsp">Carrello</a></li>
+                    <li><a href="Carrello.jsp">Carrello</a></li>
                     <li><a href="logout.jsp">Log-out</a></li>
                 </ul>
             </div>
@@ -120,9 +120,9 @@
             <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
             <div id="userMenu" class="user-menu">
                 <ul>
-                    <li><a href="profile.jsp">Profilo</a></li>
+                    <li><a href="Profilo.jsp">Profilo</a></li>
                     <li><a href="settings.jsp">Impostazioni</a></li>
-                    <li><a href="cart.jsp">Carrello</a></li>
+                    <li><a href="Carrello.jsp">Carrello</a></li>
                     <li><a href="logout.jsp">Log-out</a></li>
                 </ul>
             </div>
@@ -217,19 +217,26 @@
     if (prodotto != null){
 %>
 
-<h2>Dettagli Prodotto</h2>
-<p><strong>Nome:</strong> <%= prodotto.getNome() %></p>
-<p><strong>Media Valutazione:</strong> <%= prodotto.getMedia_valutazione() %></p>
-<p><strong>Taglia:</strong> <%= prodotto.getTaglia() %></p>
-<p><strong>Descrizione:</strong> <%= prodotto.getDescrizione() %></p>
-<p><strong>Categoria:</strong> <%= prodotto.getCategoria() %></p>
-<p><strong>Prezzo:</strong> <%= prodotto.getPrezzo() %></p>
-<form action="ProductCartMenegment" method="post">
-    <!--input type="hidden" name="CF_Utente" value="<//%= utente.getCf() %>"-->
-    <input type="hidden" name="prodottoID" value="<%= prodotto.getId_prodotto() %>">
-    <input type="hidden" name="SourcePage" value="Prodotto">
-    <button type="submit" class="btn">Aggiungi al carrelo</button>
-</form>
+<div class="product-container">
+    <div class="product-image">
+        <!-- Immagine prodotto (metti il path corretto nell'attributo src) -->
+        <!--img src="<!%= prodotto.getImmaginePath() != null ? prodotto.getImmaginePath() : "placeholder.jpg" %>" alt="Immagine Prodotto"-->
+    </div>
+    <div class="product-details">
+        <h2 class="product-name"><%= prodotto.getNome() %></h2>
+        <p class="product-description"><%= prodotto.getDescrizione() %></p>
+        <div class="product-info">
+            <span class="product-price">€ <%= prodotto.getPrezzo() %></span>
+            <form action="ProductCartMenegment" method="post" class="add-to-cart-form">
+                <input type="hidden" name="prodottoID" value="<%= prodotto.getId_prodotto() %>">
+                <input type="hidden" name="SourcePage" value="Prodotto">
+                <label for="quantity">Quantità:</label>
+                <input type="number" id="quantity" name="quantita" value="1" min="1">
+                <button type="submit" class="btn">Aggiungi al carrello</button>
+            </form>
+        </div>
+    </div>
+</div>
 <%
     }
 %>
