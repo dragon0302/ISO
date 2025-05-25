@@ -18,10 +18,6 @@
 <%@ page import="com.mysql.cj.Session" %>
 <%@ page import="DataManagement.Utente" %>
 
-<%
-    Utente utente = (Utente) session.getAttribute("utente");
-%>
-
 <!DOCTYPE html>
 <html lang="it">
     <head>
@@ -29,7 +25,7 @@
         <title>ISO-16/Profilo Utente</title>
 
         <link rel="stylesheet" href="sfondo.css">
-        <link rel="stylesheet" href="Home.css">
+        <link rel="stylesheet" href="Profilo.css">
 
     <body>
         <header>

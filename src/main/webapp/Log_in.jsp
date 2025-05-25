@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="sfondo.css">
+    <link rel="stylesheet" href="Log_in.css">
 </head>
 <body>
 
@@ -204,37 +205,36 @@
     }
 </script>
 
-<!-- Contenitore centrale con immagini laterali e login -->
-<div class="content-wrapper">
-    <1--img src="left-image.png" alt="Immagine Sinistra" class="side-image"-->
+<main>
+    <div class="page-container">
+        <!-- img src="left-image.png" alt="Immagine Sinistra" class="side-image" -->
 
-    <div class="login-container">
-        <h2>Accedi</h2>
-        <form action="Login" method="POST">
-            <div class="form-group">
-                <label for="username">Nome Utente</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Accedi">
-            </div>
-        </form>
-        <%
-            String Errore_USER_PASS = (String) request.getAttribute("Errore_USER_PASS");
-            if (Errore_USER_PASS != null) {
-        %>
-        <div class="field-error"><%= Errore_USER_PASS %></div>
-        <%
-            }
-        %>
+        <div class="login-box">
+            <h2>Accedi</h2>
+            <form action="Login" method="POST">
+                <div class="form-group">
+                    <label for="username">Nome Utente</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Accedi">
+                </div>
+                <%
+                    String Errore_USER_PASS = (String) request.getAttribute("Errore_USER_PASS");
+                    if (Errore_USER_PASS != null) {
+                %>
+                <div class="field-error"><%= Errore_USER_PASS %></div>
+                <% } %>
+            </form>
+        </div>
+
+        <!-- img src="right-image.png" alt="Immagine Destra" class="side-image" -->
     </div>
-
-    <!-- img src="right-image.png" alt="Immagine Destra" class="side-image" -->
-</div>
+</main>
 
 <!-- Footer con stile di barra inferiore -->
 <div class="footer-bar">
