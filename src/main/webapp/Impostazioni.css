@@ -1,0 +1,110 @@
+/* Box principale centrato con sfondo bianco e ombra */
+.settings-box {
+    max-width: 800px;
+    margin: 40px auto; /* centro verticale e orizzontale */
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* effetto staccato dallo sfondo */
+    padding: 30px 40px;
+    font-family: Arial, sans-serif;
+}
+
+/* Sezione individuale (es. Impostazioni account) */
+.settings-section {
+    margin-bottom: 30px;
+}
+
+/* Titolo sezione */
+.settings-section h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+/* Riga di opzione con label e bottone o switch */
+.settings-option {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Testo opzione */
+.settings-option label {
+    font-size: 16px;
+    color: #444;
+}
+
+/* Stile dell'interruttore toggle */
+.toggle-switch {
+    position: relative;
+    width: 50px;
+    height: 24px;
+}
+
+/* Nasconde l'input checkbox nativo */
+.toggle-switch input {
+    display: none;
+}
+
+/* Contenitore grafico dell'interruttore */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    background-color: #ccc;
+    border-radius: 34px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: .4s;
+}
+
+/* Pallino interno */
+.slider::before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: .4s;
+}
+
+/* Stato "attivo" dell'interruttore */
+.toggle-switch input:checked + .slider {
+    background-color: #4caf50; /* verde */
+}
+
+.toggle-switch input:checked + .slider::before {
+    transform: translateX(26px); /* sposta il pallino a destra */
+}
+
+/* Bottone per scaricare dati */
+.download-btn, .delete-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+/* Bottone rosso per eliminare account */
+.delete-btn {
+    background-color: #dc3545;
+}
+
+/* Stile per i link cliccabili */
+.settings-option a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.settings-option a:hover {
+    text-decoration: underline;
+}
