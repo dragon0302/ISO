@@ -43,6 +43,8 @@ public class Carrello extends HttpServlet {
                     Nquantita = (List<Integer>) session.getAttribute("Quantità");
                     if (session.getAttribute("prezzotatale") == null) {
                         prezzototale = 0;
+                    }else {
+                        prezzototale = (float) session.getAttribute("prezzotatale");
                     }
 
                     if (carrello == null) {
@@ -52,7 +54,6 @@ public class Carrello extends HttpServlet {
 
                     for (String id : ids) {
                         prodotto = prodottoDAO.getProdottoByID(Integer.parseInt(id));
-                        prezzototale += prodotto.getPrezzo();
 
                         if (carrello.isEmpty()) {
                             carrello.add(prodotto);
@@ -71,7 +72,7 @@ public class Carrello extends HttpServlet {
                         if (carrello.size() > Nquantita.size()) {
 
                             Nquantita.add(cm.getCookieProductQuantity(id));
-                            prezzototale = finalProdotto.getPrezzo() * cm.getCookieProductQuantity(id);
+                            prezzototale += finalProdotto.getPrezzo() * cm.getCookieProductQuantity(id);
                         } else {
 
                             for (int i = 0; i < carrello.size(); i++) {
@@ -79,7 +80,9 @@ public class Carrello extends HttpServlet {
                                 if (carrello.get(i).getId_prodotto() == Integer.parseInt(id)) {
                                     int dif = cm.getCookieProductQuantity(id) - Nquantita.get(i);
                                     Nquantita.set(i, cm.getCookieProductQuantity(id));
-                                    prezzototale += dif * finalProdotto.getPrezzo();
+                                    float temp = dif * finalProdotto.getPrezzo();
+
+                                    prezzototale += temp;
                                 }
 
                             }

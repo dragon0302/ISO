@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="Carrello.css">
 </head>
 <body>
-
+<script src="${pageContext.request.contextPath}/Javascript/Cart.js"></script>
     <header>
         <div class="top-header">
             <!-- Parte 1 - Logo a sinistra -->
@@ -211,7 +211,7 @@
             <div class="prezzo-quantita">
                 <div class="prezzo">€ <%= prodotti.get(i).getPrezzo() %></div>
                 <label for="numero">Scegli un numero:</label>
-                    <input type="number" id="numero" name="numero" min="0" max="100" step="1" value= <%= quantita.get(i) %>>
+                    <input onchange="aggiornaQuantita(<%= prodotti.get(i).getId_prodotto()%>,this,<%= prodotti.get(i).getPrezzo()%>)" type="number" id="numero" name="numero" min="0" max="100" step="1" value= <%= quantita.get(i) %>>
             </div>
         </div>
             <%  }
@@ -219,7 +219,7 @@
 
             <div>
                 <div class="PT">Prezzo Totale</div>
-                <div class="prezzo-totale"><%= prezzotatale%> </div>
+                <div id="prezzo-totale" class="prezzo-totale"><%= prezzotatale%> </div>
             </div>
         <%}%>
 
@@ -228,8 +228,6 @@
 
         <div class="box-acquista">
             <form action="NewOrder" method="post">
-    <%--            <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">--%>
-    <%--            <input type="hidden" name="SourcePage" value="Home">--%>
                 <button type="submit" class="btn-aggiungi">
                     Vai al pagamento
                 </button>

@@ -59,7 +59,7 @@ public class ProdottoDAOImplement implements ProdottoDAO{
                 String taglia = rs.getString("Taglia");
                 String descrizione = rs.getString("Descrizione");
                 String categoria = rs.getString("Categoria");
-                Double prezzo = rs.getDouble("Prezzo");
+                float prezzo = rs.getFloat("Prezzo");
                 Prodotto p = new Prodotto( nomeProdotto, mediaValutazione, taglia, descrizione, categoria, prezzo);
                 prodotti.add(p);
             }
@@ -104,7 +104,7 @@ public class ProdottoDAOImplement implements ProdottoDAO{
                 String taglia = rs.getString("Taglia");
                 String descrizione = rs.getString("Descrizione");
                 String categoria = rs.getString("Categoria");
-                Double prezzo = rs.getDouble("Prezzo");
+                float prezzo = rs.getFloat("Prezzo");
                 Prodotto p = new Prodotto(nomeProdotto,mediaValutazione,taglia,descrizione,categoria,prezzo);
                 p.setId_prodotto(idProdotto);
                 prodottiRecenti.add(p);
@@ -148,7 +148,7 @@ public class ProdottoDAOImplement implements ProdottoDAO{
                 String taglia = rs.getString("Taglia");
                 String descrizione = rs.getString("Descrizione");
                 String categoria = rs.getString("Categoria");
-                Double prezzo = rs.getDouble("Prezzo");
+                float prezzo = rs.getFloat("Prezzo");
 
                 prodotto = new Prodotto(nomeProdotto,mediaValutazione,taglia,descrizione,categoria,prezzo);
                 prodotto.setId_prodotto(ID);
@@ -169,6 +169,39 @@ public class ProdottoDAOImplement implements ProdottoDAO{
         }
         return prodotto;
     }
+
+    public Float GetPrezzo(int id) throws SQLException {
+
+        Connection conn = null;
+        PreparedStatement query6 = null;
+
+        try {
+            conn = ds.getConnection();
+            query6 = conn.prepareStatement("SELECT Prezzo FROM " + TABLE_NAME + " WHERE ID_prodotto = ?");
+
+            query6.setInt(1, id);
+
+            ResultSet rs = query6.executeQuery();
+
+            if (rs.next()) {
+                return rs.getFloat("Prezzo");
+            }
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query6 != null) {
+                    query6.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+        return null;
+    }
+
     public void editIDProdotto(Prodotto prodotto,int new_id) throws SQLException {
         Connection conn = null;
         PreparedStatement query = null;

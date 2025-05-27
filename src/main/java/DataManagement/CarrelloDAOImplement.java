@@ -54,7 +54,7 @@ public class CarrelloDAOImplement implements CarrelloDAO {
         }
     }
 
-    public void ProdottiCarello(int idProdotto,int idCarrello) throws SQLException{
+    public void ProdottoCarello(int idProdotto, int idCarrello) throws SQLException{
 
         Connection conn = null;
         PreparedStatement query2 = null;
