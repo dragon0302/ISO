@@ -32,7 +32,7 @@ public class ProductCartMenegment extends HttpServlet {
             }else {
 
                 if (!carrelloDAO.CeckProdotto(Integer.parseInt(prodottoID),utente.getCf())) {
-                    carrelloDAO.ProdottiCarello(Integer.parseInt(prodottoID), carrelloDAO.GetIdCarrello(utente.getCf()));
+                    carrelloDAO.ProdottoCarello(Integer.parseInt(prodottoID), carrelloDAO.GetIdCarrello(utente.getCf()));
                     Acquisto acquisto = new Acquisto(false,1, carrelloDAO.GetIdCarrello(utente.getCf()),Integer.parseInt(prodottoID));
                     acquistoDAO.DoSave(acquisto);
                 }else {

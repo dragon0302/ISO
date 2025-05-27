@@ -11,7 +11,6 @@ public class CookieManagemnt {
 
     Cookie cookieCart = null;
     String CartValue;
-    int quantita = 0;
     Cookie[] cookies;
 
     public CookieManagemnt(HttpServletRequest request) {
@@ -31,6 +30,9 @@ public class CookieManagemnt {
 
     public void CookieCartManagemnt(HttpServletResponse response, String prodottoID) {
 
+
+
+        int quantita = 0;
         if(cookieCart == null) {
             quantita = 1;
             CartValue = ("(I" + prodottoID + "!" + quantita + ")").trim();
@@ -52,10 +54,10 @@ public class CookieManagemnt {
                 for (String item : Cprodotti) {
                     if (item.contains("I" + prodottoID)) {
                         // Estrai e incrementa quantità
-                        quantita = Integer.parseInt(item.split("!")[1].replace(")", ""));
+                        quantita = Integer.parseInt(item.split("!")[1].split("\\)")[0]);
                         quantita++;
                         // Ricostruisci l'item
-                        item = "(I" + prodottoID + "!" + quantita + ")";
+                        item =  "(I" + prodottoID + "!" + quantita + ")";
                     }
                     if(!newCartValue.isEmpty()) {
                         newCartValue.append("-");
@@ -72,6 +74,8 @@ public class CookieManagemnt {
 
     public int getCookieProductQuantity(String prodottoID) {
 
+
+        int quantita = 0;
         if(CartValue != null) {
             String[] Cprodotti = CartValue.split("-");
 
@@ -84,6 +88,46 @@ public class CookieManagemnt {
             return quantita;
         }
         return 0;
+    }
+
+    public void updateCookieProductQuantity(HttpServletResponse response,String prodottoID,int operazione) {
+
+        StringBuilder newCartValue = new StringBuilder();
+
+        int quantita = 0;
+
+        if(CartValue != null) {
+            String[] Cprodotti = CartValue.split("-");
+
+            for (int i = 0; i < Cprodotti.length; i++) {
+                String item = Cprodotti[i];
+                if (item.contains("I" + prodottoID)) {
+                    // Estrai e incrementa quantità
+                    quantita = Integer.parseInt(item.split("!")[1].split("\\)")[0]);
+                    if (operazione == 0) {
+                        quantita++;
+                    } else if (operazione == 1) {
+                        System.out.println("nel if " + quantita);
+                        quantita--;
+                        System.out.println("nel if 2 " + quantita);
+                        System.out.println("prova");
+                    }else {
+                        System.out.println("erroere operazzione errata");
+                    }
+                    System.out.println("fuori dall if " + quantita);
+                    // Ricostruisci l'item
+                    item = "(I" + prodottoID + "!" + quantita + ")";
+                }
+                newCartValue.append(item);
+
+                if (i < Cprodotti.length - 1) {
+                    newCartValue.append("-");
+                }
+            }
+            cookieCart.setValue(newCartValue.toString());
+            response.addCookie(cookieCart);
+        }
+
     }
 
     public List<String> AllCookieId(){
