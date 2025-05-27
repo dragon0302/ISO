@@ -18,8 +18,28 @@
   <title>ISO-16</title>
 
   <link rel="stylesheet" href="sfondo.css">
-  <link rel="stylesheet" href="Home.css">
+  <link rel="stylesheet" href="Pagamento.css">
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PayPal JS SDK Standard Integration</title>
+
 <body>
+
+<div id="paypal-button-container"></div>
+<p id="result-message"></p>
+
+<!-- QUI INSERISCI IL DIV DEI LOGHI -->
+<div class="payment-methods">
+  <img src="https://img.icons8.com/color/48/paypal.png" alt="PayPal" title="PayPal">
+  <img src="https://img.icons8.com/color/48/visa.png" alt="Visa" title="Visa">
+  <img src="https://img.icons8.com/color/48/mastercard.png" alt="MasterCard" title="MasterCard">
+  <img src="https://img.icons8.com/color/48/amex.png" alt="American Express" title="American Express">
+  <img src="https://img.icons8.com/color/48/discover.png" alt="Discover" title="Discover">
+  <img src="https://img.icons8.com/color/48/apple-pay.png" alt="Apple Pay" title="Apple Pay">
+  <img src="https://img.icons8.com/color/48/google-pay.png" alt="Google Pay" title="Google Pay">
+
+
 <header>
   <div class="top-header">
     <!-- Parte 1 - Logo a sinistra -->
@@ -107,8 +127,8 @@
       <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente()!= null ? utente.getNomeutente().toUpperCase() : "" %></span>
       <div id="userMenu" class="user-menu">
         <ul>
-          <li><a href="profile.jsp">Profilo</a></li>
-          <li><a href="settings.jsp">Impostazioni</a></li>
+          <li><a href="Profilo.jsp">Profilo</a></li>
+          <li><a href="Impostazioni.jsp">Impostazioni</a></li>
           <li><a href="Carrello.jsp">Carrello</a></li>
           <form action="Logout" method="get">
             <li><button>Log-out</button></li>
@@ -125,10 +145,12 @@
       <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
       <div id="userMenu" class="user-menu">
         <ul>
-          <li><a href="profile.jsp">Profilo</a></li>
-          <li><a href="settings.jsp">Impostazioni</a></li>
+          <li><a href="Profilo.jsp">Profilo</a></li>
+          <li><a href="Impostazioni.jsp">Impostazioni</a></li>
           <li><a href="Carrello.jsp">Carrello</a></li>
-          <li><a href="logout.jsp">Log-out</a></li>
+          <form action="Logout" method="get">
+                        <li><button>Log-out</button></li>
+                    </form>
         </ul>
       </div>
       <% } %>
@@ -193,144 +215,7 @@
     document.getElementById("deleteModal").style.display = "block";
   }
 </script>
-
 <main>
-
-  <form>
-
-    <section id="customer" class="active visited">
-      <div class="header">
-        <h2>Customer</h2>
-      <section id="shipping">
-        <div class="header">
-          <h2>Shipping</h2>
-          <button
-                  id="shipping-edit-button"
-                  type="button"
-                  class="edit-button"
-          >
-            Edit
-          </button>
-        </div>
-        <div class="summary"></div>
-        <fieldset>
-                      <span>
-                          <input
-                                  id="shipping-required-checkbox"
-                                  name="shipping-required"
-                                  type="checkbox"
-                                  checked
-                          />
-                          <label for="shipping-required-checkbox"
-                          >This purchase requires shipping</label
-                          >
-                      </span>
-          <label>
-            <input
-                    name="given-name"
-                    placeholder="First name"
-                    autocomplete="given-name"
-            />
-          </label>
-          <label>
-            <input
-                    name="family-name"
-                    placeholder="Last name"
-                    autocomplete="family-name"
-            />
-          </label>
-          <label>
-            <input
-                    name="address-line1"
-                    placeholder="Street address"
-                    autocomplete="address-line1"
-            />
-          </label>
-          <label>
-            <input
-                    name="address-line2"
-                    placeholder="Apt., ste., bldg. (optional)"
-                    autocomplete="address-line2"
-            />
-          </label>
-          <label>
-            <input
-                    name="address-level2"
-                    placeholder="City"
-                    autocomplete="address-level2"
-            />
-          </label>
-          <label>
-            <input
-                    name="address-level1"
-                    placeholder="State"
-                    autocomplete="address-level1"
-            />
-          </label>
-          <label>
-            <input
-                    name="postal-code"
-                    placeholder="ZIP code"
-                    autocomplete="postal-code"
-            />
-          </label>
-          <label>
-            <input
-                    name="country"
-                    placeholder="Country"
-                    autocomplete="country"
-            />
-          </label>
-          <label>
-            <input
-                    name="tel-country-code"
-                    placeholder="Country calling code"
-                    autocomplete="tel-country-code"
-            />
-          </label>
-          <label>
-            <input
-                    name="tel-national"
-                    type="tel"
-                    placeholder="Phone number"
-                    autocomplete="tel-national"
-            />
-          </label>
-        </fieldset>
-        <button
-                id="shipping-submit-button"
-                type="button"
-                class="submit-button"
-        >
-          Continue
-        </button>
-      </section>
-
-
-      <hr />
-
-      <section id="payment">
-        <div class="header">
-          <h2>Payment</h2>
-          <button
-                  id="payment-edit-button"
-                  type="button"
-                  class="edit-button"
-          >
-            Edit
-          </button>
-        </div>
-        <fieldset>
-          <div id="payment-component"></div>
-        </fieldset>
-      </section>
-
-      <button id="checkout-button" type="button" class="submit-button">
-        Checkout
-      </button>
-      </div>
-    </section>
-  </form>
 
 </main>
 

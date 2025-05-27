@@ -25,7 +25,7 @@
     <title>ISO-16</title>
 
     <link rel="stylesheet" href="sfondo.css">
-    <link rel="stylesheet" href="Home.css">
+    <link rel="stylesheet" href="Impostazioni.css">
 <body>
 <header>
     <div class="top-header">
@@ -148,30 +148,30 @@
 <!-- JavaScript per suggerimenti live -->
 <script>
     const products = [
-  // AC/DC
-  "AC/DC T-Shirt", "AC/DC CD", "AC/DC Hoodie", "AC/DC Vinyl", "AC/DC Poster", "AC/DC Cap", "AC/DC Mug",
+        // AC/DC
+        "AC/DC T-Shirt", "AC/DC CD", "AC/DC Hoodie", "AC/DC Vinyl", "AC/DC Poster", "AC/DC Cap", "AC/DC Mug",
 
-  // Adele
-  "Adele T-Shirt", "Adele CD", "Adele Hoodie", "Adele Vinyl", "Adele Poster", "Adele Cap", "Adele Mug",
+        // Adele
+        "Adele T-Shirt", "Adele CD", "Adele Hoodie", "Adele Vinyl", "Adele Poster", "Adele Cap", "Adele Mug",
 
-  // Metallica
-  "Metallica T-Shirt", "Metallica CD", "Metallica Hoodie", "Metallica Vinyl", "Metallica Poster", "Metallica Cap", "Metallica Mug",
+        // Metallica
+        "Metallica T-Shirt", "Metallica CD", "Metallica Hoodie", "Metallica Vinyl", "Metallica Poster", "Metallica Cap", "Metallica Mug",
 
-  // Queen
-  "Queen T-Shirt", "Queen CD", "Queen Hoodie", "Queen Vinyl", "Queen Poster", "Queen Cap", "Queen Mug",
+        // Queen
+        "Queen T-Shirt", "Queen CD", "Queen Hoodie", "Queen Vinyl", "Queen Poster", "Queen Cap", "Queen Mug",
 
-  // Eminem
-  "Eminem T-Shirt", "Eminem CD", "Eminem Hoodie", "Eminem Vinyl", "Eminem Poster", "Eminem Cap", "Eminem Mug",
+        // Eminem
+        "Eminem T-Shirt", "Eminem CD", "Eminem Hoodie", "Eminem Vinyl", "Eminem Poster", "Eminem Cap", "Eminem Mug",
 
-  // Taylor Swift
-  "Taylor Swift T-Shirt", "Taylor Swift CD", "Taylor Swift Hoodie", "Taylor Swift Vinyl", "Taylor Swift Poster", "Taylor Swift Cap", "Taylor Swift Mug",
+        // Taylor Swift
+        "Taylor Swift T-Shirt", "Taylor Swift CD", "Taylor Swift Hoodie", "Taylor Swift Vinyl", "Taylor Swift Poster", "Taylor Swift Cap", "Taylor Swift Mug",
 
-  // Iron Maiden
-  "Iron Maiden T-Shirt", "Iron Maiden CD", "Iron Maiden Hoodie", "Iron Maiden Vinyl", "Iron Maiden Poster", "Iron Maiden Cap", "Iron Maiden Mug",
+        // Iron Maiden
+        "Iron Maiden T-Shirt", "Iron Maiden CD", "Iron Maiden Hoodie", "Iron Maiden Vinyl", "Iron Maiden Poster", "Iron Maiden Cap", "Iron Maiden Mug",
 
-  // Led Zeppelin
-  "Led Zeppelin T-Shirt", "Led Zeppelin CD", "Led Zeppelin Hoodie", "Led Zeppelin Vinyl", "Led Zeppelin Poster", "Led Zeppelin Cap", "Led Zeppelin Mug"
-];
+        // Led Zeppelin
+        "Led Zeppelin T-Shirt", "Led Zeppelin CD", "Led Zeppelin Hoodie", "Led Zeppelin Vinyl", "Led Zeppelin Poster", "Led Zeppelin Cap", "Led Zeppelin Mug"
+    ];
 
 
     function showSuggestions(value) {
@@ -224,154 +224,97 @@
     }
 </script>
 <main>
-    <section class="content">
-        <div class="banner">Banner</div>
-        <%
-            if(utente == null){
-        %>
-        <h2>Novità</h2>
 
-        <div class="product-slider">
+    <!-- BOX PRINCIPALE -->
+    <div class="settings-box">
 
-            <%
-                List<Prodotto> prodottiNovita = (List<Prodotto>) request.getAttribute("prodottiNovita");
+        <!-- SEZIONE 1: IMPOSTAZIONI ACCOUNT -->
+        <div class="settings-section">
+            <h2>Impostazioni Account</h2>
 
-                if (prodottiNovita != null) {
-                    for (Prodotto p : prodottiNovita) {
-            %>
-            <div class="product">
-                <div class="box">
-                    <h3><%= p.getNome() %></h3>
-                    <p>Prezzo: €<%= p.getPrezzo() %></p>
-                    <p><%= p.getDescrizione() %></p>
-                    <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
-                    <form action="ProductCartMenegment" method="post">
-                        <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
-                        <input type="hidden" name="SourcePage" value="Home">
-                        <button type="submit" class="btn-aggiungi">
-                            Aggiungi al carrello
-                        </button>
-                    </form>
-                </div>
+            <!-- Opzione: modifica dati -->
+            <div class="settings-option">
+                <label>Modifica dati account</label>
+                <a href="#">Modifica</a>
             </div>
-            <%
-                }
-            } else {
-            %>
-            <p>Nessun prodotto trovato.</p>
-            <%
-                }
-            }else{
-            %>
 
-                <h2>Novità</h2>
-
-                <div class="product-slider">
-
-                    <%
-                        List<Prodotto> prodottiNovita = (List<Prodotto>) request.getAttribute("prodottiNovita");
-
-                        if (prodottiNovita != null) {
-                            for (Prodotto p : prodottiNovita) {
-                    %>
-                    <div class="product">
-                        <div class="box">
-                            <h3><%= p.getNome() %></h3>
-                            <p>Prezzo: €<%= p.getPrezzo() %></p>
-                            <p><%= p.getDescrizione() %></p>
-                            <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
-                            <form action="ProductCartMenegment" method="post">
-                                <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
-                                <input type="hidden" name="SourcePage" value="Home">
-                                <button type="submit" class="btn-aggiungi">
-                                    Aggiungi al carrello
-                                </button>
-                                <button class="btn-elimina" onclick="openDeleteModal()">
-                                    Elimina
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                    <%
-                        }
-                    } else {
-                    %>
-                    <p>Nessun prodotto trovato.</p>
-                    <%
-                            }
-                        }
-                    %>
-
+            <!-- Opzione: indirizzo di fatturazione -->
+            <div class="settings-option">
+                <label>Indirizzo di fatturazione</label>
+                <a href="#">Gestisci</a>
+            </div>
         </div>
-        <%
-            if(utente == null){
-        %>
-        <h2>Prodotti più acquistati</h2>
-        <div class="product-slider">
-                <%
-                List<Prodotto> prodottiPopolari = (List<Prodotto>) request.getAttribute("prodottiPiuAqqistati");
-                if (prodottiPopolari != null) {
-                    for (Prodotto p : prodottiPopolari) {
-            %>
-            <div class="product">
-                <div class="box"><h3 ><%= p.getNome() %></h3>
-                    <p >Prezzo: €<%= p.getPrezzo() %></p>
-                    <p ><%= p.getDescrizione() %></p>
-                    <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
-                    <form action="ProductCartMenegment" method="post">
-                        <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
-                        <input type="hidden" name="SourcePage" value="Home">
-                        <button type="submit" class="btn-aggiungi">
-                            Aggiungi al carrello
-                        </button>
-                    </form>
-                </div>
+
+        <!-- SEZIONE 2: IMPOSTAZIONI ACQUISTO -->
+        <div class="settings-section">
+            <h2>Impostazioni Acquisto</h2>
+
+            <!-- Metodo di pagamento preferito -->
+            <div class="settings-option">
+                <label>Metodo di pagamento preferito</label>
+                <a href="#">Imposta</a>
             </div>
-                <%
-                }
-            } else {
-            %>
-            <p>Nessun prodotto trovato.</p>
-                <%
-                }
-            } else {
-            %>
 
-                    <h2>Prodotti più acquistati</h2>
-                    <div class="product-slider">
-                            <%
-                List<Prodotto> prodottiPopolari = (List<Prodotto>) request.getAttribute("prodottiPiuAqqistati");
-                if (prodottiPopolari != null) {
-                    for (Prodotto p : prodottiPopolari) {
-            %>
-                        <div class="product">
-                            <div class="box"><h3 ><%= p.getNome() %></h3>
-                                <p >Prezzo: €<%= p.getPrezzo() %></p>
-                                <p ><%= p.getDescrizione() %></p>
-                                <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
-                                <form action="ProductCartMenegment" method="post">
-                                    <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
-                                    <input type="hidden" name="SourcePage" value="Home">
-                                    <button type="submit" class="btn-aggiungi">
-                                        Aggiungi al carrello
-                                    </button>
-                                    <button class="btn-elimina" onclick="openDeleteModal()">
-                                        Elimina
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                            <%
-                }
-            } else {
-            %>
-                        <p>Nessun prodotto trovato.</p>
-                            <%
-                }
-            }
-            %>
+            <!-- Storico ordini -->
+            <div class="settings-option">
+                <label>Storico ordini</label>
+                <a href="#">Visualizza</a>
+            </div>
 
-    </section>
+            <!-- Fatturazione elettronica -->
+            <div class="settings-option">
+                <label>Fatturazione elettronica / Codice univoco / PEC</label>
+                <a href="#">Gestisci</a>
+            </div>
+        </div>
+
+        <!-- SEZIONE 3: NOTIFICHE -->
+        <div class="settings-section">
+            <h2>Notifiche</h2>
+
+            <!-- Notifica: stato ordini -->
+            <div class="settings-option">
+                <label>Stato ordini e spedizioni</label>
+                <label class="toggle-switch">
+                    <input type="checkbox" checked> <!-- checked = attivo -->
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Notifica: promozioni -->
+            <div class="settings-option">
+                <label>Avvisi di promozioni o offerte</label>
+                <label class="toggle-switch">
+                    <input type="checkbox"> <!-- non attivo di default -->
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- SEZIONE 4: PRIVACY E SICUREZZA -->
+        <div class="settings-section">
+            <h2>Privacy e Sicurezza</h2>
+
+            <!-- Cookie -->
+            <div class="settings-option">
+                <label>Gestione consensi cookies</label>
+                <a href="#">Modifica</a>
+            </div>
+
+            <!-- Scarica dati -->
+            <div class="settings-option">
+                <label>Scarica i tuoi dati</label>
+                <button class="download-btn">Scarica</button>
+            </div>
+
+            <!-- Elimina account -->
+            <div class="settings-option">
+                <label>Elimina account</label>
+                <button class="delete-btn">Elimina</button>
+            </div>
+        </div>
+    </div>
+
 </main>
 
 <div class="footer-bar">

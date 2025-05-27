@@ -1,0 +1,118 @@
+/* --- Stile per contenitore prodotto --- */
+.product-container {
+    display: flex;
+    flex-direction: row;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    margin: 40px auto;
+    max-width: 1000px;
+    gap: 40px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+/* --- Immagine --- */
+.product-image img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+/* --- Dettagli prodotto --- */
+.product-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.product-name {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.product-description {
+    font-size: 16px;
+    color: #666;
+}
+
+.product-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.product-price {
+    font-size: 22px;
+    font-weight: bold;
+    color: #1a8917;
+}
+
+/* --- Form aggiunta carrello --- */
+.add-to-cart-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.add-to-cart-form input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.add-to-cart-form .btn {
+    padding: 8px 16px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart-form .btn:hover {
+    background-color: #004a99;
+}
+
+/* --- Responsive design --- */
+@media (max-width: 768px) {
+    .product-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .product-info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .add-to-cart-form {
+        justify-content: center;
+    }
+
+    .product-price {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .product-name {
+        font-size: 24px;
+    }
+
+    .product-description {
+        font-size: 15px;
+    }
+}

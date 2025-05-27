@@ -14,6 +14,7 @@
     <meta charset="UTF-8">
     <title>Prodotto</title>
     <link rel="stylesheet" href="sfondo.css">
+    <link rel="stylesheet" href="Prodotto.css">
 </head>
 
 <header>
@@ -103,10 +104,12 @@
             <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente()!= null ? utente.getNomeutente().toUpperCase() : "" %></span>
             <div id="userMenu" class="user-menu">
                 <ul>
-                    <li><a href="profile.jsp">Profilo</a></li>
-                    <li><a href="settings.jsp">Impostazioni</a></li>
-                    <li><a href="cart.jsp">Carrello</a></li>
-                    <li><a href="logout.jsp">Log-out</a></li>
+                    <li><a href="Profilo.jsp">Profilo</a></li>
+                    <li><a href="Impostazioni.jsp">Impostazioni</a></li>
+                    <li><a href="Carrello.jsp">Carrello</a></li>
+                    <form action="Logout" method="get">
+                        <li><button>Log-out</button></li>
+                    </form>
                 </ul>
             </div>
             <!-- Bottoni amministratore -->
@@ -120,10 +123,12 @@
             <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
             <div id="userMenu" class="user-menu">
                 <ul>
-                    <li><a href="profile.jsp">Profilo</a></li>
-                    <li><a href="settings.jsp">Impostazioni</a></li>
-                    <li><a href="cart.jsp">Carrello</a></li>
-                    <li><a href="logout.jsp">Log-out</a></li>
+                    <li><a href="Profilo.jsp">Profilo</a></li>
+                    <li><a href="Impostazioni.jsp">Impostazioni</a></li>
+                    <li><a href="Carrello.jsp">Carrello</a></li>
+                    <form action="Logout" method="get">
+                        <li><button>Log-out</button></li>
+                    </form>
                 </ul>
             </div>
             <% } %>
@@ -134,10 +139,31 @@
 <!-- JavaScript per suggerimenti live -->
 <script>
     const products = [
-        "AC/DC T-Shirt", "Adele CD", "Metallica Hoodie",
-        "Queen Vinyl", "Eminem Cap", "Jazz Mug",
-        "Taylor Swift Poster", "Iron Maiden Patch", "Led Zeppelin T-Shirt"
-    ];
+  // AC/DC
+  "AC/DC T-Shirt", "AC/DC CD", "AC/DC Hoodie", "AC/DC Vinyl", "AC/DC Poster", "AC/DC Cap", "AC/DC Mug",
+
+  // Adele
+  "Adele T-Shirt", "Adele CD", "Adele Hoodie", "Adele Vinyl", "Adele Poster", "Adele Cap", "Adele Mug",
+
+  // Metallica
+  "Metallica T-Shirt", "Metallica CD", "Metallica Hoodie", "Metallica Vinyl", "Metallica Poster", "Metallica Cap", "Metallica Mug",
+
+  // Queen
+  "Queen T-Shirt", "Queen CD", "Queen Hoodie", "Queen Vinyl", "Queen Poster", "Queen Cap", "Queen Mug",
+
+  // Eminem
+  "Eminem T-Shirt", "Eminem CD", "Eminem Hoodie", "Eminem Vinyl", "Eminem Poster", "Eminem Cap", "Eminem Mug",
+
+  // Taylor Swift
+  "Taylor Swift T-Shirt", "Taylor Swift CD", "Taylor Swift Hoodie", "Taylor Swift Vinyl", "Taylor Swift Poster", "Taylor Swift Cap", "Taylor Swift Mug",
+
+  // Iron Maiden
+  "Iron Maiden T-Shirt", "Iron Maiden CD", "Iron Maiden Hoodie", "Iron Maiden Vinyl", "Iron Maiden Poster", "Iron Maiden Cap", "Iron Maiden Mug",
+
+  // Led Zeppelin
+  "Led Zeppelin T-Shirt", "Led Zeppelin CD", "Led Zeppelin Hoodie", "Led Zeppelin Vinyl", "Led Zeppelin Poster", "Led Zeppelin Cap", "Led Zeppelin Mug"
+];
+
 
     function showSuggestions(value) {
         const suggestionBox = document.getElementById('suggestionBox');
@@ -196,19 +222,26 @@
     if (prodotto != null){
 %>
 
-<h2>Dettagli Prodotto</h2>
-<p><strong>Nome:</strong> <%= prodotto.getNome() %></p>
-<p><strong>Media Valutazione:</strong> <%= prodotto.getMedia_valutazione() %></p>
-<p><strong>Taglia:</strong> <%= prodotto.getTaglia() %></p>
-<p><strong>Descrizione:</strong> <%= prodotto.getDescrizione() %></p>
-<p><strong>Categoria:</strong> <%= prodotto.getCategoria() %></p>
-<p><strong>Prezzo:</strong> <%= prodotto.getPrezzo() %></p>
-<form action="ProductCartMenegment" method="post">
-    <!--input type="hidden" name="CF_Utente" value="<//%= utente.getCf() %>"-->
-    <input type="hidden" name="prodottoID" value="<%= prodotto.getId_prodotto() %>">
-    <input type="hidden" name="SourcePage" value="Prodotto">
-    <button type="submit" class="btn">Aggiungi al carrelo</button>
-</form>
+<div class="product-container">
+    <div class="product-image">
+        <!-- Immagine prodotto (metti il path corretto nell'attributo src) -->
+        <!--img src="<!%= prodotto.getImmaginePath() != null ? prodotto.getImmaginePath() : "placeholder.jpg" %>" alt="Immagine Prodotto"-->
+    </div>
+    <div class="product-details">
+        <h2 class="product-name"><%= prodotto.getNome() %></h2>
+        <p class="product-description"><%= prodotto.getDescrizione() %></p>
+        <div class="product-info">
+            <span class="product-price">€ <%= prodotto.getPrezzo() %></span>
+            <form action="ProductCartMenegment" method="post" class="add-to-cart-form">
+                <input type="hidden" name="prodottoID" value="<%= prodotto.getId_prodotto() %>">
+                <input type="hidden" name="SourcePage" value="Prodotto">
+                <label for="quantity">Quantità:</label>
+                <input type="number" id="quantity" name="quantita" value="1" min="1">
+                <button type="submit" class="btn">Aggiungi al carrello</button>
+            </form>
+        </div>
+    </div>
+</div>
 <%
     }
 %>

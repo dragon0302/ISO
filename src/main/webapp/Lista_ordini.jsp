@@ -108,7 +108,7 @@
             <div id="userMenu" class="user-menu">
                 <ul>
                     <li><a href="Profilo.jsp">Profilo</a></li>
-                    <li><a href="settings.jsp">Impostazioni</a></li>
+                    <li><a href="Impostazioni.jsp">Impostazioni</a></li>
                     <li><a href="Carrello.jsp">Carrello</a></li>
                     <form action="Logout" method="get">
                         <li><button>Log-out</button></li>
@@ -125,10 +125,12 @@
             <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
             <div id="userMenu" class="user-menu">
                 <ul>
-                    <li><a href="profile.jsp">Profilo</a></li>
-                    <li><a href="settings.jsp">Impostazioni</a></li>
+                    <li><a href="Profilo.jsp">Profilo</a></li>
+                    <li><a href="Impostazioni.jsp">Impostazioni</a></li>
                     <li><a href="Carrello.jsp">Carrello</a></li>
-                    <li><a href="logout.jsp">Log-out</a></li>
+                    <form action="Logout" method="get">
+                        <li><button>Log-out</button></li>
+                    </form>
                 </ul>
             </div>
             <% } %>
@@ -139,10 +141,31 @@
 <!-- JavaScript per suggerimenti live -->
 <script>
     const products = [
-        "AC/DC T-Shirt", "Adele CD", "Metallica Hoodie",
-        "Queen Vinyl", "Eminem Cap", "Jazz Mug",
-        "Taylor Swift Poster", "Iron Maiden Patch", "Led Zeppelin T-Shirt"
-    ];
+  // AC/DC
+  "AC/DC T-Shirt", "AC/DC CD", "AC/DC Hoodie", "AC/DC Vinyl", "AC/DC Poster", "AC/DC Cap", "AC/DC Mug",
+
+  // Adele
+  "Adele T-Shirt", "Adele CD", "Adele Hoodie", "Adele Vinyl", "Adele Poster", "Adele Cap", "Adele Mug",
+
+  // Metallica
+  "Metallica T-Shirt", "Metallica CD", "Metallica Hoodie", "Metallica Vinyl", "Metallica Poster", "Metallica Cap", "Metallica Mug",
+
+  // Queen
+  "Queen T-Shirt", "Queen CD", "Queen Hoodie", "Queen Vinyl", "Queen Poster", "Queen Cap", "Queen Mug",
+
+  // Eminem
+  "Eminem T-Shirt", "Eminem CD", "Eminem Hoodie", "Eminem Vinyl", "Eminem Poster", "Eminem Cap", "Eminem Mug",
+
+  // Taylor Swift
+  "Taylor Swift T-Shirt", "Taylor Swift CD", "Taylor Swift Hoodie", "Taylor Swift Vinyl", "Taylor Swift Poster", "Taylor Swift Cap", "Taylor Swift Mug",
+
+  // Iron Maiden
+  "Iron Maiden T-Shirt", "Iron Maiden CD", "Iron Maiden Hoodie", "Iron Maiden Vinyl", "Iron Maiden Poster", "Iron Maiden Cap", "Iron Maiden Mug",
+
+  // Led Zeppelin
+  "Led Zeppelin T-Shirt", "Led Zeppelin CD", "Led Zeppelin Hoodie", "Led Zeppelin Vinyl", "Led Zeppelin Poster", "Led Zeppelin Cap", "Led Zeppelin Mug"
+];
+
 
     function showSuggestions(value) {
         const suggestionBox = document.getElementById('suggestionBox');

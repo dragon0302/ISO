@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="sfondo.css">
+    <link rel="stylesheet" href="Log_in.css">
 </head>
 <body>
 
@@ -97,10 +98,12 @@
             <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente()!= null ? utente.getNomeutente().toUpperCase() : "" %></span>
             <div id="userMenu" class="user-menu">
                 <ul>
-                    <li><a href="profile.jsp">Profilo</a></li>
-                    <li><a href="settings.jsp">Impostazioni</a></li>
-                    <li><a href="cart.jsp">Carrello</a></li>
-                    <li><a href="logout.jsp">Log-out</a></li>
+                    <li><a href="Profilo.jsp">Profilo</a></li>
+                    <li><a href="Impostazioni.jsp">Impostazioni</a></li>
+                    <li><a href="Carrello.jsp">Carrello</a></li>
+                    <form action="Logout" method="get">
+                        <li><button>Log-out</button></li>
+                    </form>
                 </ul>
             </div>
             <!-- Bottoni amministratore -->
@@ -114,10 +117,12 @@
             <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
             <div id="userMenu" class="user-menu">
                 <ul>
-                    <li><a href="profile.jsp">Profilo</a></li>
-                    <li><a href="settings.jsp">Impostazioni</a></li>
-                    <li><a href="cart.jsp">Carrello</a></li>
-                    <li><a href="logout.jsp">Log-out</a></li>
+                    <li><a href="Profilo.jsp">Profilo</a></li>
+                    <li><a href="Impostazioni.jsp">Impostazioni</a></li>
+                    <li><a href="Carrello.jsp">Carrello</a></li>
+                    <form action="Logout" method="get">
+                        <li><button>Log-out</button></li>
+                    </form>
                 </ul>
             </div>
             <% } %>
@@ -128,10 +133,31 @@
 <!-- JavaScript per suggerimenti live -->
 <script>
     const products = [
-        "AC/DC T-Shirt", "Adele CD", "Metallica Hoodie",
-        "Queen Vinyl", "Eminem Cap", "Jazz Mug",
-        "Taylor Swift Poster", "Iron Maiden Patch", "Led Zeppelin T-Shirt"
-    ];
+  // AC/DC
+  "AC/DC T-Shirt", "AC/DC CD", "AC/DC Hoodie", "AC/DC Vinyl", "AC/DC Poster", "AC/DC Cap", "AC/DC Mug",
+
+  // Adele
+  "Adele T-Shirt", "Adele CD", "Adele Hoodie", "Adele Vinyl", "Adele Poster", "Adele Cap", "Adele Mug",
+
+  // Metallica
+  "Metallica T-Shirt", "Metallica CD", "Metallica Hoodie", "Metallica Vinyl", "Metallica Poster", "Metallica Cap", "Metallica Mug",
+
+  // Queen
+  "Queen T-Shirt", "Queen CD", "Queen Hoodie", "Queen Vinyl", "Queen Poster", "Queen Cap", "Queen Mug",
+
+  // Eminem
+  "Eminem T-Shirt", "Eminem CD", "Eminem Hoodie", "Eminem Vinyl", "Eminem Poster", "Eminem Cap", "Eminem Mug",
+
+  // Taylor Swift
+  "Taylor Swift T-Shirt", "Taylor Swift CD", "Taylor Swift Hoodie", "Taylor Swift Vinyl", "Taylor Swift Poster", "Taylor Swift Cap", "Taylor Swift Mug",
+
+  // Iron Maiden
+  "Iron Maiden T-Shirt", "Iron Maiden CD", "Iron Maiden Hoodie", "Iron Maiden Vinyl", "Iron Maiden Poster", "Iron Maiden Cap", "Iron Maiden Mug",
+
+  // Led Zeppelin
+  "Led Zeppelin T-Shirt", "Led Zeppelin CD", "Led Zeppelin Hoodie", "Led Zeppelin Vinyl", "Led Zeppelin Poster", "Led Zeppelin Cap", "Led Zeppelin Mug"
+];
+
 
     function showSuggestions(value) {
         const suggestionBox = document.getElementById('suggestionBox');
@@ -183,42 +209,41 @@
     }
 </script>
 
-<!-- Contenitore centrale con immagini laterali e login -->
-<div class="content-wrapper">
-    <img src="left-image.png" alt="Immagine Sinistra" class="side-image">
+<main>
+    <div class="page-container">
+        <!-- img src="left-image.png" alt="Immagine Sinistra" class="side-image" -->
 
-    <div class="login-container">
-        <h2>Accedi</h2>
-        <form action="Login" method="POST">
-            <div class="form-group">
-                <label for="username">Nome Utente</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Accedi">
-            </div>
-        </form>
-        <%
-            String Errore_USER_PASS = (String) request.getAttribute("Errore_USER_PASS");
-            if (Errore_USER_PASS != null) {
-        %>
-        <div class="field-error"><%= Errore_USER_PASS %></div>
-        <%
-            }
-        %>
+        <div class="login-box">
+            <h2>Accedi</h2>
+            <form action="Login" method="POST">
+                <div class="form-group">
+                    <label for="username">Nome Utente</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Accedi">
+                </div>
+                <%
+                    String Errore_USER_PASS = (String) request.getAttribute("Errore_USER_PASS");
+                    if (Errore_USER_PASS != null) {
+                %>
+                <div class="field-error"><%= Errore_USER_PASS %></div>
+                <% } %>
+            </form>
+        </div>
+
+        <!-- img src="right-image.png" alt="Immagine Destra" class="side-image" -->
     </div>
-
-    <img src="right-image.png" alt="Immagine Destra" class="side-image">
-</div>
+</main>
 
 <!-- Footer con stile di barra inferiore -->
 <div class="footer-bar">
     <a href="About_Us.jsp" class="btn-link">About Us</a>
-    <a href="contattaci.jsp" class="btn-link">Contattaci</a>
+    <a href="Contattaci.jsp" class="btn-link">Contattaci</a>
     <a href="Termini_e_condizioni.jsp" class="btn-link">Termini e condizioni</a>
     <a href="Assistenza.jsp" class="btn-link">Assistenza</a>
 </div>
