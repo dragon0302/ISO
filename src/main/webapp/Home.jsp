@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="sfondo.css">
     <link rel="stylesheet" href="Home.css">
 <body>
+<script src="${pageContext.request.contextPath}/Javascript/CatalogFilter.js"></script>
 <header>
     <div class="top-header">
         <!-- Parte 1 - Logo a sinistra -->
@@ -44,54 +45,61 @@
                 <div class="suggestions" id="suggestionBox"></div>
             </div>
 
+            <form id="filterForm" action="Catalogo" method="post">
+
+                <input type="hidden" id="action" name="action" value="">
+                <input type="hidden" id="value" name="value" value="">
+
+            </form>
+
             <!-- Filtri sotto la barra di ricerca -->
             <div class="filter-bar">
                 <div class="filter">
-                    <a href="#">ROCK</a>
+                    <a href="#" onclick="submitFilter('ROCK')">ROCK</a>
                     <div class="dropdown">
-                        <a href="#">AC/DC</a>
-                        <a href="#">Aerosmith</a>
-                        <a href="#">Led Zeppelin</a>
+                        <a href="#" onclick="submitFilter('AC/DC')">AC/DC</a>
+                        <a href="#" onclick="submitFilter('Aerosmith')">Aerosmith</a>
+                        <a href="#" onclick="submitFilter('Led Zeppelin')">Led Zeppelin</a>
                     </div>
                 </div>
                 <div class="filter">
-                    <a href="#">POP</a>
+                    <a href="#" onclick="submitFilter('POP')">POP</a>
                     <div class="dropdown">
-                        <a href="#">Adele</a>
-                        <a href="#">Beyoncé</a>
-                        <a href="#">Madonna</a>
+                        <a href="#" onclick="submitFilter('Adele')">Adele</a>
+                        <a href="#" onclick="submitFilter('Beyoncé')">Beyoncé</a>
+                        <a href="#" onclick="submitFilter('Madonna')">Madonna</a>
                     </div>
                 </div>
                 <div class="filter">
-                    <a href="#">JAZZ</a>
+                    <a href="#" onclick="submitFilter('JAZZ')">JAZZ</a>
                     <div class="dropdown">
-                        <a href="#">Coltrane</a>
-                        <a href="#">Davis</a>
-                        <a href="#">Fitzgerald</a>
+                        <a href="#" onclick="submitFilter('Coltrane')">Coltrane</a>
+                        <a href="#" onclick="submitFilter('Davis')">Davis</a>
+                        <a href="#" onclick="submitFilter('Fitzgerald')">Fitzgerald</a>
                     </div>
                 </div>
                 <div class="filter">
-                    <a href="#">METAL</a>
+                    <a href="#" onclick="submitFilter('METAL')">METAL</a>
                     <div class="dropdown">
-                        <a href="#">Iron Maiden</a>
-                        <a href="#">Metallica</a>
-                        <a href="#">Slayer</a>
+                        <a href="#" onclick="submitFilter('Iron Maiden')">Iron Maiden</a>
+                        <a href="#" onclick="submitFilter('Metallica')">Metallica</a>
+                        <a href="#" onclick="submitFilter('Slayer')">Slayer</a>
                     </div>
                 </div>
                 <div class="filter">
-                    <a href="#">RAP</a>
+                    <a href="#" onclick="submitFilter('RAP')">RAP</a>
                     <div class="dropdown">
-                        <a href="#">Drake</a>
-                        <a href="#">Eminem</a>
-                        <a href="#">Kanye</a>
+                        <a href="#" onclick="submitFilter('Drake')">Drake</a>
+                        <a href="#" onclick="submitFilter('Eminem')">Eminem</a>
+                        <a href="#" onclick="submitFilter('Kanye')">Kanye</a>
                     </div>
                 </div>
                 <div class="filter">
-                    <a href="#">Abbigliamento</a>
+                    <a href="#" onclick="submitFilter('Abbigliamento')">Abbigliamento</a>
                     <div class="dropdown">
-                        <a href="#">Cappelli</a>
-                        <a href="#">Felpe</a>
-                        <a href="#">T-shirt</a>
+                        <a href="#" onclick="submitFilter('Cappelli')">Cappelli</a>
+                        <a href="#" onclick="submitFilter('Felpe')">Felpe</a>
+                        <a href="#" onclick="submitFilter('T-shirt')">T-shirt</a>
                     </div>
                 </div>
             </div>
@@ -310,16 +318,23 @@
         <div class="product-slider">
                 <%
                 List<Prodotto> prodottiPopolari = (List<Prodotto>) request.getAttribute("prodottiPiuAqqistati");
-                if (prodottiPopolari != null) {
-                    for (Prodotto p : prodottiPopolari) {
+                List<String> paths = (List<String>) request.getAttribute("paths");
+                if (prodottiPopolari != null && paths != null) {
+                  System.out.println(paths.size());
+                    for (int i = 0; i < prodottiPopolari.size(); i++) {
+                      System.out.println(paths.get(i));
             %>
+                <div class="product-image">
+                    <!-- Immagine prodotto (metti il path corretto nell'attributo src) -->
+                    <img src=" <%= request.getContextPath() + paths.get(i) %>" alt="Immagine Prodotto">
+                </div>
             <div class="product">
-                <div class="box"><h3 ><%= p.getNome() %></h3>
-                    <p >Prezzo: €<%= p.getPrezzo() %></p>
-                    <p ><%= p.getDescrizione() %></p>
-                    <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
+                <div class="box"><h3 ><%= prodottiPopolari.get(i).getNome() %></h3>
+                    <p >Prezzo: €<%= prodottiPopolari.get(i).getPrezzo() %></p>
+                    <p ><%= prodottiPopolari.get(i).getDescrizione() %></p>
+                    <a href="ProdottoS?id=<%= prodottiPopolari.get(i).getId_prodotto() %>">Dettagli</a>
                     <form action="ProductCartMenegment" method="post">
-                        <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
+                        <input type="hidden" name="prodottoID" value="<%= prodottiPopolari.get(i).getId_prodotto() %>">
                         <input type="hidden" name="SourcePage" value="Home">
                         <button type="submit" class="btn-aggiungi">
                             Aggiungi al carrello
