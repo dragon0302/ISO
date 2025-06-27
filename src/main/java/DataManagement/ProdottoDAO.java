@@ -2,6 +2,7 @@ package DataManagement;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface ProdottoDAO {
     public void doSave(Prodotto prodotto) throws SQLException;
@@ -10,6 +11,7 @@ public interface ProdottoDAO {
     public Prodotto getProdottoByID(int idProdotto) throws SQLException;
     public ArrayList<Prodotto> getProdottiRecenti() throws SQLException;
     public Float GetPrezzo(int id) throws SQLException;
+    public List<Prodotto> SerchByCategory(String Category) throws SQLException;
     public void editCategoria(Prodotto prodotto,String new_categoria) throws SQLException;
     public void editDescrizione(Prodotto prodotto,String new_descrizione) throws SQLException;
     public void editTaglia(Prodotto prodotto,String new_taglia) throws SQLException;

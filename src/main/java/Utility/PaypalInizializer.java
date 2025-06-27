@@ -18,33 +18,52 @@ public class PaypalInizializer implements ServletContextListener {
 
     public void contextInitialized(ServletContextEvent sce) {
         try {
-            Context ctx = new InitialContext();
-            Context envCtx = (Context) ctx.lookup("java:/comp/env");
-
-            // Recupera i valori separatamente
-            String clientId = (String) envCtx.lookup("paypalClientID");
-            String clientSecret = (String) envCtx.lookup("paypalClientSecret");
-            String mode = (String) envCtx.lookup("paypalMode");
-
-            // Verifica che tutti i parametri siano presenti
-            if (clientId == null || clientSecret == null || mode == null) {
-                throw new RuntimeException("Configurazione PayPal incompleta");
-            }
 
             Map<String,String> ppConfig = new HashMap<>();
-            ppConfig.put("mode", mode);
+            ppConfig.put("mode", getJndiParameter("paypalMode"));
+
+            ppConfig.putAll(getDefaultPaypalConfig());
 
             OAuthTokenCredential credential = new OAuthTokenCredential(
-                    clientId,
-                    clientSecret,
+                    getJndiParameter("paypalClientID"),
+                    getJndiParameter("paypalClientSecret"),
                     ppConfig
             );
 
             APIContext apiContext = new APIContext(credential.getAccessToken());
+            apiContext.setConfigurationMap(ppConfig);
+
             sce.getServletContext().setAttribute("paypalApiContext", apiContext);
 
-        } catch (NamingException | PayPalRESTException e) {
-            throw new RuntimeException("Configurazione PayPal fallita", e);
+        } catch (Exception e) {
+        throw new RuntimeException("PayPal initialization failed", e);
         }
+    }
+
+    private String getJndiParameter(String name) throws NamingException{
+
+        Context ctx = new InitialContext();
+        Context envCtx = (Context) ctx.lookup("java:/comp/env");
+        String value = (String) envCtx.lookup(name);
+
+        if (value == null || value.trim().isEmpty()) {
+            throw new NamingException("JNDI parameter '" + name + "' not found or empty");
+        }
+        return value;
+
+    }
+
+    private Map<String, String> getDefaultPaypalConfig() {
+        Map<String, String> config = new HashMap<>();
+        config.put("http.ConnectionTimeOut", "5000");
+        config.put("http.Retry", "2");
+        config.put("http.ReadTimeOut", "30000");
+        config.put("http.MaxConnection", "100");
+        config.put("http.ProxyHost", "");
+        config.put("http.ProxyPort", "");
+        config.put("http.ProxyUserName", "");
+        config.put("http.ProxyPassword", "");
+        config.put("http.GoogleAppEngine", "false");
+        return config;
     }
 }

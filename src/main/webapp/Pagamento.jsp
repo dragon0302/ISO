@@ -31,7 +31,11 @@
 
 <!-- QUI INSERISCI IL DIV DEI LOGHI -->
 <div class="payment-methods">
-  <img src="https://img.icons8.com/color/48/paypal.png" alt="PayPal" title="PayPal">
+  <form action="PaymentAutorization" method="post">
+    <button>
+      <img src="https://img.icons8.com/color/48/paypal.png" alt="PayPal" title="PayPal">
+    </button>
+  </form>
   <img src="https://img.icons8.com/color/48/visa.png" alt="Visa" title="Visa">
   <img src="https://img.icons8.com/color/48/mastercard.png" alt="MasterCard" title="MasterCard">
   <img src="https://img.icons8.com/color/48/amex.png" alt="American Express" title="American Express">

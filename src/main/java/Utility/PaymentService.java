@@ -3,6 +3,7 @@ package Utility;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
+import jakarta.servlet.ServletContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +12,11 @@ public class PaymentService {
 
     private final APIContext apiContext;
 
-    public PaymentService(APIContext apiContext) {
-        this.apiContext = apiContext;
+    public PaymentService(ServletContext servletContext) {
+        this.apiContext = (APIContext) servletContext.getAttribute("paypalApiContext");
+        if (this.apiContext == null) {
+            throw new IllegalStateException("PayPal API Context not initialized");
+        }
     }
 
     public String AuthorizePayment(Orderdetail orderdetail) throws PayPalRESTException{
@@ -32,8 +36,9 @@ public class PaymentService {
         payer.setPaymentMethod("paypal");
 
         RedirectUrls redirectUrls = new RedirectUrls();
-        String cancelURL = "";
-        String returnURL = "";
+        String baseUrl = "http://localhost:8080/ISO_16_war_exploded";
+        String cancelURL = baseUrl + "/Catalogo";
+        String returnURL = baseUrl + "/Execute_Payment";
         redirectUrls.setCancelUrl(cancelURL);
         redirectUrls.setReturnUrl(returnURL);
 
@@ -53,5 +58,15 @@ public class PaymentService {
 
         throw new PayPalRESTException("Payment failed");
 
+    }
+
+    public Payment executePayment(String paymentId, String payerId) throws PayPalRESTException {
+        Payment payment = new Payment();
+        payment.setId(paymentId);
+
+        PaymentExecution paymentExecute = new PaymentExecution();
+        paymentExecute.setPayerId(payerId);
+
+        return payment.execute(apiContext, paymentExecute);
     }
 }

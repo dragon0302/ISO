@@ -43,6 +43,8 @@ public class NewOrder extends HttpServlet {
             Ordine ordine = new Ordine(Date.valueOf(LocalDate.now()),PrezzoTotale,idProdotti,carrelloDAO.GetIdCarrello(utente.getCf()));
             ordineDAO.DoSave(ordine);
 
+            response.sendRedirect("Pagamento.jsp");
+
         }catch (Exception e) {
             e.printStackTrace();
         }

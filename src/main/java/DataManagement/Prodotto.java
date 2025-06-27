@@ -8,14 +8,16 @@ public class Prodotto {
     private String descrizione;
     private String categoria;
     private float prezzo;
+    private int iva;
 
-    public Prodotto(String nome, Double media_valutazione, String taglia, String descrizione, String categoria, float prezzo) {
+    public Prodotto(String nome, Double media_valutazione, String taglia, String descrizione, String categoria, float prezzo, int iva) {
         this.nome = nome;
         this.media_valutazione = media_valutazione;
         this.taglia = taglia;
         this.descrizione = descrizione;
         this.categoria = categoria;
         this.prezzo = prezzo;
+        this.iva = iva;
     }
 
     public int getId_prodotto() {
@@ -69,4 +71,12 @@ public class Prodotto {
     public float getPrezzo() {return prezzo;}
 
     public void setPrezzo(float prezzo) {}
+
+    public int getIva() {
+        return iva;
+    }
+
+    public void setIva(int iva) {
+        this.iva = iva;
+    }
 }

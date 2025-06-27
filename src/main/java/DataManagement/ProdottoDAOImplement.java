@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import static java.util.Arrays.stream;
 
@@ -60,7 +61,8 @@ public class ProdottoDAOImplement implements ProdottoDAO{
                 String descrizione = rs.getString("Descrizione");
                 String categoria = rs.getString("Categoria");
                 float prezzo = rs.getFloat("Prezzo");
-                Prodotto p = new Prodotto( nomeProdotto, mediaValutazione, taglia, descrizione, categoria, prezzo);
+                int iva = rs.getInt("Iva");
+                Prodotto p = new Prodotto( nomeProdotto, mediaValutazione, taglia, descrizione, categoria, prezzo,iva);
                 prodotti.add(p);
             }
         } catch (Exception e) {
@@ -105,7 +107,8 @@ public class ProdottoDAOImplement implements ProdottoDAO{
                 String descrizione = rs.getString("Descrizione");
                 String categoria = rs.getString("Categoria");
                 float prezzo = rs.getFloat("Prezzo");
-                Prodotto p = new Prodotto(nomeProdotto,mediaValutazione,taglia,descrizione,categoria,prezzo);
+                int iva = rs.getInt("Iva");
+                Prodotto p = new Prodotto(nomeProdotto,mediaValutazione,taglia,descrizione,categoria,prezzo,iva);
                 p.setId_prodotto(idProdotto);
                 prodottiRecenti.add(p);
             }
@@ -149,8 +152,9 @@ public class ProdottoDAOImplement implements ProdottoDAO{
                 String descrizione = rs.getString("Descrizione");
                 String categoria = rs.getString("Categoria");
                 float prezzo = rs.getFloat("Prezzo");
+                int iva = rs.getInt("Iva");
 
-                prodotto = new Prodotto(nomeProdotto,mediaValutazione,taglia,descrizione,categoria,prezzo);
+                prodotto = new Prodotto(nomeProdotto,mediaValutazione,taglia,descrizione,categoria,prezzo,iva);
                 prodotto.setId_prodotto(ID);
             }
 
@@ -200,6 +204,56 @@ public class ProdottoDAOImplement implements ProdottoDAO{
             }
         }
         return null;
+    }
+
+    public List<Prodotto> SerchByCategory(String Category) throws SQLException{
+
+        Connection conn = null;
+        PreparedStatement query7 = null;
+        ArrayList prodtti = new ArrayList();
+
+        try {
+            conn = ds.getConnection();
+            query7 = conn.prepareStatement("select * from " + TABLE_NAME + " where Categoria like concat('%', ?, '%')");
+
+            query7.setString(1, Category);
+
+            ResultSet rs = query7.executeQuery();
+
+            while (rs.next()) {
+                int ID = rs.getInt("ID_prodotto");
+                String nomeProdotto = rs.getString("Nome");
+                Double mediaValutazione = Double.valueOf(rs.getString("MediaValutazione"));
+                String taglia = rs.getString("Taglia");
+                String descrizione = rs.getString("Descrizione");
+                String Categoria = rs.getString("Categoria");
+                float prezzo = rs.getFloat("Prezzo");
+                int iva = rs.getInt("Iva");
+                Date dataInserimento = rs.getDate("DataInserimento");
+
+                Prodotto prodotto = new Prodotto(nomeProdotto, mediaValutazione, taglia, descrizione, Categoria, prezzo,iva);
+                prodotto.setId_prodotto(ID);
+
+                prodtti.add(prodotto);
+            }
+
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query7 != null) {
+                    query7.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+
+        return prodtti;
+
     }
 
     public void editIDProdotto(Prodotto prodotto,int new_id) throws SQLException {
