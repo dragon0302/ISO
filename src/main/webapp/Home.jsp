@@ -156,30 +156,30 @@
 <!-- JavaScript per suggerimenti live -->
 <script>
     const products = [
-  // AC/DC
-  "AC/DC T-Shirt", "AC/DC CD", "AC/DC Hoodie", "AC/DC Vinyl", "AC/DC Poster", "AC/DC Cap", "AC/DC Mug",
+        // AC/DC
+        "AC/DC T-Shirt", "AC/DC CD", "AC/DC Hoodie", "AC/DC Vinyl", "AC/DC Poster", "AC/DC Cap", "AC/DC Mug",
 
-  // Adele
-  "Adele T-Shirt", "Adele CD", "Adele Hoodie", "Adele Vinyl", "Adele Poster", "Adele Cap", "Adele Mug",
+        // Adele
+        "Adele T-Shirt", "Adele CD", "Adele Hoodie", "Adele Vinyl", "Adele Poster", "Adele Cap", "Adele Mug",
 
-  // Metallica
-  "Metallica T-Shirt", "Metallica CD", "Metallica Hoodie", "Metallica Vinyl", "Metallica Poster", "Metallica Cap", "Metallica Mug",
+        // Metallica
+        "Metallica T-Shirt", "Metallica CD", "Metallica Hoodie", "Metallica Vinyl", "Metallica Poster", "Metallica Cap", "Metallica Mug",
 
-  // Queen
-  "Queen T-Shirt", "Queen CD", "Queen Hoodie", "Queen Vinyl", "Queen Poster", "Queen Cap", "Queen Mug",
+        // Queen
+        "Queen T-Shirt", "Queen CD", "Queen Hoodie", "Queen Vinyl", "Queen Poster", "Queen Cap", "Queen Mug",
 
-  // Eminem
-  "Eminem T-Shirt", "Eminem CD", "Eminem Hoodie", "Eminem Vinyl", "Eminem Poster", "Eminem Cap", "Eminem Mug",
+        // Eminem
+        "Eminem T-Shirt", "Eminem CD", "Eminem Hoodie", "Eminem Vinyl", "Eminem Poster", "Eminem Cap", "Eminem Mug",
 
-  // Taylor Swift
-  "Taylor Swift T-Shirt", "Taylor Swift CD", "Taylor Swift Hoodie", "Taylor Swift Vinyl", "Taylor Swift Poster", "Taylor Swift Cap", "Taylor Swift Mug",
+        // Taylor Swift
+        "Taylor Swift T-Shirt", "Taylor Swift CD", "Taylor Swift Hoodie", "Taylor Swift Vinyl", "Taylor Swift Poster", "Taylor Swift Cap", "Taylor Swift Mug",
 
-  // Iron Maiden
-  "Iron Maiden T-Shirt", "Iron Maiden CD", "Iron Maiden Hoodie", "Iron Maiden Vinyl", "Iron Maiden Poster", "Iron Maiden Cap", "Iron Maiden Mug",
+        // Iron Maiden
+        "Iron Maiden T-Shirt", "Iron Maiden CD", "Iron Maiden Hoodie", "Iron Maiden Vinyl", "Iron Maiden Poster", "Iron Maiden Cap", "Iron Maiden Mug",
 
-  // Led Zeppelin
-  "Led Zeppelin T-Shirt", "Led Zeppelin CD", "Led Zeppelin Hoodie", "Led Zeppelin Vinyl", "Led Zeppelin Poster", "Led Zeppelin Cap", "Led Zeppelin Mug"
-];
+        // Led Zeppelin
+        "Led Zeppelin T-Shirt", "Led Zeppelin CD", "Led Zeppelin Hoodie", "Led Zeppelin Vinyl", "Led Zeppelin Poster", "Led Zeppelin Cap", "Led Zeppelin Mug"
+    ];
 
 
     function showSuggestions(value) {
@@ -232,13 +232,16 @@
     }
 </script>
 <main>
+    <section class="content">
+        <div class="banner">Banner</div>
 
-    <%
-        List<Prodotto> filtri = (List<Prodotto>) request.getAttribute("Filtri");
-
-        if (filtri != null) {
-            for (Prodotto p : filtri) {
-    %>
+        <%
+            if(utente == null){
+                String filtro = (String) request.getAttribute("Filter");
+                if (filtro != null) {
+                    List<Prodotto> prodottiFiltro = (List<Prodotto>) request.getAttribute("prodottiFiltro");
+                    for (Prodotto p : prodottiFiltro){
+        %>
 
         <div class="product">
             <div class="box">
@@ -255,16 +258,16 @@
                 </form>
             </div>
         </div>
-        <%
-                }
-            } else {
-        %>
 
+        <%
+                    }
+                }
+        %>
         <h2>Novità</h2>
 
         <div class="product-slider">
 
-            <%
+                <%
                 List<Prodotto> prodottiNovita = (List<Prodotto>) request.getAttribute("prodottiNovita");
 
                 if (prodottiNovita != null) {
@@ -285,23 +288,26 @@
                     </form>
                 </div>
             </div>
-            <%
+                <%
                 }
-            } else {
+        /**/} else {
             %>
             <p>Nessun prodotto trovato.</p>
-            <%
+                <%
                 }
             }else{
             %>
 
-                    <%
-        List<Prodotto> filtri = (List<Prodotto>) request.getAttribute("Filtri");
+            <h2>Novità</h2>
 
-        if (filtri != null) {
-            for (Prodotto p : filtri) {
-    %>
+            <div class="product-slider">
 
+                <%
+                    List<Prodotto> prodottiNovita = (List<Prodotto>) request.getAttribute("prodottiNovita");
+
+                    if (prodottiNovita != null) {
+                        for (Prodotto p : prodottiNovita) {
+                %>
                 <div class="product">
                     <div class="box">
                         <h3><%= p.getNome() %></h3>
@@ -314,29 +320,75 @@
                             <button type="submit" class="btn-aggiungi">
                                 Aggiungi al carrello
                             </button>
+                            <button class="btn-elimina" onclick="openDeleteModal()">
+                                Elimina
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <%
+                    }
+                } else {
+                %>
+                <p>Nessun prodotto trovato.</p>
+                <%
+                        }
+                    }
+                %>
+
+            </div>
+                <%
+            if(utente == null){
+        %>
+            <h2>Prodotti più acquistati</h2>
+            <div class="product-slider">
+                    <%
+                List<Prodotto> prodottiPopolari = (List<Prodotto>) request.getAttribute("prodottiPiuAqqistati");
+                List<String> paths = (List<String>) request.getAttribute("paths");
+                if (prodottiPopolari != null && paths != null) {
+                  System.out.println(paths.size());
+                    for (int i = 0; i < prodottiPopolari.size(); i++) {
+                      System.out.println(paths.get(i));
+            %>
+                <div class="product-image">
+                    <!-- Immagine prodotto (metti il path corretto nell'attributo src) -->
+                    <img src=" <%= request.getContextPath() + paths.get(i) %>" alt="Immagine Prodotto">
+                </div>
+                <div class="product">
+                    <div class="box"><h3 ><%= prodottiPopolari.get(i).getNome() %></h3>
+                        <p >Prezzo: €<%= prodottiPopolari.get(i).getPrezzo() %></p>
+                        <p ><%= prodottiPopolari.get(i).getDescrizione() %></p>
+                        <a href="ProdottoS?id=<%= prodottiPopolari.get(i).getId_prodotto() %>">Dettagli</a>
+                        <form action="ProductCartMenegment" method="post">
+                            <input type="hidden" name="prodottoID" value="<%= prodottiPopolari.get(i).getId_prodotto() %>">
+                            <input type="hidden" name="SourcePage" value="Home">
+                            <button type="submit" class="btn-aggiungi">
+                                Aggiungi al carrello
+                            </button>
                         </form>
                     </div>
                 </div>
                     <%
                 }
             } else {
-        %>
-
-                <h2>Novità</h2>
-
-                <div class="product-slider">
-
+            %>
+                <p>Nessun prodotto trovato.</p>
                     <%
-                        List<Prodotto> prodottiNovita = (List<Prodotto>) request.getAttribute("prodottiNovita");
+                }
+            } else {
+            %>
 
-                        if (prodottiNovita != null) {
-                            for (Prodotto p : prodottiNovita) {
-                    %>
+                <h2>Prodotti più acquistati</h2>
+                <div class="product-slider">
+                        <%
+                List<Prodotto> prodottiPopolari = (List<Prodotto>) request.getAttribute("prodottiPiuAqqistati");
+                if (prodottiPopolari != null) {
+                    for (Prodotto p : prodottiPopolari) {
+            %>
                     <div class="product">
-                        <div class="box">
-                            <h3><%= p.getNome() %></h3>
-                            <p>Prezzo: €<%= p.getPrezzo() %></p>
-                            <p><%= p.getDescrizione() %></p>
+                        <div class="box"><h3 ><%= p.getNome() %></h3>
+                            <p >Prezzo: €<%= p.getPrezzo() %></p>
+                            <p ><%= p.getDescrizione() %></p>
                             <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
                             <form action="ProductCartMenegment" method="post">
                                 <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
@@ -350,88 +402,12 @@
                             </form>
                         </div>
                     </div>
-                    <%
-                        }
-                    } else {
-                    %>
+                        <%
+                }
+            } else {
+            %>
                     <p>Nessun prodotto trovato.</p>
-                    <%
-                            }
-                        }
-                    %>
-
-        </div>
-        <%
-            if(utente == null){
-        %>
-        <h2>Prodotti più acquistati</h2>
-        <div class="product-slider">
-                <%
-                List<Prodotto> prodottiPopolari = (List<Prodotto>) request.getAttribute("prodottiPiuAqqistati");
-                List<String> paths = (List<String>) request.getAttribute("paths");
-                if (prodottiPopolari != null && paths != null) {
-                  System.out.println(paths.size());
-                    for (int i = 0; i < prodottiPopolari.size(); i++) {
-                      System.out.println(paths.get(i));
-            %>
-                <div class="product-image">
-                    <!-- Immagine prodotto (metti il path corretto nell'attributo src) -->
-                    <img src=" <%= request.getContextPath() + paths.get(i) %>" alt="Immagine Prodotto">
-                </div>
-            <div class="product">
-                <div class="box"><h3 ><%= prodottiPopolari.get(i).getNome() %></h3>
-                    <p >Prezzo: €<%= prodottiPopolari.get(i).getPrezzo() %></p>
-                    <p ><%= prodottiPopolari.get(i).getDescrizione() %></p>
-                    <a href="ProdottoS?id=<%= prodottiPopolari.get(i).getId_prodotto() %>">Dettagli</a>
-                    <form action="ProductCartMenegment" method="post">
-                        <input type="hidden" name="prodottoID" value="<%= prodottiPopolari.get(i).getId_prodotto() %>">
-                        <input type="hidden" name="SourcePage" value="Home">
-                        <button type="submit" class="btn-aggiungi">
-                            Aggiungi al carrello
-                        </button>
-                    </form>
-                </div>
-            </div>
-                <%
-                }
-            } else {
-            %>
-            <p>Nessun prodotto trovato.</p>
-                <%
-                }
-            } else {
-            %>
-
-                    <h2>Prodotti più acquistati</h2>
-                    <div class="product-slider">
-                            <%
-                List<Prodotto> prodottiPopolari = (List<Prodotto>) request.getAttribute("prodottiPiuAqqistati");
-                if (prodottiPopolari != null) {
-                    for (Prodotto p : prodottiPopolari) {
-            %>
-                        <div class="product">
-                            <div class="box"><h3 ><%= p.getNome() %></h3>
-                                <p >Prezzo: €<%= p.getPrezzo() %></p>
-                                <p ><%= p.getDescrizione() %></p>
-                                <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
-                                <form action="ProductCartMenegment" method="post">
-                                    <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
-                                    <input type="hidden" name="SourcePage" value="Home">
-                                    <button type="submit" class="btn-aggiungi">
-                                        Aggiungi al carrello
-                                    </button>
-                                    <button class="btn-elimina" onclick="openDeleteModal()">
-                                        Elimina
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                            <%
-                }
-            } else {
-            %>
-                        <p>Nessun prodotto trovato.</p>
-                            <%
+                        <%
                 }
             }
             %>
