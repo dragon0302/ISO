@@ -232,11 +232,34 @@
     }
 </script>
 <main>
-    <section class="content">
-        <div class="banner">Banner</div>
+
+    <%
+        List<Prodotto> filtri = (List<Prodotto>) request.getAttribute("Filtri");
+
+        if (filtri != null) {
+            for (Prodotto p : filtri) {
+    %>
+
+        <div class="product">
+            <div class="box">
+                <h3><%= p.getNome() %></h3>
+                <p>Prezzo: €<%= p.getPrezzo() %></p>
+                <p><%= p.getDescrizione() %></p>
+                <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
+                <form action="ProductCartMenegment" method="post">
+                    <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
+                    <input type="hidden" name="SourcePage" value="Home">
+                    <button type="submit" class="btn-aggiungi">
+                        Aggiungi al carrello
+                    </button>
+                </form>
+            </div>
+        </div>
         <%
-            if(utente == null){
+                }
+            } else {
         %>
+
         <h2>Novità</h2>
 
         <div class="product-slider">
@@ -271,6 +294,33 @@
                 }
             }else{
             %>
+
+                    <%
+        List<Prodotto> filtri = (List<Prodotto>) request.getAttribute("Filtri");
+
+        if (filtri != null) {
+            for (Prodotto p : filtri) {
+    %>
+
+                <div class="product">
+                    <div class="box">
+                        <h3><%= p.getNome() %></h3>
+                        <p>Prezzo: €<%= p.getPrezzo() %></p>
+                        <p><%= p.getDescrizione() %></p>
+                        <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
+                        <form action="ProductCartMenegment" method="post">
+                            <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
+                            <input type="hidden" name="SourcePage" value="Home">
+                            <button type="submit" class="btn-aggiungi">
+                                Aggiungi al carrello
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                    <%
+                }
+            } else {
+        %>
 
                 <h2>Novità</h2>
 
