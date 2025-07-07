@@ -28,12 +28,14 @@
     <link rel="stylesheet" href="Home.css">
 <body>
 <script src="${pageContext.request.contextPath}/Javascript/CatalogFilter.js"></script>
+<script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
+<script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
 <header>
     <div class="top-header">
         <!-- Parte 1 - Logo a sinistra -->
         <div class="logo-container">
             <a href="Home.jsp">
-                <!--img src="logo.png" alt="Logo"-->
+                <img src=" <%= request.getContextPath() + "/Immagini/isologo.png" %>" alt="Immagine Prodotto">
             </a>
         </div>
 
@@ -153,84 +155,8 @@
         </div>
     </div>
 </header>
-<!-- JavaScript per suggerimenti live -->
-<script>
-    const products = [
-        // AC/DC
-        "AC/DC T-Shirt", "AC/DC CD", "AC/DC Hoodie", "AC/DC Vinyl", "AC/DC Poster", "AC/DC Cap", "AC/DC Mug",
-
-        // Adele
-        "Adele T-Shirt", "Adele CD", "Adele Hoodie", "Adele Vinyl", "Adele Poster", "Adele Cap", "Adele Mug",
-
-        // Metallica
-        "Metallica T-Shirt", "Metallica CD", "Metallica Hoodie", "Metallica Vinyl", "Metallica Poster", "Metallica Cap", "Metallica Mug",
-
-        // Queen
-        "Queen T-Shirt", "Queen CD", "Queen Hoodie", "Queen Vinyl", "Queen Poster", "Queen Cap", "Queen Mug",
-
-        // Eminem
-        "Eminem T-Shirt", "Eminem CD", "Eminem Hoodie", "Eminem Vinyl", "Eminem Poster", "Eminem Cap", "Eminem Mug",
-
-        // Taylor Swift
-        "Taylor Swift T-Shirt", "Taylor Swift CD", "Taylor Swift Hoodie", "Taylor Swift Vinyl", "Taylor Swift Poster", "Taylor Swift Cap", "Taylor Swift Mug",
-
-        // Iron Maiden
-        "Iron Maiden T-Shirt", "Iron Maiden CD", "Iron Maiden Hoodie", "Iron Maiden Vinyl", "Iron Maiden Poster", "Iron Maiden Cap", "Iron Maiden Mug",
-
-        // Led Zeppelin
-        "Led Zeppelin T-Shirt", "Led Zeppelin CD", "Led Zeppelin Hoodie", "Led Zeppelin Vinyl", "Led Zeppelin Poster", "Led Zeppelin Cap", "Led Zeppelin Mug"
-    ];
 
 
-    function showSuggestions(value) {
-        const suggestionBox = document.getElementById('suggestionBox');
-        suggestionBox.innerHTML = '';
-        if (value.length === 0) return;
-
-        const filtered = products.filter(product =>
-            product.toLowerCase().includes(value.toLowerCase())
-        );
-
-        filtered.forEach(product => {
-            const div = document.createElement('div');
-            div.textContent = product;
-            div.onclick = () => {
-                document.getElementById('searchInput').value = product;
-                suggestionBox.innerHTML = '';
-            };
-            suggestionBox.appendChild(div);
-        });
-    }
-</script>
-<script>
-    function toggleUserMenu() {
-        document.getElementById("userMenu").classList.toggle("show");
-    }
-
-    function closeModal(modalId) {
-        document.getElementById(modalId).style.display = "none";
-    }
-
-    function openAddProductModal() {
-        document.getElementById("addProductModal").style.display = "block";
-    }
-
-    function openPriceSurveyModal() {
-        document.getElementById("priceSurveyModal").style.display = "block";
-    }
-
-    function openAddFilterModal() {
-        document.getElementById("addFilterModal").style.display = "block";
-    }
-
-    function openDateSurveyModal() {
-        document.getElementById("dateSurveyModal").style.display = "block";
-    }
-
-    function openDeleteModal() {
-        document.getElementById("deleteModal").style.display = "block";
-    }
-</script>
 <main>
     <section class="content">
         <div class="banner">Banner</div>
@@ -239,30 +165,77 @@
             if(utente == null){
                 String filtro = (String) request.getAttribute("Filter");
                 if (filtro != null) {
+        %>
+
+            <h2><%= filtro %></h2>
+
+            <div class="product-slider">
+
+        <%
                     List<Prodotto> prodottiFiltro = (List<Prodotto>) request.getAttribute("prodottiFiltro");
                     for (Prodotto p : prodottiFiltro){
         %>
 
-        <div class="product">
-            <div class="box">
-                <h3><%= p.getNome() %></h3>
-                <p>Prezzo: €<%= p.getPrezzo() %></p>
-                <p><%= p.getDescrizione() %></p>
-                <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
-                <form action="ProductCartMenegment" method="post">
-                    <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
-                    <input type="hidden" name="SourcePage" value="Home">
-                    <button type="submit" class="btn-aggiungi">
-                        Aggiungi al carrello
-                    </button>
-                </form>
+            <div class="product">
+                <div class="box">
+                    <h3><%= p.getNome() %></h3>
+                    <p>Prezzo: €<%= p.getPrezzo() %></p>
+                    <p><%= p.getDescrizione() %></p>
+                    <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
+                    <form action="ProductCartMenegment" method="post">
+                        <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
+                        <input type="hidden" name="SourcePage" value="Home">
+                        <button type="submit" class="btn-aggiungi">
+                            Aggiungi al carrello
+                        </button>
+                    </form>
+                </div>
             </div>
+
+            <%
+                        }
+                    }
+            %>
+
         </div>
 
         <%
+        String filtroAmministratore = (String) request.getAttribute("Filter");
+        if (filtroAmministratore != null) {
+        %>
+
+        <h2><%= filtroAmministratore %></h2>
+
+        <div class="product-slider">
+
+            <%
+                List<Prodotto> prodottiFiltro = (List<Prodotto>) request.getAttribute("prodottiFiltro");
+                for (Prodotto p : prodottiFiltro){
+            %>
+
+            <div class="product">
+                <div class="box">
+                    <h3><%= p.getNome() %></h3>
+                    <p>Prezzo: €<%= p.getPrezzo() %></p>
+                    <p><%= p.getDescrizione() %></p>
+                    <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
+                    <form action="ProductCartMenegment" method="post">
+                        <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
+                        <input type="hidden" name="SourcePage" value="Home">
+                        <button type="submit" class="btn-aggiungi">
+                            Aggiungi al carrello
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <%
                     }
                 }
-        %>
+            %>
+
+        </div>
+
         <h2>Novità</h2>
 
         <div class="product-slider">
