@@ -1,40 +1,42 @@
 package Utility;
 
+import java.util.List;
+
 public class Orderdetail {
 
-    private String NomeProdotto;
-    private float Prezzo;
-    private String iva;
-    private float totale;
+    private List<String> NomeProdotti;
+    private List<Float> Prezzo;
+    private List<Integer> iva;
+    private Float totale;
 
-    public Orderdetail(String nomeProdotto, float prezzo, String iva, float totale) {
-        NomeProdotto = nomeProdotto;
-        Prezzo = prezzo;
+    public Orderdetail(List<String> nomeProdotti, List<Float> prezzi, List<Integer> iva, float totale) {
+        NomeProdotti = nomeProdotti;
+        Prezzo = prezzi;
         this.iva = iva;
         this.totale = totale;
     }
 
-    public String getNomeProdotto() {
-        return NomeProdotto;
+    public List<String> getNomeProdotto() {
+        return NomeProdotti;
     }
 
-    public void setNomeProdotto(String nomeProdotto) {
-        NomeProdotto = nomeProdotto;
+    public void setNomeProdotto(List<String> nomeProdotto) {
+        NomeProdotti = nomeProdotto;
     }
 
-    public float getPrezzo() {
+    public List<Float> getPrezzo() {
         return Prezzo;
     }
 
-    public void setPrezzo(float prezzo) {
+    public void setPrezzo(List<Float> prezzo) {
         Prezzo = prezzo;
     }
 
-    public String getIva() {
+    public List<Integer> getIva() {
         return iva;
     }
 
-    public void setIva(String iva) {
+    public void setIva(List<Integer> iva) {
         this.iva = iva;
     }
 

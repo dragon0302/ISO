@@ -26,7 +26,7 @@ public class PaymentService {
         amount.setTotal(String.valueOf(orderdetail.getTotale()));
 
         Transaction transaction = new Transaction();
-        transaction.setDescription(orderdetail.getNomeProdotto());
+        transaction.setDescription(String.valueOf(orderdetail.getNomeProdotto()));
         transaction.setAmount(amount);
 
         List<Transaction> transactions = new ArrayList<>();

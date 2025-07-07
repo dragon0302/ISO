@@ -36,13 +36,19 @@ public class PaymentAutorization extends HttpServlet {
         session = request.getSession();
         List<Prodotto> carello = (List<Prodotto>) session.getAttribute("carrello");
         float prezzotatale = (float) session.getAttribute("prezzotatale");
+        List<String> nomiProdotti = new ArrayList<>();
+        List<Integer> ivaProdotti = new ArrayList<>();
+        List<Float> prezzoProdotti = new ArrayList<>();
 
-        String NomeProdotto = carello.get(0).getNome();
-        String prezzo = String.valueOf(carello.get(0).getPrezzo());
-        String iva = String.valueOf(carello.get(0).getIva());
-        String totale = String.valueOf(prezzotatale);
+        for (Prodotto prodotto : carello) {
 
-        Orderdetail orderdetail = new Orderdetail(NomeProdotto,Float.parseFloat(prezzo),iva,Float.parseFloat(totale));
+            nomiProdotti.add(prodotto.getNome());
+            prezzoProdotti.add(prodotto.getPrezzo());
+            ivaProdotti.add(prodotto.getIva());
+
+        }
+
+        Orderdetail orderdetail = new Orderdetail(nomiProdotti,prezzoProdotti,ivaProdotti,prezzotatale);
 
         try{
             String approvalLink = paymentService.AuthorizePayment(orderdetail);
