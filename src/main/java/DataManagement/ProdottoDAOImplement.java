@@ -80,9 +80,30 @@ public class ProdottoDAOImplement implements ProdottoDAO{
         }
         return prodotti;
     }
-    public synchronized void deleteProdotto(Prodotto prodotto) throws SQLException{
-        Connection conn = ds.getConnection();
-        PreparedStatement query3 = conn.prepareStatement("DELETE FROM " + TABLE_NAME + " WHERE ID_prodotto = " + prodotto.getId_prodotto());
+    public synchronized void deleteProdotto(int id) throws SQLException{
+        Connection conn = null;
+        PreparedStatement query3 = null;
+
+        try {
+            conn = ds.getConnection();
+            query3 = conn.prepareStatement("DELETE FROM " + TABLE_NAME + " WHERE ID_prodotto = ?");
+
+            query3.setInt(1, id);
+            query3.executeUpdate();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query3 != null) {
+                    query3.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
     }
 
     public synchronized ArrayList<Prodotto> getProdottiRecenti() throws SQLException{

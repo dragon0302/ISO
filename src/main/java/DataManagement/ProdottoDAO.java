@@ -7,7 +7,7 @@ import java.util.List;
 public interface ProdottoDAO {
     public void doSave(Prodotto prodotto) throws SQLException;
     public ArrayList<Prodotto> getProdotti() throws SQLException;
-    public void deleteProdotto(Prodotto prodotto) throws SQLException;
+    public void deleteProdotto(int id) throws SQLException;
     public Prodotto getProdottoByID(int idProdotto) throws SQLException;
     public ArrayList<Prodotto> getProdottiRecenti() throws SQLException;
     public Float GetPrezzo(int id) throws SQLException;
