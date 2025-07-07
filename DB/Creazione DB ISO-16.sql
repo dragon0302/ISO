@@ -29,6 +29,7 @@ CREATE TABLE prodotto(
      Descrizione VARCHAR(500) NOT NULL,
      Categoria VARCHAR(20) NOT NULL,
      Prezzo DOUBLE NOT NULL,
+     Iva Integer not null ,
      DataInserimento DATE not null default (curdate())
 );
 
