@@ -21,6 +21,7 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.element.Text;
 import com.itextpdf.layout.properties.UnitValue;
+import javax.servlet;
 
 
 import java.awt.*;
@@ -37,7 +38,8 @@ public class CreatePDF {
     public static void main(String[] args) throws IOException, SQLException {
         Date datanascita = new Date(2004,10,4);
         Date dataordine = new Date(2025,6,9);
-        Utente u = new Utente("RTLVTR000000000","vittruot","vix","t","Vittorio","Ruotolo","vxvitti@gmail.com","M",datanascita,false);
+        Utente u = request.getSession().getAttribute("utente");
+
         Float totale = (float) 0;
         Ordine o = new Ordine(dataordine,totale,"ciao",1);
         Indirizzo i = new Indirizzo("Nocera Superiore","Salerno","84015","Via delle vie",3,"N/A","C/o Corte Dei Conti","N/A",true,"RTLVTR000000000");
@@ -64,7 +66,7 @@ public class CreatePDF {
         document.setMargins(20, 20, 20, 20);
 
         try {
-            String imagePath = "C:\\Users\\Vittorio\\IdeaProjects\\ISO\\src\\main\\java\\DataManagement\\Fatturazione\\isologo.png";
+            String imagePath = "src/main/java/DataManagement/Fatturazione/isologo.png";
             ImageData imageData = ImageDataFactory.create(imagePath);
             Image logo = new Image(imageData).scaleToFit(200, 200);
             document.add(logo);
