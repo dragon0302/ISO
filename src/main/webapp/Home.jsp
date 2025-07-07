@@ -239,30 +239,41 @@
             if(utente == null){
                 String filtro = (String) request.getAttribute("Filter");
                 if (filtro != null) {
+
+        %>
+
+        <h2><%= filtro%> </h2>
+
+        <div class="product-slider">
+
+        <%
                     List<Prodotto> prodottiFiltro = (List<Prodotto>) request.getAttribute("prodottiFiltro");
                     for (Prodotto p : prodottiFiltro){
         %>
 
-        <div class="product">
-            <div class="box">
-                <h3><%= p.getNome() %></h3>
-                <p>Prezzo: €<%= p.getPrezzo() %></p>
-                <p><%= p.getDescrizione() %></p>
-                <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
-                <form action="ProductCartMenegment" method="post">
-                    <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
-                    <input type="hidden" name="SourcePage" value="Home">
-                    <button type="submit" class="btn-aggiungi">
-                        Aggiungi al carrello
-                    </button>
-                </form>
+            <div class="product">
+                <div class="box">
+                    <h3><%= p.getNome() %></h3>
+                    <p>Prezzo: €<%= p.getPrezzo() %></p>
+                    <p><%= p.getDescrizione() %></p>
+                    <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
+                    <form action="ProductCartMenegment" method="post">
+                        <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
+                        <input type="hidden" name="SourcePage" value="Home">
+                        <button type="submit" class="btn-aggiungi">
+                            Aggiungi al carrello
+                        </button>
+                    </form>
+                </div>
             </div>
+
+            <%
+                        }
+                    }
+            %>
+
         </div>
 
-        <%
-                    }
-                }
-        %>
         <h2>Novità</h2>
 
         <div class="product-slider">
@@ -290,13 +301,51 @@
             </div>
                 <%
                 }
-        /**/} else {
+            } else {
             %>
             <p>Nessun prodotto trovato.</p>
                 <%
                 }
             }else{
             %>
+
+        <%
+        String filtroAmministratore = (String) request.getAttribute("Filter");
+        if (filtroAmministratore != null) {
+
+        %>
+
+                    <h2><%= filtroAmministratore%> </h2>
+
+                    <div class="product-slider">
+
+                        <%
+                            List<Prodotto> prodottiFiltro = (List<Prodotto>) request.getAttribute("prodottiFiltro");
+                            for (Prodotto p : prodottiFiltro){
+                        %>
+
+                        <div class="product">
+                            <div class="box">
+                                <h3><%= p.getNome() %></h3>
+                                <p>Prezzo: €<%= p.getPrezzo() %></p>
+                                <p><%= p.getDescrizione() %></p>
+                                <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
+                                <form action="ProductCartMenegment" method="post">
+                                    <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
+                                    <input type="hidden" name="SourcePage" value="Home">
+                                    <button type="submit" class="btn-aggiungi">
+                                        Aggiungi al carrello
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <%
+                                }
+                            }
+                        %>
+
+                    </div>
 
             <h2>Novità</h2>
 
@@ -320,6 +369,9 @@
                             <button type="submit" class="btn-aggiungi">
                                 Aggiungi al carrello
                             </button>
+                        </form>
+                        <form action="ProductCatalogoMenegment" method="post">
+                            <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
                             <button class="btn-elimina" onclick="openDeleteModal()">
                                 Elimina
                             </button>

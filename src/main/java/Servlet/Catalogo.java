@@ -52,9 +52,13 @@ public class Catalogo extends HttpServlet {
             request.setAttribute("prodottiNovita", prodottiRecenti);
             request.setAttribute("prodottiPiuAqqistati", prodottiPiuAcquistai);
 
-            String value = request.getParameter("value");
+            String Filter = request.getParameter("value");
 
-            System.out.println(value);
+            request.setAttribute("Filter", Filter);
+
+            List<Prodotto> prodottiFiltro = prodottoDAO.SerchByCategory(Filter);
+
+            request.setAttribute("prodottiFiltro", prodottiFiltro);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("/Home.jsp");
             dispatcher.forward(request, response);
