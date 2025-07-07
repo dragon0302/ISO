@@ -18,12 +18,16 @@
         <link rel="stylesheet" href="Sign-up.css">
 </head>
     <body>
+
+        <script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
+        <script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
+
         <header>
             <div class="top-header">
                 <!-- Parte 1 - Logo a sinistra -->
                 <div class="logo-container">
                     <a href="Home.jsp">
-                        <!--img src="logo.png" alt="Logo"-->
+                        <img src=" <%= request.getContextPath() + "/Immagini/isologo.png" %>" alt="Immagine Prodotto">
                     </a>
                 </div>
 
@@ -137,124 +141,68 @@
                 </div>
             </div>
         </header>
-        <!-- JavaScript per suggerimenti live -->
-        <script>
-            const products = [
-                "AC/DC T-Shirt", "Adele CD", "Metallica Hoodie",
-                "Queen Vinyl", "Eminem Cap", "Jazz Mug",
-                "Taylor Swift Poster", "Iron Maiden Patch", "Led Zeppelin T-Shirt"
-            ];
 
-            function showSuggestions(value) {
-                const suggestionBox = document.getElementById('suggestionBox');
-                suggestionBox.innerHTML = '';
-                if (value.length === 0) return;
 
-                const filtered = products.filter(product =>
-                    product.toLowerCase().includes(value.toLowerCase())
-                );
+        <main>
+            <div class="content-wrapper">
+                <!-- Immagini laterali fisse -->
+                <!-- img src="left-image.png" class="side-image left" alt="Immagine sinistra" -->
+                <!-- img src="right-image.png" class="side-image right" alt="Immagine destra" -->
 
-                filtered.forEach(product => {
-                    const div = document.createElement('div');
-                div.textContent = product;
-                div.onclick = () => {
-                    document.getElementById('searchInput').value = product;
-                    suggestionBox.innerHTML = '';
-                };
-                suggestionBox.appendChild(div);
-            });
-        }
-    </script>
-    <script>
-        function toggleUserMenu() {
-            document.getElementById("userMenu").classList.toggle("show");
-        }
+                <!-- Box centrale con form -->
+                <div class="form-container">
+                    <h2>Registrazione Utente</h2>
+                    <form action="Sign-up" method="POST">
+                        <input type="hidden" name="action" value="insert">
 
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = "none";
-        }
+                        <div class="form-group">
+                            <label for="CodiceFiscale">Codice Fiscale *</label>
+                            <input type="text" name="CodiceFiscale" id="CodiceFiscale" required>
+                        </div>
 
-        function openAddProductModal() {
-            document.getElementById("addProductModal").style.display = "block";
-        }
+                        <div class="form-group">
+                            <label for="NomeUtente">Nome Utente *</label>
+                            <input type="text" name="NomeUtente" id="NomeUtente" required>
+                        </div>
 
-        function openPriceSurveyModal() {
-            document.getElementById("priceSurveyModal").style.display = "block";
-        }
+                        <div class="form-group">
+                            <label for="Password">Password *</label>
+                            <input type="password" name="Password" id="Password" required>
+                        </div>
 
-        function openAddFilterModal() {
-            document.getElementById("addFilterModal").style.display = "block";
-        }
+                        <div class="form-group">
+                            <label for="Nome">Nome *</label>
+                            <input type="text" name="Nome" id="Nome" required>
+                        </div>
 
-        function openDateSurveyModal() {
-            document.getElementById("dateSurveyModal").style.display = "block";
-        }
+                        <div class="form-group">
+                            <label for="Cognome">Cognome *</label>
+                            <input type="text" name="Cognome" id="Cognome" required>
+                        </div>
 
-        function openDeleteModal() {
-            document.getElementById("deleteModal").style.display = "block";
-        }
-    </script>
+                        <div class="form-group">
+                            <label>Sesso *</label>
+                            <label>M<input type="radio" name="sesso" value="M" required></label>
+                            <label>F<input type="radio" name="sesso" value="F" required></label>
+                        </div>
 
-    <main>
-        <div class="content-wrapper">
-            <!-- Immagini laterali fisse -->
-            <!-- img src="left-image.png" class="side-image left" alt="Immagine sinistra" -->
-            <!-- img src="right-image.png" class="side-image right" alt="Immagine destra" -->
+                        <div class="form-group">
+                            <label for="DataNascita">Data di Nascita *</label>
+                            <input type="date" name="DataNascita" id="DataNascita" required>
+                        </div>
 
-            <!-- Box centrale con form -->
-            <div class="form-container">
-                <h2>Registrazione Utente</h2>
-                <form action="Sign-up" method="POST">
-                    <input type="hidden" name="action" value="insert">
+                        <div class="form-group">
+                            <label for="E-mail">E-mail *</label>
+                            <input type="email" name="E-mail" id="E-mail" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="CodiceFiscale">Codice Fiscale *</label>
-                        <input type="text" name="CodiceFiscale" id="CodiceFiscale" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="NomeUtente">Nome Utente *</label>
-                        <input type="text" name="NomeUtente" id="NomeUtente" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="Password">Password *</label>
-                        <input type="password" name="Password" id="Password" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="Nome">Nome *</label>
-                        <input type="text" name="Nome" id="Nome" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="Cognome">Cognome *</label>
-                        <input type="text" name="Cognome" id="Cognome" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Sesso *</label>
-                        <label>M<input type="radio" name="sesso" value="M" required></label>
-                        <label>F<input type="radio" name="sesso" value="F" required></label>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="DataNascita">Data di Nascita *</label>
-                        <input type="date" name="DataNascita" id="DataNascita" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="E-mail">E-mail *</label>
-                        <input type="email" name="E-mail" id="E-mail" required>
-                    </div>
-
-                    <div class="form-group full-width">
-                        <input type="submit" value="Registrati">
-                    </div>
-                </form>
+                        <div class="form-group full-width">
+                            <input type="submit" value="Registrati">
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-    </main>
+        </main>
 
     </body>
 </html>

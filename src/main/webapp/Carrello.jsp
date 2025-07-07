@@ -8,18 +8,22 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Ricerca & Filtri</title>
+    <title>Carrello</title>
     <link rel="stylesheet" href="sfondo.css">
     <link rel="stylesheet" href="Carrello.css">
 </head>
 <body>
+
 <script src="${pageContext.request.contextPath}/Javascript/Cart.js"></script>
+<script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
+<script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
+
     <header>
         <div class="top-header">
             <!-- Parte 1 - Logo a sinistra -->
             <div class="logo-container">
                 <a href="Home.jsp">
-                    <!--img src="logo.png" alt="Logo"-->
+                    <img src=" <%= request.getContextPath() + "/Immagini/isologo.png" %>" alt="Immagine Prodotto">
                 </a>
             </div>
 
@@ -133,63 +137,7 @@
             </div>
         </div>
     </header>
-    <!-- JavaScript per suggerimenti live -->
-    <script>
-        const products = [
-            "AC/DC T-Shirt", "Adele CD", "Metallica Hoodie",
-            "Queen Vinyl", "Eminem Cap", "Jazz Mug",
-            "Taylor Swift Poster", "Iron Maiden Patch", "Led Zeppelin T-Shirt"
-        ];
 
-        function showSuggestions(value) {
-            const suggestionBox = document.getElementById('suggestionBox');
-            suggestionBox.innerHTML = '';
-            if (value.length === 0) return;
-
-            const filtered = products.filter(product =>
-                product.toLowerCase().includes(value.toLowerCase())
-            );
-
-            filtered.forEach(product => {
-                const div = document.createElement('div');
-                div.textContent = product;
-                div.onclick = () => {
-                    document.getElementById('searchInput').value = product;
-                    suggestionBox.innerHTML = '';
-                };
-                suggestionBox.appendChild(div);
-            });
-        }
-    </script>
-    <script>
-        function toggleUserMenu() {
-            document.getElementById("userMenu").classList.toggle("show");
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = "none";
-        }
-
-        function openAddProductModal() {
-            document.getElementById("addProductModal").style.display = "block";
-        }
-
-        function openPriceSurveyModal() {
-            document.getElementById("priceSurveyModal").style.display = "block";
-        }
-
-        function openAddFilterModal() {
-            document.getElementById("addFilterModal").style.display = "block";
-        }
-
-        function openDateSurveyModal() {
-            document.getElementById("dateSurveyModal").style.display = "block";
-        }
-
-        function openDeleteModal() {
-            document.getElementById("deleteModal").style.display = "block";
-        }
-    </script>
     <div class="box-container">
         <div class="box-prodotti">
             <%
