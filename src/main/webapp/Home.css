@@ -115,3 +115,215 @@ main h2 {
     font-weight: 700;
     letter-spacing: 1px;
 }
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+}
+.close {
+    float: right;
+    cursor: pointer;
+}
+
+#userContainer {
+    position: relative;
+    display: inline-block; /* per adattarsi alla larghezza del contenuto */
+}
+
+#userMenu {
+    display: none; /* nascosto di default */
+    position: absolute;
+    top: 100%;      /* subito sotto il contenitore */
+    left: 0;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+    min-width: 150px; /* opzionale: larghezza minima */
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+/* Per far apparire il menu quando si passa col mouse sul contenitore (hover) */
+#userContainer:hover #userMenu {
+    display: block;
+}
+
+/* Stile lista dentro il menu */
+#userMenu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#userMenu li {
+    padding: 8px 12px;
+}
+
+#userMenu li:hover {
+    background-color: #f0f0f0;
+}
+
+#userMenu li button {
+    width: 100%;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
+}
+
+/* Pulsante ⋮ posizionato in alto a destra della card prodotto */
+.menu-button {
+    position: absolute;           /* Posiziona il pulsante rispetto al contenitore .box */
+    top: 10px;                   /* Distanza dal bordo superiore */
+    right: 10px;                 /* Distanza dal bordo destro */
+    background: none;            /* Sfondo trasparente */
+    border: none;                /* Nessun bordo */
+    font-size: 20px;             /* Dimensione del carattere */
+    cursor: pointer;             /* Cambia il cursore in mano al passaggio */
+    color: #ccc;                 /* Colore del testo grigio chiaro */
+    padding: 4px 8px;            /* Spaziatura interna */
+    border-radius: 6px;          /* Angoli arrotondati */
+    transition: background-color 0.2s; /* Transizione dolce per hover */
+}
+
+/* Cambio colore di sfondo quando si passa sopra col mouse */
+.menu-button:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Sfondo leggermente più chiaro */
+}
+
+/* Contenitore del menu opzioni (Modifica, Elimina) */
+.box-option {
+    position: absolute;          /* Posizionato rispetto al contenitore .box */
+    top: 40px;                  /* Spostato sotto il pulsante ⋮ */
+    right: 10px;                /* Allineato a destra come il pulsante */
+    background-color: #2a2a2a;  /* Sfondo scuro */
+    border: 1px solid #444;     /* Bordo grigio scuro */
+    border-radius: 8px;         /* Angoli arrotondati */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Ombra per dare profondità */
+    z-index: 1000;              /* Sopra altri elementi */
+    min-width: 120px;           /* Larghezza minima */
+    display: none;              /* Nasconde il menu di default */
+    flex-direction: column;     /* Dispone i pulsanti in colonna */
+    padding: 4px 0;             /* Spaziatura verticale */
+}
+
+/* Quando il menu è attivo, mostra il contenitore */
+.box-option.show {
+    display: flex;              /* Mostra e usa flexbox verticale */
+}
+
+/* Stile dei pulsanti dentro il menu */
+.box-option button {
+    background: none;           /* Nessuno sfondo */
+    border: none;               /* Nessun bordo */
+    color: white;               /* Testo bianco */
+    padding: 10px 16px;         /* Spaziatura interna per cliccabilità */
+    text-align: left;           /* Allinea il testo a sinistra */
+    font-size: 14px;            /* Dimensione testo leggibile */
+    cursor: pointer;            /* Cursore a mano */
+    width: 100%;                /* Pulsanti occupano tutta la larghezza del menu */
+    transition: background-color 0.2s; /* Transizione dolce al passaggio */
+}
+
+/* Effetto hover sui pulsanti del menu */
+.box-option button:hover {
+    background-color: #8B2635;  /* Sfondo rosso scuro */
+    color: #fff;                /* Testo bianco */
+}
+
+
+
+/* Sfondo oscurato dietro la modale */
+.modal {
+    display: none; /* Mostrata via JS */
+    position: fixed;
+    z-index: 1000; /* Assicurati che stia sopra tutto */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Sfondo scuro semi-trasparente */
+}
+
+/* Contenuto della modale */
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease;
+}
+
+/* Animazione di entrata */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Pulsante di chiusura (X) */
+.modal-content .close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Form input e textarea */
+.modal-content input[type="text"],
+.modal-content input[type="number"],
+.modal-content textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: vertical;
+}
+
+/* Etichette */
+.modal-content label {
+    font-weight: 600;
+    display: block;
+    margin-top: 10px;
+}
+
+/* Bottone Salva Modifiche */
+.modal-content .btn-submit {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
+}
+
+.modal-content .btn-submit:hover {
+    background-color: #45a049;
+}

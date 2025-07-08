@@ -109,7 +109,7 @@
                 <ul>
                     <li><a href="Profilo.jsp">Profilo</a></li>
                     <li><a href="Impostazioni.jsp">Impostazioni</a></li>
-                    <li><a href="Carrello.jsp">Carrello</a></li>
+
                     <form action="Logout" method="get">
                         <li><button>Log-out</button></li>
                     </form>
@@ -128,7 +128,7 @@
                 <ul>
                     <li><a href="Profilo.jsp">Profilo</a></li>
                     <li><a href="Impostazioni.jsp">Impostazioni</a></li>
-                    <li><a href="Carrello.jsp">Carrello</a></li>
+
                     <form action="Logout" method="get">
                         <li><button>Log-out</button></li>
                     </form>

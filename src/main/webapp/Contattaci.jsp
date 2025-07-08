@@ -35,7 +35,7 @@
         <div class="logo-container">
             <a href="Home.jsp">
                 <!-- Immagine del logo -->
-                <!-- <img src="logo.png" alt="Logo"> -->
+                <img src=" <%= request.getContextPath() + "/Immagini/isologo.png" %>" alt="Immagine Prodotto">
             </a>
         </div>
 
