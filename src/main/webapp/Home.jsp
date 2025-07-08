@@ -170,16 +170,19 @@
             <button class="btn-link" onclick="openDateSurveyModal()">Indagine per Data</button>
             <% } else { %>
             <!-- Utente non amministratore: solo il nome utente e il menu a tendina -->
-            <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
-            <div id="userMenu" class="user-menu">
-                <ul>
-                    <li><a href="Profilo.jsp">Profilo</a></li>
-                    <li><a href="Impostazioni.jsp">Impostazioni</a></li>
-
-                    <form action="Logout" method="get">
-                        <li><button>Log-out</button></li>
-                    </form>
-                </ul>
+            <div id="userContainer">
+                <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
+                <div id="menuUser" class="user-menu">
+                    <ul>
+                        <li><a class="btn-link" href="Profilo.jsp">Profilo</a></li>
+                        <li><a class="btn-link" href="Impostazioni.jsp">Impostazioni</a></li>
+                        <li>
+                            <form action="Logout" method="get">
+                                <button type="submit">Log-out</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <% } %>
             <% } %>
