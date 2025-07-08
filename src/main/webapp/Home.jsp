@@ -135,7 +135,38 @@
             <!-- Bottoni amministratore -->
             <button class="btn-link" onclick="openPriceSurveyModal()">Indagine per numero venduti</button>
             <button class="btn-link" onclick="openAddProductModal()">Aggiungi Prodotto</button>
+
+            <%-- questo è il pulsante per creare un nuovo filtro--%>
             <button class="btn-link" onclick="openAddFilterModal()">Aggiungi Filtro</button>
+
+                <%-- form per il nuovo filtro--%>
+                <div id="addFilterModal" class="modal" style="display:none;">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeAddFilterModal()">&times;</span>
+                        <h2>Aggiungi Nuovo Filtro</h2>
+                        <form action="GestioneFiltri" method="post">
+                            <input type="hidden" name="action" value="addFilter">
+                            <label for="filterName">Nome Filtro:</label>
+                            <input type="text" id="filterName" name="filterName" required>
+
+                            <label for="filterValue">Valore Filtro:</label>
+                            <input type="text" id="filterValue" name="filterValue" required>
+
+                            <button type="submit" class="btn-submit">Salva Filtro</button>
+                        </form>
+                    </div>
+                </div>
+
+                <%-- questo script è per il form  (PS: ci ho perso mezz'ora per capire che ci volesse :,) )--%>
+                <script>
+                    function openAddFilterModal() {
+                        document.getElementById("addFilterModal").style.display = "block";
+                    }
+                    function closeAddFilterModal() {
+                        document.getElementById("addFilterModal").style.display = "none";
+                    }
+                </script>
+
             <button class="btn-link" onclick="openDateSurveyModal()">Indagine per Data</button>
             <% } else { %>
             <!-- Utente non amministratore: solo il nome utente e il menu a tendina -->
