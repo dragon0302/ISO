@@ -217,19 +217,19 @@
         %>
 
             <div class="product">
-                <div class="box">
-                    <h3><%= p.getNome() %></h3>
-                    <p>Prezzo: €<%= p.getPrezzo() %></p>
-                    <p><%= p.getDescrizione() %></p>
-                    <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
-                    <form action="ProductCartMenegment" method="post">
-                        <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
-                        <input type="hidden" name="SourcePage" value="Home">
-                        <button type="submit" class="btn-aggiungi">
-                            Aggiungi al carrello
-                        </button>
-                    </form>
-                </div>
+                    <div class="box">
+                        <h3><%= p.getNome() %></h3>
+                        <p>Prezzo: €<%= p.getPrezzo() %></p>
+                        <p><%= p.getDescrizione() %></p>
+                        <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
+                        <form action="ProductCartMenegment" method="post">
+                            <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
+                            <input type="hidden" name="SourcePage" value="Home">
+                            <button type="submit" class="btn-aggiungi">
+                                Aggiungi al carrello
+                            </button>
+                        </form>
+                    </div>
             </div>
 
             <%
@@ -241,7 +241,7 @@
 
         <%
         String filtroAmministratore = (String) request.getAttribute("Filter");
-        if (filtroAmministratore != null) {
+        if (filtroAmministratore != null && utente.isAmministratore()) {
         %>
 
         <h2><%= filtroAmministratore %></h2>
@@ -253,12 +253,24 @@
                 for (Prodotto p : prodottiFiltro){
             %>
 
+            <%-- modifica che permette di visualizzare il pulsante elimina e modifica attraverso il pulsante: "⋮"--%>
             <div class="product">
                 <div class="box">
+                    <!-- Pulsante ⋮ -->
+                    <button class="menu-button" onclick="toggleBoxOption(this)">⋮</button>
+
+                    <!-- Menu opzioni -->
+                    <div class="box-option">
+                        <button onclick="openEditModal(<%= p.getId_prodotto() %>, '<%= p.getNome() %>', <%= p.getPrezzo() %>, '<%= p.getDescrizione() %>')">Modifica</button>
+                        <button onclick="openDeleteModal(<%= p.getId_prodotto() %>)">Elimina</button>
+                    </div>
+
                     <h3><%= p.getNome() %></h3>
                     <p>Prezzo: €<%= p.getPrezzo() %></p>
                     <p><%= p.getDescrizione() %></p>
+
                     <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
+
                     <form action="ProductCartMenegment" method="post">
                         <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
                         <input type="hidden" name="SourcePage" value="Home">
@@ -268,6 +280,7 @@
                     </form>
                 </div>
             </div>
+
 
             <%
                     }
@@ -328,24 +341,35 @@
                     if (prodottiNovita != null) {
                         for (Prodotto p : prodottiNovita) {
                 %>
+
+                <%-- modifica che permette di visualizzare il pulsante elimina e modifica attraverso il pulsante: "⋮"--%>
                 <div class="product">
                     <div class="box">
+                        <!-- Pulsante ⋮ -->
+                        <button class="menu-button" onclick="toggleBoxOption(this)">⋮</button>
+
+                        <!-- Menu opzioni -->
+                        <div class="box-option">
+                            <button onclick="openEditModal(<%= p.getId_prodotto() %>, '<%= p.getNome() %>', <%= p.getPrezzo() %>, '<%= p.getDescrizione() %>')">Modifica</button>
+                            <button onclick="openDeleteModal(<%= p.getId_prodotto() %>)">Elimina</button>
+                        </div>
+
                         <h3><%= p.getNome() %></h3>
                         <p>Prezzo: €<%= p.getPrezzo() %></p>
                         <p><%= p.getDescrizione() %></p>
+
                         <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
+
                         <form action="ProductCartMenegment" method="post">
                             <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
                             <input type="hidden" name="SourcePage" value="Home">
                             <button type="submit" class="btn-aggiungi">
                                 Aggiungi al carrello
                             </button>
-                            <button class="btn-elimina" onclick="openDeleteModal()">
-                                Elimina
-                            </button>
                         </form>
                     </div>
                 </div>
+
                 <%
                     }
                 } else {
@@ -413,23 +437,33 @@
                 if (prodottiPopolari != null) {
                     for (Prodotto p : prodottiPopolari) {
             %>
-                    <div class="product">
-                        <div class="box"><h3 ><%= p.getNome() %></h3>
-                            <p >Prezzo: €<%= p.getPrezzo() %></p>
-                            <p ><%= p.getDescrizione() %></p>
-                            <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
-                            <form action="ProductCartMenegment" method="post">
-                                <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
-                                <input type="hidden" name="SourcePage" value="Home">
-                                <button type="submit" class="btn-aggiungi">
-                                    Aggiungi al carrello
-                                </button>
-                                <button class="btn-elimina" onclick="openDeleteModal()">
-                                    Elimina
-                                </button>
-                            </form>
+                        <%-- modifica che permette di visualizzare il pulsante elimina e modifica attraverso il pulsante: "⋮"--%>
+                        <div class="product">
+                            <div class="box">
+                                <!-- Pulsante ⋮ -->
+                                <button class="menu-button" onclick="toggleBoxOption(this)">⋮</button>
+
+                                <!-- Menu opzioni -->
+                                <div class="box-option">
+                                    <button onclick="openEditModal(<%= p.getId_prodotto() %>, '<%= p.getNome() %>', <%= p.getPrezzo() %>, '<%= p.getDescrizione() %>')">Modifica</button>
+                                    <button onclick="openDeleteModal(<%= p.getId_prodotto() %>)">Elimina</button>
+                                </div>
+
+                                <h3><%= p.getNome() %></h3>
+                                <p>Prezzo: €<%= p.getPrezzo() %></p>
+                                <p><%= p.getDescrizione() %></p>
+
+                                <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
+
+                                <form action="ProductCartMenegment" method="post">
+                                    <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
+                                    <input type="hidden" name="SourcePage" value="Home">
+                                    <button type="submit" class="btn-aggiungi">
+                                        Aggiungi al carrello
+                                    </button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
                         <%
                 }
             } else {
@@ -451,6 +485,44 @@
     <a href="Termini_e_condizioni.jsp" class="btn-link">Termini e condizioni</a>
     <a href="Assistenza.jsp" class="btn-link">Assistenza</a>
 </div>
+
+<%--form per la modifica del prodotto--%>
+<div id="editProductModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeEditModal()">&times;</span>
+        <h2>Modifica Prodotto</h2>
+        <form action="GestioneProdotti" method="post">
+            <input type="hidden" name="action" value="modifica">
+            <input type="hidden" name="id_prodotto" id="edit-id">
+
+            <label for="edit-nome">Nome:</label>
+            <input type="text" id="edit-nome" name="nome" required>
+
+            <label for="edit-prezzo">Prezzo (€):</label>
+            <input type="number" id="edit-prezzo" name="prezzo" step="0.01" required>
+
+            <label for="edit-descrizione">Descrizione:</label>
+            <textarea id="edit-descrizione" name="descrizione" required></textarea>
+
+            <button type="submit" class="btn-submit">Salva Modifiche</button>
+        </form>
+    </div>
+</div>
+
+<!-- Script JS per il form della modifica-->
+<script>
+    function openEditModal(id, nome, prezzo, descrizione) {
+        document.getElementById("edit-id").value = id;
+        document.getElementById("edit-nome").value = nome;
+        document.getElementById("edit-prezzo").value = prezzo;
+        document.getElementById("edit-descrizione").value = descrizione;
+        document.getElementById("editProductModal").style.display = "block";
+    }
+
+    function closeEditModal() {
+        document.getElementById("editProductModal").style.display = "none";
+    }
+</script>
 
 </body>
 </html>
