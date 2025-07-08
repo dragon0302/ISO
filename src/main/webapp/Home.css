@@ -187,6 +187,50 @@ main h2 {
     text-align: left;
 }
 
+#menuUser {
+    display: none; /* nascosto di default */
+    position: absolute;
+    top: 100%;      /* subito sotto il contenitore */
+    left: 0;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+    min-width: 150px; /* opzionale: larghezza minima */
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+/* Per far apparire il menu quando si passa col mouse sul contenitore (hover) */
+#userContainer:hover #menuUser {
+    display: block;
+}
+
+/* Stile lista dentro il menu */
+#menuUser ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#menuUser li {
+    padding: 8px 12px;
+}
+
+#menuUser li:hover {
+    background-color: #f0f0f0;
+}
+
+#menuUser li button {
+    width: 100%;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
+}
+
 /* Pulsante ⋮ posizionato in alto a destra della card prodotto */
 .menu-button {
     position: absolute;           /* Posiziona il pulsante rispetto al contenitore .box */
