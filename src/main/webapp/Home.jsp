@@ -126,7 +126,7 @@
                 <ul>
                     <li><a href="Profilo.jsp">Profilo</a></li>
                     <li><a href="Impostazioni.jsp">Impostazioni</a></li>
-                    <li><a href="Carrello.jsp">Carrello</a></li>
+
                     <form action="Logout" method="get">
                         <li><button>Log-out</button></li>
                     </form>
@@ -144,7 +144,7 @@
                 <ul>
                     <li><a href="Profilo.jsp">Profilo</a></li>
                     <li><a href="Impostazioni.jsp">Impostazioni</a></li>
-                    <li><a href="Carrello.jsp">Carrello</a></li>
+
                     <form action="Logout" method="get">
                         <li><button>Log-out</button></li>
                     </form>
@@ -237,7 +237,6 @@
         </div>
 
         <h2>Novità</h2>
-
         <div class="product-slider">
 
                 <%
@@ -271,8 +270,14 @@
             }else{
             %>
 
-            <h2>Novità</h2>
-
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <h2>Novità</h2>
+                <%--la riga successiva dovrebbe mostrare l'input numerico in novità--%>
+                <form action="FiltraNovita" method="get" style="display: flex; align-items: center; gap: 10px;">
+                    <input type="number" name="giorni" id="giorni-novita" min="1" max="365" placeholder="Max giorni" required>
+                    <button class="btn-link" type="submit">Ricerca</button>
+                </form>
+            </div>
             <div class="product-slider">
 
                 <%
@@ -351,8 +356,16 @@
             } else {
             %>
 
-                <h2>Prodotti più acquistati</h2>
-                <div class="product-slider">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <h2>Prodotti più acquistati</h2>
+                            <%--la riga successiva dovrebbe mostrare l'input numerico in prodotti più venduti--%>
+                            <form action="FiltraPopolari" method="get" style="display: flex; align-items: center; gap: 10px;">
+                                <input type="number" name="maxVendite" id="vendite-max" min="1" placeholder="Num MAX vendite">
+                                <button class="btn-link" type="submit">Ricerca</button>
+                            </form>
+                        </div>
+
+                        <div class="product-slider">
                         <%
                 List<Prodotto> prodottiPopolari = (List<Prodotto>) request.getAttribute("prodottiPiuAqqistati");
                 if (prodottiPopolari != null) {
