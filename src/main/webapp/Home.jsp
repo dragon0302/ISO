@@ -189,6 +189,12 @@
 
 
 <main>
+
+    <%-- variabile boolean per controllare che un filtro è attivo--%>
+    <%
+        boolean filtroAttivo = (request.getAttribute("Filter") != null && !((String)request.getAttribute("Filter")).isEmpty());
+    %>
+
     <section class="content">
         <div class="banner">Banner</div>
 
@@ -266,6 +272,8 @@
             %>
 
         </div>
+        <%-- utilizzo la variabile boolean per controllare se è stato usato un filtro e se è cosi blocca tutta la parte seguente--%>
+        <% if (!filtroAttivo) { %>
 
         <h2>Novità</h2>
         <div class="product-slider">
@@ -428,6 +436,8 @@
                 }
             }
             %>
+
+                <% } %>
 
     </section>
 </main>
