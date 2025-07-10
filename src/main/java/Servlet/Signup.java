@@ -15,6 +15,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.*;
 
 @WebServlet("/Sign-up")
 public class Signup extends HttpServlet {
@@ -30,9 +31,21 @@ public class Signup extends HttpServlet {
         String erroreData = "Data non coretta";
         String erroreEmail = "Email non coretta";
 
+        // Regex
+        Pattern USERNAME_REGEX = Pattern.compile("^[a-zA-Z0-9_]{1,10}$");
+        Pattern EMAIL_REGEX = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+        Pattern PASSWORD_REGEX = Pattern.compile("^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_]+\\-=[\\]{};':\"\\\\|,.<>/?]).{8,}$");
+        Pattern NOME_REGEX = Pattern.compile("^[A-Za-zÀ-ÖØ-öø-ÿ' ]+$");
+        Pattern COGNOME_REGEX = Pattern.compile("^[A-Za-zÀ-ÖØ-öø-ÿ' ]+$");
+        Pattern CODICEFISCALE_REGEX = Pattern.compile("^([A-Z]{6}[0-9LMNPQRSTUV]{2}[ABCDEHLMPRST]{1}[0-9LMNPQRSTUV]{2}[A-Z]{1}[0-9LMNPQRSTUV]{3}[A-Z]{1})$|([0-9]{11})$");
+        String erroreNomeRegex = "Il campo <<Nome>> contiene caratteri non ammessi ";
+        String erroreCognomeRegex = "Il campo <<Cognome>> contiene caratteri non ammessi ";
+        String erroreEmailRegex = "Il campo <<Email>> contiene caratteri non ammessi ";
+        String erroreNomeUtenteRegex = "Il campo <<Nome Utente>> contiene caratteri non ammessi ";
+        String errorePasswordRegex = "Il campo <<Password>> contiene caratteri non ammessi ";
         try{
             String CF = request.getParameter("CodiceFiscale");
-            String nomeUtenete = request.getParameter("NomeUtente");
+            String nomeUtente = request.getParameter("NomeUtente");
             String Password = request.getParameter("Password");
             String Nome = request.getParameter("Nome");
             String Cognome = request.getParameter("Cognome");
@@ -44,13 +57,28 @@ public class Signup extends HttpServlet {
             String salt = encod.genereitSalt();
             String encodedPassword = encod.codePassword(Password,salt);
 
-            if (CF.length() != 16) {
+            if (!CODICEFISCALE_REGEX.matcher(CF).matches()) {
                 request.setAttribute("errore", erroreCF);
+                request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
+           }else if (!NOME_REGEX.matcher(Nome).matches()) {
+                request.setAttribute("errore", erroreNomeRegex);
+                request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
+            }else if (!COGNOME_REGEX.matcher(Cognome).matches()) {
+                request.setAttribute("errore", erroreCognomeRegex);
+                request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
+            }else if (!EMAIL_REGEX.matcher(Email).matches()) {
+                request.setAttribute("errore", erroreEmailRegex);
+                request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
+            }else if (!USERNAME_REGEX.matcher(nomeUtente).matches()) {
+                request.setAttribute("errore", erroreNomeUtenteRegex);
+                request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
+            }else if (!PASSWORD_REGEX.matcher(Password).matches()) {
+                request.setAttribute("errore", errorePasswordRegex);
                 request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
             }else if(utenteDAO.CFEsistente(CF)){
                 request.setAttribute("errore", erroreCF);
                 request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
-            }else if (utenteDAO.UtenteEsistente(nomeUtenete)) {
+            }else if (utenteDAO.UtenteEsistente(nomeUtente)) {
                 request.setAttribute("errore", erroreNomeUtente);
                 request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
             } else if (dataNascita.compareTo(new Date(1900,1,1)) < 0 && dataNascita.compareTo(Date.valueOf(LocalDate.now())) > 0) {
@@ -59,8 +87,12 @@ public class Signup extends HttpServlet {
             } else if(utenteDAO.EmailEsistente(Email)) {
                 request.setAttribute("errore", erroreEmail);
                 request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
-            }else{
-                Utente utente = new Utente(CF, nomeUtenete, encodedPassword,salt, Nome, Cognome, Email, Sesso, dataNascita, Amministratore);
+            } else if(!NOME_REGEX.matcher(nomeUtente).matches()) {
+                request.setAttribute("errore", erroreEmail);
+                request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
+            }
+            else{
+                Utente utente = new Utente(CF, nomeUtente, encodedPassword,salt, Nome, Cognome, Email, Sesso, dataNascita, Amministratore);
                 Carrello carrello = new Carrello(CF);
                 utenteDAO.DoSave(utente);
                 carrelloDAO.DoSave(carrello);
