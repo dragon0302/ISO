@@ -21,7 +21,7 @@
         <div class="top-header">
             <!-- Parte 1 - Logo a sinistra -->
             <div class="logo-container">
-                <a href="Home.jsp">
+                <a href="Catalogo">
                     <img src=" <%= request.getContextPath() + "/Immagini/isologo.png" %>" alt="Immagine Prodotto">
                 </a>
             </div>
