@@ -203,6 +203,7 @@
         <%
             if(utente == null){
                 String filtro = (String) request.getAttribute("Filter");
+                String filtroAmministratore = (String) request.getAttribute("Filter");
                 if (filtro != null) {
         %>
 
@@ -233,14 +234,13 @@
 
             <%
                         }
-                    }
             %>
 
         </div>
 
         <%
-        String filtroAmministratore = (String) request.getAttribute("Filter");
-        if (filtroAmministratore != null && utente.isAmministratore()) {
+
+            } else if (filtroAmministratore != null && utente.isAmministratore()) {
         %>
 
         <h2><%= filtroAmministratore %></h2>

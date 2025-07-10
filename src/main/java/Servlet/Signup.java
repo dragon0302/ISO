@@ -30,6 +30,11 @@ public class Signup extends HttpServlet {
         String erroreNomeUtente = "Nome utente gia esistente";
         String erroreData = "Data non coretta";
         String erroreEmail = "Email non coretta";
+        String erroreNomeRegex = "Il campo <<Nome>> contiene caratteri non ammessi ";
+        String erroreCognomeRegex = "Il campo <<Cognome>> contiene caratteri non ammessi ";
+        String erroreEmailRegex = "Il campo <<Email>> contiene caratteri non ammessi ";
+        String erroreNomeUtenteRegex = "Il campo <<Nome Utente>> contiene caratteri non ammessi ";
+        String errorePasswordRegex = "Il campo <<Password>> contiene caratteri non ammessi ";
 
         // Regex
         Pattern USERNAME_REGEX = Pattern.compile("^[a-zA-Z0-9_]{1,10}$");
@@ -38,11 +43,8 @@ public class Signup extends HttpServlet {
         Pattern NOME_REGEX = Pattern.compile("^[A-Za-zÀ-ÖØ-öø-ÿ' ]+$");
         Pattern COGNOME_REGEX = Pattern.compile("^[A-Za-zÀ-ÖØ-öø-ÿ' ]+$");
         Pattern CODICEFISCALE_REGEX = Pattern.compile("^([A-Z]{6}[0-9LMNPQRSTUV]{2}[ABCDEHLMPRST]{1}[0-9LMNPQRSTUV]{2}[A-Z]{1}[0-9LMNPQRSTUV]{3}[A-Z]{1})$|([0-9]{11})$");
-        String erroreNomeRegex = "Il campo <<Nome>> contiene caratteri non ammessi ";
-        String erroreCognomeRegex = "Il campo <<Cognome>> contiene caratteri non ammessi ";
-        String erroreEmailRegex = "Il campo <<Email>> contiene caratteri non ammessi ";
-        String erroreNomeUtenteRegex = "Il campo <<Nome Utente>> contiene caratteri non ammessi ";
-        String errorePasswordRegex = "Il campo <<Password>> contiene caratteri non ammessi ";
+
+
         try{
             String CF = request.getParameter("CodiceFiscale");
             String nomeUtente = request.getParameter("NomeUtente");
