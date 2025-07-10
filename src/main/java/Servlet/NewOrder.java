@@ -20,7 +20,7 @@ public class NewOrder extends HttpServlet {
     OrdineDAO ordineDAO = new OrdineDAOImplement();
     CarrelloDAO carrelloDAO = new CarrelloDAOImplement();
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
 
@@ -43,7 +43,7 @@ public class NewOrder extends HttpServlet {
             Ordine ordine = new Ordine(Date.valueOf(LocalDate.now()),PrezzoTotale,idProdotti,carrelloDAO.GetIdCarrello(utente.getCf()));
             ordineDAO.DoSave(ordine);
 
-            response.sendRedirect("Pagamento.jsp");
+            response.sendRedirect("Catalogo");
 
         }catch (Exception e) {
             e.printStackTrace();

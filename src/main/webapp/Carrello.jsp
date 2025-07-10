@@ -179,11 +179,11 @@
 
 
         <div class="box-acquista">
-            <form action="NewOrder" method="post">
-                <button type="submit" class="btn-aggiungi">
+            <!--<form action="NewOrder" method="post">-->
+                <button onclick="window.location.href='${pageContext.request.contextPath}/Pagamento.jsp'">
                     Vai al pagamento
                 </button>
-            </form>
+            <!--</form>-->
         </div>
     </div>
 
