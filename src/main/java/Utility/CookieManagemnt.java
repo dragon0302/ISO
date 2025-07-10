@@ -107,14 +107,10 @@ public class CookieManagemnt {
                     if (operazione == 0) {
                         quantita++;
                     } else if (operazione == 1) {
-                        System.out.println("nel if " + quantita);
-                        quantita--;
-                        System.out.println("nel if 2 " + quantita);
-                        System.out.println("prova");
+                        quantita--;;
                     }else {
                         System.out.println("erroere operazzione errata");
                     }
-                    System.out.println("fuori dall if " + quantita);
                     // Ricostruisci l'item
                     item = "(I" + prodottoID + "!" + quantita + ")";
                 }

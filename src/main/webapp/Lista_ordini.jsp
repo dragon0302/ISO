@@ -10,6 +10,8 @@
 <%@ page import="DataManagement.Prodotto" %>
 <%@ page import="com.mysql.cj.Session" %>
 <%@ page import="DataManagement.Utente" %>
+<%@ page import="DataManagement.Ordine" %>
+<%@ page import="java.util.ArrayList" %>
 
 <!DOCTYPE html>
 <html lang="it">
@@ -150,32 +152,38 @@
             <h2>I miei ordini</h2>
             <%
                 if (utente != null) {
-                    List<Ordine> ordini = utente.getListaOrdini(); // o metodo corretto
+                    List<Ordine> ordini = (List<Ordine>) session.getAttribute("ordine");
+                    List<Prodotto> prodotti = new ArrayList<>();
 
+                    System.out.println(ordini == null);
                     if (ordini != null && !ordini.isEmpty()) {
-                        for (Ordine ordine : ordini) {
-                            List<Prodotto> prodotti = ordine.getProdotti(); // Assumi esistenza
-                            String imgPath = (prodotti != null && !prodotti.isEmpty())
+                        for (int i = 0;i < ordini.size(); i++) {
+                          //prendere la funzione che da i prodotti dell'ordine e creare classe apposita per la gesione delle immagini
+                            List<List<Prodotto>> Listaprodotti = (List<List<Prodotto>>) session.getAttribute("ListeProdotti");
+                            for (int g = 0; g < Listaprodotti.get(i).size(); g++){
+                              prodotti = Listaprodotti.get(i);
+                            /*String imgPath = (prodotti != null && !prodotti.isEmpty())
                                     ? prodotti.get(0).getImmagine() // es. "img/prodotto1.jpg"
-                                    : "img/default.jpg"; // immagine placeholder
+                                    : "img/default.jpg"; // immagine placeholder*/
             %>
             <div class="order-box">
-                <div class="order-image">
+                <%--<div class="order-image">
                     <img src="<%= imgPath %>" alt="Immagine prodotto" />
-                </div>
+                </div>--%>
                 <div class="order-info">
-                    <p><strong>Ordine #</strong><%= ordine.getId() %></p>
-                    <p><strong>Data:</strong> <%= ordine.getDataOrdine() %></p>
-                    <p><strong>Totale:</strong> € <%= ordine.getTotale() %></p>
-                    <p><strong>Stato:</strong> <%= ordine.getStato() %></p>
+                    <p><strong>Ordine #</strong><%= ordini.get(i).getIdOrdine() %></p>
+                    <p><strong>Data:</strong> <%= ordini.get(i).getData_ordine() %></p>
+                    <p><strong>Totale:</strong> € <%= ordini.get(i).getTotale() %></p>
+                    <%--<p><strong>Stato:</strong> <%= ordini.get(i).getStato() %></p>--%>
                     <div class="order-actions">
-                        <a href="RiacquistaProdotti.jsp?idOrdine=<%= ordine.getId() %>" class="btn-small">Riacquista Prodotti</a>
-                        <a href="VediOrdine.jsp?idOrdine=<%= ordine.getId() %>" class="btn-small">Vedi Ordine</a>
+                        <a href="RiacquistaProdotti.jsp?idOrdine=<%= prodotti.get(i).getId_prodotto() %>" class="btn-small">Riacquista Prodotti</a>
+                        <%--<a href="VediOrdine.jsp?idOrdine=<%= ordine.getId() %>" class="btn-small">Vedi Ordine</a>--%>
                     </div>
                 </div>
             </div>
             <%      }
-            } else { %>
+                }
+            }else { %>
             <p>Non hai ancora effettuato ordini.</p>
             <%      }
             } else {

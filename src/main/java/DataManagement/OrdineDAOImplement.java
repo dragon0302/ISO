@@ -6,6 +6,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrdineDAOImplement implements OrdineDAO {
     private static DataSource ds;
@@ -119,7 +120,7 @@ public class OrdineDAOImplement implements OrdineDAO {
                 String prodotti = rs.getString(4);
                 Integer id_carrello = rs.getInt(5);
                 Ordine ordine = new Ordine(DataOrdine,prezzo,prodotti,id_carrello);
-                ordine.setID_carrello(id_ordine);
+                ordine.setIdOrdine(id_ordine);
                 ordini.add(ordine);
             }
 
@@ -138,6 +139,53 @@ public class OrdineDAOImplement implements OrdineDAO {
         }
 
         return ordini;
+
+    }
+
+    public ArrayList<Prodotto> getProdotti(int IdOrdine) throws SQLException{
+
+        Connection conn = null;
+        PreparedStatement query5 = null;
+        String prodoti = null;
+        ArrayList<Prodotto> listaProdotti = new ArrayList<>();
+        ProdottoDAO prodottoDAO = new ProdottoDAOImplement();
+
+        try {
+
+            conn = ds.getConnection();
+            query5 = conn.prepareStatement("select Lista_prodotti from  " + TABLE_NAME + " where ID_ordine = ?");
+
+            query5.setInt(1, IdOrdine);
+
+            ResultSet rs = query5.executeQuery();
+
+            if (rs.next()) {
+
+                prodoti = rs.getString(1);
+                String[] prodotti = prodoti.split(",");
+
+                for (int i = 0; i < prodotti.length; i++) {
+                    listaProdotti.add(prodottoDAO.getProdottoByID(Integer.parseInt(prodotti[i])));
+                }
+            }else {
+                return null;
+            }
+
+        }catch (Exception e) {
+            System.out.println("Naming Exeption: " + e.getMessage());
+        } finally {
+            try {
+                if (query5 != null) {
+                    query5.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+
+        return listaProdotti;
 
     }
 
