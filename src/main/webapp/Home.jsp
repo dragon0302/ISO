@@ -15,7 +15,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="DataManagement.Prodotto" %>
-<%@ page import="com.mysql.cj.Session" %>
 <%@ page import="DataManagement.Utente" %>
 
 <!DOCTYPE html>
@@ -390,9 +389,7 @@
                 List<Prodotto> prodottiPopolari = (List<Prodotto>) request.getAttribute("prodottiPiuAqqistati");
                 List<String> paths = (List<String>) request.getAttribute("paths");
                 if (prodottiPopolari != null && paths != null) {
-                  System.out.println(paths.size());
                     for (int i = 0; i < prodottiPopolari.size(); i++) {
-                      System.out.println(paths.get(i));
             %>
                 <div class="product-image">
                     <!-- Immagine prodotto (metti il path corretto nell'attributo src) -->

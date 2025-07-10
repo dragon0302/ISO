@@ -53,10 +53,8 @@ public class UpdateCarrello extends HttpServlet {
                     try {
                         if (quantita > quantity) {
                             cookieManagemnt.updateCookieProductQuantity(response, String.valueOf(productId), 1);
-                            System.out.println(productId);
                             prezzoTotale = prezzoTotale - prodottoDAO.GetPrezzo(productId);
                         } else {
-                            System.out.println("prova2");
                             cookieManagemnt.updateCookieProductQuantity(response, String.valueOf(productId), 0);
                             prezzoTotale += prodottoDAO.GetPrezzo(productId);
                         }

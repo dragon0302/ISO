@@ -103,7 +103,6 @@ public class Signup extends HttpServlet {
                     List<String> ids = cm.AllCookieId();
 
                     for (String id : ids) {
-                        System.out.println(Integer.parseInt(id));
                         Acquisto acquisto = new Acquisto(false,cm.getCookieProductQuantity(id), carrelloDAO.GetIdCarrello(CF),Integer.parseInt(id));
                         acquistoDAO.DoSave(acquisto);
                     }
