@@ -199,7 +199,7 @@ public class CarrelloDAOImplement implements CarrelloDAO {
         try {
 
             conn = ds.getConnection();
-            query6 = conn.prepareStatement("SELECT Lista_prodotti FROM " + TABLE_NAME + " WHERE ID_carrello = ?");
+            query6 = conn.prepareStatement("SELECT Lista_prodotti FROM " + TABLE_NAME + " WHERE ID_carrello = ? AND Lista_prodotti IS NOT NULL");
 
             query6.setInt(1,idcarello);
 

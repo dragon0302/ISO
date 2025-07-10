@@ -112,42 +112,44 @@ public class Carrello extends HttpServlet {
                     session.setAttribute("quantità", Nquantita);
                 }
 
-                for (String id : ids) {
-                    prodotto = prodottoDAO.getProdottoByID(Integer.parseInt(id));
+                if (ids != null) {
+                    for (String id : ids) {
+                        prodotto = prodottoDAO.getProdottoByID(Integer.parseInt(id));
 
 
-                    if (carrello.isEmpty()) {
-                        carrello.add(prodotto);
-                    }
+                        if (carrello.isEmpty()) {
+                            carrello.add(prodotto);
+                        }
 
-                    Prodotto finalProdotto = prodotto;
-                    if (!(carrello.stream().anyMatch(p -> p.getId_prodotto() == finalProdotto.getId_prodotto()))) {
-                        carrello.add(prodotto);
-                    }
+                        Prodotto finalProdotto = prodotto;
+                        if (!(carrello.stream().anyMatch(p -> p.getId_prodotto() == finalProdotto.getId_prodotto()))) {
+                            carrello.add(prodotto);
+                        }
 
-                    if (Nquantita == null) {
-                        Nquantita = new ArrayList<>();
-                        session.setAttribute("quantità", Nquantita);
-                    }
+                        if (Nquantita == null) {
+                            Nquantita = new ArrayList<>();
+                            session.setAttribute("quantità", Nquantita);
+                        }
 
-                    if (carrello.size() > Nquantita.size()) {
+                        if (carrello.size() > Nquantita.size()) {
 
-                        Nquantita.add(acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), Integer.parseInt(id)));
-                        prezzototale += prodotto.getPrezzo() *acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), Integer.parseInt(id));
-                    } else {
+                            Nquantita.add(acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), Integer.parseInt(id)));
+                            prezzototale += prodotto.getPrezzo() * acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), Integer.parseInt(id));
+                        } else {
 
-                        for (int i = 0; i < carrello.size(); i++) {
-                            if (carrello.get(i).getId_prodotto() == Integer.parseInt(id)) {
+                            for (int i = 0; i < carrello.size(); i++) {
+                                if (carrello.get(i).getId_prodotto() == Integer.parseInt(id)) {
 
-                                if(Nquantita.get(i) < acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), Integer.parseInt(id))){
-                                    int temp = acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), Integer.parseInt(id)) - Nquantita.get(i);
-                                    prezzototale += (prodotto.getPrezzo() * temp);
+                                    if (Nquantita.get(i) < acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), Integer.parseInt(id))) {
+                                        int temp = acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), Integer.parseInt(id)) - Nquantita.get(i);
+                                        prezzototale += (prodotto.getPrezzo() * temp);
+                                    }
+
+                                    Nquantita.set(i, acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), Integer.parseInt(id)));
+
                                 }
 
-                                Nquantita.set(i, acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), Integer.parseInt(id)));
-
                             }
-
                         }
                     }
                 }
