@@ -86,26 +86,38 @@ public class AcquistoDAOImplement implements AcquistoDAO {
         return prodottiPiuAqquistati;
     }
 
-    public void UpdateQuantity(int ProdottoID, int IDcarello) throws SQLException{
+    public void UpdateQuantity(int ProdottoID, int IDcarello, char segnio) throws SQLException{
 
         Connection conn = null;
         PreparedStatement query3 = null;
+        PreparedStatement query4 = null;
 
         try {
 
             conn = ds.getConnection();
             query3 = conn.prepareStatement("update " + TABLE_NAME + " set Quantita = Quantita + 1 where (ID_Carello = ? and ID_Prodotto = ?)");
+            query4 = conn.prepareStatement("update " + TABLE_NAME + " set Quantita = Quantita - 1 where (ID_Carello = ? and ID_Prodotto = ?)");
 
-            query3.setInt(1, IDcarello);
-            query3.setInt(2, ProdottoID);
+            if (segnio == '+') {
+                query3.setInt(1, IDcarello);
+                query3.setInt(2, ProdottoID);
 
-            query3.executeUpdate();
+                query3.executeUpdate();
+            } else if (segnio == '-') {
+                query4.setInt(1, IDcarello);
+                query4.setInt(2, ProdottoID);
+
+                query4.executeUpdate();
+            }
         }catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
             try {
                 if (query3 != null) {
                     query3.close();
+                }
+                if (query4 != null) {
+                    query4.close();
                 }
             } finally {
                 if (conn != null) {
@@ -118,17 +130,17 @@ public class AcquistoDAOImplement implements AcquistoDAO {
     public Integer GetQuntita(int IDcarello,int ProdottoID) throws SQLException{
 
         Connection conn = null;
-        PreparedStatement query4 = null;
+        PreparedStatement query5 = null;
 
         try {
 
             conn = ds.getConnection();
-            query4 = conn.prepareStatement("SELECT Quantita FROM " + TABLE_NAME + " WHERE ID_Carello = ? and ID_Prodotto = ?");
+            query5 = conn.prepareStatement("SELECT Quantita FROM " + TABLE_NAME + " WHERE ID_Carello = ? and ID_Prodotto = ?");
 
-            query4.setInt(1, IDcarello);
-            query4.setInt(2, ProdottoID);
+            query5.setInt(1, IDcarello);
+            query5.setInt(2, ProdottoID);
 
-            ResultSet rs = query4.executeQuery();
+            ResultSet rs = query5.executeQuery();
 
             if (rs.next()) {
                 return rs.getInt(1);
@@ -137,8 +149,8 @@ public class AcquistoDAOImplement implements AcquistoDAO {
             System.out.println(e.getMessage());
         } finally {
             try {
-                if (query4 != null) {
-                    query4.close();
+                if (query5 != null) {
+                    query5.close();
                 }
             } finally {
                 if (conn != null) {

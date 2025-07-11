@@ -67,10 +67,15 @@ public class UpdateCarrello extends HttpServlet {
 
         }else {
 
-            prezzoTotale += prezzo;
-
             try {
-                acquistoDAO.UpdateQuantity(productId, carrelloDAO.GetIdCarrello(utente.getCf()));
+                int quantita = acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), productId);
+                if (quantita < quantity) {
+                    acquistoDAO.UpdateQuantity(productId, carrelloDAO.GetIdCarrello(utente.getCf()), '+');
+                    prezzoTotale += prezzo;
+                } else if (quantita > quantity) {
+                    acquistoDAO.UpdateQuantity(productId, carrelloDAO.GetIdCarrello(utente.getCf()), '-');
+                    prezzoTotale -= prezzo;
+                }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

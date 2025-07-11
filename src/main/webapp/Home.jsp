@@ -108,7 +108,7 @@
 
         <!-- Parte 3 - Bottoni di Sign-up e Log-in a destra -->
         <div class="right-section">
-            <a class="btn-link" href="Carrello">Carrello</a>
+            <a class="btn-link" href="carrello">Carrello</a>
             <%
                 Utente utente = (Utente) session.getAttribute("utente");
 
@@ -397,8 +397,8 @@
                 </div>
                 <div class="product">
                     <div class="box"><h3 ><%= prodottiPopolari.get(i).getNome() %></h3>
-                        <p >Prezzo: €<%= prodottiPopolari.get(i).getPrezzo() %></p>
-                        <p ><%= prodottiPopolari.get(i).getDescrizione() %></p>
+                        <p>Prezzo: €<%= prodottiPopolari.get(i).getPrezzo() %></p>
+                        <p><%= prodottiPopolari.get(i).getDescrizione() %></p>
                         <a href="ProdottoS?id=<%= prodottiPopolari.get(i).getId_prodotto() %>">Dettagli</a>
                         <form action="ProductCartMenegment" method="post">
                             <input type="hidden" name="prodottoID" value="<%= prodottiPopolari.get(i).getId_prodotto() %>">

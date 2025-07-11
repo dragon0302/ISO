@@ -36,7 +36,7 @@ public class ProductCartMenegment extends HttpServlet {
                     Acquisto acquisto = new Acquisto(false,1, carrelloDAO.GetIdCarrello(utente.getCf()),Integer.parseInt(prodottoID));
                     acquistoDAO.DoSave(acquisto);
                 }else {
-                    acquistoDAO.UpdateQuantity(Integer.parseInt(prodottoID), carrelloDAO.GetIdCarrello(utente.getCf()));
+                    acquistoDAO.UpdateQuantity(Integer.parseInt(prodottoID), carrelloDAO.GetIdCarrello(utente.getCf()), '+');
                 }
             }
 
