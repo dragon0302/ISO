@@ -19,8 +19,8 @@
     <meta charset="UTF-8">
     <title>Lista Ordini</title>
 
-    <link rel="stylesheet" href="sfondo.css">
-    <link rel="stylesheet" href="Lista_ordini.css">
+    <link rel="stylesheet" href="../sfondo.css">
+    <link rel="stylesheet" href="../FILE_CSS/Lista_ordini.css">
 <body>
 
 <script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>

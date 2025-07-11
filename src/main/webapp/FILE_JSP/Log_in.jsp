@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log in</title>
-    <link rel="stylesheet" href="sfondo.css">
-    <link rel="stylesheet" href="Log_in.css">
+    <link rel="stylesheet" href="../sfondo.css">
+    <link rel="stylesheet" href="../FILE_CSS/Log_in.css">
 </head>
 <body>
 

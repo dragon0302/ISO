@@ -3,20 +3,19 @@
 <%@ page import="DataManagement.Prodotto" %>
 <%@ page import="com.mysql.cj.Session" %>
 <%@ page import="DataManagement.Utente" %>
-<%@ page import="java.util.ArrayList" %>
+
 <!DOCTYPE html>
 <html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <title>Carrello</title>
-    <link rel="stylesheet" href="sfondo.css">
-    <link rel="stylesheet" href="Carrello.css">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Assistenza</title>
 
-<script src="${pageContext.request.contextPath}/Javascript/Cart.js"></script>
-<script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
-<script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
+        <link rel="stylesheet" href="../sfondo.css">
+        <link rel="stylesheet" href="../FILE_CSS/Assistenza.css">
+    <body>
+
+    <script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
+    <script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
 
     <header>
         <div class="top-header">
@@ -90,7 +89,7 @@
 
             <!-- Parte 3 - Bottoni di Sign-up e Log-in a destra -->
             <div class="right-section">
-                <a class="btn-link" href="Carrello.jsp">Carrello</a>
+                <a class="btn-link" href="Carrello">Carrello</a>
                 <%
                     Utente utente = (Utente) session.getAttribute("utente");
 
@@ -118,7 +117,6 @@
                 <button class="btn-link" onclick="openAddProductModal()">Aggiungi Prodotto</button>
                 <button class="btn-link" onclick="openAddFilterModal()">Aggiungi Filtro</button>
                 <button class="btn-link" onclick="openDateSurveyModal()">Indagine per Data</button>
-                <button class="btn-link" onclick="openDeleteModal()">Elimina</button>
                 <% } else { %>
                 <!-- Utente non amministratore: solo il nome utente e il menu a tendina -->
                 <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
@@ -138,66 +136,45 @@
         </div>
     </header>
 
-    <div class="box-container">
-        <div class="box-prodotti">
-            <%
-            // Recupera i prodotti dal database
-            ArrayList<Prodotto> prodotti = (ArrayList<Prodotto>) session.getAttribute("carrello");
-            ArrayList<Integer> quantita = (ArrayList<Integer>) session.getAttribute("Quantità");
-            float prezzotatale = (float) session.getAttribute("prezzotatale");
+        <main>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <h3>Come posso effettuare un ordine?</h3>
+                    <p>Per ordinare, cerca i tuoi prodotti preferiti, aggiungili al carrello e segui la procedura di checkout.</p>
+                </div>
 
-            //Visualizza la barra orizzontale per ogni prodotto -->
-            if (prodotti != null){
-                for (int i = 0; i < prodotti.size(); i++) {
-        %>
-        <div class="product-bar">
-            <!-- Immagine -->
-            <!--img src="<//%= prodotto.getImmagine() %>" alt="Immagine prodotto"-->
+                <div class="faq-item">
+                    <h3>Quali metodi di pagamento accettate?</h3>
+                    <p>Accettiamo carte di credito/debito e PayPal.</p>
+                </div>
 
-            <!-- Descrizione -->
-            <div class="descrizione">
-                <%= prodotti.get(i).getDescrizione() %>
+                <div class="faq-item">
+                    <h3>Quanto tempo impiega la consegna?</h3>
+                    <p>Generalmente, le consegne avvengono entro 3-5 giorni lavorativi.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Posso restituire un prodotto?</h3>
+                    <p>Sì, hai 14 giorni per effettuare il reso. Visita la sezione "Profilo" per gestire i tuoi resi.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Come posso contattare l’assistenza?</h3>
+                    <p>Puoi usare il nostro modulo nella pagina Contattaci o inviarci un'email a <strong>support@iso16.it</strong>.</p>
+                </div>
+
+                <div class="contact-link">
+                    <a href="Contattaci.jsp">Contatta il supporto</a>
+                </div>
             </div>
+        </main>
 
-            <!-- Prezzo e quantità -->
-            <div class="prezzo-quantita">
-                <div class="prezzo">€ <%= prodotti.get(i).getPrezzo() %></div>
-                <label for="numero">Scegli un numero:</label>
-                    <input onchange="aggiornaQuantita(<%= prodotti.get(i).getId_prodotto()%>,this,<%= prodotti.get(i).getPrezzo()%>)" type="number" id="numero" name="numero" min="0" max="100" step="1" value= <%= quantita.get(i) %>>
-            </div>
+        <div class="footer-bar">
+            <a href="About_Us.jsp" class="btn-link">About Us</a>
+            <a href="Contattaci.jsp" class="btn-link">Contattaci</a>
+            <a href="Termini_e_condizioni.jsp" class="btn-link">Termini e condizioni</a>
+            <a href="Assistenza.jsp" class="btn-link">Assistenza</a>
         </div>
-            <%  }
-                %>
 
-            <div>
-                <div class="PT">Prezzo Totale</div>
-                <div id="prezzo-totale" class="prezzo-totale"><%= prezzotatale%> </div>
-            </div>
-        <%}%>
-
-            </div>
-
-
-        <div class="box-acquista">
-            <form action="CheckUtente" method="post">
-                <button type="submit" class="btn-aggiungi">
-                    Vai al pagamento
-                </button>
-            </form>
-        </div>
-    </div>
-
-<div class="footer-bar">
-    <a href="About_Us.jsp" class="btn-link">About Us</a>
-    <a href="Contattaci.jsp" class="btn-link">Contattaci</a>
-    <a href="Termini_e_condizioni.jsp" class="btn-link">Termini e condizioni</a>
-    <a href="Assistenza.jsp" class="btn-link">Assistenza</a>
-</div>
-
-</body>
+    </body>
 </html>
-
-
-
-
-

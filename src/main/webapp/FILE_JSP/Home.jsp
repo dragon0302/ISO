@@ -23,8 +23,8 @@
     <meta charset="UTF-8">
     <title>ISO-16</title>
 
-    <link rel="stylesheet" href="sfondo.css">
-    <link rel="stylesheet" href="Home.css">
+    <link rel="stylesheet" href="../sfondo.css">
+    <link rel="stylesheet" href="../FILE_CSS/Home.css">
 <body>
 <script src="${pageContext.request.contextPath}/Javascript/CatalogFilter.js"></script>
 <script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
