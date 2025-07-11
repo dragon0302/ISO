@@ -83,6 +83,8 @@ public class Carello extends HttpServlet {
 
           }
 
+        }else  {
+          prezzototale = 0f;
         }
 
       }else{
@@ -116,6 +118,8 @@ public class Carello extends HttpServlet {
 
           }
 
+        }else{
+          prezzototale = 0f;
         }
 
       }
@@ -124,7 +128,7 @@ public class Carello extends HttpServlet {
       session.setAttribute("Quantità", Nquantita);
       session.setAttribute("prezzotatale", prezzototale);
 
-      response.sendRedirect("Carrello.jsp");
+      response.sendRedirect("FILE_JSP/Carrello.jsp");
 
     }catch (Exception e) {
       e.printStackTrace();

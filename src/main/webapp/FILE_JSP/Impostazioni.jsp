@@ -24,8 +24,8 @@
     <meta charset="UTF-8">
     <title>Impostazioni</title>
 
-    <link rel="stylesheet" href="../sfondo.css">
-    <link rel="stylesheet" href="../FILE_CSS/Impostazioni.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/sfondo.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/Impostazioni.css">
 <body>
 
 <script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
@@ -35,7 +35,7 @@
     <div class="top-header">
         <!-- Parte 1 - Logo a sinistra -->
         <div class="logo-container">
-            <a href="Catalogo">
+            <a href="${pageContext.request.contextPath}/Catalogo">
                 <img src=" <%= request.getContextPath() + "/Immagini/isologo.png" %>" alt="Immagine Prodotto">
             </a>
         </div>

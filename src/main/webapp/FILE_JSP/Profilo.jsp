@@ -24,8 +24,8 @@
         <meta charset="UTF-8">
         <title>Profilo Utente</title>
 
-        <link rel="stylesheet" href="../sfondo.css">
-        <link rel="stylesheet" href="../FILE_CSS/Profilo.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/sfondo.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/Profilo.css">
 
     <body>
 
@@ -36,7 +36,7 @@
             <div class="top-header">
                 <!-- Parte 1 - Logo a sinistra -->
                 <div class="logo-container">
-                    <a href="Catalogo">
+                    <a href="${pageContext.request.contextPath}/Catalogo">
                         <img src=" <%= request.getContextPath() + "/Immagini/isologo.png" %>" alt="Immagine Prodotto">
                     </a>
                 </div>

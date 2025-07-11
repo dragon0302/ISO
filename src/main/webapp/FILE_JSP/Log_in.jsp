@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log in</title>
-    <link rel="stylesheet" href="../sfondo.css">
-    <link rel="stylesheet" href="../FILE_CSS/Log_in.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/sfondo.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/Log_in.css">
 </head>
 <body>
 
@@ -18,7 +18,7 @@
     <div class="top-header">
         <!-- Parte 1 - Logo a sinistra -->
         <div class="logo-container">
-            <a href="Catalogo">
+            <a href="${pageContext.request.contextPath}/Catalogo">
                 <img src=" <%= request.getContextPath() + "/Immagini/isologo.png" %>" alt="Immagine Prodotto">
             </a>
         </div>
@@ -142,7 +142,7 @@
 
         <div class="login-box">
             <h2>Accedi</h2>
-            <form action="Login" method="POST">
+            <form action="${pageContext.request.contextPath}/Login" method="POST">
                 <div class="form-group">
                     <label for="username">Nome Utente</label>
                     <input type="text" id="username" name="username" required>
