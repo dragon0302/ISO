@@ -53,11 +53,11 @@ header {
     width: 60%;
     margin: 0 auto;
 }
-.search-container input {
-    padding: 8px;
+.search-container input[type="text"] {
     width: 100%;
+    padding: 10px;
     border-radius: 4px;
-    border: 1px solid #ffffff;
+    border: none;
 }
 
 /* Suggerimenti di ricerca */
@@ -185,6 +185,23 @@ a.btn-elimina:hover {
     cursor: pointer;
 }
 
+.card-btn{
+    padding: 8px 12px;
+    border-radius: 4px;
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+a.card-btn:hover {
+    background-color: #8B2635;
+    color: #fff;
+}
+
 /* Bottone login (bordo nero, sfondo trasparente) */
 .login-btn {
     border: 1px solid #000;
@@ -194,9 +211,20 @@ a.btn-elimina:hover {
 
 /* Bottone signup (sfondo nero, testo bianco) */
 .signup-btn {
+    padding: 8px 12px;
+    border-radius: 4px;
     background-color: #000;
     color: #fff;
-    border: none;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+a.signup-btn:hover {
+    background-color: #8B2635;
+    color: #fff;
 }
 
 /* Footer fisso in basso */
@@ -220,10 +248,14 @@ a.btn-elimina:hover {
 .user-menu {
     display: none;
     position: absolute;
+    top: 30px;
+    right: 0;
     background-color: #fff;
-    border: 1px solid #ccc;
+    border: 1px solid #444444;
+    color: black;
     border-radius: 5px;
     padding: 10px;
+    z-index: 30;
 }
 .user-menu.show {
     display: block; /* Mostrato quando ha la classe .show */
