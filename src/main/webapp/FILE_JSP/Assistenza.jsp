@@ -10,8 +10,8 @@
         <meta charset="UTF-8">
         <title>Assistenza</title>
 
-        <link rel="stylesheet" href="sfondo.css">
-        <link rel="stylesheet" href="Assistenza.css">
+        <link rel="stylesheet" href="../sfondo.css">
+        <link rel="stylesheet" href="../FILE_CSS/Assistenza.css">
     <body>
 
     <script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>

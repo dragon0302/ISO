@@ -9,8 +9,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Carrello</title>
-    <link rel="stylesheet" href="sfondo.css">
-    <link rel="stylesheet" href="Carrello.css">
+    <link rel="stylesheet" href="../sfondo.css">
+    <link rel="stylesheet" href="../FILE_CSS/Carrello.css">
 </head>
 <body>
 
@@ -179,11 +179,11 @@
 
 
         <div class="box-acquista">
-            <!--<form action="NewOrder" method="post">-->
-                <button onclick="window.location.href='${pageContext.request.contextPath}/Pagamento.jsp'">
+            <form action="CheckUtente" method="post">
+                <button type="submit" class="btn-aggiungi">
                     Vai al pagamento
                 </button>
-            <!--</form>-->
+            </form>
         </div>
     </div>
 

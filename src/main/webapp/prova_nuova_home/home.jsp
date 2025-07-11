@@ -21,7 +21,7 @@
         <title>ISO-16</title>
 
         <link rel="stylesheet" href="sfondo.css">
-        <link rel="stylesheet" href="home.css">
+        <link rel="stylesheet" href="prova_nuova_home/home.css">
 
         <script>
             function toggleBoxOption(btn) {
@@ -90,10 +90,12 @@
                 <h2><%= filtro %></h2>
                 <div class="product-slider">
                     <% for (Prodotto p : prodottiFiltro) { %>
-                    <jsp:include page="/prova_nuova_home/prodottoBox.jsp">
-                        <jsp:param name="prodotto" value="<%= p %>"/>
-                        <jsp:param name="admin" value="<%= (utente != null && admin)%>"/>
-                    </jsp:include>
+                    <%
+                    request.setAttribute("prodotto", p);
+                    request.setAttribute("admin", admin);
+                    %>
+                    <jsp:include page="/prova_nuova_home/prodottoBox.jsp" />
+
                     <% } %>
                 </div>
                 <%
@@ -118,11 +120,12 @@
                         List<Prodotto> prodottiNovita = (List<Prodotto>) request.getAttribute("prodottiNovita");
                         if (prodottiNovita != null) {
                             for (Prodotto p : prodottiNovita) {
+                            request.setAttribute("prodotto", p);
+                            request.setAttribute("admin", admin);
                     %>
-                    <jsp:include page="/prova_nuova_home/prodottoBox.jsp">
-                        <jsp:param name="prodotto" value="<%= p %>"/>
-                        <jsp:param name="admin" value="<%= (utente != null && admin)%>"/>
-                    </jsp:include>
+                    <jsp:include page="/prova_nuova_home/prodottoBox.jsp"/>
+
+
                     <%
                         }
                     } else {
@@ -146,11 +149,11 @@
                         List<Prodotto> prodottiPopolari = (List<Prodotto>) request.getAttribute("prodottiPiuAqqistati");
                         if (prodottiPopolari != null) {
                             for (Prodotto p : prodottiPopolari) {
+                            request.setAttribute("prodotto", p);
+                            request.setAttribute("admin", admin);
                     %>
-                    <jsp:include page="/prova_nuova_home/prodottoBox.jsp">
-                        <jsp:param name="prodotto" value="<%= p %>"/>
-                        <jsp:param name="admin" value="<%= (utente != null && admin)%>"/>
-                    </jsp:include>
+                    <jsp:include page="/prova_nuova_home/prodottoBox.jsp" />
+
                     <%
                         }
                     } else {

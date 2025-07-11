@@ -1,22 +1,32 @@
 <%--
   Created by IntelliJ IDEA.
   User: PRINCIPALE
-  Date: 01/04/2025
-  Time: 11:13
+  Date: 02/04/2025
+  Time: 11:28
+  To change this template use File | Settings | File Templates.
+--%>
+<%--
+  Created by IntelliJ IDEA.
+  User: PRINCIPALE
+  Date: 02/04/2025
+  Time: 11:28
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="DataManagement.Prodotto" %>
+<%@ page import="com.mysql.cj.Session" %>
 <%@ page import="DataManagement.Utente" %>
+
 <!DOCTYPE html>
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sig-up</title>
-        <!-- Link al file CSS esterno per lo styling della pagina-->
-        <link rel="stylesheet" href="sfondo.css">
-        <link rel="stylesheet" href="Sign-up.css">
-</head>
+        <title>Profilo Utente</title>
+
+        <link rel="stylesheet" href="../sfondo.css">
+        <link rel="stylesheet" href="../FILE_CSS/Profilo.css">
+
     <body>
 
         <script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
@@ -94,7 +104,7 @@
 
                 <!-- Parte 3 - Bottoni di Sign-up e Log-in a destra -->
                 <div class="right-section">
-                    <a class="btn" href="Carrello.jsp">Carrello</a>
+                    <a class="btn-link" href="Carrello">Carrello</a>
                     <%
                         Utente utente = (Utente) session.getAttribute("utente");
 
@@ -113,16 +123,15 @@
                             <li><a href="Impostazioni.jsp">Impostazioni</a></li>
 
                             <form action="Logout" method="get">
-                            <li><button>Log-out</button></li>
-                        </form>
+                                <li><button>Log-out</button></li>
+                            </form>
                         </ul>
                     </div>
                     <!-- Bottoni amministratore -->
-                    <button class="btn" onclick="openPriceSurveyModal()">Indagine per nnumero venduti</button>
-                    <button class="btn" onclick="openAddProductModal()">Aggiungi Prodotto</button>
-                    <button class="btn" onclick="openAddFilterModal()">Aggiungi Filtro</button>
-                    <button class="btn" onclick="openDateSurveyModal()">Indagine per Data</button>
-                    <button class="btn" onclick="openDeleteModal()">Elimina</button>
+                    <button class="btn-link" onclick="openPriceSurveyModal()">Indagine per numero venduti</button>
+                    <button class="btn-link" onclick="openAddProductModal()">Aggiungi Prodotto</button>
+                    <button class="btn-link" onclick="openAddFilterModal()">Aggiungi Filtro</button>
+                    <button class="btn-link" onclick="openDateSurveyModal()">Indagine per Data</button>
                     <% } else { %>
                     <!-- Utente non amministratore: solo il nome utente e il menu a tendina -->
                     <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
@@ -132,8 +141,8 @@
                             <li><a href="Impostazioni.jsp">Impostazioni</a></li>
 
                             <form action="Logout" method="get">
-                            <li><button>Log-out</button></li>
-                        </form>
+                                <li><button>Log-out</button></li>
+                            </form>
                         </ul>
                     </div>
                     <% } %>
@@ -142,67 +151,49 @@
             </div>
         </header>
 
-
         <main>
-            <div class="content-wrapper">
-                <!-- Immagini laterali fisse -->
-                <!-- img src="left-image.png" class="side-image left" alt="Immagine sinistra" -->
-                <!-- img src="right-image.png" class="side-image right" alt="Immagine destra" -->
 
-                <!-- Box centrale con form -->
-                <div class="form-container">
-                    <h2>Registrazione Utente</h2>
-                    <form action="Sign-up" method="POST">
-                        <input type="hidden" name="action" value="insert">
+            <div class="profile-container">
+                <!-- Immagine profilo -->
+                <div class="profile-image-section">
+                    <!--img src="img/default-profile.png" alt="Immagine Profilo"-->
+                </div>
 
+                <!-- Informazioni -->
+                <div class="profile-info-section">
+                    <form action="AggiornaProfilo" method="post" class="profile-form">
+                        <!-- Email e Nome Utente -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" id="email" value="<%= utente.getEmail() %>" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="username">Nome Utente</label>
+                                <input type="text" name="username" id="username" value="<%= utente.getNomeutente() %>" required>
+                            </div>
+                        </div>
+
+                        <!-- Password -->
                         <div class="form-group">
-                            <label for="CodiceFiscale">Codice Fiscale *</label>
-                            <input type="text" name="CodiceFiscale" id="CodiceFiscale" required>
+                            <label for="password">Password (lascia vuoto per non cambiare)</label>
+                            <input type="password" name="password" id="password" placeholder="Nuova password">
                         </div>
 
-                        <div class="form-group">
-                            <label for="NomeUtente">Nome Utente *</label>
-                            <input type="text" name="NomeUtente" id="NomeUtente" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="Password">Password *</label>
-                            <input type="password" name="Password" id="Password" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="Nome">Nome *</label>
-                            <input type="text" name="Nome" id="Nome" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="Cognome">Cognome *</label>
-                            <input type="text" name="Cognome" id="Cognome" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Sesso *</label>
-                            <label>M<input type="radio" name="sesso" value="M" required></label>
-                            <label>F<input type="radio" name="sesso" value="F" required></label>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="DataNascita">Data di Nascita *</label>
-                            <input type="date" name="DataNascita" id="DataNascita" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="E-mail">E-mail *</label>
-                            <input type="email" name="E-mail" id="E-mail" required>
-                        </div>
-
-                        <div class="form-group full-width">
-                            <input type="submit" value="Registrati">
-                        </div>
+                        <button type="submit" class="btn btn-save">Salva Modifiche</button>
                     </form>
                 </div>
             </div>
+
         </main>
+
+        <div class="footer-bar">
+            <a href="About_Us.jsp" class="btn-link">About Us</a>
+            <a href="Contattaci.jsp" class="btn-link">Contattaci</a>
+            <a href="Termini_e_condizioni.jsp" class="btn-link">Termini e condizioni</a>
+            <a href="Assistenza.jsp" class="btn-link">Assistenza</a>
+        </div>
 
     </body>
 </html>

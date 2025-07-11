@@ -18,9 +18,9 @@
     <title>Contattaci</title>
 
     <!-- Link al file CSS esterno per lo styling della pagina-->
-    <link rel="stylesheet" href="sfondo.css">
+    <link rel="stylesheet" href="../sfondo.css">
     <!-- Link al file CSS esterno per lo styling dell'elenco-->
-    <link rel="stylesheet" href="Contattaci.css">
+    <link rel="stylesheet" href="../FILE_CSS/Contattaci.css">
 
 </head>
 <body>

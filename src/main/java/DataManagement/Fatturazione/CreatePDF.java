@@ -21,7 +21,7 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.element.Text;
 import com.itextpdf.layout.properties.UnitValue;
-import javax.servlet;
+//import javax.servlet;
 
 
 import java.awt.*;
@@ -38,13 +38,13 @@ public class CreatePDF {
     public static void main(String[] args) throws IOException, SQLException {
         Date datanascita = new Date(2004,10,4);
         Date dataordine = new Date(2025,6,9);
-        Utente u = request.getSession().getAttribute("utente");
+//        Utente u = request.getSession().getAttribute("utente");
 
         Float totale = (float) 0;
         Ordine o = new Ordine(dataordine,totale,"ciao",1);
         Indirizzo i = new Indirizzo("Nocera Superiore","Salerno","84015","Via delle vie",3,"N/A","C/o Corte Dei Conti","N/A",true,"RTLVTR000000000");
 
-        Fattura f = new Fattura(o,u,i,StatoFattura.Emessa,StatoPagamento.Pagato);
+//        Fattura f = new Fattura(o,u,i,StatoFattura.Emessa,StatoPagamento.Pagato);
         String dest = "fattura.pdf";
         PdfWriter writer = new PdfWriter(dest);
         PdfDocument pdf = new PdfDocument(writer);
@@ -82,9 +82,9 @@ public class CreatePDF {
 
         // Dati cliente
         document.add(new Paragraph(titolo_fattuarazione));
-        document.add(new Paragraph(f.getNomeFatturato() +" " + f.getCognomeFatturato() + "\n" + f.getViaFatturato() + " " + f.getCAP_Fatturato() + " " + f.getCittàFatturato() + " " + f.getProvinciaFatturato() + "\n" + f.getCF_fatturato())
-                .setFontSize(10)
-                .setMarginBottom(20));
+//        document.add(new Paragraph(f.getNomeFatturato() +" " + f.getCognomeFatturato() + "\n" + f.getViaFatturato() + " " + f.getCAP_Fatturato() + " " + f.getCittàFatturato() + " " + f.getProvinciaFatturato() + "\n" + f.getCF_fatturato())
+//                .setFontSize(10)
+//                .setMarginBottom(20));
 
         // Tabella dei prodotti/servizi
         float[] columnWidths = {4, 1, 2, 2}; // Descrizione, Quantità, Prezzo Unitario, Totale
