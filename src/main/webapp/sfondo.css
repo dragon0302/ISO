@@ -3,7 +3,6 @@ body {
     font-family: Arial, sans-serif;     /* Font principale */
     background-color: #000000;          /* Sfondo nero */
     color: white;                       /* Testo bianco */
-    margin: 0;                          /* Rimuove margini */
     padding-top: 100px;                 /* Spazio sopra per non coprire contenuto con header */
     padding-bottom: 80px;              /* Spazio sotto per non coprire contenuto con footer */
 }
@@ -29,7 +28,7 @@ header {
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    flex-wrap: wrap;                   /* Va a capo se lo spazio finisce */
+    flex-wrap: nowrap;                   /* Va a capo se lo spazio finisce */
 }
 
 /* Contenitore del logo */
@@ -44,13 +43,14 @@ header {
 .center-section {
     flex: 2;
     text-align: center;
-    width: 100%;
+    max-width: 400px;  /* evita che invada tutto */
 }
 
 /* Contenitore barra di ricerca */
-.search-container {
+ {
     position: relative;
     width: 60%;
+    max-width: 400px;
     margin: 0 auto;
 }
 .search-container input[type="text"] {

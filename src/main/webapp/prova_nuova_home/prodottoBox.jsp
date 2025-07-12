@@ -2,11 +2,11 @@
 
 <%
     Prodotto p = (Prodotto) request.getAttribute("prodotto");
-    boolean admin = (Boolean) request.getAttribute("admin");
+    Boolean admin = (Boolean) request.getAttribute("isAmministratore");
 %>
 <div class="product">
     <div class="box">
-        <% if (admin) { %>
+        <% if (admin != null) { %>
         <button class="menu-button" onclick="toggleBoxOption(this)">⋮</button>
         <div class="box-option">
             <button onclick="openEditModal(<%= p.getId_prodotto() %>, '<%= p.getNome() %>', <%= p.getPrezzo() %>, '<%= p.getDescrizione() %>')">Modifica</button>

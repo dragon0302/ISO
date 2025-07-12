@@ -5,12 +5,12 @@
 
 <%
     // Recupero l'utente loggato dalla sessione
-    Object utente = session.getAttribute("utente");
+    Utente utente = (Utente) session.getAttribute("utente");
     // Controllo se c'è un filtro attivo
     String filtro = (String) request.getAttribute("Filter");
     boolean filtroAttivo = filtro != null && !filtro.isEmpty();
     List<Prodotto> prodottiFiltro = (List<Prodotto>) request.getAttribute("prodottiFiltro");
-    boolean admin = Boolean.parseBoolean((String) request.getAttribute("admin"));
+//    boolean admin = utente.isAmministratore();
 %>
 
 <!DOCTYPE html>
@@ -54,17 +54,14 @@
         <header>
             <div class="top-header">
                 <div>
-                    <%@ include file="/prova_nuova_home/header.jsp" %>
-
-                    <div class="right-section">
-                        <% if (utente == null) { %>
-                        <jsp:include page="/prova_nuova_home/logButtons.jsp" />
-                        <% } else if (admin) { %>
-                        <jsp:include page="/prova_nuova_home/adminButtons.jsp" />
-                        <% } else { %>
-                        <jsp:include page="/prova_nuova_home/userMenu.jsp" />
-                        <% } %>
-                    </div>
+                    <%
+                        if(utente == null){
+                        request.setAttribute("isAmministratore", null);
+                        }else{
+                        request.setAttribute("isAmministratore", utente.isAmministratore());
+                        }
+                    %>
+                    <jsp:include page="/prova_nuova_home/header.jsp" />
                 </div>
             </div> <!-- fine top-header -->
         </header>
@@ -83,7 +80,11 @@
                     <% for (Prodotto p : prodottiFiltro) { %>
                     <%
                     request.setAttribute("prodotto", p);
-                    request.setAttribute("admin", admin);
+                        if(utente == null){
+                            request.setAttribute("isAmministratore", null);
+                        }else{
+                            request.setAttribute("isAmministratore", utente.isAmministratore());
+                        }
                     %>
                     <jsp:include page="/prova_nuova_home/prodottoBox.jsp" />
 
@@ -112,7 +113,11 @@
                         if (prodottiNovita != null) {
                             for (Prodotto p : prodottiNovita) {
                             request.setAttribute("prodotto", p);
-                            request.setAttribute("admin", admin);
+                                if(utente == null){
+                                    request.setAttribute("isAmministratore", null);
+                                }else{
+                                    request.setAttribute("isAmministratore", utente.isAmministratore());
+                                }
                     %>
                     <jsp:include page="/prova_nuova_home/prodottoBox.jsp"/>
 
@@ -141,7 +146,11 @@
                         if (prodottiPopolari != null) {
                             for (Prodotto p : prodottiPopolari) {
                             request.setAttribute("prodotto", p);
-                            request.setAttribute("admin", admin);
+                                if(utente == null){
+                                    request.setAttribute("isAmministratore", null);
+                                }else{
+                                    request.setAttribute("isAmministratore", utente.isAmministratore());
+                                }
                     %>
                     <jsp:include page="/prova_nuova_home/prodottoBox.jsp" />
 
