@@ -22,8 +22,6 @@ public class Carello extends HttpServlet {
     CarrelloDAO carrelloDAO = new CarrelloDAOImplement();
     AcquistoDAO acquistoDAO = new AcquistoDAOImplement();
 
-    System.out.println("prova");
-
     try {
 
       //prendo i dati

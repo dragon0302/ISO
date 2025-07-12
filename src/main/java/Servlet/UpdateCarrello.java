@@ -47,8 +47,15 @@ public class UpdateCarrello extends HttpServlet {
 
             for (int i = 0; i < ids.size(); i++) {
 
+                String id = ids.get(i);
                 if (Objects.equals(ids.get(i), String.valueOf(productId))) {
                     int quantita = cookieManagemnt.getCookieProductQuantity(ids.get(i));
+
+                    System.out.println(quantita);
+
+                    if (quantita == 0) {
+                        rimozioneProdotto();
+                    }
 
                     try {
                         if (quantita > quantity) {
@@ -69,6 +76,11 @@ public class UpdateCarrello extends HttpServlet {
 
             try {
                 int quantita = acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), productId);
+
+                if (quantita == 0) {
+                    rimozioneProdotto();
+                }
+
                 if (quantita < quantity) {
                     acquistoDAO.UpdateQuantity(productId, carrelloDAO.GetIdCarrello(utente.getCf()), '+');
                     prezzoTotale += prezzo;
@@ -90,4 +102,11 @@ public class UpdateCarrello extends HttpServlet {
         response.getWriter().print(json);
 
     }
+
+    public void rimozioneProdotto(){
+
+        System.out.println("rimozioneProdotto");
+
+    }
+
 }
