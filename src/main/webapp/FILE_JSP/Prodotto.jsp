@@ -1,32 +1,21 @@
 <%--
   Created by IntelliJ IDEA.
   User: PRINCIPALE
-  Date: 02/04/2025
-  Time: 11:28
+  Date: 01/04/2025
+  Time: 11:52
   To change this template use File | Settings | File Templates.
 --%>
-<%--
-  Created by IntelliJ IDEA.
-  User: PRINCIPALE
-  Date: 02/04/2025
-  Time: 11:28
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.List" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" import="java.sql.*" %>
 <%@ page import="DataManagement.Prodotto" %>
-<%@ page import="com.mysql.cj.Session" %>
 <%@ page import="DataManagement.Utente" %>
-
 <!DOCTYPE html>
-<html lang="it">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Impostazioni</title>
-
-    <link rel="stylesheet" href="sfondo.css">
-    <link rel="stylesheet" href="Impostazioni.css">
-<body>
+    <title>Prodotto</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/sfondo.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/Prodotto.css">
+</head>
 
 <script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
 <script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
@@ -35,7 +24,7 @@
     <div class="top-header">
         <!-- Parte 1 - Logo a sinistra -->
         <div class="logo-container">
-            <a href="Catalogo">
+            <a href="${pageContext.request.contextPath}/Catalogo">
                 <img src=" <%= request.getContextPath() + "/Immagini/isologo.png" %>" alt="Immagine Prodotto">
             </a>
         </div>
@@ -103,7 +92,7 @@
 
         <!-- Parte 3 - Bottoni di Sign-up e Log-in a destra -->
         <div class="right-section">
-            <a class="btn-link" href="Carrello">Carrello</a>
+            <a class="btn-link" href="Carrello.jsp">Carrello</a>
             <%
                 Utente utente = (Utente) session.getAttribute("utente");
 
@@ -131,6 +120,7 @@
             <button class="btn-link" onclick="openAddProductModal()">Aggiungi Prodotto</button>
             <button class="btn-link" onclick="openAddFilterModal()">Aggiungi Filtro</button>
             <button class="btn-link" onclick="openDateSurveyModal()">Indagine per Data</button>
+            <button class="btn-link" onclick="openDeleteModal()">Elimina</button>
             <% } else { %>
             <!-- Utente non amministratore: solo il nome utente e il menu a tendina -->
             <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
@@ -150,107 +140,37 @@
     </div>
 </header>
 
+<body>
 
-<main>
+<%
+    Prodotto prodotto = (Prodotto) request.getAttribute("Prodotto");
+    if (prodotto != null){
+%>
 
-    <!-- BOX PRINCIPALE -->
-    <div class="settings-box">
-
-        <!-- SEZIONE 1: IMPOSTAZIONI ACCOUNT -->
-        <div class="settings-section">
-            <h2>Impostazioni Account</h2>
-
-            <!-- Opzione: modifica dati -->
-            <div class="settings-option">
-                <label>Modifica dati account</label>
-                <a href="#">Modifica</a>
-            </div>
-
-            <!-- Opzione: indirizzo di fatturazione -->
-            <div class="settings-option">
-                <label>Indirizzo di fatturazione</label>
-                <a href="#">Gestisci</a>
-            </div>
-        </div>
-
-        <!-- SEZIONE 2: IMPOSTAZIONI ACQUISTO -->
-        <div class="settings-section">
-            <h2>Impostazioni Acquisto</h2>
-
-            <!-- Metodo di pagamento preferito -->
-            <div class="settings-option">
-                <label>Metodo di pagamento preferito</label>
-                <a href="#">Imposta</a>
-            </div>
-
-            <!-- Storico ordini -->
-            <div class="settings-option">
-                <label>Storico ordini</label>
-                <a href="#">Visualizza</a>
-            </div>
-
-            <!-- Fatturazione elettronica -->
-            <div class="settings-option">
-                <label>Fatturazione elettronica / Codice univoco / PEC</label>
-                <a href="#">Gestisci</a>
-            </div>
-        </div>
-
-        <!-- SEZIONE 3: NOTIFICHE -->
-        <div class="settings-section">
-            <h2>Notifiche</h2>
-
-            <!-- Notifica: stato ordini -->
-            <div class="settings-option">
-                <label>Stato ordini e spedizioni</label>
-                <label class="toggle-switch">
-                    <input type="checkbox" checked> <!-- checked = attivo -->
-                    <span class="slider"></span>
-                </label>
-            </div>
-
-            <!-- Notifica: promozioni -->
-            <div class="settings-option">
-                <label>Avvisi di promozioni o offerte</label>
-                <label class="toggle-switch">
-                    <input type="checkbox"> <!-- non attivo di default -->
-                    <span class="slider"></span>
-                </label>
-            </div>
-        </div>
-
-        <!-- SEZIONE 4: PRIVACY E SICUREZZA -->
-        <div class="settings-section">
-            <h2>Privacy e Sicurezza</h2>
-
-            <!-- Cookie -->
-            <div class="settings-option">
-                <label>Gestione consensi cookies</label>
-                <a href="#">Modifica</a>
-            </div>
-
-            <!-- Scarica dati -->
-            <div class="settings-option">
-                <label>Scarica i tuoi dati</label>
-                <button class="download-btn">Scarica</button>
-            </div>
-
-            <!-- Elimina account -->
-            <div class="settings-option">
-                <label>Elimina account</label>
-                <button class="delete-btn">Elimina</button>
-            </div>
+<div class="product-container">
+    <div class="product-image">
+        <!-- Immagine prodotto (metti il path corretto nell'attributo src) -->
+        <!--img src="<!%= prodotto.getImmaginePath() != null ? prodotto.getImmaginePath() : "placeholder.jpg" %>" alt="Immagine Prodotto"-->
+    </div>
+    <div class="product-details">
+        <h2 class="product-name"><%= prodotto.getNome() %></h2>
+        <p class="product-description"><%= prodotto.getDescrizione() %></p>
+        <div class="product-info">
+            <span class="product-price">€ <%= prodotto.getPrezzo() %></span>
+            <form action="ProductCartMenegment" method="post" class="add-to-cart-form">
+                <input type="hidden" name="prodottoID" value="<%= prodotto.getId_prodotto() %>">
+                <input type="hidden" name="SourcePage" value="Prodotto">
+                <label for="quantity">Quantità:</label>
+                <input type="number" id="quantity" name="quantita" value="1" min="1">
+                <button type="submit" class="btn">Aggiungi al carrello</button>
+            </form>
         </div>
     </div>
-
-</main>
-
-<div class="footer-bar">
-    <a href="About_Us.jsp" class="btn-link">About Us</a>
-    <a href="Contattaci.jsp" class="btn-link">Contattaci</a>
-    <a href="Termini_e_condizioni.jsp" class="btn-link">Termini e condizioni</a>
-    <a href="Assistenza.jsp" class="btn-link">Assistenza</a>
 </div>
+<%
+    }
+%>
+
 
 </body>
 </html>

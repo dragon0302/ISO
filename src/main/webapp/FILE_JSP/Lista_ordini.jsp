@@ -1,21 +1,27 @@
 <%--
   Created by IntelliJ IDEA.
   User: PRINCIPALE
-  Date: 01/04/2025
-  Time: 11:52
+  Date: 06/05/2025
+  Time: 20:06
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" import="java.sql.*" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
 <%@ page import="DataManagement.Prodotto" %>
+<%@ page import="com.mysql.cj.Session" %>
 <%@ page import="DataManagement.Utente" %>
+<%@ page import="DataManagement.Ordine" %>
+<%@ page import="java.util.ArrayList" %>
+
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Prodotto</title>
-    <link rel="stylesheet" href="sfondo.css">
-    <link rel="stylesheet" href="Prodotto.css">
-</head>
+    <title>Lista Ordini</title>
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/sfondo.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/Lista_ordini.css">
+<body>
 
 <script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
 <script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
@@ -24,7 +30,7 @@
     <div class="top-header">
         <!-- Parte 1 - Logo a sinistra -->
         <div class="logo-container">
-            <a href="Catalogo">
+            <a href="${pageContext.request.contextPath}/Catalogo">
                 <img src=" <%= request.getContextPath() + "/Immagini/isologo.png" %>" alt="Immagine Prodotto">
             </a>
         </div>
@@ -92,7 +98,7 @@
 
         <!-- Parte 3 - Bottoni di Sign-up e Log-in a destra -->
         <div class="right-section">
-            <a class="btn-link" href="Carrello.jsp">Carrello</a>
+            <a class="btn-link" href="Carrello">Carrello</a>
             <%
                 Utente utente = (Utente) session.getAttribute("utente");
 
@@ -120,7 +126,6 @@
             <button class="btn-link" onclick="openAddProductModal()">Aggiungi Prodotto</button>
             <button class="btn-link" onclick="openAddFilterModal()">Aggiungi Filtro</button>
             <button class="btn-link" onclick="openDateSurveyModal()">Indagine per Data</button>
-            <button class="btn-link" onclick="openDeleteModal()">Elimina</button>
             <% } else { %>
             <!-- Utente non amministratore: solo il nome utente e il menu a tendina -->
             <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
@@ -140,37 +145,61 @@
     </div>
 </header>
 
-<body>
 
-<%
-    Prodotto prodotto = (Prodotto) request.getAttribute("Prodotto");
-    if (prodotto != null){
-%>
+<main>
 
-<div class="product-container">
-    <div class="product-image">
-        <!-- Immagine prodotto (metti il path corretto nell'attributo src) -->
-        <!--img src="<!%= prodotto.getImmaginePath() != null ? prodotto.getImmaginePath() : "placeholder.jpg" %>" alt="Immagine Prodotto"-->
-    </div>
-    <div class="product-details">
-        <h2 class="product-name"><%= prodotto.getNome() %></h2>
-        <p class="product-description"><%= prodotto.getDescrizione() %></p>
-        <div class="product-info">
-            <span class="product-price">€ <%= prodotto.getPrezzo() %></span>
-            <form action="ProductCartMenegment" method="post" class="add-to-cart-form">
-                <input type="hidden" name="prodottoID" value="<%= prodotto.getId_prodotto() %>">
-                <input type="hidden" name="SourcePage" value="Prodotto">
-                <label for="quantity">Quantità:</label>
-                <input type="number" id="quantity" name="quantita" value="1" min="1">
-                <button type="submit" class="btn">Aggiungi al carrello</button>
-            </form>
+        <div class="box-all_order">
+            <h2>I miei ordini</h2>
+            <%
+                if (utente != null) {
+                    List<Ordine> ordini = (List<Ordine>) session.getAttribute("ordine");
+                    List<Prodotto> prodotti = new ArrayList<>();
+
+                    System.out.println(ordini == null);
+                    if (ordini != null && !ordini.isEmpty()) {
+                        for (int i = 0;i < ordini.size(); i++) {
+                          //prendere la funzione che da i prodotti dell'ordine e creare classe apposita per la gesione delle immagini
+                            List<List<Prodotto>> Listaprodotti = (List<List<Prodotto>>) session.getAttribute("ListeProdotti");
+                            for (int g = 0; g < Listaprodotti.get(i).size(); g++){
+                              prodotti = Listaprodotti.get(i);
+                            /*String imgPath = (prodotti != null && !prodotti.isEmpty())
+                                    ? prodotti.get(0).getImmagine() // es. "img/prodotto1.jpg"
+                                    : "img/default.jpg"; // immagine placeholder*/
+            %>
+            <div class="order-box">
+                <%--<div class="order-image">
+                    <img src="<%= imgPath %>" alt="Immagine prodotto" />
+                </div>--%>
+                <div class="order-info">
+                    <p><strong>Ordine #</strong><%= ordini.get(i).getIdOrdine() %></p>
+                    <p><strong>Data:</strong> <%= ordini.get(i).getData_ordine() %></p>
+                    <p><strong>Totale:</strong> € <%= ordini.get(i).getTotale() %></p>
+                    <%--<p><strong>Stato:</strong> <%= ordini.get(i).getStato() %></p>--%>
+                    <div class="order-actions">
+                        <a href="RiacquistaProdotti.jsp?idOrdine=<%= prodotti.get(i).getId_prodotto() %>" class="btn-small">Riacquista Prodotti</a>
+                        <%--<a href="VediOrdine.jsp?idOrdine=<%= ordine.getId() %>" class="btn-small">Vedi Ordine</a>--%>
+                    </div>
+                </div>
+            </div>
+            <%      }
+                }
+            }else { %>
+            <p>Non hai ancora effettuato ordini.</p>
+            <%      }
+            } else {
+            %>
+            <p>Effettua il <a href="Log_in.jsp">login</a> per visualizzare i tuoi ordini.</p>
+            <% } %>
         </div>
-    </div>
-</div>
-<%
-    }
-%>
 
+</main>
+
+<div class="footer-bar">
+    <a href="About_Us.jsp" class="btn-link">About Us</a>
+    <a href="Contattaci.jsp" class="btn-link">Contattaci</a>
+    <a href="Termini_e_condizioni.jsp" class="btn-link">Termini e condizioni</a>
+    <a href="Assistenza.jsp" class="btn-link">Assistenza</a>
+</div>
 
 </body>
 </html>

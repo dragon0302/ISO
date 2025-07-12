@@ -29,7 +29,7 @@ public class Login extends HttpServlet {
             u.isUtente(username,password);
             if (!u.isUtente(username, password)){
                 request.setAttribute("Errore_USER_PASS", errore);
-                request.getRequestDispatcher("/Log_in.jsp").forward(request, response);
+                request.getRequestDispatcher("/FILE_JSP/Log_in.jsp").forward(request, response);
             }else {
                 session.setAttribute("utente", u.getUtente(username));
                 response.sendRedirect("Catalogo");

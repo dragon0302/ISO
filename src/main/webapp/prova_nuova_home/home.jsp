@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+ <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="DataManagement.Prodotto" %>
 <%@ page import="DataManagement.Utente" %>
@@ -20,8 +20,8 @@
         <meta charset="UTF-8">
         <title>ISO-16</title>
 
-        <link rel="stylesheet" href="sfondo.css">
-        <link rel="stylesheet" href="home.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/sfondo.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/prova_nuova_home/home.css">
 
         <script>
             function toggleBoxOption(btn) {
@@ -90,10 +90,12 @@
                 <h2><%= filtro %></h2>
                 <div class="product-slider">
                     <% for (Prodotto p : prodottiFiltro) { %>
-                    <jsp:include page="/prova_nuova_home/prodottoBox.jsp">
-                        <jsp:param name="prodotto" value="<%= p %>"/>
-                        <jsp:param name="admin" value="<%= (utente != null && admin)%>"/>
-                    </jsp:include>
+                    <%
+                    request.setAttribute("prodotto", p);
+                    request.setAttribute("admin", admin);
+                    %>
+                    <jsp:include page="/prova_nuova_home/prodottoBox.jsp" />
+
                     <% } %>
                 </div>
                 <%
@@ -118,11 +120,12 @@
                         List<Prodotto> prodottiNovita = (List<Prodotto>) request.getAttribute("prodottiNovita");
                         if (prodottiNovita != null) {
                             for (Prodotto p : prodottiNovita) {
+                            request.setAttribute("prodotto", p);
+                            request.setAttribute("admin", admin);
                     %>
-                    <jsp:include page="/prova_nuova_home/prodottoBox.jsp">
-                        <jsp:param name="prodotto" value="<%= p %>"/>
-                        <jsp:param name="admin" value="<%= (utente != null && admin)%>"/>
-                    </jsp:include>
+                    <jsp:include page="/prova_nuova_home/prodottoBox.jsp"/>
+
+
                     <%
                         }
                     } else {
@@ -146,11 +149,11 @@
                         List<Prodotto> prodottiPopolari = (List<Prodotto>) request.getAttribute("prodottiPiuAqqistati");
                         if (prodottiPopolari != null) {
                             for (Prodotto p : prodottiPopolari) {
+                            request.setAttribute("prodotto", p);
+                            request.setAttribute("admin", admin);
                     %>
-                    <jsp:include page="/prova_nuova_home/prodottoBox.jsp">
-                        <jsp:param name="prodotto" value="<%= p %>"/>
-                        <jsp:param name="admin" value="<%= (utente != null && admin)%>"/>
-                    </jsp:include>
+                    <jsp:include page="/prova_nuova_home/prodottoBox.jsp" />
+
                     <%
                         }
                     } else {
@@ -168,10 +171,10 @@
         </main>
 
         <div class="footer-bar">
-            <a href="About_Us.jsp" class="btn-link">About Us</a>
-            <a href="Contattaci.jsp" class="btn-link">Contattaci</a>
-            <a href="Termini_e_condizioni.jsp" class="btn-link">Termini e condizioni</a>
-            <a href="Assistenza.jsp" class="btn-link">Assistenza</a>
+            <a href="${pageContext.request.contextPath}/FILE_JSP/About_Us.jsp" class="btn-link">About Us</a>
+            <a href="${pageContext.request.contextPath}/FILE_JSP/Contattaci.jsp" class="btn-link">Contattaci</a>
+            <a href="${pageContext.request.contextPath}/FILE_JSP/Termini_e_condizioni.jsp" class="btn-link">Termini e condizioni</a>
+            <a href="${pageContext.request.contextPath}/FILE_JSP/Assistenza.jsp" class="btn-link">Assistenza</a>
         </div>
 
         <%--form per la modifica del prodotto--%>

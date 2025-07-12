@@ -1,24 +1,29 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="DataManagement.Utente" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: PRINCIPALE
+  Date: 23/04/2025
+  Time: 11:43
+  To change this template use File | Settings | File Templates.
+--%>
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log in</title>
-    <link rel="stylesheet" href="sfondo.css">
-    <link rel="stylesheet" href="Log_in.css">
+    <title>About Us</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/sfondo.css">
 </head>
 <body>
 
 <script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
 <script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
 
+<!-- Top Header -->
 <header>
     <div class="top-header">
         <!-- Parte 1 - Logo a sinistra -->
         <div class="logo-container">
-            <a href="Catalogo">
+            <a href="${pageContext.request.contextPath}/Catalogo">
                 <img src=" <%= request.getContextPath() + "/Immagini/isologo.png" %>" alt="Immagine Prodotto">
             </a>
         </div>
@@ -30,7 +35,6 @@
                 <input type="text" id="searchInput" placeholder="Cerca prodotti..." onkeyup="showSuggestions(this.value)">
                 <div class="suggestions" id="suggestionBox"></div>
             </div>
-
             <!-- Filtri sotto la barra di ricerca -->
             <div class="filter-bar">
                 <div class="filter">
@@ -87,97 +91,51 @@
         <!-- Parte 3 - Bottoni di Sign-up e Log-in a destra -->
         <div class="right-section">
             <a class="btn" href="Carrello.jsp">Carrello</a>
-            <%
-                Utente utente = (Utente) session.getAttribute("utente");
-
-                if (utente == null) { %>
-            <!-- Se l'utente non è loggato, mostra i bottoni di login e signup -->
             <a class="btn login-btn" href="Log_in.jsp">Log In</a>
             <a class="btn signup-btn" href="Sign-up.jsp">Sign Up</a>
-            <% } else { %>
-            <!-- Se l'utente è loggato, mostra il nome utente o il menu amministratore -->
-            <% if (utente.isAmministratore()) { %>
-            <!-- Amministratore: aggiungi i bottoni di gestione e il menu a tendina -->
-            <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente()!= null ? utente.getNomeutente().toUpperCase() : "" %></span>
-            <div id="userMenu" class="user-menu">
-                <ul>
-                    <li><a href="Profilo.jsp">Profilo</a></li>
-                    <li><a href="Impostazioni.jsp">Impostazioni</a></li>
-
-                    <form action="Logout" method="get">
-                        <li><button>Log-out</button></li>
-                    </form>
-                </ul>
-            </div>
-            <!-- Bottoni amministratore -->
-            <button class="btn" onclick="openPriceSurveyModal()">Indagine per nnumero venduti</button>
-            <button class="btn" onclick="openAddProductModal()">Aggiungi Prodotto</button>
-            <button class="btn" onclick="openAddFilterModal()">Aggiungi Filtro</button>
-            <button class="btn" onclick="openDateSurveyModal()">Indagine per Data</button>
-            <button class="btn" onclick="openDeleteModal()">Elimina</button>
-            <% } else { %>
-            <!-- Utente non amministratore: solo il nome utente e il menu a tendina -->
-            <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
-            <div id="userMenu" class="user-menu">
-                <ul>
-                    <li><a href="Profilo.jsp">Profilo</a></li>
-                    <li><a href="Impostazioni.jsp">Impostazioni</a></li>
-
-                    <form action="Logout" method="get">
-                        <li><button>Log-out</button></li>
-                    </form>
-                </ul>
-            </div>
-            <% } %>
-            <% } %>
         </div>
     </div>
 </header>
 
-
-
+<!-- Informazioni aziendali -->
 <main>
-    <div class="page-container">
-        <!-- img src="left-image.png" alt="Immagine Sinistra" class="side-image" -->
+    <section>
+        <h2>Chi Siamo</h2>
+        <p>
+            Scopri il nostro mondo dedicato ai veri appassionati di musica!
+            Su ISO-16, troverai il miglior merchandise ispirato ai generi musicali più popolari:
+            Rock, Pop, Metal, Jazz, Rap e tanto altro.
+            Siamo il punto di riferimento per tutti i fan di band leggendarie, gruppi iconici e solisti che hanno scritto la storia della musica.
+            Dalle t-shirt ai poster, dalle felpe agli accessori, ogni prodotto è pensato per permetterti di indossare e vivere la tua passione musicale ogni giorno.
+            Unisciti alla nostra community e porta sempre con te il suono dei tuoi artisti preferiti!
+        </p>
+    </section>
 
-        <div class="login-box">
-            <h2>Accedi</h2>
-            <form action="Login" method="POST">
-                <div class="form-group">
-                    <label for="username">Nome Utente</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Accedi">
-                </div>
-                <%
-                    String Errore_USER_PASS = (String) request.getAttribute("Errore_USER_PASS");
-                    if (Errore_USER_PASS != null) {
-                %>
-                <div class="field-error"><%= Errore_USER_PASS %></div>
-                <% } %>
-            </form>
-        </div>
+    <section>
+        <h2>Missione</h2>
+        <p>
+            Su ISO-16, la nostra missione è celebrare la musica in tutte le sue forme.
+            Vogliamo offrire ai fan dei generi musicali più amati un'esperienza unica,
+            fornendo loro merchandise autentico e di qualità, ispirato ai loro artisti preferiti.
+            Siamo appassionati di musica quanto i nostri clienti e ci impegniamo a rendere ogni acquisto un'occasione
+            per esprimere la propria passione e connessione con il mondo musicale.
+            La nostra missione è unire le persone attraverso il potere della musica, fornendo prodotti che riflettano il loro stile e il loro amore per la musica.        </p>
+    </section>
 
-        <!-- img src="right-image.png" alt="Immagine Destra" class="side-image" -->
-    </div>
+    <section>
+        <h2>Orari servizio clienti</h2>
+        <p><strong>Lunedì - Venerdì:</strong> 5:00 - 22:00</p>
+        <p><strong>Sabato - Domenica:</strong> 7:00 - 18:00</p>
+    </section>
+
 </main>
 
-<!-- Footer con stile di barra inferiore -->
+<!-- Footer -->
 <div class="footer-bar">
     <a href="About_Us.jsp" class="btn-link">About Us</a>
     <a href="Contattaci.jsp" class="btn-link">Contattaci</a>
     <a href="Termini_e_condizioni.jsp" class="btn-link">Termini e condizioni</a>
     <a href="Assistenza.jsp" class="btn-link">Assistenza</a>
 </div>
-
 </body>
 </html>
-
-
-
-

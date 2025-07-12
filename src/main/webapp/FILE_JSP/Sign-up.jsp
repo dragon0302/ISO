@@ -14,8 +14,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sig-up</title>
         <!-- Link al file CSS esterno per lo styling della pagina-->
-        <link rel="stylesheet" href="sfondo.css">
-        <link rel="stylesheet" href="Sign-up.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/sfondo.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/Sign-up.css">
 </head>
     <body>
 
@@ -26,7 +26,7 @@
             <div class="top-header">
                 <!-- Parte 1 - Logo a sinistra -->
                 <div class="logo-container">
-                    <a href="Catalogo">
+                    <a href="${pageContext.request.contextPath}/Catalogo">
                         <img src=" <%= request.getContextPath() + "/Immagini/isologo.png" %>" alt="Immagine Prodotto">
                     </a>
                 </div>
@@ -152,7 +152,7 @@
                 <!-- Box centrale con form -->
                 <div class="form-container">
                     <h2>Registrazione Utente</h2>
-                    <form action="Sign-up" method="POST">
+                    <form action="${pageContext.request.contextPath}/Sign-up" method="POST">
                         <input type="hidden" name="action" value="insert">
 
                         <div class="form-group">

@@ -9,8 +9,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Carrello</title>
-    <link rel="stylesheet" href="sfondo.css">
-    <link rel="stylesheet" href="Carrello.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/sfondo.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/Carrello.css">
 </head>
 <body>
 
@@ -22,7 +22,7 @@
         <div class="top-header">
             <!-- Parte 1 - Logo a sinistra -->
             <div class="logo-container">
-                <a href="Catalogo">
+                <a href="${pageContext.request.contextPath}/Catalogo">
                     <img src=" <%= request.getContextPath() + "/Immagini/isologo.png" %>" alt="Immagine Prodotto">
                 </a>
             </div>
@@ -144,7 +144,7 @@
             // Recupera i prodotti dal database
             ArrayList<Prodotto> prodotti = (ArrayList<Prodotto>) session.getAttribute("carrello");
             ArrayList<Integer> quantita = (ArrayList<Integer>) session.getAttribute("Quantità");
-            float prezzotatale = (float) session.getAttribute("prezzotatale");
+            Float prezzotatale = (Float) session.getAttribute("prezzotatale");
 
             //Visualizza la barra orizzontale per ogni prodotto -->
             if (prodotti != null){

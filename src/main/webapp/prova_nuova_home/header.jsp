@@ -1,6 +1,6 @@
 <div class="top-header">
   <div class="logo-container">
-    <a href="Catalogo">
+    <a href="${pageContext.request.contextPath}/Catalogo">
       <img src="<%= request.getContextPath() + "/Immagini/isologo.png" %>" alt="Immagine Prodotto">
     </a>
   </div>

@@ -9,8 +9,8 @@
 
 <div id="userMenu" class="user-menu">
   <ul>
-    <li><a href="Profilo.jsp">Profilo</a></li>
-    <li><a href="Impostazioni.jsp">Impostazioni</a></li>
+    <li><a href="${pageContext.request.contextPath}/FILE_JSP/Profilo.jsp">Profilo</a></li>
+    <li><a href="${pageContext.request.contextPath}/FILE_JSP/Impostazioni.jsp">Impostazioni</a></li>
     <form action="Logout" method="get">
       <li><button>Log-out</button></li>
     </form>

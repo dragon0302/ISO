@@ -61,37 +61,37 @@ public class Signup extends HttpServlet {
 
             if (!CODICEFISCALE_REGEX.matcher(CF).matches()) {
                 request.setAttribute("errore", erroreCF);
-                request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
-           }else if (!NOME_REGEX.matcher(Nome).matches()) {
+                request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
+            }else if (!NOME_REGEX.matcher(Nome).matches()) {
                 request.setAttribute("errore", erroreNomeRegex);
-                request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
+                request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             }else if (!COGNOME_REGEX.matcher(Cognome).matches()) {
                 request.setAttribute("errore", erroreCognomeRegex);
-                request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
+                request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             }else if (!EMAIL_REGEX.matcher(Email).matches()) {
                 request.setAttribute("errore", erroreEmailRegex);
-                request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
+                request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             }else if (!USERNAME_REGEX.matcher(nomeUtente).matches()) {
                 request.setAttribute("errore", erroreNomeUtenteRegex);
-                request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
+                request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             }else if (!PASSWORD_REGEX.matcher(Password).matches()) {
                 request.setAttribute("errore", errorePasswordRegex);
-                request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
+                request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             }else if(utenteDAO.CFEsistente(CF)){
                 request.setAttribute("errore", erroreCF);
-                request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
+                request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             }else if (utenteDAO.UtenteEsistente(nomeUtente)) {
                 request.setAttribute("errore", erroreNomeUtente);
-                request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
+                request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             } else if (dataNascita.compareTo(new Date(1900,1,1)) < 0 && dataNascita.compareTo(Date.valueOf(LocalDate.now())) > 0) {
                 request.setAttribute("errore", erroreData);
-                request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
+                request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             } else if(utenteDAO.EmailEsistente(Email)) {
                 request.setAttribute("errore", erroreEmail);
-                request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
+                request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             } else if(!NOME_REGEX.matcher(nomeUtente).matches()) {
                 request.setAttribute("errore", erroreEmail);
-                request.getRequestDispatcher("/Sign-up.jsp").forward(request, response);
+                request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             }
             else{
                 Utente utente = new Utente(CF, nomeUtente, encodedPassword,salt, Nome, Cognome, Email, Sesso, dataNascita, Amministratore);

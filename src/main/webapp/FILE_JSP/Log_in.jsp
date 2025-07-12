@@ -1,26 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: PRINCIPALE
-  Date: 06/05/2025
-  Time: 20:06
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.List" %>
-<%@ page import="DataManagement.Prodotto" %>
-<%@ page import="com.mysql.cj.Session" %>
 <%@ page import="DataManagement.Utente" %>
-<%@ page import="DataManagement.Ordine" %>
-<%@ page import="java.util.ArrayList" %>
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Lista Ordini</title>
-
-    <link rel="stylesheet" href="sfondo.css">
-    <link rel="stylesheet" href="Lista_ordini.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/sfondo.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/Log_in.css">
+</head>
 <body>
 
 <script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
@@ -30,7 +18,7 @@
     <div class="top-header">
         <!-- Parte 1 - Logo a sinistra -->
         <div class="logo-container">
-            <a href="Catalogo">
+            <a href="${pageContext.request.contextPath}/Catalogo">
                 <img src=" <%= request.getContextPath() + "/Immagini/isologo.png" %>" alt="Immagine Prodotto">
             </a>
         </div>
@@ -98,7 +86,7 @@
 
         <!-- Parte 3 - Bottoni di Sign-up e Log-in a destra -->
         <div class="right-section">
-            <a class="btn-link" href="Carrello">Carrello</a>
+            <a class="btn" href="Carrello.jsp">Carrello</a>
             <%
                 Utente utente = (Utente) session.getAttribute("utente");
 
@@ -122,10 +110,11 @@
                 </ul>
             </div>
             <!-- Bottoni amministratore -->
-            <button class="btn-link" onclick="openPriceSurveyModal()">Indagine per numero venduti</button>
-            <button class="btn-link" onclick="openAddProductModal()">Aggiungi Prodotto</button>
-            <button class="btn-link" onclick="openAddFilterModal()">Aggiungi Filtro</button>
-            <button class="btn-link" onclick="openDateSurveyModal()">Indagine per Data</button>
+            <button class="btn" onclick="openPriceSurveyModal()">Indagine per nnumero venduti</button>
+            <button class="btn" onclick="openAddProductModal()">Aggiungi Prodotto</button>
+            <button class="btn" onclick="openAddFilterModal()">Aggiungi Filtro</button>
+            <button class="btn" onclick="openDateSurveyModal()">Indagine per Data</button>
+            <button class="btn" onclick="openDeleteModal()">Elimina</button>
             <% } else { %>
             <!-- Utente non amministratore: solo il nome utente e il menu a tendina -->
             <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
@@ -146,54 +135,39 @@
 </header>
 
 
+
 <main>
+    <div class="page-container">
+        <!-- img src="left-image.png" alt="Immagine Sinistra" class="side-image" -->
 
-        <div class="box-all_order">
-            <h2>I miei ordini</h2>
-            <%
-                if (utente != null) {
-                    List<Ordine> ordini = (List<Ordine>) session.getAttribute("ordine");
-                    List<Prodotto> prodotti = new ArrayList<>();
-
-                    System.out.println(ordini == null);
-                    if (ordini != null && !ordini.isEmpty()) {
-                        for (int i = 0;i < ordini.size(); i++) {
-                          //prendere la funzione che da i prodotti dell'ordine e creare classe apposita per la gesione delle immagini
-                            List<List<Prodotto>> Listaprodotti = (List<List<Prodotto>>) session.getAttribute("ListeProdotti");
-                            for (int g = 0; g < Listaprodotti.get(i).size(); g++){
-                              prodotti = Listaprodotti.get(i);
-                            /*String imgPath = (prodotti != null && !prodotti.isEmpty())
-                                    ? prodotti.get(0).getImmagine() // es. "img/prodotto1.jpg"
-                                    : "img/default.jpg"; // immagine placeholder*/
-            %>
-            <div class="order-box">
-                <%--<div class="order-image">
-                    <img src="<%= imgPath %>" alt="Immagine prodotto" />
-                </div>--%>
-                <div class="order-info">
-                    <p><strong>Ordine #</strong><%= ordini.get(i).getIdOrdine() %></p>
-                    <p><strong>Data:</strong> <%= ordini.get(i).getData_ordine() %></p>
-                    <p><strong>Totale:</strong> € <%= ordini.get(i).getTotale() %></p>
-                    <%--<p><strong>Stato:</strong> <%= ordini.get(i).getStato() %></p>--%>
-                    <div class="order-actions">
-                        <a href="RiacquistaProdotti.jsp?idOrdine=<%= prodotti.get(i).getId_prodotto() %>" class="btn-small">Riacquista Prodotti</a>
-                        <%--<a href="VediOrdine.jsp?idOrdine=<%= ordine.getId() %>" class="btn-small">Vedi Ordine</a>--%>
-                    </div>
+        <div class="login-box">
+            <h2>Accedi</h2>
+            <form action="${pageContext.request.contextPath}/Login" method="POST">
+                <div class="form-group">
+                    <label for="username">Nome Utente</label>
+                    <input type="text" id="username" name="username" required>
                 </div>
-            </div>
-            <%      }
-                }
-            }else { %>
-            <p>Non hai ancora effettuato ordini.</p>
-            <%      }
-            } else {
-            %>
-            <p>Effettua il <a href="Log_in.jsp">login</a> per visualizzare i tuoi ordini.</p>
-            <% } %>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Accedi">
+                </div>
+                <%
+                    String Errore_USER_PASS = (String) request.getAttribute("Errore_USER_PASS");
+                    if (Errore_USER_PASS != null) {
+                %>
+                <div class="field-error"><%= Errore_USER_PASS %></div>
+                <% } %>
+            </form>
         </div>
 
+        <!-- img src="right-image.png" alt="Immagine Destra" class="side-image" -->
+    </div>
 </main>
 
+<!-- Footer con stile di barra inferiore -->
 <div class="footer-bar">
     <a href="About_Us.jsp" class="btn-link">About Us</a>
     <a href="Contattaci.jsp" class="btn-link">Contattaci</a>
@@ -203,3 +177,7 @@
 
 </body>
 </html>
+
+
+
+

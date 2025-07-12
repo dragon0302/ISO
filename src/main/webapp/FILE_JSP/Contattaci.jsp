@@ -18,9 +18,9 @@
     <title>Contattaci</title>
 
     <!-- Link al file CSS esterno per lo styling della pagina-->
-    <link rel="stylesheet" href="sfondo.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/sfondo.css">
     <!-- Link al file CSS esterno per lo styling dell'elenco-->
-    <link rel="stylesheet" href="Contattaci.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/Contattaci.css">
 
 </head>
 <body>
@@ -33,7 +33,7 @@
     <div class="top-header">
         <!-- Parte 1 - Logo a sinistra -->
         <div class="logo-container">
-            <a href="Catalogo">
+            <a href="${pageContext.request.contextPath}/Catalogo">
                 <!-- Immagine del logo -->
                 <img src=" <%= request.getContextPath() + "/Immagini/isologo.png" %>" alt="Immagine Prodotto">
             </a>

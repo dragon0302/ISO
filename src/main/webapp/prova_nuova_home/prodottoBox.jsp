@@ -1,7 +1,8 @@
 <%@ page import="DataManagement.Prodotto" %>
+
 <%
     Prodotto p = (Prodotto) request.getAttribute("prodotto");
-    boolean admin = Boolean.parseBoolean((String) request.getAttribute("admin"));
+    boolean admin = (Boolean) request.getAttribute("admin");
 %>
 <div class="product">
     <div class="box">
