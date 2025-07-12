@@ -14,7 +14,7 @@
         <% } %>
 
         <h3><%= p.getNome() %></h3>
-        <p>Prezzo: €<%= p.getPrezzo() %></p>
+        <p>Prezzo: € <%= p.getPrezzo() %></p>
         <p><%= p.getDescrizione() %></p>
         <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
 
