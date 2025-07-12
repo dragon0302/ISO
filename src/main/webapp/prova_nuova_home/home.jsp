@@ -6,7 +6,6 @@
 <%
     // Recupero l'utente loggato dalla sessione
     Object utente = session.getAttribute("utente");
-
     // Controllo se c'è un filtro attivo
     String filtro = (String) request.getAttribute("Filter");
     boolean filtroAttivo = filtro != null && !filtro.isEmpty();
@@ -28,11 +27,11 @@
                 const menu = btn.nextElementSibling;
                 menu.classList.toggle("show");
             }
-
+            //per modificare
             function openEditModal(id, nome, prezzo, descrizione) {
                 alert("Modifica prodotto: " + nome);
             }
-
+            //per cancellare
             function openDeleteModal(id) {
                 alert("Elimina prodotto con ID: " + id);
             }
@@ -53,15 +52,7 @@
         <script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
 
         <header>
-
             <div class="top-header">
-                <!-- Parte 1 - Logo a sinistra -->
-                <div class="logo-container">
-                    <a href="Catalogo">
-                        <img src=" <%= request.getContextPath() + "/Immagini/isologo.png" %>" alt="Immagine Prodotto">
-                    </a>
-                </div>
-
                 <div>
                     <%@ include file="/prova_nuova_home/header.jsp" %>
 

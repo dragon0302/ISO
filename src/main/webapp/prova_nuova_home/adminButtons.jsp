@@ -17,10 +17,8 @@
   </ul>
 </div>
 
-<button class="btn-link" onclick="openPriceSurveyModal()">Indagine per numero venduti</button>
 <button class="btn-link" onclick="openAddProductModal()">Aggiungi Prodotto</button>
 <button class="btn-link" onclick="openAddFilterModal()">Aggiungi Filtro</button>
-<button class="btn-link" onclick="openDateSurveyModal()">Indagine per Data</button>
 
 <div id="addFilterModal" class="modal" style="display:none;">
   <div class="modal-content">
