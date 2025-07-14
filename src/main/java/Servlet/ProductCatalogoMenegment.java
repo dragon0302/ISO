@@ -1,5 +1,6 @@
 package Servlet;
 
+import DataManagement.Prodotto;
 import DataManagement.ProdottoDAO;
 import DataManagement.ProdottoDAOImplement;
 import jakarta.servlet.ServletException;
@@ -18,13 +19,32 @@ public class ProductCatalogoMenegment extends HttpServlet {
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    int prodottoID = Integer.parseInt(request.getParameter("prodottoID"));
+    String action = request.getParameter("action");
+    int prodottoID = Integer.parseInt(request.getParameter("id_prodotto"));
+    String nome = request.getParameter("nome");
+    float prezzo = Float.parseFloat(request.getParameter("prezzo"));
+    String descrizzione = request.getParameter("descrizione");
 
-    try {
+    if(action.equals("modifica")) {
+
+        try {
+
+          Prodotto prodotto = prodottoDAO.getProdottoByID(prodottoID);
+          prodottoDAO.editNomeProdotto(prodotto, nome);
+          prodottoDAO.editPrezzo(prodotto, prezzo);
+          prodottoDAO.editDescrizione(prodotto, descrizzione);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    /*try {
       prodottoDAO.deleteProdotto(prodottoID);
     } catch (SQLException e) {
       throw new RuntimeException(e);
-    }
+    }*/
 
     response.sendRedirect("Catalogo");
 

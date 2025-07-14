@@ -288,7 +288,7 @@ public class ProdottoDAOImplement implements ProdottoDAO{
             query.setInt(1, new_id);
             query.setInt(2, prodotto.getId_prodotto());
 
-            ResultSet rs = query.executeQuery();
+            query.execute();
 
         }catch (Exception e) {
             System.out.println(e.getMessage());
@@ -316,7 +316,7 @@ public class ProdottoDAOImplement implements ProdottoDAO{
             query.setString(1, new_nomeprodotto);
             query.setInt(2, prodotto.getId_prodotto());
 
-            ResultSet rs = query.executeQuery();
+            query.execute();
 
         }catch (Exception e) {
             System.out.println(e.getMessage());
@@ -343,7 +343,7 @@ public class ProdottoDAOImplement implements ProdottoDAO{
             query.setDouble(1, new_mv);
             query.setInt(2, prodotto.getId_prodotto());
 
-            ResultSet rs = query.executeQuery();
+            query.execute();
 
         }catch (Exception e) {
             System.out.println(e.getMessage());
@@ -371,7 +371,7 @@ public class ProdottoDAOImplement implements ProdottoDAO{
             query.setString(1, new_taglia);
             query.setInt(2, prodotto.getId_prodotto());
 
-            ResultSet rs = query.executeQuery();
+            query.execute();
 
         }catch (Exception e) {
             System.out.println(e.getMessage());
@@ -398,7 +398,7 @@ public class ProdottoDAOImplement implements ProdottoDAO{
             query.setString(1, new_descrizione);
             query.setInt(2, prodotto.getId_prodotto());
 
-            ResultSet rs = query.executeQuery();
+            query.execute();
 
         }catch (Exception e) {
             System.out.println(e.getMessage());
@@ -426,7 +426,34 @@ public class ProdottoDAOImplement implements ProdottoDAO{
             query.setString(1, new_categoria);
             query.setInt(2, prodotto.getId_prodotto());
 
-            ResultSet rs = query.executeQuery();
+            query.execute();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+
+    public void editPrezzo (Prodotto prodotto, float new_prezzo) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE " + TABLE_NAME + " SET Prezzo = ? WHERE ID_Prodotto = ?");
+            query.setFloat(1, new_prezzo);
+            query.setInt(2, prodotto.getId_prodotto());
+
+            query.execute();
 
         }catch (Exception e) {
             System.out.println(e.getMessage());

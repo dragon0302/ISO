@@ -326,7 +326,7 @@ public class UtenteDAOImplement implements UtenteDAO {
             query = conn.prepareStatement("UPDATE utente" +  " SET CF = ?" + "WHERE CF = ?");
             query.setString(1, new_cf);
             query.setString(2, utente.getCf());
-            ResultSet rs = query.executeQuery();
+            query.executeQuery();
 
         }catch (Exception e) {
             System.out.println(e.getMessage());
@@ -354,7 +354,7 @@ public class UtenteDAOImplement implements UtenteDAO {
             query.setString(1, new_nomeutente);
             query.setString(2, utente.getNomeutente());
 
-            ResultSet rs = query.executeQuery();
+            query.executeQuery();
 
         }catch (Exception e) {
             System.out.println(e.getMessage());
@@ -381,7 +381,7 @@ public class UtenteDAOImplement implements UtenteDAO {
             query.setString(1, new_password);
             query.setString(2, utente.getCf());
 
-            ResultSet rs = query.executeQuery();
+            query.executeQuery();
 
         }catch (Exception e) {
             System.out.println(e.getMessage());
@@ -408,7 +408,7 @@ public class UtenteDAOImplement implements UtenteDAO {
             query.setString(1, new_nome);
             query.setString(2, utente.getCf());
 
-            ResultSet rs = query.executeQuery();
+            query.executeQuery();
 
         }catch (Exception e) {
             System.out.println(e.getMessage());
@@ -439,7 +439,7 @@ public class UtenteDAOImplement implements UtenteDAO {
             query.setString(1, new_cognome);
             query.setString(2, utente.getCf());
 
-            ResultSet rs = query.executeQuery();
+            query.executeQuery();
 
         }catch (Exception e) {
             System.out.println(e.getMessage());
@@ -467,7 +467,7 @@ public class UtenteDAOImplement implements UtenteDAO {
             query.setString(1, new_sesso);
             query.setString(2, utente.getCf());
 
-            ResultSet rs = query.executeQuery();
+            query.executeQuery();
 
         }catch (Exception e) {
             System.out.println(e.getMessage());
@@ -494,7 +494,7 @@ public class UtenteDAOImplement implements UtenteDAO {
             query.setBoolean(1, new_admin);
             query.setString(2, utente.getCf());
 
-            ResultSet rs = query.executeQuery();
+            query.executeQuery();
 
         }catch (Exception e) {
             System.out.println(e.getMessage());
@@ -521,7 +521,7 @@ public class UtenteDAOImplement implements UtenteDAO {
             query.setDate(1, new_dn);
             query.setString(2, utente.getCf());
 
-            ResultSet rs = query.executeQuery();
+            query.executeQuery();
 
         }catch (Exception e) {
             System.out.println(e.getMessage());

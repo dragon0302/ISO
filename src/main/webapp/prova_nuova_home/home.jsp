@@ -182,7 +182,7 @@
             <div class="modal-content">
                 <span class="close" onclick="closeEditModal()">&times;</span>
                 <h2>Modifica Prodotto</h2>
-                <form action="GestioneProdotti" method="post">
+                <form action="ProductCatalogoMenegment" method="post">
                     <input type="hidden" name="action" value="modifica">
                     <input type="hidden" name="id_prodotto" id="edit-id">
 
