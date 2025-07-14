@@ -18,7 +18,7 @@
     <title>Termini e condizioni</title>
 
     <!-- Link al file CSS esterno per lo styling della pagina-->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/sfondo.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/sfondo.css">
 
 </head>
     <body>

@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Carrello</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/sfondo.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/sfondo.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/Carrello.css">
 </head>
 <body>

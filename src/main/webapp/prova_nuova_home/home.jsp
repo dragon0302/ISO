@@ -19,7 +19,7 @@
         <meta charset="UTF-8">
         <title>ISO-16</title>
 
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/sfondo.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/sfondo.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/prova_nuova_home/home.css">
 
         <script>

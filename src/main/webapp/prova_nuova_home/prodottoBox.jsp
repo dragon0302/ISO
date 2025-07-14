@@ -9,7 +9,7 @@
         <% if (admin != null) { %>
         <button class="menu-button" onclick="toggleBoxOption(this)">⋮</button>
         <div class="box-option">
-            <button onclick="openEditModal(<%= p.getId_prodotto() %>, '<%= p.getNome() %>', <%= p.getPrezzo() %>, '<%= p.getDescrizione() %>')">Modifica</button>
+            <button onclick="openEditModal(<%= p.getId_prodotto() %>, '<%= p.getNome() %>', <%= p.getPrezzo() %>, '<%= p.getDescrizione() %>', '<%=p.%>')">Modifica</button>
             <button onclick="openDeleteModal(<%= p.getId_prodotto() %>)">Elimina</button>
         </div>
         <% } %>

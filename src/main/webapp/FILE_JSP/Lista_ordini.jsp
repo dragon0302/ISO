@@ -13,13 +13,17 @@
 <%@ page import="DataManagement.Ordine" %>
 <%@ page import="java.util.ArrayList" %>
 
+<%
+    Prodotto p = (Prodotto) request.getAttribute("prodotto");
+%>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <title>Lista Ordini</title>
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/sfondo.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/sfondo.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/Lista_ordini.css">
 <body>
 
@@ -178,6 +182,20 @@
                     <div class="order-actions">
                         <a href="RiacquistaProdotti.jsp?idOrdine=<%= prodotti.get(i).getId_prodotto() %>" class="btn-small">Riacquista Prodotti</a>
                         <%--<a href="VediOrdine.jsp?idOrdine=<%= ordine.getId() %>" class="btn-small">Vedi Ordine</a>--%>
+                    </div>
+                    <div class="product">
+                        <div class="box">
+                            <h3><%= p.getNome() %></h3>
+                            <p>Prezzo: € <%= p.getPrezzo() %></p>
+                            <p><%= p.getDescrizione() %></p>
+                            <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
+
+                            <form action="ProductCartMenegment" method="post">
+                                <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
+                                <input type="hidden" name="SourcePage" value="Home">
+                                <button type="submit" class="btn-aggiungi">Aggiungi al carrello</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -17,7 +17,7 @@
   <meta charset="UTF-8">
   <title>Pagamento</title>
 
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/sfondo.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/sfondo.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/Pagamento.css">
 
   <meta charset="UTF-8" />
@@ -167,7 +167,7 @@
 </header>
 
 <main>
-
+  
 </main>
 
 <div class="footer-bar">

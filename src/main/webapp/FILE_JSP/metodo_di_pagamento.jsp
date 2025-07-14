@@ -10,7 +10,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Prova Metodo_di_pagamento</title></head>
+  <title>Metodo_di_pagamento</title></head>
 <body>
 
 <form action="logIN" method="POST">
