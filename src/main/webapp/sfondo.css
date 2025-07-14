@@ -27,7 +27,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    gap: 290px;
     flex-wrap: nowrap;                   /* Va a capo se lo spazio finisce */
 }
 
@@ -62,7 +62,6 @@ header {
 
 /* Suggerimenti di ricerca */
 .suggestions {
-    position: absolute;
     top: 36px;
     left: 0;
     right: 0;
