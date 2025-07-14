@@ -10,28 +10,48 @@
     border-radius: 4px;
 }
 
-.user-menu ul {
+#userMenu {
+    display: none; /* nascosto di default */
+    position: absolute;
+    top: 100%;      /* subito sotto il contenitore */
+    left: 0;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+    min-width: 150px; /* opzionale: larghezza minima */
+    padding: 0;
+    margin: 0;
     list-style: none;
 }
 
-.user-menu ul li {
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
+/* Per far apparire il menu quando si passa col mouse sul contenitore (hover) */
+#userContainer:hover #userMenu {
+    display: block;
 }
 
-.user-menu ul li a,
-.user-menu ul li button {
-    color: black;
-    text-decoration: none;
-    background: none;
-    border: none;
-    width: 100%;
-    text-align: left;
-    cursor: pointer;
+/* Stile lista dentro il menu */
+#userMenu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
-.user-menu ul li:hover {
+#userMenu li {
+    padding: 8px 12px;
+}
+
+#userMenu li:hover {
     background-color: #f0f0f0;
+}
+
+#userMenu li button {
+    width: 100%;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
 }
 
 /* Pulsante ⋮ posizionato in alto a destra della card prodotto */
@@ -258,44 +278,3 @@ main h2 {
 
 
 
-/* ----- MEDIA QUERIES ----- */
-@media (max-width: 768px) {
-    .top-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-
-    .filter-bar {
-        flex-direction: column;
-    }
-
-    .dropdown {
-        position: static;
-        width: 100%;
-        box-shadow: none;
-    }
-
-    .filter:hover .dropdown {
-        display: none;
-    }
-
-    .filter.open .dropdown {
-        display: block;
-    }
-
-    .modal-content {
-        width: 95%;
-    }
-}
-
-@media (max-width: 480px) {
-    .search-container input[type="text"] {
-        font-size: 14px;
-    }
-
-    .btn, .btn-link {
-        width: 100%;
-        text-align: center;
-    }
-}

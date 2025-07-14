@@ -1,12 +1,18 @@
 <%@ page import="DataManagement.Utente" %>
-<div id="userContainer">
-  <span class="username" onclick="toggleUserMenu()">
-    <%
-        Utente utente = (Utente) session.getAttribute("utente");
 
-        String nomeUtente = utente.getNomeutente().toUpperCase();
-    %>
-  </span>
+<%
+    Utente utente = (Utente) session.getAttribute("utente");
+
+    String nomeUtente = utente.getNomeutente().toUpperCase();
+%>
+
+<a class="btn card-btn" href="carrello">Carrello</a>
+
+<div id="userContainer">
+<%--  <span class="username" onclick="toggleUserMenu()">--%>
+
+<%--  </span>--%>
+    <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente()!= null ? utente.getNomeutente().toUpperCase() : "" %></span>
     <div id="menuUser" class="user-menu">
         <ul>
             <li><a class="btn-link" href="${pageContext.request.contextPath}/FILE_JSP/Profilo.jsp">Profilo</a></li>
