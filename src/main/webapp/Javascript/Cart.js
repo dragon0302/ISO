@@ -6,7 +6,7 @@ function aggiornaQuantita(ID,Quantity,prezzo){
         return;
     }
 
-    fetch('Updatecarrello', {
+    fetch("/ISO_16_war_exploded/Updatecarrello", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
