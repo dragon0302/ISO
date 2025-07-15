@@ -24,6 +24,10 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Metodo_di_pagamento</title>
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/sfondo.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/metodo_di_pagamento.css">
+
   </head>
   <body>
 
@@ -46,7 +50,6 @@
     </div> <!-- fine top-header -->
   </header>
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/metodo_di_pagamento.css">
     <form action="logIN" method="POST">
 
       <%--@declare id="NumeroCarta"--%>
