@@ -18,9 +18,9 @@ public class CheckUtente extends HttpServlet {
             HttpSession session = request.getSession();
             Utente utente = (Utente) session.getAttribute("utente");
             if (utente == null) {
-                response.sendRedirect("Log_in.jsp");
+                response.sendRedirect("FILE_JSP/Log_in.jsp");
             }else{
-                response.sendRedirect("Pagamento.jsp");
+                response.sendRedirect("FILE_JSP/Pagamento.jsp");
             }
         }catch (Exception e){
             e.printStackTrace();

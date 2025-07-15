@@ -71,9 +71,15 @@
             <section class="content">
                 <div class="banner">
                     <span>Banner</span>
-                    <button class="banner-btn" onclick="openAddProductModal()">+</button>
+
                 </div>
 
+                <% if(utente != null && utente.isAmministratore()){
+                %>
+                <button class="banner-btn" onclick="openAddProductModal()">+</button>
+                <%
+                    }
+                %>
                 <%-- FILTRO ATTIVO --%>
                 <%
                     if (filtroAttivo && prodottiFiltro != null) {
