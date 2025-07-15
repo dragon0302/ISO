@@ -7,16 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="DataManagement.Utente" %>
-<%@ page import="DataManagement.Prodotto" %>
-<%@ page import="java.util.List" %>
 <%
   // Recupero l'utente loggato dalla sessione
   Utente utente = (Utente) session.getAttribute("utente");
-  // Controllo se c'è un filtro attivo
-  String filtro = (String) request.getAttribute("Filter");
-  boolean filtroAttivo = filtro != null && !filtro.isEmpty();
-  List<Prodotto> prodottiFiltro = (List<Prodotto>) request.getAttribute("prodottiFiltro");
-//    boolean admin = utente.isAmministratore();
 %>
 
 <!DOCTYPE html>
