@@ -203,11 +203,10 @@
 
         <!-- FOOTER -->
         <div class="footer-bar">
-            <a href="About_Us.jsp" class="btn-link">About Us</a>
-            <a href="Contattaci.jsp" class="btn-link">Contattaci</a>
-            <a href="Termini_e_condizioni.jsp" class="btn-link">Termini e condizioni</a>
-            <a href="Assistenza.jsp" class="btn-link">Assistenza</a>
+            <a href="${pageContext.request.contextPath}/FILE_JSP/About_Us.jsp" class="btn-link">About Us</a>
+            <a href="${pageContext.request.contextPath}/FILE_JSP/Contattaci.jsp" class="btn-link">Contattaci</a>
+            <a href="${pageContext.request.contextPath}/FILE_JSP/Termini_e_condizioni.jsp" class="btn-link">Termini e condizioni</a>
+            <a href="${pageContext.request.contextPath}/FILE_JSP/Assistenza.jsp" class="btn-link">Assistenza</a>
         </div>
-
     </body>
 </html>

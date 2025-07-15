@@ -89,9 +89,8 @@
                     <!-- Metodo di pagamento preferito -->
                     <div class="settings-option">
                         <label>Metodo di pagamento preferito</label>
-                        <a href="metodo_di:pagamento.jsp">Imposta</a>
+                        <a href="${pageContext.request.contextPath}/FILE_JSP/metodo_di_pagamento.jsp" class="button-link">Imposta</a>
                     </div>
-
 
                     <!-- Storico ordini -->
                     <form action="visualizzaOrdini" method="GET" class="settings-option">
@@ -158,11 +157,10 @@
 
 
         <div class="footer-bar">
-            <a href="About_Us.jsp" class="btn-link">About Us</a>
-            <a href="Contattaci.jsp" class="btn-link">Contattaci</a>
-            <a href="Termini_e_condizioni.jsp" class="btn-link">Termini e condizioni</a>
-            <a href="Assistenza.jsp" class="btn-link">Assistenza</a>
+            <a href="${pageContext.request.contextPath}/FILE_JSP/About_Us.jsp" class="btn-link">About Us</a>
+            <a href="${pageContext.request.contextPath}/FILE_JSP/Contattaci.jsp" class="btn-link">Contattaci</a>
+            <a href="${pageContext.request.contextPath}/FILE_JSP/Termini_e_condizioni.jsp" class="btn-link">Termini e condizioni</a>
+            <a href="${pageContext.request.contextPath}/FILE_JSP/Assistenza.jsp" class="btn-link">Assistenza</a>
         </div>
-
     </body>
 </html>
