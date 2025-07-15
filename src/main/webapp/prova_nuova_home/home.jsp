@@ -211,15 +211,16 @@
             <div class="modal-content">
                 <span class="close" onclick="closeAddProductModal()">&times;</span>
                 <h2>Aggiungi Prodotto</h2>
-                <form>
+                <form action="ProductCatalogoMenegment" method="post">
                     <label for="productName">Nome prodotto:</label>
+                    <input type="hidden" name="action" value="nuovo">
                     <input type="text" id="productName" name="productName" required><br><br>
 
                     <label for="price">Prezzo (€):</label>
                     <input type="number" id="price" name="price" step="0.01" required><br><br>
 
                     <label for="edit-descrizione">Descrizione:</label>
-                    <input type="text" id="productDescrizione" name="productName" required><br><br>
+                    <input type="text" id="productDescrizione" name="productDescrizione" required><br><br>
 
                     <label for="edit-filtro">filtro</label>
                     <input type="text" id="productfiltro" name="filtro" required>
