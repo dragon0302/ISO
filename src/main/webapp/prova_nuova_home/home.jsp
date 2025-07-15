@@ -28,7 +28,7 @@
                 menu.classList.toggle("show");
             }
             //per modificare
-            function openEditModal(id, nome, prezzo, descrizione) {
+            function openEditModal(id, nome, prezzo, descrizione, filto) {
                 alert("Modifica prodotto: " + nome);
             }
             //per cancellare
@@ -194,6 +194,9 @@
 
                     <label for="edit-descrizione">Descrizione:</label>
                     <textarea id="edit-descrizione" name="descrizione" required></textarea>
+
+                    <label for="edit-filtro">filtro</label>
+                    <input type="text" id="edit-filtro" name="filtro" required>
 
                     <button type="submit" class="btn-submit">Salva Modifiche</button>
                 </form>
