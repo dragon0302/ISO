@@ -59,7 +59,8 @@ public class ProdottoDAOImplement implements ProdottoDAO{
         ArrayList<Prodotto> prodotti = new ArrayList<>();
 
         try {
-            conn.prepareStatement("SELECT * FROM " + TABLE_NAME);
+            conn = ds.getConnection();
+            query2 = conn.prepareStatement("SELECT * FROM " + TABLE_NAME);
             ResultSet rs = query2.executeQuery();
 
             while (rs.next()) {

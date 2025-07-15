@@ -10,6 +10,7 @@
     String filtro = (String) request.getAttribute("Filter");
     boolean filtroAttivo = filtro != null && !filtro.isEmpty();
     List<Prodotto> prodottiFiltro = (List<Prodotto>) request.getAttribute("prodottiFiltro");
+    List<String> paths = (List<String>) application.getAttribute("Paths");
 //    boolean admin = utente.isAmministratore();
 %>
 
@@ -89,6 +90,7 @@
                     <% for (Prodotto p : prodottiFiltro) { %>
                     <%
                     request.setAttribute("prodotto", p);
+                    request.setAttribute("path", paths.get(p.getId_prodotto() - 1));
                         if(utente == null){
                             request.setAttribute("isAmministratore", null);
                         }else{
@@ -122,6 +124,7 @@
                         if (prodottiNovita != null) {
                             for (Prodotto p : prodottiNovita) {
                             request.setAttribute("prodotto", p);
+                            request.setAttribute("path", paths.get(p.getId_prodotto() - 1));
                                 if(utente == null){
                                     request.setAttribute("isAmministratore", null);
                                 }else{
@@ -155,6 +158,7 @@
                         if (prodottiPopolari != null) {
                             for (Prodotto p : prodottiPopolari) {
                             request.setAttribute("prodotto", p);
+                            request.setAttribute("path", paths.get(p.getId_prodotto() - 1));
                                 if(utente == null){
                                     request.setAttribute("isAmministratore", null);
                                 }else{

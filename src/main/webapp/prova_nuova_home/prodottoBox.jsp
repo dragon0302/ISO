@@ -1,8 +1,10 @@
 <%@ page import="DataManagement.Prodotto" %>
+<%@ page import="java.util.List" %>
 
 <%
     Prodotto p = (Prodotto) request.getAttribute("prodotto");
     Boolean admin = (Boolean) request.getAttribute("isAmministratore");
+    String path = (String) request.getAttribute("path");
 %>
 <div class="product">
     <div class="box">
@@ -13,6 +15,11 @@
             <button onclick="openDeleteModal(<%= p.getId_prodotto() %>)">Elimina</button>
         </div>
         <% } %>
+
+        <div class="product-image">
+            <!-- Immagine prodotto (metti il path corretto nell'attributo src) -->
+            <img src=" <%= request.getContextPath() + path %>" alt="Immagine Prodotto">
+        </div>
 
         <h3><%= p.getNome() %></h3>
         <p>Prezzo: € <%= p.getPrezzo() %></p>
