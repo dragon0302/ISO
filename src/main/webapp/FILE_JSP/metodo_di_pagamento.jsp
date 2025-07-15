@@ -24,24 +24,27 @@
   </head>
   <body>
 
-  <script src="${pageContext.request.contextPath}/Javascript/CatalogFilter.js"></script>
-  <script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
-  <script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
+    <script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
+    <script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
 
-  <header>
-    <div class="top-header">
-      <div>
-        <%
-          if(utente == null){
-            request.setAttribute("isAmministratore", null);
-          }else{
-            request.setAttribute("isAmministratore", utente.isAmministratore());
-          }
-        %>
-        <jsp:include page="/prova_nuova_home/header.jsp" />
-      </div>
-    </div> <!-- fine top-header -->
-  </header>
+    <script src="${pageContext.request.contextPath}/Javascript/CatalogFilter.js"></script>
+    <script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
+    <script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
+
+    <header>
+      <div class="top-header">
+        <div>
+          <%
+            if(utente == null){
+              request.setAttribute("isAmministratore", null);
+            }else{
+              request.setAttribute("isAmministratore", utente.isAmministratore());
+            }
+          %>
+          <jsp:include page="/prova_nuova_home/header.jsp" />
+        </div>
+      </div> <!-- fine top-header -->
+    </header>
 
     <form action="logIN" method="POST">
 
