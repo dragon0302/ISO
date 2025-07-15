@@ -30,7 +30,16 @@ public class ProdottoDAOImplement implements ProdottoDAO{
         PreparedStatement query = null;
         try {
             conn = ds.getConnection();
-            query = conn.prepareStatement("INSERT INTO " + TABLE_NAME +  "(Nome, MediaValutazione, Taglia, Descrizione, Categoria) VALUES (?,?,?,?,?);");
+            query = conn.prepareStatement("INSERT INTO " + TABLE_NAME +  "(Nome, MediaValutazione, Taglia, Descrizione, Categoria,Prezzo,Iva) VALUES (?,?,?,?,?,?,?)");
+
+            query.setString(1, prodotto.getNome());
+            query.setDouble(2,prodotto.getMedia_valutazione());
+            query.setString(3, prodotto.getTaglia());
+            query.setString(4, prodotto.getDescrizione());
+            query.setString(5, prodotto.getCategoria());
+            query.setFloat(6, prodotto.getPrezzo());
+            query.setInt(7, prodotto.getIva());
+
             query.executeUpdate();
         }finally {
             try {
@@ -50,7 +59,8 @@ public class ProdottoDAOImplement implements ProdottoDAO{
         ArrayList<Prodotto> prodotti = new ArrayList<>();
 
         try {
-            conn.prepareStatement("SELECT * FROM " + TABLE_NAME);
+            conn = ds.getConnection();
+            query2 = conn.prepareStatement("SELECT * FROM " + TABLE_NAME);
             ResultSet rs = query2.executeQuery();
 
             while (rs.next()) {

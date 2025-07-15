@@ -179,7 +179,7 @@
 
 
         <div class="box-acquista">
-            <form action="CheckUtente" method="post">
+            <form action="${pageContext.request.contextPath}/CheckUtente" method="post">
                 <button type="submit" class="btn-aggiungi">
                     Vai al pagamento
                 </button>

@@ -10,6 +10,7 @@
     String filtro = (String) request.getAttribute("Filter");
     boolean filtroAttivo = filtro != null && !filtro.isEmpty();
     List<Prodotto> prodottiFiltro = (List<Prodotto>) request.getAttribute("prodottiFiltro");
+    List<String> paths = (List<String>) application.getAttribute("Paths");
 //    boolean admin = utente.isAmministratore();
 %>
 
@@ -71,9 +72,15 @@
             <section class="content">
                 <div class="banner">
                     <span>Banner</span>
-                    <button class="banner-btn" onclick="openAddProductModal()">+</button>
+
                 </div>
 
+                <% if(utente != null && utente.isAmministratore()){
+                %>
+                <button class="banner-btn" onclick="openAddProductModal()">+</button>
+                <%
+                    }
+                %>
                 <%-- FILTRO ATTIVO --%>
                 <%
                     if (filtroAttivo && prodottiFiltro != null) {
@@ -83,6 +90,7 @@
                     <% for (Prodotto p : prodottiFiltro) { %>
                     <%
                     request.setAttribute("prodotto", p);
+                    request.setAttribute("path", paths.get(p.getId_prodotto() - 1));
                         if(utente == null){
                             request.setAttribute("isAmministratore", null);
                         }else{
@@ -116,6 +124,7 @@
                         if (prodottiNovita != null) {
                             for (Prodotto p : prodottiNovita) {
                             request.setAttribute("prodotto", p);
+                            request.setAttribute("path", paths.get(p.getId_prodotto() - 1));
                                 if(utente == null){
                                     request.setAttribute("isAmministratore", null);
                                 }else{
@@ -149,6 +158,7 @@
                         if (prodottiPopolari != null) {
                             for (Prodotto p : prodottiPopolari) {
                             request.setAttribute("prodotto", p);
+                            request.setAttribute("path", paths.get(p.getId_prodotto() - 1));
                                 if(utente == null){
                                     request.setAttribute("isAmministratore", null);
                                 }else{
@@ -211,15 +221,16 @@
             <div class="modal-content">
                 <span class="close" onclick="closeAddProductModal()">&times;</span>
                 <h2>Aggiungi Prodotto</h2>
-                <form>
+                <form action="ProductCatalogoMenegment" method="post">
                     <label for="productName">Nome prodotto:</label>
+                    <input type="hidden" name="action" value="nuovo">
                     <input type="text" id="productName" name="productName" required><br><br>
 
                     <label for="price">Prezzo (€):</label>
                     <input type="number" id="price" name="price" step="0.01" required><br><br>
 
                     <label for="edit-descrizione">Descrizione:</label>
-                    <input type="text" id="productDescrizione" name="productName" required><br><br>
+                    <input type="text" id="productDescrizione" name="productDescrizione" required><br><br>
 
                     <label for="edit-filtro">filtro</label>
                     <input type="text" id="productfiltro" name="filtro" required>

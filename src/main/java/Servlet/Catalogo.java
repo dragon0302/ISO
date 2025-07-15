@@ -26,29 +26,14 @@ public class Catalogo extends HttpServlet {
             List<Prodotto> prodottiRecenti = prodottoDAO.getProdottiRecenti();
             List<Integer> IDprodottiPiuAcquistati = acquistoDAO.getProdottiPiuAqquistati();
             List<Prodotto> prodottiPiuAcquistai = new ArrayList<>();
-            List<String> paths = new ArrayList<>();
             for (int ID : IDprodottiPiuAcquistati) {
 
                 Prodotto prodotto = prodottoDAO.getProdottoByID(ID);
                 prodotto.setId_prodotto(ID);
                 prodottiPiuAcquistai.add(prodotto);
 
-                String nomeFile = prodotto.getNome() + ".jpg";
-                Path percorsoImmagine = Paths.get(request.getServletContext().getRealPath("/Immagini"), nomeFile);
-
-                if (Files.exists(percorsoImmagine)){
-
-                    paths.add("/Immagini/" + prodotto.getNome() + ".jpg");
-
-                }else {
-
-                    paths.add("/Immagini/" + "ironmaden.png");
-
-                }
-
             }
 
-            request.setAttribute("paths", paths);
             request.setAttribute("prodottiNovita", prodottiRecenti);
             request.setAttribute("prodottiPiuAqqistati", prodottiPiuAcquistai);
 

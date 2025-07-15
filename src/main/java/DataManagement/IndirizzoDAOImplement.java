@@ -27,15 +27,16 @@ public class IndirizzoDAOImplement implements IndirizzoDAO {
         PreparedStatement query = null;
         try {
             conn = ds.getConnection();
-            query = conn.prepareStatement("INSERT INTO" + TABLE_NAME +  "(CF_Utente, città, Provincia, CAP, Via, Civico, Indirizzo2, Note, Fatturazione) VALUES (?,?,?,?,?,?,?,?,?)");
+            query = conn.prepareStatement("INSERT INTO " + TABLE_NAME +  "(CF_Utente, città, Provincia, CAP, Via, Civico, Indirizzo2, Note, Fatturazione) VALUES (?,?,?,?,?,?,?,?,?)");
             query.setString(1,indirizzo.getCF_utente());
             query.setString(2,indirizzo.getCittà());
             query.setString(3,indirizzo.getProvincia());
             query.setString(4,indirizzo.getCap());
             query.setString(5,indirizzo.getVia());
-            query.setString(6, indirizzo.getIndirizzo2());
-            query.setString(7,indirizzo.getNote());
-            query.setBoolean(8,indirizzo.isFatturazione());
+            query.setInt(6,indirizzo.getCivico());
+            query.setString(7, indirizzo.getIndirizzo2());
+            query.setString(8,indirizzo.getNote());
+            query.setBoolean(9,indirizzo.isFatturazione());
             query.executeUpdate();
         }finally {
             try {
