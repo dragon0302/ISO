@@ -45,7 +45,7 @@
   <img src="https://img.icons8.com/color/48/discover.png" alt="Discover" title="Discover">
   <img src="https://img.icons8.com/color/48/apple-pay.png" alt="Apple Pay" title="Apple Pay">
   <img src="https://img.icons8.com/color/48/google-pay.png" alt="Google Pay" title="Google Pay">
-
+</div>
 
 <header>
   <div class="top-header">
@@ -167,8 +167,10 @@
 </header>
 
 <main>
-  
+  <h2>Conferma il pagamento</h2>
+  <p>Seleziona un metodo di pagamento tra quelli disponibili.</p>
 </main>
+
 
 <div class="footer-bar">
   <a href="About_Us.jsp" class="btn-link">About Us</a>
