@@ -297,3 +297,161 @@ main h2 {
     letter-spacing: 1px;
 }
 
+/*@media (min-width: 480px) and (max-width:768px){*/
+
+/*    .section-header{*/
+/*        display: flex;*/
+/*        justify-content: start;*/
+/*    }*/
+
+/*    .top-header{*/
+/*        gap:100px;*/
+/*    }*/
+
+/*    .main h2{*/
+/*        font-size: 5rem;*/
+/*    }*/
+
+/*    .product-slider{*/
+/*        flex-direction: column;*/
+/*        width: 80%;*/
+/*        height: 32vh;*/
+/*    }*/
+/*}*/
+
+@media (max-width: 480px) {
+    /* Banner */
+    .banner {
+        font-size: 1.5rem;
+        padding: 30px 10px;
+        text-align: center;
+    }
+
+    /* Slider prodotti */
+    .product-slider {
+        flex-direction: column;
+        gap: 16px;
+        padding: 10px;
+    }
+
+    /* Card prodotto */
+    .product {
+        flex: 1 0 auto;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .box h3 {
+        font-size: 14px;
+    }
+
+    .box p {
+        font-size: 12px;
+    }
+
+    .btn-aggiungi {
+        font-size: 10px;
+        padding: 4px 6px;
+    }
+
+    /* Menu utente */
+    .username {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+
+    #userMenu li {
+        padding: 6px 10px;
+    }
+
+    /* Modale */
+    .modal-content {
+        width: 95%;
+        padding: 16px;
+    }
+
+    .modal-content input,
+    .modal-content select {
+        padding: 6px;
+    }
+
+    /* Titoli sezione */
+    main h2 {
+        font-size: 1.4rem;
+        margin-left: 20px;
+        padding-left: 10px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 1024px) {
+    /* Banner */
+    .banner {
+        font-size: 2rem;
+        padding: 40px 15px;
+    }
+
+    /* Product slider in scroll singolo */
+    .product-slider {
+        gap: 12px;
+        padding: 10px;
+        overflow-x: scroll;
+    }
+
+    .product {
+        flex: 0 0 200px;
+    }
+
+    .box h3 {
+        font-size: 15px;
+    }
+
+    .box p {
+        font-size: 13px;
+    }
+
+    /* Menu utente */
+    .username {
+        font-size: 15px;
+        padding: 7px 11px;
+    }
+
+    /* Modale */
+    .modal-content {
+        width: 85%;
+        padding: 18px;
+    }
+
+    .modal-content input,
+    .modal-content select {
+        padding: 7px;
+    }
+
+    /* Titoli sezione */
+    main h2 {
+        font-size: 1.8rem;
+        margin-left: 30px;
+        padding-left: 12px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .product-slider {
+        gap: 14px;
+    }
+
+    .product {
+        flex: 0 0 250px;
+    }
+
+    .box h3 {
+        font-size: 16px;
+    }
+
+    .box p {
+        font-size: 13px;
+    }
+
+    main h2 {
+        font-size: 2rem;
+    }
+}
