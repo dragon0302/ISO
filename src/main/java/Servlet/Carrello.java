@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/carrello")
-public class Carello extends HttpServlet {
+public class Carrello extends HttpServlet {
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -38,27 +38,27 @@ public class Carello extends HttpServlet {
 
       if (utente == null) {
 
-        //recupero gli id dei prodotti che si trovano all'interno del cucky
+        //recupero gli id dei prodotti che si trovano all'interno del cookie
         ids = cm.AllCookieId();
 
         if (ids != null) {
 
 
-          //verifico se i campi sono inizzializzati
+          //verifico se i campi sono inizializzati
           prezzototale = VerIniCampi(Nquantita,carrello,prezzototale, session);
 
           for (String id : ids){
 
-            //vado a prendere i prodotti che sono nel cucky
+            //vado a prendere i prodotti che sono nel cookie
             prodotto = prodottoDAO.getProdottoByID(Integer.parseInt(id));
 
             Prodotto finalProdotto = prodotto;
-            //vado ad aggungere un prodotto al carello se non e gia presente
+            //vado ad aggungere un prodotto al carrello se non è già presente
             if (!(carrello.stream().anyMatch(p -> p.getId_prodotto() == finalProdotto.getId_prodotto()))) {
               carrello.add(prodotto);
             }
 
-            //vado a controllare se e gia stata aggunta la quantità di dell'ultimo prodotto
+            //vado a controllare se è già stata aggunta la quantità dell'ultimo prodotto
             if (carrello.size() != Nquantita.size()) {
 
               Nquantita.add(cm.getCookieProductQuantity(id));

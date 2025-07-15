@@ -46,7 +46,7 @@
       </div> <!-- fine top-header -->
     </header>
 
-    <form action="logIN" method="POST">
+    <form action="${pageContext.request.contextPath}/AddPayment" method="GET">
 
       <%--@declare id="NumeroCarta"--%>
       <%--@declare id="DataScadenza"--%>
@@ -56,11 +56,11 @@
       <%--@declare id="CF_utente"--%>
       <%--input type="hidden" name="action" value="insert"--%>
 
-      <label for="NumeroCarta">Numero della carta<textarea name="NumeroCarta" id="NumeroCarta" required placeholder="Inserire il numero della carta"></textarea></label>
+      <label for="NumeroCarta">Numero della carta<input name="NumeroCarta" id="NumeroCarta" required placeholder="Inserire il numero della carta"></input></label>
 
-      <label for="DataScadenza">Data di scadenza carta<textarea name="DataScadenza" id="DataScadenza" required placeholder="Inserire la data di scadenza della carta"></textarea></label>
+      <label for="DataScadenza">Data di scadenza carta<input type="Date" name="DataScadenza" id="DataScadenza" required placeholder="Inserire la data di scadenza della carta"></input></label>
 
-      <label for="CVV">CVV dell'utente<textarea name="CVV" id="CVV" required placeholder="Iserire il CVV dell'utente"></textarea></label>
+      <label for="CVV">CVV dell'utente<input name="CVV" id="CVV" required placeholder="Iserire il CVV dell'utente"></input></label>
 
       <label>Tipo:</label>
       <label><input type="radio" name="Tipo" value="Prepagata" required> Carta prepagata</label>
@@ -70,9 +70,6 @@
       <label>Default_pagamento:</label>
       <label><input type="radio" name="Default_pagamento" value="1" required> Y</label>
       <label><input type="radio" name="Default_pagamento" value="0" required> N</label>
-
-      <label for="CF_utente">CF dell'utente<textarea name="CF_utente" id="CF_utente" maxlength="16" required placeholder="Inserire CF dell'utente"></textarea> </label>
-
       <input type="submit" value="add">
 
     </form>
