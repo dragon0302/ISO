@@ -18,8 +18,8 @@
     </ul>
   </div>
 
-  <button class="btn-link" onclick="openAddProductModal()">Aggiungi Prodotto</button>
-  <button class="btn-link" onclick="openAddFilterModal()">Aggiungi Filtro</button>
+  <a class="btn card-btn" href="carrello">Carrello</a>
+  <button class="login-btn" onclick="openAddFilterModal()">Aggiungi Filtro</button>
 
   <div id="addFilterModal" class="modal" style="display:none;">
     <div class="modal-content">

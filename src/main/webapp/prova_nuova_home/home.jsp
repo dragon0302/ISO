@@ -69,7 +69,10 @@
         <main>
 
             <section class="content">
-                <div class="banner">Banner</div>
+                <div class="banner">
+                    <span>Banner</span>
+                    <button class="banner-btn" onclick="openAddProductModal()">+</button>
+                </div>
 
                 <%-- FILTRO ATTIVO --%>
                 <%
@@ -203,13 +206,58 @@
             </div>
         </div>
 
+        <%--form per la creazione del prodotto--%>
+        <div id="addProductModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeAddProductModal()">&times;</span>
+                <h2>Aggiungi Prodotto</h2>
+                <form>
+                    <label for="productName">Nome prodotto:</label>
+                    <input type="text" id="productName" name="productName" required><br><br>
+
+                    <label for="price">Prezzo (€):</label>
+                    <input type="number" id="price" name="price" step="0.01" required><br><br>
+
+                    <label for="edit-descrizione">Descrizione:</label>
+                    <input type="text" id="productDescrizione" name="productName" required><br><br>
+
+                    <label for="edit-filtro">filtro</label>
+                    <input type="text" id="productfiltro" name="filtro" required>
+
+                    <button type="submit">Salva</button>
+                </form>
+            </div>
+        </div>
+
+        <script>
+            function openAddProductModal() {
+                const modal = document.getElementById("addProductModal");
+                modal.style.display = "block";
+            }
+
+            function closeAddProductModal() {
+                const modal = document.getElementById("addProductModal");
+                modal.style.display = "none";
+            }
+
+            // Opzionale: chiusura cliccando fuori dal modal
+            window.onclick = function(event) {
+                const modal = document.getElementById("addProductModal");
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
+
+
         <!-- Script JS per il form della modifica-->
         <script>
-            function openEditModal(id, nome, prezzo, descrizione) {
+            function openEditModal(id, nome, prezzo, descrizione, filtro) {
                 document.getElementById("edit-id").value = id;
                 document.getElementById("edit-nome").value = nome;
                 document.getElementById("edit-prezzo").value = prezzo;
                 document.getElementById("edit-descrizione").value = descrizione;
+                // document.getCategoriaById("edit-filtro").value = filtro;
                 document.getElementById("editProductModal").style.display = "block";
             }
 
