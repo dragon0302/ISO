@@ -13,6 +13,7 @@
     <div class="dropdown">
       <a href="#" onclick="submitFilter('Ariana Grande')">Ariana Grande</a>
       <a href="#" onclick="submitFilter('Michael Jackson')">Michael Jackson</a>
+      <a href="#" onclick="submitFilter('Adele')">Adele</a>
     </div>
   </div>
 
@@ -45,6 +46,7 @@
     <div class="dropdown">
       <a href="#" onclick="submitFilter('T-shirt')">T-shirt</a>
       <a href="#" onclick="submitFilter('Fascia')">Fascia</a>
+      <a href="#" onclick="submitFilter('Felpe')">Felpe</a>
     </div>
   </div>
 </div>

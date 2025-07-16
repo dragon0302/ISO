@@ -27,7 +27,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 290px;
+    gap: 500px;
     flex-wrap: nowrap;                   /* Va a capo se lo spazio finisce */
 }
 
@@ -90,6 +90,7 @@ header {
     position: relative;
     padding: 5px 10px;
     border: 1px solid black;
+    overflow: visible;
 }
 
 .filter > a {
@@ -107,7 +108,7 @@ header {
     background-color: black;
     border: 1px solid #ffffff;
     min-width: 120px;
-    z-index: 100;
+    z-index: 9999;
 }
 .dropdown a {
     display: block;
@@ -325,7 +326,11 @@ a.btn-link:hover {
 }
 
 /* MEDIA QUERY: per schermi piccoli (telefono) */
-@media (min-width: 481px), (max-width: 768px) {
+@media (min-width: 481px) and (max-width: 1024px) {
+
+    .top-header{
+        gap: 130px
+    }
 
     .header-bar {
         flex-direction: column;
@@ -366,7 +371,6 @@ a.btn-link:hover {
     }
 
     .filter-bar {
-        overflow-x: auto;
         white-space: nowrap;
     }
 
@@ -385,7 +389,7 @@ a.btn-link:hover {
     }
 }
 
-@media (min-width: 769px), (max-width: 1200px) {
+@media (min-width: 1025px) {
 
     .header-bar {
         flex-direction: column;
@@ -394,7 +398,6 @@ a.btn-link:hover {
     }
 
     .filter-bar {
-        overflow-x: auto;
         white-space: nowrap;
     }
 
