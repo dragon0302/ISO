@@ -7,7 +7,6 @@ import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
-import jakarta.servlet.http.HttpSessionEvent;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,7 +23,6 @@ public class ImagePathInitializer implements ServletContextListener {
   public void contextInitialized(ServletContextEvent sce) {
 
     List<String> paths = new ArrayList<>();
-    System.out.println("prova");
 
     try {
 

@@ -13,10 +13,6 @@
 <%@ page import="DataManagement.Ordine" %>
 <%@ page import="java.util.ArrayList" %>
 
-<%
-    Prodotto p = (Prodotto) request.getAttribute("prodotto");
-%>
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -161,47 +157,61 @@
 
                     System.out.println(ordini == null);
                     if (ordini != null && !ordini.isEmpty()) {
+                        List<List<Prodotto>> Listaprodotti = (List<List<Prodotto>>) session.getAttribute("ListeProdotti");
                         for (int i = 0;i < ordini.size(); i++) {
-                          //prendere la funzione che da i prodotti dell'ordine e creare classe apposita per la gesione delle immagini
-                            List<List<Prodotto>> Listaprodotti = (List<List<Prodotto>>) session.getAttribute("ListeProdotti");
-                            for (int g = 0; g < Listaprodotti.get(i).size(); g++){
-                              prodotti = Listaprodotti.get(i);
-                            /*String imgPath = (prodotti != null && !prodotti.isEmpty())
-                                    ? prodotti.get(0).getImmagine() // es. "img/prodotto1.jpg"
-                                    : "img/default.jpg"; // immagine placeholder*/
+                          System.out.println("numero ordine: " + ordini.get(i).getIdOrdine());
             %>
             <div class="order-box">
-                <%--<div class="order-image">
-                    <img src="<%= imgPath %>" alt="Immagine prodotto" />
-                </div>--%>
                 <div class="order-info">
                     <p><strong>Ordine #</strong><%= ordini.get(i).getIdOrdine() %></p>
                     <p><strong>Data:</strong> <%= ordini.get(i).getData_ordine() %></p>
                     <p><strong>Totale:</strong> € <%= ordini.get(i).getTotale() %></p>
                     <%--<p><strong>Stato:</strong> <%= ordini.get(i).getStato() %></p>--%>
-                    <div class="order-actions">
-                        <a href="RiacquistaProdotti.jsp?idOrdine=<%= prodotti.get(i).getId_prodotto() %>" class="btn-small">Riacquista Prodotti</a>
-                        <%--<a href="VediOrdine.jsp?idOrdine=<%= ordine.getId() %>" class="btn-small">Vedi Ordine</a>--%>
-                    </div>
+
+
+                <div class="order-actions">
+                    <a href="RiacquistaProdotti.jsp?idOrdine=<%= ordini.get(i).getIdOrdine() %>" class="btn-small">Riacquista Prodotti</a>
+                    <%--<a href="VediOrdine.jsp?idOrdine=<%= ordine.getId() %>" class="btn-small">Vedi Ordine</a>--%>
+                </div>
+
+                <%
+
+                          //prendere la funzione che da i prodotti dell'ordine e creare classe apposita per la gesione delle immagini
+                    prodotti = Listaprodotti.get(i);
+                            for (int g = 0; g < prodotti.size(); g++){
+                              System.out.println("Numero Prodotto: " + prodotti.get(g).getId_prodotto());
+
+                            /*String imgPath = (prodotti != null && !prodotti.isEmpty())
+                                    ? prodotti.get(0).getImmagine() // es. "img/prodotto1.jpg"
+                                    : "img/default.jpg"; // immagine placeholder*/
+                %>
+                <%--<div class="order-image">
+                    <img src="<%= imgPath %>" alt="Immagine prodotto" />
+                </div>--%>
+
                     <div class="product">
                         <div class="box">
-                            <h3><%= p.getNome() %></h3>
-                            <p>Prezzo: € <%= p.getPrezzo() %></p>
-                            <p><%= p.getDescrizione() %></p>
-                            <a href="ProdottoS?id=<%= p.getId_prodotto() %>">Dettagli</a>
+                            <h3><%= prodotti.get(g).getNome() %></h3>
+                            <p>Prezzo: € <%= prodotti.get(g).getPrezzo() %></p>
+                            <p><%= prodotti.get(g).getDescrizione() %></p>
+                            <a href="ProdottoS?id=<%= prodotti.get(g).getId_prodotto() %>">Dettagli</a>
 
                             <form action="ProductCartMenegment" method="post">
-                                <input type="hidden" name="prodottoID" value="<%= p.getId_prodotto() %>">
+                                <input type="hidden" name="prodottoID" value="<%= prodotti.get(g).getId_prodotto() %>">
                                 <input type="hidden" name="SourcePage" value="Home">
                                 <button type="submit" class="btn-aggiungi">Aggiungi al carrello</button>
                             </form>
                         </div>
                     </div>
+
+            <%      }%>
                 </div>
             </div>
-            <%      }
-                }
-            }else { %>
+                <% }
+            %>
+
+
+            <%}else { %>
             <p>Non hai ancora effettuato ordini.</p>
             <%      }
             } else {

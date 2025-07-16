@@ -88,7 +88,7 @@
                     </div>
 
                     <!-- Storico ordini -->
-                    <form action="visualizzaOrdini" method="GET" class="settings-option">
+                    <form action="${pageContext.request.contextPath}/Ordini" method="GET" class="settings-option">
                         <label>Visualizza storico ordini:</label>
                         <button type="submit">Visualizza</button>
                     </form>
