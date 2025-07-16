@@ -327,6 +327,15 @@ main h2 {
         text-align: center;
     }
 
+    .section-header{
+        display: flex;
+        justify-content: start;
+    }
+
+    .top-header{
+        gap:100px;
+    }
+
     /* Slider prodotti */
     .product-slider {
         flex-direction: column;
@@ -377,7 +386,7 @@ main h2 {
 
     /* Titoli sezione */
     main h2 {
-        font-size: 1.4rem;
+        font-size: 5rem;
         margin-left: 20px;
         padding-left: 10px;
     }
@@ -390,8 +399,18 @@ main h2 {
         padding: 40px 15px;
     }
 
+    .section-header{
+        display: flex;
+        justify-content: start;
+    }
+
+    .top-header{
+        gap:100px;
+    }
+
     /* Product slider in scroll singolo */
     .product-slider {
+        display: flow;
         gap: 12px;
         padding: 10px;
         overflow-x: scroll;
@@ -430,7 +449,7 @@ main h2 {
 
     /* Titoli sezione */
     main h2 {
-        font-size: 1.8rem;
+        font-size: 5.2rem;
         margin-left: 30px;
         padding-left: 12px;
     }
