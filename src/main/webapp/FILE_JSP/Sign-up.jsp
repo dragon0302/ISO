@@ -23,6 +23,7 @@
 </head>
     <body>
 
+        <script src="${pageContext.request.contextPath}/Javascript/Passweor_error.js"></script>
         <script src="${pageContext.request.contextPath}/Javascript/CatalogFilter.js"></script>
         <script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
         <script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
@@ -87,6 +88,10 @@
                         <div class="form-group">
                             <label for="Password">Password *</label>
                             <input type="password" name="Password" id="Password" required>
+                            <small className="password-requirements">
+                                La password deve contenere almeno 8 caratteri, una lettera maiuscola, un numero, un numero e un carattere speciale.
+                            </small>
+                            <small id="password-feedback"></small>
                             <% if(errorePasswordRegex != null){ %>
                                 <%= errorePasswordRegex%>
                             <%}%>
