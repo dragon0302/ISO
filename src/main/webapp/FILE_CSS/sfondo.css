@@ -62,12 +62,10 @@ header {
 
 /* Suggerimenti di ricerca */
 .suggestions {
-    top: 36px;
     left: 0;
     right: 0;
     background-color: black;
     border: 1px solid #ffffff;
-    z-index: 10;
 }
 .suggestions div {
     padding: 5px;
@@ -75,6 +73,35 @@ header {
 }
 .suggestions div:hover {
     background-color: #8B2635;
+}
+
+/* Contenitore esterno dei suggerimenti */
+#suggestionBox {
+    position: absolute;
+    top: 100%; /* subito sotto l'input */
+    width: 100%;
+    background-color: #000; /* nero, come il tema */
+    border: 1px solid #fff; /* bordo bianco */
+    border-top: none;
+    z-index: 9999;
+    max-height: 200px; /* opzionale: scrollabile */
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Ogni singolo suggerimento */
+#suggestionBox div {
+    padding: 10px;
+    cursor: pointer;
+    color: white;
+    font-size: 14px;
+    border-bottom: 1px solid #444;
+}
+
+/* Hover sui suggerimenti */
+#suggestionBox div:hover {
+    background-color: #8B2635; /* rosso scuro come nel resto */
+    color: white;
 }
 
 /* Barra dei filtri (categorie musicali ad esempio) */
