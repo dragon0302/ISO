@@ -48,6 +48,8 @@ public class selectDefault extends HttpServlet {
 
     }
 
+    response.sendRedirect(request.getContextPath() + "/Impostazioni");
+
   }
 
 }
