@@ -1,11 +1,13 @@
 <%@ page import="DataManagement.Utente" %>
 <div id="userContainer">
+
   <span class="username" onclick="toggleUserMenu()">
     <%
       Utente utente = (Utente) session.getAttribute("utente");
 
       String nomeUtente = utente.getNomeutente().toUpperCase();
     %>
+    <%= nomeUtente %>
   </span>
 
   <div id="userMenu" class="user-menu">
