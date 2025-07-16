@@ -47,7 +47,7 @@ header {
 }
 
 /* Contenitore barra di ricerca */
- {
+{
     position: relative;
     width: 60%;
     max-width: 400px;
@@ -416,7 +416,11 @@ a.btn-link:hover {
     }
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 1025px) and (max-width: 1200px) {
+
+    .top-header{
+        gap: 290px;
+    }
 
     .header-bar {
         flex-direction: column;
