@@ -1,6 +1,6 @@
 document.getElementById("Password").addEventListener("input", function () {
     const password = this.value;
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+    const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_]+-=[\]{};':"\\|,.<>/?]).{8,}$/;
     const msg = document.getElementById("password-feedback");
 
     if (!regex.test(password)) {
