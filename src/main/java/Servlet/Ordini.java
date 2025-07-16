@@ -42,7 +42,7 @@ public class Ordini extends HttpServlet {
 
       session.setAttribute("ListeProdotti", ListeProdotti);
 
-      response.sendRedirect("Lista_ordini.jsp");
+      response.sendRedirect("FILE_JSP/Lista_ordini.jsp");
 
     } catch (SQLException e) {
       throw new RuntimeException(e);

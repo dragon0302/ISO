@@ -110,7 +110,6 @@ public class Carrello extends HttpServlet {
 
               Nquantita.add(acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), Integer.parseInt(id)));
               prezzototale += prodotto.getPrezzo() * acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), Integer.parseInt(id));
-              System.out.println("carrello.size()");
 
             }
 
