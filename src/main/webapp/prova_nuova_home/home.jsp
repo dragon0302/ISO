@@ -72,12 +72,40 @@
             <section class="content">
                 <div class="banner">
                     <span>Banner</span>
-
                 </div>
 
                 <% if(utente != null && utente.isAmministratore()){
                 %>
                 <button class="banner-btn" onclick="openAddProductModal()">+</button>
+
+                <%--form per la creazione del prodotto--%>
+                <div id="addProductModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeAddProductModal()">&times;</span>
+                        <h2>Aggiungi Prodotto</h2>
+                        <form action="ProductCatalogoMenegment" method="post">
+
+                            <label for="imageInput">Aggiungi immagine</label>
+                            <input type="file" name="immagine" id="imageInput" accept="image/*" required>
+                            <img id="imagePreview" src="#" alt="Anteprima immagine" style="display:none; width: 100px; margin-top:10px;"/
+
+                            <label for="productName">Nome prodotto:</label>
+                            <input type="hidden" name="action" value="nuovo">
+                            <input type="text" id="productName" name="productName" required><br><br>
+
+                            <label for="price">Prezzo (€):</label>
+                            <input type="number" id="price" name="price" step="0.01" required><br><br>
+
+                            <label for="edit-descrizione">Descrizione:</label>
+                            <input type="text" id="productDescrizione" name="productDescrizione" required><br><br>
+
+                            <label for="edit-filtro">filtro</label>
+                            <input type="text" id="productfiltro" name="filtro" required>
+
+                            <button type="submit">Salva</button>
+                        </form>
+                    </div>
+                </div>
                 <%
                     }
                 %>
@@ -216,39 +244,15 @@
             </div>
         </div>
 
-        <%--form per la creazione del prodotto--%>
-        <div id="addProductModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeAddProductModal()">&times;</span>
-                <h2>Aggiungi Prodotto</h2>
-                <form action="ProductCatalogoMenegment" method="post">
-                    <label for="productName">Nome prodotto:</label>
-                    <input type="hidden" name="action" value="nuovo">
-                    <input type="text" id="productName" name="productName" required><br><br>
 
-                    <label for="price">Prezzo (€):</label>
-                    <input type="number" id="price" name="price" step="0.01" required><br><br>
-
-                    <label for="edit-descrizione">Descrizione:</label>
-                    <input type="text" id="productDescrizione" name="productDescrizione" required><br><br>
-
-                    <label for="edit-filtro">filtro</label>
-                    <input type="text" id="productfiltro" name="filtro" required>
-
-                    <button type="submit">Salva</button>
-                </form>
-            </div>
-        </div>
 
         <script>
             function openAddProductModal() {
-                const modal = document.getElementById("addProductModal");
-                modal.style.display = "block";
+                document.getElementById('addProductModal').style.display = 'flex';
             }
 
             function closeAddProductModal() {
-                const modal = document.getElementById("addProductModal");
-                modal.style.display = "none";
+                document.getElementById('addProductModal').style.display = 'none';
             }
 
             // Opzionale: chiusura cliccando fuori dal modal
@@ -258,6 +262,17 @@
                     modal.style.display = "none";
                 }
             }
+
+            const imageInput = document.getElementById('imageInput');
+            const imagePreview = document.getElementById('imagePreview');
+
+            imageInput.addEventListener('change', function () {
+                const file = this.files[0];
+                if (file) {
+                    imagePreview.src = URL.createObjectURL(file);
+                    imagePreview.style.display = 'block';
+                }
+            });
         </script>
 
 

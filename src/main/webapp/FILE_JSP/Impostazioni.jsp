@@ -63,21 +63,14 @@
                     <h2>Impostazioni Account</h2>
 
                     <!-- Modifica dati account -->
-                    <form action="modificaDatiAccount" method="POST" class="settings-option">
-                        <label for="nome">Nome:</label>
-                        <input type="text" id="nome" name="nome" required>
-
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required>
+                        <h3>Modifica nome o e-mail:</h3>
                         <a href="${pageContext.request.contextPath}/FILE_JSP/Profilo.jsp" class="button-link">Modifica</a>
-
-                    </form>
 
                     <!-- Indirizzo di fatturazione -->
                     <form action="gestisciFatturazione" method="POST" class="settings-option">
                         <label for="indirizzo">Indirizzo di fatturazione:</label>
                         <input type="text" id="indirizzo" name="indirizzo" required>
-
+///aggiungi un menu in cui si sceglie l'indirizzo desiderato (stampare: città, civico e cap)
                         <button type="submit" class="button-link">Gestisci</button>
                     </form>
                 </div>
@@ -89,43 +82,15 @@
                     <!-- Metodo di pagamento preferito -->
                     <div class="settings-option">
                         <label>Metodo di pagamento preferito</label>
-                        <a href="${pageContext.request.contextPath}/FILE_JSP/metodo_di_pagamento.jsp" class="button-link">Imposta</a>
+                        ///aggiungi menu utilizzando un form con l'elenco dei metodi di pagamento (stampa: tutti i dati)
+                        <a class="button-link">Seleziona</a>
+                        <a href="${pageContext.request.contextPath}/FILE_JSP/metodo_di_pagamento.jsp" class="button-link">Aggiungi</a>
                     </div>
 
                     <!-- Storico ordini -->
                     <form action="visualizzaOrdini" method="GET" class="settings-option">
                         <label>Visualizza storico ordini:</label>
                         <button type="submit">Visualizza</button>
-                    </form>
-
-                    <!-- Fatturazione elettronica -->
-                    <form action="gestisciFatturazioneElettronica" method="POST" class="settings-option">
-                        <label for="pec">PEC:</label>
-                        <input type="email" id="pec" name="pec">
-
-                        <label for="codice_univoco">Codice univoco:</label>
-                        <input type="text" id="codice_univoco" name="codice_univoco" maxlength="7">
-
-                        <button type="submit">Gestisci</button>
-                    </form>
-                </div>
-
-                <!-- SEZIONE 3: NOTIFICHE -->
-                <div class="settings-section">
-                    <h2>Notifiche</h2>
-
-                    <!-- Notifica stato ordini -->
-                    <form action="aggiornaNotificaOrdini" method="POST" class="settings-option">
-                        <label for="notifica_ordini">Stato ordini e spedizioni</label>
-                        <input type="checkbox" id="notifica_ordini" name="notifica_ordini" checked>
-                        <button type="submit">Salva</button>
-                    </form>
-
-                    <!-- Notifica promozioni -->
-                    <form action="aggiornaNotificaPromo" method="POST" class="settings-option">
-                        <label for="notifica_promo">Avvisi di promozioni o offerte</label>
-                        <input type="checkbox" id="notifica_promo" name="notifica_promo">
-                        <button type="submit">Salva</button>
                     </form>
                 </div>
 
@@ -137,12 +102,6 @@
                     <form action="modificaCookie" method="POST" class="settings-option">
                         <label>Gestione consensi cookie</label>
                         <button type="submit">Modifica</button>
-                    </form>
-
-                    <!-- Scarica dati -->
-                    <form action="scaricaDati" method="POST" class="settings-option">
-                        <label>Scarica i tuoi dati</label>
-                        <button type="submit" class="download-btn">Scarica</button>
                     </form>
 
                     <!-- Elimina account -->
