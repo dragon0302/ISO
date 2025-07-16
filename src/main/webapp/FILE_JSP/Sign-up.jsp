@@ -50,7 +50,15 @@
                 <!-- img src="right-image.png" class="side-image right" alt="Immagine destra" -->
 
                 <%
-                    String Errore = (String) request.getAttribute("errore");
+                    String erroreCF = (String) request.getAttribute("erroreCF");
+                    String erroreNomeUtente = (String) request.getAttribute("erroreNomeUtente");
+                    String erroreData = (String) request.getAttribute("erroreData");
+                    String erroreEmail = (String) request.getAttribute("erroreEmail");
+                    String erroreNomeRegex = (String) request.getAttribute("erroreNomeRegex");
+                    String erroreCognomeRegex = (String) request.getAttribute("erroreCognomeRegex");
+                    String erroreEmailRegex = (String) request.getAttribute("erroreEmailRegex");
+                    String erroreNomeUtenteRegex = (String) request.getAttribute("erroreNomeUtenteRegex");
+                    String errorePasswordRegex = (String) request.getAttribute("errorePasswordRegex");
                 %>
 
                 <!-- Box centrale con form -->
@@ -62,31 +70,42 @@
                         <div class="form-group">
                             <label for="CodiceFiscale">Codice Fiscale *</label>
                             <input type="text" name="CodiceFiscale" id="CodiceFiscale" required>
-                            <%= Errore%>
+                            <% if(erroreCF != null){ %>
+                                <%= erroreCF%>
+                            <%}%>
                         </div>
 
                         <div class="form-group">
                             <label for="NomeUtente">Nome Utente *</label>
                             <input type="text" name="NomeUtente" id="NomeUtente" required>
-                            <%= Errore%>
+                            <% if(erroreNomeUtente != null || erroreNomeUtenteRegex != null){ %>
+                                <%= erroreNomeUtente%>
+                                <%= erroreNomeUtenteRegex%>
+                            <%}%>
                         </div>
 
                         <div class="form-group">
                             <label for="Password">Password *</label>
                             <input type="password" name="Password" id="Password" required>
-                            <%= Errore%>
+                            <% if(errorePasswordRegex != null){ %>
+                                <%= errorePasswordRegex%>
+                            <%}%>
                         </div>
 
                         <div class="form-group">
                             <label for="Nome">Nome *</label>
                             <input type="text" name="Nome" id="Nome" required>
-                            <%= Errore%>
+                            <% if(erroreNomeRegex != null){ %>
+                                <%= erroreNomeRegex%>
+                            <%}%>
                         </div>
 
                         <div class="form-group">
                             <label for="Cognome">Cognome *</label>
                             <input type="text" name="Cognome" id="Cognome" required>
-                            <%= Errore%>
+                            <% if(erroreCognomeRegex != null){ %>
+                                <%= erroreCognomeRegex%>
+                            <%}%>
                         </div>
 
                         <div class="form-group">
@@ -98,13 +117,18 @@
                         <div class="form-group">
                             <label for="DataNascita">Data di Nascita *</label>
                             <input type="date" name="DataNascita" id="DataNascita" required>
-                            <%= Errore%>
+                            <% if(erroreData != null){ %>
+                                <%= erroreData%>
+                            <%}%>
                         </div>
 
                         <div class="form-group">
                             <label for="E-mail">E-mail *</label>
                             <input type="email" name="E-mail" id="E-mail" required>
-                            <%= Errore%>
+                            <% if(erroreEmail != null || erroreEmailRegex != null){ %>
+                                <%= erroreEmail%>
+                                <%=erroreEmailRegex%>
+                            <%}%>
                         </div>
 
                         <div class="form-group full-width">

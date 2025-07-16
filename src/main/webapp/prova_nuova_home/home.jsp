@@ -11,7 +11,6 @@
     boolean filtroAttivo = filtro != null && !filtro.isEmpty();
     List<Prodotto> prodottiFiltro = (List<Prodotto>) request.getAttribute("prodottiFiltro");
     List<String> paths = (List<String>) application.getAttribute("Paths");
-//    boolean admin = utente.isAmministratore();
 %>
 
 <!DOCTYPE html>

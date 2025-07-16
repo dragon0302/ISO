@@ -29,11 +29,11 @@ public class Signup extends HttpServlet {
         String erroreNomeUtente = "Nome utente gia esistente";
         String erroreData = "Data non coretta";
         String erroreEmail = "Email non coretta";
-        String erroreNomeRegex = "Il campo <<Nome>> contiene caratteri non ammessi ";
-        String erroreCognomeRegex = "Il campo <<Cognome>> contiene caratteri non ammessi ";
-        String erroreEmailRegex = "Il campo <<Email>> contiene caratteri non ammessi ";
-        String erroreNomeUtenteRegex = "Il campo <<Nome Utente>> contiene caratteri non ammessi ";
-        String errorePasswordRegex = "Il campo <<Password>> contiene caratteri non ammessi ";
+        String erroreNomeRegex = "Il campo Nome contiene caratteri non ammessi ";
+        String erroreCognomeRegex = "Il campo Cognome contiene caratteri non ammessi ";
+        String erroreEmailRegex = "Il campo Email contiene caratteri non ammessi ";
+        String erroreNomeUtenteRegex = "Il campo Nome Utente contiene caratteri non ammessi ";
+        String errorePasswordRegex = "Il campo Password contiene caratteri non ammessi ";
 
         // Regex
         Pattern USERNAME_REGEX = Pattern.compile("^[a-zA-Z0-9_]{1,10}$");
@@ -59,40 +59,36 @@ public class Signup extends HttpServlet {
             String encodedPassword = encod.codePassword(Password,salt);
 
             if (!CODICEFISCALE_REGEX.matcher(CF).matches()) {
-                request.setAttribute("errore", erroreCF);
+                request.setAttribute("erroreCF", erroreCF);
                 request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             }else if (!NOME_REGEX.matcher(Nome).matches()) {
-                request.setAttribute("errore", erroreNomeRegex);
+                request.setAttribute("erroreNomeRegex", erroreNomeRegex);
                 request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             }else if (!COGNOME_REGEX.matcher(Cognome).matches()) {
-                request.setAttribute("errore", erroreCognomeRegex);
+                request.setAttribute("erroreCognomeRegex", erroreCognomeRegex);
                 request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             }else if (!EMAIL_REGEX.matcher(Email).matches()) {
-                request.setAttribute("errore", erroreEmailRegex);
+                request.setAttribute("erroreEmailRegex", erroreEmailRegex);
                 request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             }else if (!USERNAME_REGEX.matcher(nomeUtente).matches()) {
-                request.setAttribute("errore", erroreNomeUtenteRegex);
+                request.setAttribute("erroreNomeUtenteRegex", erroreNomeUtenteRegex);
                 request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             }else if (!PASSWORD_REGEX.matcher(Password).matches()) {
-                request.setAttribute("errore", errorePasswordRegex);
+                request.setAttribute("errorePasswordRegex", errorePasswordRegex);
                 request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             }else if(utenteDAO.CFEsistente(CF)){
-                request.setAttribute("errore", erroreCF);
+                request.setAttribute("erroreCF", erroreCF);
                 request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             }else if (utenteDAO.UtenteEsistente(nomeUtente)) {
-                request.setAttribute("errore", erroreNomeUtente);
+                request.setAttribute("erroreNomeUtente", erroreNomeUtente);
                 request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             } else if (dataNascita.compareTo(new Date(1900,1,1)) < 0 && dataNascita.compareTo(Date.valueOf(LocalDate.now())) > 0) {
-                request.setAttribute("errore", erroreData);
+                request.setAttribute("erroreData", erroreData);
                 request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             } else if(utenteDAO.EmailEsistente(Email)) {
-                request.setAttribute("errore", erroreEmail);
+                request.setAttribute("erroreEmail", erroreEmail);
                 request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
-            } else if(!NOME_REGEX.matcher(nomeUtente).matches()) {
-                request.setAttribute("errore", erroreEmail);
-                request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
-            }
-            else{
+            } else{
                 Utente utente = new Utente(CF, nomeUtente, encodedPassword,salt, Nome, Cognome, Email, Sesso, dataNascita, Amministratore);
                 Carrello carrello = new Carrello(CF);
                 utenteDAO.DoSave(utente);
