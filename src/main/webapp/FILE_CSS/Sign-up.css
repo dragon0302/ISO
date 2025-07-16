@@ -102,3 +102,10 @@ input[type="submit"]:hover {
     margin-left: 0.5rem;
     margin-right: 1rem;
 }
+
+.password-requirements {
+    font-size: 12px;
+    color: #ccc;
+    margin-top: 4px;
+    display: block;
+}

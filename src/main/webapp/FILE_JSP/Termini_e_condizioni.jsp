@@ -5,12 +5,12 @@
   Time: 08:03
   To change this template use File | Settings | File Templates.
 --%>
-<<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.List" %>
-<%@ page import="DataManagement.Prodotto" %>
-<%@ page import="com.mysql.cj.Session" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="DataManagement.Utente" %>
-
+<%
+    // Recupero l'utente loggato dalla sessione
+    Utente utente = (Utente) session.getAttribute("utente");
+%>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -26,124 +26,23 @@
         <script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
         <script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
 
-        <!-- TOP HEADER -->
+        <script src="${pageContext.request.contextPath}/Javascript/CatalogFilter.js"></script>
+        <script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
+        <script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
+
         <header>
             <div class="top-header">
-                <!-- Parte 1 - Logo a sinistra -->
-                <div class="logo-container">
-                    <a href="${pageContext.request.contextPath}/Catalogo">
-                        <img src=" <%= request.getContextPath() + "/Immagini/isologo.png" %>" alt="Immagine Prodotto">
-                    </a>
-                </div>
-
-                <!-- Parte 2 - Barra di ricerca centrata e filtri sotto -->
-                <div class="center-section">
-                    <!-- Barra di ricerca -->
-                    <div class="search-container">
-                        <input type="text" id="searchInput" placeholder="Cerca prodotti..." onkeyup="showSuggestions(this.value)">
-                        <div class="suggestions" id="suggestionBox"></div>
-                    </div>
-
-                    <!-- Filtri sotto la barra di ricerca -->
-                    <div class="filter-bar">
-                        <div class="filter">
-                            <a href="#">ROCK</a>
-                            <div class="dropdown">
-                                <a href="#">AC/DC</a>
-                                <a href="#">Aerosmith</a>
-                                <a href="#">Led Zeppelin</a>
-                            </div>
-                        </div>
-                        <div class="filter">
-                            <a href="#">POP</a>
-                            <div class="dropdown">
-                                <a href="#">Adele</a>
-                                <a href="#">Beyoncé</a>
-                                <a href="#">Madonna</a>
-                            </div>
-                        </div>
-                        <div class="filter">
-                            <a href="#">JAZZ</a>
-                            <div class="dropdown">
-                                <a href="#">Coltrane</a>
-                                <a href="#">Davis</a>
-                                <a href="#">Fitzgerald</a>
-                            </div>
-                        </div>
-                        <div class="filter">
-                            <a href="#">METAL</a>
-                            <div class="dropdown">
-                                <a href="#">Iron Maiden</a>
-                                <a href="#">Metallica</a>
-                                <a href="#">Slayer</a>
-                            </div>
-                        </div>
-                        <div class="filter">
-                            <a href="#">RAP</a>
-                            <div class="dropdown">
-                                <a href="#">Drake</a>
-                                <a href="#">Eminem</a>
-                                <a href="#">Kanye</a>
-                            </div>
-                        </div>
-                        <div class="filter">
-                            <a href="#">Abbigliamento</a>
-                            <div class="dropdown">
-                                <a href="#">Cappelli</a>
-                                <a href="#">Felpe</a>
-                                <a href="#">T-shirt</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Parte 3 - Bottoni di Sign-up e Log-in a destra -->
-                <div class="right-section">
-                    <a class="btn-link" href="Carrello">Carrello</a>
+                <div>
                     <%
-                        Utente utente = (Utente) session.getAttribute("utente");
-
-                        if (utente == null) { %>
-                    <!-- Se l'utente non è loggato, mostra i bottoni di login e signup -->
-                    <a class="btn login-btn" href="Log_in.jsp">Log In</a>
-                    <a class="btn signup-btn" href="Sign-up.jsp">Sign Up</a>
-                    <% } else { %>
-                    <!-- Se l'utente è loggato, mostra il nome utente o il menu amministratore -->
-                    <% if (utente.isAmministratore()) { %>
-                    <!-- Amministratore: aggiungi i bottoni di gestione e il menu a tendina -->
-                    <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente()!= null ? utente.getNomeutente().toUpperCase() : "" %></span>
-                    <div id="userMenu" class="user-menu">
-                        <ul>
-                            <li><a href="Profilo.jsp">Profilo</a></li>
-                            <li><a href="Impostazioni.jsp">Impostazioni</a></li>
-
-                            <form action="Logout" method="get">
-                                <li><button>Log-out</button></li>
-                            </form>
-                        </ul>
-                    </div>
-                    <!-- Bottoni amministratore -->
-                    <button class="btn-link" onclick="openPriceSurveyModal()">Indagine per numero venduti</button>
-                    <button class="btn-link" onclick="openAddProductModal()">Aggiungi Prodotto</button>
-                    <button class="btn-link" onclick="openAddFilterModal()">Aggiungi Filtro</button>
-                    <button class="btn-link" onclick="openDateSurveyModal()">Indagine per Data</button>
-                    <% } else { %>
-                    <!-- Utente non amministratore: solo il nome utente e il menu a tendina -->
-                    <span class="username" onclick="toggleUserMenu()"><%= utente.getNomeutente() != null ? utente.getNomeutente().toUpperCase() : "" %></span>
-                    <div id="userMenu" class="user-menu">
-                        <ul>
-                            <li><a href="Profilo.jsp">Profilo</a></li>
-                            <li><a href="Impostazioni.jsp">Impostazioni</a></li>
-
-                            <form action="Logout" method="get">
-                                <li><button>Log-out</button></li>
-                            </form>
-                        </ul>
-                    </div>
-                    <% } %>
-                    <% } %>
+                        if(utente == null){
+                            request.setAttribute("isAmministratore", null);
+                        }else{
+                            request.setAttribute("isAmministratore", utente.isAmministratore());
+                        }
+                    %>
+                    <jsp:include page="/prova_nuova_home/header.jsp" />
                 </div>
-            </div>
+            </div> <!-- fine top-header -->
         </header>
 
         <!-- MAIN CONTENT -->
@@ -188,16 +87,6 @@
                     non è necessario il consenso dell'utente perché questi cookie consentono una visualizzazione completa e continua
                     del contenuto del sito Web in modo da permettere l'accesso al sito Web e un'esperienza di navigazione digitale e online appropriata. </p>
 
-                <h4><b>Come accettare o revocare il consenso ai cookie nelle "Impostazioni cookie"?</b></h4>
-                <p>Puoi gestire il consenso sui cookie in "Impostazioni cookie" in fondo a questo sito Web. Puoi accettare tutte e
-                    tre le categorie di cookie o solo una di esse, se preferisci. Accettando una categoria di cookie, accetti tutti
-                    i cookie di questa categoria (vedere l'elenco dettagliato dei cookie di seguito).  Puoi modificare le tue preferenze
-                    e rifiutare i cookie in qualsiasi momento in Impostazioni cookie. Di seguito sono riportate informazioni più dettagliate
-                    sulle nostre categorie di cookie e un elenco di tutti i cookie utilizzati in tale categoria.</p>
-
-                <h4><b>Domande?</b></h4>
-                <p>In caso di domande sul trattamento dei dati personali, ti invitiamo a leggere la nostra Informativa sulla Privacy dove
-                    troverai anche le nostre informazioni di contatto.</p>
             </section>
         </main>
 
