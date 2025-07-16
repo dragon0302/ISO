@@ -69,8 +69,8 @@
 
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" required>
+                        <a href="${pageContext.request.contextPath}/FILE_JSP/Profilo.jsp" class="button-link">Modifica</a>
 
-                        <button type="submit">Modifica</button>
                     </form>
 
                     <!-- Indirizzo di fatturazione -->
@@ -78,7 +78,7 @@
                         <label for="indirizzo">Indirizzo di fatturazione:</label>
                         <input type="text" id="indirizzo" name="indirizzo" required>
 
-                        <button type="submit">Gestisci</button>
+                        <button type="submit" class="button-link">Gestisci</button>
                     </form>
                 </div>
 
