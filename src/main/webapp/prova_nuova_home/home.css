@@ -330,8 +330,8 @@ main h2 {
     /* Slider prodotti */
     .product-slider {
         flex-direction: column;
-        gap: 16px;
-        padding: 10px;
+        width: 80%;
+        height: 32vh;
     }
 
     /* Card prodotto */
@@ -395,6 +395,8 @@ main h2 {
         gap: 12px;
         padding: 10px;
         overflow-x: scroll;
+        width: 85%;
+        height: 40vh;
     }
 
     .product {
