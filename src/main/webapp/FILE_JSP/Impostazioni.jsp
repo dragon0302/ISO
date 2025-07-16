@@ -14,6 +14,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="DataManagement.Utente" %>
+<%@ page import="DataManagement.Indirizzo" %>
+<%@ page import="java.util.List" %>
+<%@ page import="DataManagement.MetodoPagamento" %>
 
 <%
     // Recupero l'utente loggato dalla sessione
@@ -67,12 +70,33 @@
                         <a href="${pageContext.request.contextPath}/FILE_JSP/Profilo.jsp" class="button-link">Modifica</a>
 
                     <!-- Indirizzo di fatturazione -->
+
+                    <%
+                        List<Indirizzo> indirizzi = (List<Indirizzo>) request.getAttribute("listaIndirizzi");
+                    %>
+
                     <form action="gestisciFatturazione" method="POST" class="settings-option">
                         <label for="indirizzo">Indirizzo di fatturazione:</label>
-                        <input type="text" id="indirizzo" name="indirizzo" required>
-///aggiungi un menu in cui si sceglie l'indirizzo desiderato (stampare: città, civico e cap)
-                        <button type="submit" class="button-link">Gestisci</button>
+                        <select id="indirizzo" name="indirizzo" required>
+                            <option value="">-- Seleziona un indirizzo --</option>
+
+                            <%
+                                if(indirizzi != null){
+                                    for (Indirizzo i : indirizzi){
+
+                            %>
+
+                            <option value="<%= i.getID_Indirizzo()%>">
+                                <%= i.getCap()%> <%= i.getCittà()%> <%= i.getCivico()%> <%= i.getVia()%>
+                            </option>
+                            <%
+                                    }
+                                }
+                            %>
+                        </select>
                     </form>
+
+
                 </div>
 
                 <!-- SEZIONE 2: IMPOSTAZIONI ACQUISTO -->
@@ -82,8 +106,28 @@
                     <!-- Metodo di pagamento preferito -->
                     <div class="settings-option">
                         <label>Metodo di pagamento preferito</label>
-                        ///aggiungi menu utilizzando un form con l'elenco dei metodi di pagamento (stampa: tutti i dati)
-                        <a class="button-link">Seleziona</a>
+
+                        <form action="selezionaMetodoPagamento" method="get">
+                            <select name="metodoPagamentoId" required>
+                                <option value="">--- Seleziona un metodo ---</option>
+                                <%
+                                    List<MetodoPagamento> metodi = (List<MetodoPagamento>) request.getAttribute("metodiPagamento");
+                                    if(metodi != null){
+                                        for(MetodoPagamento m : metodi){
+                                %>
+
+                                <option value="<%= m.getNumerocarta()%>">
+<%--                                    creare getUltime4Cifre che da le ultime 4 cifre della carta--%>
+                                    <%=m.getNumerocarta()%> - **** **** **** <%=m.getUltime4Cifre()%> (scadenza: <%=m.getDataScadenza()%>) (Tipo: <%=m.getTipo()%>)
+                                </option>
+
+                                <%
+                                        }
+                                    }
+                                %>
+                            </select>
+                        </form>
+
                         <a href="${pageContext.request.contextPath}/FILE_JSP/metodo_di_pagamento.jsp" class="button-link">Aggiungi</a>
                     </div>
 
