@@ -25,7 +25,7 @@ public class AddPayment extends HttpServlet {
         try{ //controllo che il codicecarta + cvv non esiste già + data scadenza inferiore o uguale a oggi
             HttpSession session = request.getSession();
             Utente utente = (Utente)session.getAttribute("utente");
-            double numerocarta = Double.parseDouble(request.getParameter("NumeroCarta"));
+            String numerocarta = String.valueOf(request.getParameter("NumeroCarta"));
             if (mpi.getNumeroCarta(utente.getCf()) == numerocarta){
                 response.sendRedirect("metodo_di_pagamento.jsp");
             }
