@@ -149,6 +149,10 @@
                 <!-- img src="left-image.png" class="side-image left" alt="Immagine sinistra" -->
                 <!-- img src="right-image.png" class="side-image right" alt="Immagine destra" -->
 
+                <%
+                    String Errore = (String) request.getAttribute("errore");
+                %>
+
                 <!-- Box centrale con form -->
                 <div class="form-container">
                     <h2>Registrazione Utente</h2>
@@ -158,26 +162,31 @@
                         <div class="form-group">
                             <label for="CodiceFiscale">Codice Fiscale *</label>
                             <input type="text" name="CodiceFiscale" id="CodiceFiscale" required>
+                            <%= Errore%>
                         </div>
 
                         <div class="form-group">
                             <label for="NomeUtente">Nome Utente *</label>
                             <input type="text" name="NomeUtente" id="NomeUtente" required>
+                            <%= Errore%>
                         </div>
 
                         <div class="form-group">
                             <label for="Password">Password *</label>
                             <input type="password" name="Password" id="Password" required>
+                            <%= Errore%>
                         </div>
 
                         <div class="form-group">
                             <label for="Nome">Nome *</label>
                             <input type="text" name="Nome" id="Nome" required>
+                            <%= Errore%>
                         </div>
 
                         <div class="form-group">
                             <label for="Cognome">Cognome *</label>
                             <input type="text" name="Cognome" id="Cognome" required>
+                            <%= Errore%>
                         </div>
 
                         <div class="form-group">
@@ -189,11 +198,13 @@
                         <div class="form-group">
                             <label for="DataNascita">Data di Nascita *</label>
                             <input type="date" name="DataNascita" id="DataNascita" required>
+                            <%= Errore%>
                         </div>
 
                         <div class="form-group">
                             <label for="E-mail">E-mail *</label>
                             <input type="email" name="E-mail" id="E-mail" required>
+                            <%= Errore%>
                         </div>
 
                         <div class="form-group full-width">
