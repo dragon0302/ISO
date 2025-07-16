@@ -19,5 +19,6 @@ public interface UtenteDAO {
     public void editPassword(Utente utente,String new_password) throws SQLException;
     public void editNomeUtente (Utente utente,String new_nomeutente) throws SQLException;
     public void editCF (Utente utente,String new_cf) throws SQLException;
+    public void remouveUtente (Utente utente) throws SQLException;
 
 }

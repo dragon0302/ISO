@@ -142,7 +142,7 @@
                     </form>
 
                     <!-- Elimina account -->
-                    <form action="eliminaAccount" method="POST" class="settings-option" onsubmit="return confirm('Sei sicuro di voler eliminare l\'account?');">
+                    <form action="${pageContext.request.contextPath}/DeleteAccount" method="POST" class="settings-option" onsubmit="return confirm('Sei sicuro di voler eliminare l\'account?');">
                         <label>Elimina account</label>
                         <button type="submit" class="delete-btn">Elimina</button>
                     </form>
