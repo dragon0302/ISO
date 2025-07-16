@@ -22,17 +22,16 @@
       <input type="hidden" id="value" name="value" value="">
     </form>
 
-    <jsp:include page="/prova_nuova_home/filterBar.jsp" />
+    <jsp:include page="/FILE_JSP/filterBar.jsp" />
   </div>
 
   <div class="right-section">
     <% if (utente == null) { %>
-    <jsp:include page="/prova_nuova_home/logButtons.jsp" />
+    <jsp:include page="/FILE_JSP/logButtons.jsp" />
     <% } else if (!admin && admin != null) { %>
-<%--    <jsp:include page="/prova_nuova_home/userMenu.jsp" />--%>
-    <jsp:include page="/prova_nuova_home/logButtons.jsp" />
+    <jsp:include page="/FILE_JSP/userMenu.jsp" />
     <% } else { %>
-    <jsp:include page="/prova_nuova_home/adminButtons.jsp" />
+    <jsp:include page="/FILE_JSP/adminButtons.jsp" />
     <% } %>
   </div>
 

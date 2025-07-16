@@ -30,7 +30,7 @@
                         request.setAttribute("isAmministratore", utente.isAmministratore());
                     }
                 %>
-                <jsp:include page="/prova_nuova_home/header.jsp" />
+                <jsp:include page="/FILE_JSP/header.jsp" />
             </div>
         </div> <!-- fine top-header -->
     </header>

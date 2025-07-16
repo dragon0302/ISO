@@ -20,7 +20,7 @@
         <title>ISO-16</title>
 
         <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/sfondo.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/prova_nuova_home/home.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/home.css">
 
         <script>
             function toggleBoxOption(btn) {
@@ -61,7 +61,7 @@
                         request.setAttribute("isAmministratore", utente.isAmministratore());
                         }
                     %>
-                    <jsp:include page="/prova_nuova_home/header.jsp" />
+                    <jsp:include page="/FILE_JSP/header.jsp" />
                 </div>
             </div> <!-- fine top-header -->
         </header>
@@ -86,7 +86,7 @@
 
                             <label for="imageInput">Aggiungi immagine</label>
                             <input type="file" name="immagine" id="imageInput" accept="image/*" required>
-                            <img id="imagePreview" src="#" alt="Anteprima immagine" style="display:none; width: 100px; margin-top:10px;"/
+                            <img id="imagePreview" src="#" alt="Anteprima immagine" style="display:none; width: 100px; margin-top:10px;"/>
 
                             <label for="productName">Nome prodotto:</label>
                             <input type="hidden" name="action" value="nuovo">
@@ -124,7 +124,7 @@
                             request.setAttribute("isAmministratore", utente.isAmministratore());
                         }
                     %>
-                    <jsp:include page="/prova_nuova_home/prodottoBox.jsp" />
+                    <jsp:include page="/FILE_JSP/prodottoBox.jsp" />
 
                     <% } %>
                 </div>
@@ -158,7 +158,7 @@
                                     request.setAttribute("isAmministratore", utente.isAmministratore());
                                 }
                     %>
-                    <jsp:include page="/prova_nuova_home/prodottoBox.jsp"/>
+                    <jsp:include page="/FILE_JSP/prodottoBox.jsp"/>
 
 
                     <%
@@ -192,7 +192,7 @@
                                     request.setAttribute("isAmministratore", utente.isAmministratore());
                                 }
                     %>
-                    <jsp:include page="/prova_nuova_home/prodottoBox.jsp" />
+                    <jsp:include page="/FILE_JSP/prodottoBox.jsp" />
 
                     <%
                         }

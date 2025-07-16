@@ -45,7 +45,7 @@ public class Catalogo extends HttpServlet {
 
             request.setAttribute("prodottiFiltro", prodottiFiltro);
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/prova_nuova_home/home.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/FILE_JSP/home.jsp");
             dispatcher.forward(request, response);
 
         }catch (Exception e) {
