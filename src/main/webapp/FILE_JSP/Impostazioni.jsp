@@ -75,28 +75,24 @@
                         List<Indirizzo> indirizzi = (List<Indirizzo>) request.getAttribute("listaIndirizzi");
                     %>
 
-                    <form action="gestisciFatturazione" method="POST" class="settings-option">
-                        <label for="indirizzo">Indirizzo di fatturazione:</label>
-                        <select id="indirizzo" name="indirizzo" required>
-                            <option value="">-- Seleziona un indirizzo --</option>
 
-                            <%
-                                if(indirizzi != null){
-                                    for (Indirizzo i : indirizzi){
+                    <label for="indirizzo">Indirizzo di fatturazione:</label>
+                    <select id="indirizzo" name="indirizzo" required onchange="selectFatturazione(this)">
+                        <option value="">-- Seleziona un indirizzo --</option>
 
-                            %>
+                        <%
+                            if(indirizzi != null){
+                                for (Indirizzo i : indirizzi){
+                        %>
 
-                            <option value="<%= i.getID_Indirizzo()%>">
-                                <%= i.getCap()%> <%= i.getCittà()%> <%= i.getCivico()%> <%= i.getVia()%>
-                            </option>
-                            <%
-                                    }
+                        <option value="<%= i.getID_Indirizzo()%>">
+                            <%= i.getCap()%> <%= i.getCittà()%> <%= i.getCivico()%> <%= i.getVia()%>
+                        </option>
+                        <%
                                 }
-                            %>
-                        </select>
-                    </form>
-
-
+                            }
+                        %>
+                    </select>
                 </div>
 
                 <!-- SEZIONE 2: IMPOSTAZIONI ACQUISTO -->
@@ -107,8 +103,7 @@
                     <div class="settings-option">
                         <label>Metodo di pagamento preferito</label>
 
-                        <form action="selezionaMetodoPagamento" method="get">
-                            <select name="metodoPagamentoId" required>
+                            <select name="metodoPagamentoId" required onchange="pagamentoDefault(this)">
                                 <option value="">--- Seleziona un metodo ---</option>
                                 <%
                                     List<MetodoPagamento> metodi = (List<MetodoPagamento>) request.getAttribute("metodiPagamento");
@@ -117,8 +112,7 @@
                                 %>
 
                                 <option value="<%= m.getNumerocarta()%>">
-<%--                                    creare getUltime4Cifre che da le ultime 4 cifre della carta--%>
-                                    <%=m.getNumerocarta()%> - **** **** **** <%=m.getUltime4Cifre()%> (scadenza: <%=m.getDataScadenza()%>) (Tipo: <%=m.getTipo()%>)
+                                    **** **** **** <%=m.getUltime4Cifre()%> (scadenza: <%=m.getDataScadenza()%>) (Tipo: <%=m.getTipo()%>)
                                 </option>
 
                                 <%
@@ -126,7 +120,6 @@
                                     }
                                 %>
                             </select>
-                        </form>
 
                         <a href="${pageContext.request.contextPath}/FILE_JSP/metodo_di_pagamento.jsp" class="button-link">Aggiungi</a>
                     </div>
@@ -157,6 +150,47 @@
 
             </div>
         </main>
+
+        <script>
+
+            function selectFatturazione(select){
+                if (select.value){
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = '${pageContext.request.contextPath}/selectDefault';
+
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'indirizzoFatturazione';
+                    input.value = select.value;
+
+                    form.appendChild(input);
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            }
+
+        </script>
+        <script>
+
+            function pagamentoDefault(select){
+                if (select.value){
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = '${pageContext.request.contextPath}/selectDefault';
+
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'pagamentoDefault';
+                    input.value = select.value;
+
+                    form.appendChild(input);
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            }
+
+        </script>
 
 
         <div class="footer-bar">
