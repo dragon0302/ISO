@@ -79,7 +79,7 @@
 
             </div>
 
-
+        <%if (prodotti.isEmpty()){%>
         <div class="box-acquista">
             <form action="${pageContext.request.contextPath}/CheckUtente" method="post">
                 <button type="submit" class="btn-aggiungi">
@@ -87,6 +87,7 @@
                 </button>
             </form>
         </div>
+    <%}%>
     </div>
 
 <div class="footer-bar">

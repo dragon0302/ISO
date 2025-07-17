@@ -25,7 +25,7 @@ public class Signup extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response){
 
         CookieManagemnt cm = new CookieManagemnt(request);
-        String erroreCF = "Codice Fiscale errato";
+        String erroreCF = "Codice Fiscale gia presente nel sito";
         String erroreNomeUtente = "Nome utente gia esistente";
         String erroreData = "Data non coretta";
         String erroreEmail = "Email non coretta";
@@ -38,7 +38,7 @@ public class Signup extends HttpServlet {
         // Regex
         Pattern USERNAME_REGEX = Pattern.compile("^[a-zA-Z0-9_]{1,10}$");
         Pattern EMAIL_REGEX = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
-        Pattern PASSWORD_REGEX = Pattern.compile("^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_]+\\-=[\\]{};':\"\\\\|,.<>/?]).{8,}$");
+        Pattern PASSWORD_REGEX = Pattern.compile("^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\|,.<>\\/?]).{8,}$");
         Pattern NOME_REGEX = Pattern.compile("^[A-Za-zÀ-ÖØ-öø-ÿ' ]+$");
         Pattern COGNOME_REGEX = Pattern.compile("^[A-Za-zÀ-ÖØ-öø-ÿ' ]+$");
         Pattern CODICEFISCALE_REGEX = Pattern.compile("^([A-Z]{6}[0-9LMNPQRSTUV]{2}[ABCDEHLMPRST]{1}[0-9LMNPQRSTUV]{2}[A-Z]{1}[0-9LMNPQRSTUV]{3}[A-Z]{1})$|([0-9]{11})$");
@@ -74,6 +74,7 @@ public class Signup extends HttpServlet {
                 request.setAttribute("erroreNomeUtenteRegex", erroreNomeUtenteRegex);
                 request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             }else if (!PASSWORD_REGEX.matcher(Password).matches()) {
+                System.out.println(Password);
                 request.setAttribute("errorePasswordRegex", errorePasswordRegex);
                 request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             }else if(utenteDAO.CFEsistente(CF)){

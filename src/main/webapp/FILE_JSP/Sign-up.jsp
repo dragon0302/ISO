@@ -79,8 +79,9 @@
                         <div class="form-group">
                             <label for="NomeUtente">Nome Utente *</label>
                             <input type="text" name="NomeUtente" id="NomeUtente" required>
-                            <% if(erroreNomeUtente != null || erroreNomeUtenteRegex != null){ %>
+                            <% if(erroreNomeUtente != null){ %>
                                 <%= erroreNomeUtente%>
+                            <%} else if (erroreNomeUtenteRegex != null) {%>
                                 <%= erroreNomeUtenteRegex%>
                             <%}%>
                         </div>
@@ -89,7 +90,7 @@
                             <label for="Password">Password *</label>
                             <input type="password" name="Password" id="Password" required>
                             <small className="password-requirements">
-                                La password deve contenere almeno 8 caratteri, una lettera maiuscola, un numero e un carattere speciale("").
+                                La password deve contenere almeno 8 caratteri, una lettera maiuscola, un numero e un carattere speciale("!@#$%^&*()_").
                             </small>
                             <small id="password-feedback"></small>
                             <% if(errorePasswordRegex != null){ %>
@@ -130,10 +131,12 @@
                         <div class="form-group">
                             <label for="E-mail">E-mail *</label>
                             <input type="email" name="E-mail" id="E-mail" required>
-                            <% if(erroreEmail != null || erroreEmailRegex != null){ %>
+                            <% if(erroreEmail != null){ %>
                                 <%= erroreEmail%>
-                                <%=erroreEmailRegex%>
+                            <%} else if (erroreEmailRegex != null) {%>
+                            <%=erroreEmailRegex%>
                             <%}%>
+                            %>
                         </div>
 
                         <div class="form-group full-width">
