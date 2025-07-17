@@ -140,10 +140,16 @@
                 <%-- NOVITÀ --%>
                 <div class="section-header">
                     <h2>Novità</h2>
-                    <form action="${pageContext.request.contextPath}/Catalogo" method="get">
+                    <%
+                        if(utente != null && utente.isAmministratore()){
+                    %>
+                    <form action="FiltraNovita" method="get">
                         <input type="number" name="giorni" min="1" max="365" placeholder="Max giorni" required>
                         <button class="btn-link" type="submit">Ricerca</button>
                     </form>
+                    <%
+                        }
+                    %>
                 </div>
                 <div class="product-slider">
                     <%
@@ -174,10 +180,16 @@
                 <%-- PRODOTTI POPOLARI --%>
                 <div class="section-header">
                     <h2>Prodotti più acquistati</h2>
-                    <form action="${pageContext.request.contextPath}/Catalogo" method="get">
+                    <%
+                        if(utente != null && utente.isAmministratore()){
+                    %>
+                    <form action="FiltraPopolari" method="get">
                         <input type="number" name="maxVendite" placeholder="Num MAX vendite">
                         <button class="btn-link" type="submit">Ricerca</button>
                     </form>
+                    <%
+                        }
+                    %>
                 </div>
                 <div class="product-slider">
                     <%
