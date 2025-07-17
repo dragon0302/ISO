@@ -25,12 +25,10 @@ public class FatturaServlet extends HttpServlet {
         Ordine ordine = (Ordine) request.getAttribute("ordine");
         StatoFattura sf = StatoFattura.Emessa;
         StatoPagamento sp = StatoPagamento.Pagato;
-        String paykey = "Balliamo, è da tanto tempo che non lo facciamo!";
         Float totale = (Float) request.getAttribute("totale");
-        Float totalesenzaiva = (Float) request.getAttribute("totalesenzaiva");
-        String iva = (String) request.getAttribute("iva");
+        Float totalesenzaiva = (totale * 22)/100;
+        String paykey = request.getParameter("transaction_id");
         Indirizzo indirizzo = (Indirizzo) request.getAttribute("indirizzo");
-        totalesenzaiva = (totale * 22)/100;
         try {
             fattura = new Fattura(ordine,utente,indirizzo,sf,sp);
         } catch (SQLException e) {
