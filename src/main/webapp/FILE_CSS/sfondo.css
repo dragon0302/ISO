@@ -416,7 +416,7 @@ a.btn-link:hover {
     }
 }
 
-@media (min-width: 1025px) and (max-width: 1200px) {
+@media (min-width: 1025px) and (max-width: 1800px) {
 
     .top-header{
         gap: 290px;

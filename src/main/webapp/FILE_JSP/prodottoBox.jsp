@@ -12,7 +12,9 @@
         <button class="menu-button" onclick="toggleBoxOption(this)">⋮</button>
         <div class="box-option">
             <button onclick="openEditModal(<%= p.getId_prodotto() %>, '<%= p.getNome() %>', <%= p.getPrezzo() %>, '<%= p.getDescrizione() %>', '<%=p.getCategoria()%>')">Modifica</button>
-            <button onclick="openDeleteModal(<%= p.getId_prodotto() %>)">Elimina</button>
+            <form action="eliminaProdotto" method="POST" class="settings-option" onsubmit="return confirm('Sei sicuro di voler eliminare l\'account?');">
+                <button onclick="openDeleteModal(<%= p.getId_prodotto() %>)">Elimina</button>
+            </form>
         </div>
         <% } %>
 
