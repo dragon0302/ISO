@@ -55,7 +55,7 @@ public class AcquistoDAOImplement implements AcquistoDAO {
         }
     }
 
-    public ArrayList<Integer> getProdottiPiuAqquistati() throws SQLException{
+    public ArrayList<Integer> getProdottiPiuAqquistati(int quantita) throws SQLException{
 
         Connection conn = null;
         PreparedStatement query2 = null;
@@ -63,7 +63,10 @@ public class AcquistoDAOImplement implements AcquistoDAO {
 
         try {
             conn = ds.getConnection();
-            query2 = conn.prepareStatement("select distinct ID_prodotto from " + TABLE_NAME + " where Quantita >= 10");
+            query2 = conn.prepareStatement("select distinct ID_prodotto from " + TABLE_NAME + " where Quantita >= ?");
+
+            query2.setInt(1,quantita);
+            System.out.println(quantita);
 
             ResultSet rs = query2.executeQuery();
 

@@ -23,9 +23,22 @@ public class Catalogo extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
-            String ricerca = request.getParameter("search");;
-            List<Prodotto> prodottiRecenti = prodottoDAO.getProdottiRecenti();
-            List<Integer> IDprodottiPiuAcquistati = acquistoDAO.getProdottiPiuAqquistati();
+            String ricerca = request.getParameter("search");
+            Integer giorni = null;
+            if(request.getParameter("giorni") != null) {
+                giorni = Integer.parseInt(request.getParameter("giorni"));
+            }else {
+                giorni=10;
+            }
+
+            Integer quantita =null;
+            if(request.getParameter("maxVendite") != null) {
+                quantita = Integer.parseInt(request.getParameter("maxVendite"));
+            }else {
+                quantita=10;
+            }
+            List<Prodotto> prodottiRecenti = prodottoDAO.getProdottiRecenti(giorni);
+            List<Integer> IDprodottiPiuAcquistati = acquistoDAO.getProdottiPiuAqquistati(quantita);
             List<Prodotto> prodottiPiuAcquistai = new ArrayList<>();
             for (int ID : IDprodottiPiuAcquistati) {
 

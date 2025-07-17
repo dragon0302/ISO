@@ -140,7 +140,7 @@
                 <%-- NOVITÀ --%>
                 <div class="section-header">
                     <h2>Novità</h2>
-                    <form action="FiltraNovita" method="get">
+                    <form action="${pageContext.request.contextPath}/Catalogo" method="get">
                         <input type="number" name="giorni" min="1" max="365" placeholder="Max giorni" required>
                         <button class="btn-link" type="submit">Ricerca</button>
                     </form>
@@ -174,7 +174,7 @@
                 <%-- PRODOTTI POPOLARI --%>
                 <div class="section-header">
                     <h2>Prodotti più acquistati</h2>
-                    <form action="FiltraPopolari" method="get">
+                    <form action="${pageContext.request.contextPath}/Catalogo" method="get">
                         <input type="number" name="maxVendite" placeholder="Num MAX vendite">
                         <button class="btn-link" type="submit">Ricerca</button>
                     </form>

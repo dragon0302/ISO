@@ -9,7 +9,7 @@ public interface ProdottoDAO {
     public ArrayList<Prodotto> getProdotti() throws SQLException;
     public void deleteProdotto(int id) throws SQLException;
     public Prodotto getProdottoByID(int idProdotto) throws SQLException;
-    public ArrayList<Prodotto> getProdottiRecenti() throws SQLException;
+    public ArrayList<Prodotto> getProdottiRecenti(int giorni) throws SQLException;
     public Float GetPrezzo(int id) throws SQLException;
     public List<Prodotto> SerchByCategory(String Category) throws SQLException;
     public void editPrezzo (Prodotto prodotto, float new_prezzo) throws SQLException;

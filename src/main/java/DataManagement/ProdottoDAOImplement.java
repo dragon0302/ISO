@@ -116,11 +116,11 @@ public class ProdottoDAOImplement implements ProdottoDAO{
         }
     }
 
-    public synchronized ArrayList<Prodotto> getProdottiRecenti() throws SQLException{
+    public synchronized ArrayList<Prodotto> getProdottiRecenti(int giorni) throws SQLException{
         Connection conn = null;
         PreparedStatement query4 = null;
         ArrayList<Prodotto> prodottiRecenti = new ArrayList<>();
-        LocalDate ofsetDate= LocalDate.now().minusDays(7);
+        LocalDate ofsetDate= LocalDate.now().minusDays(giorni);
 
         try {
             conn = ds.getConnection();
