@@ -44,7 +44,7 @@ public class ProductCatalogoMenegment extends HttpServlet {
 
             System.out.println("Nome: " + nome);
 
-            Prodotto prodotto = new Prodotto(nome,0.0,"l",descrizzione,categoria,prezzo,12);
+            Prodotto prodotto = new Prodotto(nome,"l",descrizzione,categoria,prezzo,12);
             prodottoDAO.doSave(prodotto);
 
           }

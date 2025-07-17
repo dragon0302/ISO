@@ -16,7 +16,6 @@ public interface ProdottoDAO {
     public void editCategoria(Prodotto prodotto,String new_categoria) throws SQLException;
     public void editDescrizione(Prodotto prodotto,String new_descrizione) throws SQLException;
     public void editTaglia(Prodotto prodotto,String new_taglia) throws SQLException;
-    public void editMediaValutazione(Prodotto prodotto,Double new_mv) throws SQLException;
     public void editNomeProdotto(Prodotto prodotto,String new_nomeprodotto) throws SQLException;
     public void editIDProdotto(Prodotto prodotto,int new_id) throws SQLException;
 

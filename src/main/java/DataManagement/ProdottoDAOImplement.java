@@ -30,15 +30,14 @@ public class ProdottoDAOImplement implements ProdottoDAO{
         PreparedStatement query = null;
         try {
             conn = ds.getConnection();
-            query = conn.prepareStatement("INSERT INTO " + TABLE_NAME +  "(Nome, MediaValutazione, Taglia, Descrizione, Categoria,Prezzo,Iva) VALUES (?,?,?,?,?,?,?)");
+            query = conn.prepareStatement("INSERT INTO " + TABLE_NAME +  "(Nome,  Taglia, Descrizione, Categoria,Prezzo,Iva) VALUES (?,?,?,?,?,?,?)");
 
             query.setString(1, prodotto.getNome());
-            query.setDouble(2,prodotto.getMedia_valutazione());
-            query.setString(3, prodotto.getTaglia());
-            query.setString(4, prodotto.getDescrizione());
-            query.setString(5, prodotto.getCategoria());
-            query.setFloat(6, prodotto.getPrezzo());
-            query.setInt(7, prodotto.getIva());
+            query.setString(2, prodotto.getTaglia());
+            query.setString(3, prodotto.getDescrizione());
+            query.setString(4, prodotto.getCategoria());
+            query.setFloat(5, prodotto.getPrezzo());
+            query.setInt(6, prodotto.getIva());
 
             query.executeUpdate();
         }finally {
@@ -66,13 +65,12 @@ public class ProdottoDAOImplement implements ProdottoDAO{
             while (rs.next()) {
                 int idProdotto = rs.getInt("ID_prodotto");
                 String nomeProdotto = rs.getString("Nome");
-                Double mediaValutazione = Double.valueOf(rs.getString("MediaValutazione"));
                 String taglia = rs.getString("Taglia");
                 String descrizione = rs.getString("Descrizione");
                 String categoria = rs.getString("Categoria");
                 float prezzo = rs.getFloat("Prezzo");
                 int iva = rs.getInt("Iva");
-                Prodotto p = new Prodotto( nomeProdotto, mediaValutazione, taglia, descrizione, categoria, prezzo,iva);
+                Prodotto p = new Prodotto( nomeProdotto, taglia, descrizione, categoria, prezzo,iva);
                 prodotti.add(p);
             }
         } catch (Exception e) {
@@ -133,13 +131,12 @@ public class ProdottoDAOImplement implements ProdottoDAO{
             while (rs.next()) {
                 int idProdotto = rs.getInt("ID_prodotto");
                 String nomeProdotto = rs.getString("Nome");
-                Double mediaValutazione = Double.valueOf(rs.getString("MediaValutazione"));
                 String taglia = rs.getString("Taglia");
                 String descrizione = rs.getString("Descrizione");
                 String categoria = rs.getString("Categoria");
                 float prezzo = rs.getFloat("Prezzo");
                 int iva = rs.getInt("Iva");
-                Prodotto p = new Prodotto(nomeProdotto,mediaValutazione,taglia,descrizione,categoria,prezzo,iva);
+                Prodotto p = new Prodotto(nomeProdotto,taglia,descrizione,categoria,prezzo,iva);
                 p.setId_prodotto(idProdotto);
                 prodottiRecenti.add(p);
             }
@@ -178,14 +175,13 @@ public class ProdottoDAOImplement implements ProdottoDAO{
             if (rs.next()) {
                 int ID = rs.getInt("ID_prodotto");
                 String nomeProdotto = rs.getString("Nome");
-                Double mediaValutazione = Double.valueOf(rs.getString("MediaValutazione"));
                 String taglia = rs.getString("Taglia");
                 String descrizione = rs.getString("Descrizione");
                 String categoria = rs.getString("Categoria");
                 float prezzo = rs.getFloat("Prezzo");
                 int iva = rs.getInt("Iva");
 
-                prodotto = new Prodotto(nomeProdotto,mediaValutazione,taglia,descrizione,categoria,prezzo,iva);
+                prodotto = new Prodotto(nomeProdotto,taglia,descrizione,categoria,prezzo,iva);
                 prodotto.setId_prodotto(ID);
             }
 
@@ -254,7 +250,6 @@ public class ProdottoDAOImplement implements ProdottoDAO{
             while (rs.next()) {
                 int ID = rs.getInt("ID_prodotto");
                 String nomeProdotto = rs.getString("Nome");
-                Double mediaValutazione = Double.valueOf(rs.getString("MediaValutazione"));
                 String taglia = rs.getString("Taglia");
                 String descrizione = rs.getString("Descrizione");
                 String Categoria = rs.getString("Categoria");
@@ -262,7 +257,7 @@ public class ProdottoDAOImplement implements ProdottoDAO{
                 int iva = rs.getInt("Iva");
                 Date dataInserimento = rs.getDate("DataInserimento");
 
-                Prodotto prodotto = new Prodotto(nomeProdotto, mediaValutazione, taglia, descrizione, Categoria, prezzo,iva);
+                Prodotto prodotto = new Prodotto(nomeProdotto, taglia, descrizione, Categoria, prezzo,iva);
                 prodotto.setId_prodotto(ID);
 
                 prodtti.add(prodotto);
@@ -324,33 +319,6 @@ public class ProdottoDAOImplement implements ProdottoDAO{
             conn = ds.getConnection();
             query = conn.prepareStatement("UPDATE " + TABLE_NAME + " SET Nome = ? WHERE ID_Prodotto = ?");
             query.setString(1, new_nomeprodotto);
-            query.setInt(2, prodotto.getId_prodotto());
-
-            query.execute();
-
-        }catch (Exception e) {
-            System.out.println(e.getMessage());
-        } finally {
-            try {
-                if (query != null) {
-                    query.close();
-                }
-            } finally {
-                if (conn != null) {
-                    conn.close();
-                }
-            }
-        }
-    }
-    public void editMediaValutazione(Prodotto prodotto,Double new_mv) throws SQLException {
-        Connection conn = null;
-        PreparedStatement query = null;
-
-        try {
-
-            conn = ds.getConnection();
-            query = conn.prepareStatement("UPDATE " + TABLE_NAME + " SET MediaValutazione = ? WHERE ID_prodotto = ?");
-            query.setDouble(1, new_mv);
             query.setInt(2, prodotto.getId_prodotto());
 
             query.execute();
