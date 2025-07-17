@@ -105,12 +105,16 @@
                         </div>
                     </div>
 
-            <%      }%>
+            <%
+                            }
+            %>
                 </div>
             </div>
-                <% }
-            %>
+                <%
+                        }
+                %>
 
+            <button type="submit" class="login-btn">Scarica fattura</button>
 
             <%}else { %>
             <p>Non hai ancora effettuato ordini.</p>
