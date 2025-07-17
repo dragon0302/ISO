@@ -31,6 +31,10 @@ public class Indirizzo {
     return ID_Indirizzo;
   }
 
+  public void setID_Indirizzo(int ID_Indirizzo) {
+    this.ID_Indirizzo = ID_Indirizzo;
+  }
+
   public String getCittà() {
     return citta;
   }

@@ -23,6 +23,7 @@ public class Catalogo extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
+            String ricerca = request.getParameter("search");;
             List<Prodotto> prodottiRecenti = prodottoDAO.getProdottiRecenti();
             List<Integer> IDprodottiPiuAcquistati = acquistoDAO.getProdottiPiuAqquistati();
             List<Prodotto> prodottiPiuAcquistai = new ArrayList<>();
@@ -39,11 +40,21 @@ public class Catalogo extends HttpServlet {
 
             String Filter = request.getParameter("value");
 
-            request.setAttribute("Filter", Filter);
+            if (Filter != null) {
+                request.setAttribute("Filter", Filter);
 
-            List<Prodotto> prodottiFiltro = prodottoDAO.SerchByCategory(Filter);
+                List<Prodotto> prodottiFiltro = prodottoDAO.SerchByCategory(Filter);
 
-            request.setAttribute("prodottiFiltro", prodottiFiltro);
+                request.setAttribute("prodottiFiltro", prodottiFiltro);
+            } else if (ricerca != null) {
+
+                request.setAttribute("Filter", ricerca);
+
+                List<Prodotto> prodottiFiltro = prodottoDAO.SerchByCategory(ricerca);
+
+                request.setAttribute("prodottiFiltro", prodottiFiltro);
+                
+            }
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("/FILE_JSP/home.jsp");
             dispatcher.forward(request, response);

@@ -1,17 +1,18 @@
 package DataManagement;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class MetodoPagamento {
 
-  private double numerocarta;
+  private String numerocarta;
   private Date dataScadenza;
   private int cvv;
   private String tipo;
   private boolean DefaultPagamento;
   private String CF_utente;
 
-  public MetodoPagamento(double numerocarta, Date dataScadenza, int cvv, String tipo, boolean defaultPagamento, String CF_utente){
+  public MetodoPagamento(String numerocarta, Date dataScadenza, int cvv, String tipo, boolean defaultPagamento, String CF_utente){
     this.numerocarta = numerocarta;
     this.dataScadenza = dataScadenza;
     this.cvv = cvv;
@@ -20,11 +21,11 @@ public class MetodoPagamento {
     this.CF_utente = CF_utente;
   }
 
-  public double getNumerocarta() {
+  public String getNumerocarta() {
     return numerocarta;
   }
 
-  public void setNumerocarta(double numerocarta) {
+  public void setNumerocarta(String numerocarta) {
     this.numerocarta = numerocarta;
   }
 
@@ -66,5 +67,12 @@ public class MetodoPagamento {
 
   public void setCF_utente(String CF_utente) {
     this.CF_utente = CF_utente;
+  }
+
+  public String getUltime4Cifre(){
+
+    String NummeroCarta = String.valueOf(numerocarta);
+    return NummeroCarta.substring(12,16);
+
   }
 }

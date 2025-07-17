@@ -13,14 +13,14 @@
   <div id="userMenu" class="user-menu">
     <ul>
       <li><a href="${pageContext.request.contextPath}/FILE_JSP/Profilo.jsp">Profilo</a></li>
-      <li><a href="${pageContext.request.contextPath}/FILE_JSP/Impostazioni.jsp">Impostazioni</a></li>
+      <li><a href="${pageContext.request.contextPath}/Impostazioni">Impostazioni</a></li>
       <form action="Logout" method="get">
         <li><button>Log-out</button></li>
       </form>
     </ul>
   </div>
 
-  <a class="btn card-btn" href="carrello">Carrello</a>
+  <a class="btn card-btn" href="${pageContext.request.contextPath}/carrello">Carrello</a>
   <button class="login-btn" onclick="openAddFilterModal()">Aggiungi Filtro</button>
 
   <div id="addFilterModal" class="modal" style="display:none;">

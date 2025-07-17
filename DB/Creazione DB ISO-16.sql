@@ -44,7 +44,7 @@ CREATE TABLE acquisto(
 );
 
 CREATE TABLE metodoPagamento(
-    NumeroCarta DOUBLE PRIMARY KEY NOT NULL,
+    NumeroCarta VARCHAR(16) PRIMARY KEY NOT NULL,
     DataScadenza date NOT NULL,
     CVV INT NOT NULL check ( CVV >= 100 && CVV < 1000 ),
     Tipo VARCHAR(20) NOT NULL,

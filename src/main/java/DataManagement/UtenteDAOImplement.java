@@ -323,7 +323,7 @@ public class UtenteDAOImplement implements UtenteDAO {
         try {
 
             conn = ds.getConnection();
-            query = conn.prepareStatement("UPDATE utente" +  " SET CF = ?" + "WHERE CF = ?");
+            query = conn.prepareStatement("UPDATE " + TABLE_NAME +  " SET CF = ?" + "WHERE CF = ?");
             query.setString(1, new_cf);
             query.setString(2, utente.getCf());
             query.executeQuery();
@@ -350,7 +350,7 @@ public class UtenteDAOImplement implements UtenteDAO {
         try {
 
             conn = ds.getConnection();
-            query = conn.prepareStatement("UPDATE utente" +  " SET nomeutente = ?" + "WHERE nomeutente = ?");
+            query = conn.prepareStatement("UPDATE " + TABLE_NAME +  " SET nomeutente = ?" + "WHERE nomeutente = ?");
             query.setString(1, new_nomeutente);
             query.setString(2, utente.getNomeutente());
 
@@ -377,7 +377,7 @@ public class UtenteDAOImplement implements UtenteDAO {
         try {
 
             conn = ds.getConnection();
-            query = conn.prepareStatement("UPDATE utente" +  " SET Password = ?" + "WHERE CF = ?");
+            query = conn.prepareStatement("UPDATE " + TABLE_NAME +  " SET Password = ?" + "WHERE CF = ?");
             query.setString(1, new_password);
             query.setString(2, utente.getCf());
 
@@ -404,7 +404,7 @@ public class UtenteDAOImplement implements UtenteDAO {
         try {
 
             conn = ds.getConnection();
-            query = conn.prepareStatement("UPDATE utente" +  " SET Nome = ?" + "WHERE CF = ?");
+            query = conn.prepareStatement("UPDATE " + TABLE_NAME +  " SET Nome = ?" + "WHERE CF = ?");
             query.setString(1, new_nome);
             query.setString(2, utente.getCf());
 
@@ -435,7 +435,7 @@ public class UtenteDAOImplement implements UtenteDAO {
         try {
 
             conn = ds.getConnection();
-            query = conn.prepareStatement("UPDATE utente" +  " SET Cognome = ?" + "WHERE CF = ?");
+            query = conn.prepareStatement("UPDATE " + TABLE_NAME +  " SET Cognome = ?" + "WHERE CF = ?");
             query.setString(1, new_cognome);
             query.setString(2, utente.getCf());
 
@@ -463,7 +463,7 @@ public class UtenteDAOImplement implements UtenteDAO {
         try {
 
             conn = ds.getConnection();
-            query = conn.prepareStatement("UPDATE utente" +  " SET Sesso = ?" + "WHERE CF = ?");
+            query = conn.prepareStatement("UPDATE " + TABLE_NAME +  " SET Sesso = ?" + "WHERE CF = ?");
             query.setString(1, new_sesso);
             query.setString(2, utente.getCf());
 
@@ -490,7 +490,7 @@ public class UtenteDAOImplement implements UtenteDAO {
         try {
 
             conn = ds.getConnection();
-            query = conn.prepareStatement("UPDATE utente" +  " SET Amministratore = ?" + "WHERE CF = ?");
+            query = conn.prepareStatement("UPDATE " + TABLE_NAME +  " SET Amministratore = ?" + "WHERE CF = ?");
             query.setBoolean(1, new_admin);
             query.setString(2, utente.getCf());
 
@@ -517,7 +517,7 @@ public class UtenteDAOImplement implements UtenteDAO {
         try {
 
             conn = ds.getConnection();
-            query = conn.prepareStatement("UPDATE utente" +  " SET DataNascita = ?" + "WHERE CF = ?");
+            query = conn.prepareStatement("UPDATE " + TABLE_NAME +  " SET DataNascita = ?" + "WHERE CF = ?");
             query.setDate(1, new_dn);
             query.setString(2, utente.getCf());
 
@@ -536,5 +536,35 @@ public class UtenteDAOImplement implements UtenteDAO {
                 }
             }
         }
+    }
+
+    public void remouveUtente (Utente utente) throws SQLException{
+
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("DELETE FROM " + TABLE_NAME +  " WHERE CF LIKE ?");
+
+            query.setString(1, utente.getCf());
+
+            query.execute();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+
     }
 }

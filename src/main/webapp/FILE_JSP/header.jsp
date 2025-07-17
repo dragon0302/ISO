@@ -13,8 +13,10 @@
 
   <div class="center-section">
     <div class="search-container">
-      <input type="text" id="searchInput" placeholder="Cerca prodotti..." onkeyup="showSuggestions(this.value)">
-      <div class="suggestions" id="suggestionBox"></div>
+      <form action="${pageContext.request.contextPath}/Catalogo" method="get">
+        <input name="search" type="text" id="searchInput" placeholder="Cerca prodotti..." onkeyup="showSuggestions(this.value)">
+        <div class="suggestions" id="suggestionBox"></div>
+      </form>
     </div>
 
     <form id="filterForm" action="Catalogo" method="post">
