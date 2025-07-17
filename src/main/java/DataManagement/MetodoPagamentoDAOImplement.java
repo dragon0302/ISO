@@ -10,7 +10,7 @@ import java.util.List;
 
 public class MetodoPagamentoDAOImplement implements MetodoPagamentoDAO {
     private static DataSource ds;
-    private static final String TABLE_NAME = "metodopagamento";
+    private static final String TABLE_NAME = "metodoPagamento";
 
     static {
         try {

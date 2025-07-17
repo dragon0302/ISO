@@ -143,7 +143,7 @@
                     <%
                         if(utente != null && utente.isAmministratore()){
                     %>
-                    <form action="FiltraNovita" method="get">
+                    <form action="${pageContext.request.contextPath}/Catalogo" method="get">
                         <input type="number" name="giorni" min="1" max="365" placeholder="Max giorni" required>
                         <button class="btn-link" type="submit">Ricerca</button>
                     </form>
@@ -183,7 +183,7 @@
                     <%
                         if(utente != null && utente.isAmministratore()){
                     %>
-                    <form action="FiltraPopolari" method="get">
+                    <form action="${pageContext.request.contextPath}/Catalogo" method="get">
                         <input type="number" name="maxVendite" placeholder="Num MAX vendite">
                         <button class="btn-link" type="submit">Ricerca</button>
                     </form>

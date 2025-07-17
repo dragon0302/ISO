@@ -3,8 +3,8 @@ package Servlet;
 import DataManagement.Prodotto;
 import Utility.Orderdetail;
 import Utility.PaymentService;
-import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -24,7 +24,6 @@ public class PaymentAutorization extends HttpServlet {
 
     public void init() throws ServletException {
 
-        //APIContext apiContext = (APIContext) getServletContext().getAttribute("paypalApiContext");
         this.paymentService = new PaymentService(getServletContext());
 
     }
