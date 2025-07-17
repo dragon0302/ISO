@@ -34,24 +34,6 @@
 <script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
 <script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
 
-<div id="paypal-button-container"></div>
-<p id="result-message"></p>
-
-<!-- QUI INSERISCI IL DIV DEI LOGHI -->
-<div class="payment-methods">
-  <form action="PaymentAutorization" method="post">
-    <button>
-      <img src="https://img.icons8.com/color/48/paypal.png" alt="PayPal" title="PayPal">
-    </button>
-  </form>
-  <img src="https://img.icons8.com/color/48/visa.png" alt="Visa" title="Visa">
-  <img src="https://img.icons8.com/color/48/mastercard.png" alt="MasterCard" title="MasterCard">
-  <img src="https://img.icons8.com/color/48/amex.png" alt="American Express" title="American Express">
-  <img src="https://img.icons8.com/color/48/discover.png" alt="Discover" title="Discover">
-  <img src="https://img.icons8.com/color/48/apple-pay.png" alt="Apple Pay" title="Apple Pay">
-  <img src="https://img.icons8.com/color/48/google-pay.png" alt="Google Pay" title="Google Pay">
-</div>
-
 <header>
   <div class="top-header">
     <div>
@@ -70,6 +52,33 @@
 <main>
   <h2>Conferma il pagamento</h2>
   <p>Seleziona un metodo di pagamento tra quelli disponibili.</p>
+
+  <div class="payment-methods">
+    <form action="${pageContext.request.contextPath}/PaymentAutorization" method="post">
+      <button>
+        <img src="https://img.icons8.com/color/48/paypal.png" alt="PayPal" title="PayPal">
+      </button>
+    </form>
+    <img src="https://img.icons8.com/color/48/visa.png" alt="Visa" title="Visa">
+    <img src="https://img.icons8.com/color/48/mastercard.png" alt="MasterCard" title="MasterCard">
+    <img src="https://img.icons8.com/color/48/amex.png" alt="American Express" title="American Express">
+    <img src="https://img.icons8.com/color/48/discover.png" alt="Discover" title="Discover">
+    <img src="https://img.icons8.com/color/48/apple-pay.png" alt="Apple Pay" title="Apple Pay">
+    <img src="https://img.icons8.com/color/48/google-pay.png" alt="Google Pay" title="Google Pay">
+  </div>
+
+  <%
+    String esito = (String) request.getAttribute("esitoPagamento");
+    if ("successo".equals(esito)) {
+  %>
+  <div class="payment-message success">Pagamento effettuato con successo!</div>
+  <%
+  } else if ("errore".equals(esito)) {
+  %>
+  <div class="payment-message error">Errore durante il pagamento. Riprova.</div>
+  <%
+    }
+  %>
 </main>
 
 
