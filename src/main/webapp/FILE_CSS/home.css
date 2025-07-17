@@ -126,6 +126,7 @@
     justify-content: center;
     align-items: center;
     z-index: 100;
+    color: black;
 }
 
 .modal-content {
@@ -449,7 +450,7 @@ main h2 {
 
     /* Titoli sezione */
     main h2 {
-        font-size: 5.2rem;
+        font-size: 3rem;
         margin-left: 30px;
         padding-left: 12px;
     }

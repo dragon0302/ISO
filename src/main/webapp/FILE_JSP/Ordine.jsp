@@ -5,7 +5,13 @@
   Time: 17:19
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="DataManagement.Utente" %>
+<%
+    // Recupero l'utente loggato dalla sessione
+    Utente utente = (Utente) session.getAttribute("utente");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +19,26 @@
     <title>Prova Ordine</title>
 </head>
 <body>
+
+<script src="${pageContext.request.contextPath}/Javascript/Passweor_error.js"></script>
+<script src="${pageContext.request.contextPath}/Javascript/CatalogFilter.js"></script>
+<script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
+<script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
+
+<header>
+    <div class="top-header">
+        <div>
+            <%
+                if(utente == null){
+                    request.setAttribute("isAmministratore", null);
+                }else{
+                    request.setAttribute("isAmministratore", utente.isAmministratore());
+                }
+            %>
+            <jsp:include page="/FILE_JSP/header.jsp" />
+        </div>
+    </div> <!-- fine top-header -->
+</header>
 
 <form action="logIN" method="POST">
 
