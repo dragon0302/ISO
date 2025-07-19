@@ -24,10 +24,9 @@ CREATE TABLE carrello(
 CREATE TABLE prodotto(
      ID_prodotto INTEGER PRIMARY KEY NOT NULL auto_increment,
      Nome VARCHAR(20) NOT NULL,
-     MediaValutazione DOUBLE NOT NULL check ( MediaValutazione >= 0 && MediaValutazione <= 10 ),
      Taglia VARCHAR(3) NOT NULL,
      Descrizione VARCHAR(500) NOT NULL,
-     Categoria VARCHAR(20) NOT NULL,
+     Categoria VARCHAR(300) NOT NULL,
      Prezzo DOUBLE NOT NULL,
      Iva Integer not null ,
      DataInserimento DATE not null default (curdate())

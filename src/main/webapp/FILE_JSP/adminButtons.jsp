@@ -1,4 +1,4 @@
-<%@ page import="DataManagement.Utente" %>
+<%@ page import="Model.Utente" %>
 <div id="userContainer">
 
   <span class="username" onclick="toggleUserMenu()">

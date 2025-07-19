@@ -4,7 +4,7 @@ VALUES (?,?,?,?,?,?,?,?,?);
 INSERT INTO carrello (ID_carrello, CF_utente)
 VALUES (?,?);
 
-INSERT INTO prodotto (ID_prodotto, Nome, MediaValutazione, Taglia, Descrizione, Categoria)
+INSERT INTO prodotto (ID_prodotto, Nome, Taglia, Descrizione, Categoria)
 VALUES (?,?,?,?,?,?);
 
 INSERT INTO metodoPagamento (CF_Utente, NumeroCarta, DataScadenza, CVV, Tipo, Default_pagamento)

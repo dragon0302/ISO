@@ -13,10 +13,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="DataManagement.Utente" %>
-<%@ page import="DataManagement.Indirizzo" %>
+<%@ page import="Model.Utente" %>
+<%@ page import="Model.Indirizzo" %>
 <%@ page import="java.util.List" %>
-<%@ page import="DataManagement.MetodoPagamento" %>
+<%@ page import="Model.MetodoPagamento" %>
 
 <%
     // Recupero l'utente loggato dalla sessione

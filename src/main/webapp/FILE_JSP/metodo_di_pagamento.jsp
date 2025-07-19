@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="DataManagement.Utente" %>
+<%@ page import="Model.Utente" %>
 <%
   // Recupero l'utente loggato dalla sessione
   Utente utente = (Utente) session.getAttribute("utente");
@@ -46,7 +46,7 @@
       </div> <!-- fine top-header -->
     </header>
 
-    <form action="${pageContext.request.contextPath}/AddPayment" method="GET">
+    <form class="AggMP" action="${pageContext.request.contextPath}/AddPayment" method="GET">
 
       <%--@declare id="NumeroCarta"--%>
       <%--@declare id="DataScadenza"--%>
