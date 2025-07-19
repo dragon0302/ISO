@@ -89,7 +89,7 @@
                             <label for="Password">Password *</label>
                             <input type="password" name="Password" id="Password" required>
                             <small className="password-requirements">
-                                La password deve contenere almeno 8 caratteri, una lettera maiuscola, un numero, un numero e un carattere speciale.
+                                La password deve contenere almeno 8 caratteri, una lettera maiuscola, un numero e un carattere speciale("").
                             </small>
                             <small id="password-feedback"></small>
                             <% if(errorePasswordRegex != null){ %>

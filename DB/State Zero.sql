@@ -12,7 +12,7 @@ VALUES
 
 INSERT INTO prodotto (Nome, MediaValutazione, Taglia, Descrizione, Categoria, Prezzo, iva)
 VALUES
-    ( 'Maglia del cazzo', 5, 'XL', 'è una maglia con un cazzo', 'Rock', 12.5, 22),
+    ( 'Maglia dei Nirvana', 5, 'XL', 'è una maglia dei Nirvana  serve davvero altro', 'Rock', 12.5, 22),
     ( 'Giacca di pelle', 4.5, 'L', 'Giacca nera in vera pelle', 'Rock', 90, 22),
     ( 'Stivali borchiati', 4.8, '42', 'Stivali con borchie metalliche', 'Goth', 72.72, 22);
 
