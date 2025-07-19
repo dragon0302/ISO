@@ -46,7 +46,7 @@
       </div> <!-- fine top-header -->
     </header>
 
-    <form action="${pageContext.request.contextPath}/AddPayment" method="GET">
+    <form class="AggMP" action="${pageContext.request.contextPath}/AddPayment" method="GET">
 
       <%--@declare id="NumeroCarta"--%>
       <%--@declare id="DataScadenza"--%>
