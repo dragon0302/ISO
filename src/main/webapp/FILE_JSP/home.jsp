@@ -1,7 +1,7 @@
  <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="DataManagement.Prodotto" %>
-<%@ page import="DataManagement.Utente" %>
+<%@ page import="Model.Prodotto" %>
+<%@ page import="Model.Utente" %>
 
 <%
     // Recupero l'utente loggato dalla sessione

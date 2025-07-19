@@ -7,10 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="DataManagement.Prodotto" %>
+<%@ page import="Model.Prodotto" %>
 <%@ page import="com.mysql.cj.Session" %>
-<%@ page import="DataManagement.Utente" %>
-<%@ page import="DataManagement.Ordine" %>
+<%@ page import="Model.Utente" %>
+<%@ page import="Model.Ordine" %>
 <%@ page import="java.util.ArrayList" %>
 <%
     // Recupero l'utente loggato dalla sessione
