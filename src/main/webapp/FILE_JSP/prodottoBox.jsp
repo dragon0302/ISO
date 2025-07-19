@@ -1,4 +1,4 @@
-<%@ page import="DataManagement.Prodotto" %>
+<%@ page import="Model.Prodotto" %>
 <%@ page import="java.util.List" %>
 
 <%
