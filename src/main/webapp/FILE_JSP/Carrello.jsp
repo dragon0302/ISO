@@ -47,6 +47,7 @@
             ArrayList<Prodotto> prodotti = (ArrayList<Prodotto>) session.getAttribute("carrello");
             ArrayList<Integer> quantita = (ArrayList<Integer>) session.getAttribute("Quantità");
             Float prezzotatale = (Float) session.getAttribute("prezzotatale");
+            Float spesespedizione = (Float) session.getAttribute("spesespedizione");
 
             //Visualizza la barra orizzontale per ogni prodotto -->
             if (prodotti != null){
@@ -70,11 +71,6 @@
         </div>
             <%  }
                 %>
-
-            <div>
-                <div class="PT">Prezzo Totale</div>
-                <div id="prezzo-totale" class="prezzo-totale"><%= prezzotatale%> </div>
-            </div>
         <%}%>
 
             </div>
@@ -82,13 +78,29 @@
 
         <div class="box-acquista">
             <form action="${pageContext.request.contextPath}/CheckUtente" method="post">
-                <button type="submit" class="btn-aggiungi">
-                    Vai al pagamento
-                </button>
+                <div class="spese-spedizione">
+                    Spese di spedizione: € <%= spesespedizione%>
+                </div>
+                <div class="prezzo-totale">
+                    Prezzo Totale: <%= prezzotatale%>
+                </div>
+                <div>
+                    .
+                </div>
+                <div style="text-align: center;">
+                    <button type="submit" class="btn-aggiungi">
+                        Vai al pagamento
+                    </button>
+                    <div>
+                        .
+                    </div>
+                </div>
+                <div class="info-text">
+                    Effettuando l'ordine, accetti i Termini e le Condizioni.
+                </div>
             </form>
         </div>
     </div>
-
 <div class="footer-bar">
     <a href="${pageContext.request.contextPath}/FILE_JSP/About_Us.jsp" class="btn-link">About Us</a>
     <a href="${pageContext.request.contextPath}/FILE_JSP/Contattaci.jsp" class="btn-link">Contattaci</a>

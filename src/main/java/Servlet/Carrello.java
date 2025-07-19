@@ -33,7 +33,7 @@ public class Carrello extends HttpServlet {
       List<String> ids = new ArrayList<>();
       Prodotto prodotto = null;
       Float prezzototale = null;
-
+      Float spesespedizione =7F;
 
 
       if (utente == null) {
@@ -121,10 +121,13 @@ public class Carrello extends HttpServlet {
 
       }
 
+      if (prezzototale != 0.0F) {
+        prezzototale+=spesespedizione;
+      }
       session.setAttribute("carrello", carrello);
       session.setAttribute("Quantità", Nquantita);
       session.setAttribute("prezzotatale", prezzototale);
-
+      session.setAttribute("spesespedizione", spesespedizione);
       response.sendRedirect("FILE_JSP/Carrello.jsp");
 
     }catch (Exception e) {
