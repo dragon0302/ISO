@@ -1,5 +1,5 @@
 <%@ page import="DataManagement.Utente" %>
-<a class="btn card-btn" href=${pageContext.request.contextPath}/"carrello">Carrello</a>
+<a class="btn card-btn" href=${pageContext.request.contextPath}/carrello>Carrello</a>
 
 <div id="userContainer">
 <%--  <span class="username" onclick="toggleUserMenu()">--%>
