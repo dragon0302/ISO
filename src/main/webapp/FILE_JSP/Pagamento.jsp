@@ -7,9 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="DataManagement.Prodotto" %>
+<%@ page import="Model.Prodotto" %>
 <%@ page import="com.mysql.cj.Session" %>
-<%@ page import="DataManagement.Utente" %>
+<%@ page import="Model.Utente" %>
+<%@ page import="Model.Indirizzo" %>
 <%
   // Recupero l'utente loggato dalla sessione
   Utente utente = (Utente) session.getAttribute("utente");
@@ -65,6 +66,44 @@
     <img src="https://img.icons8.com/color/48/discover.png" alt="Discover" title="Discover">
     <img src="https://img.icons8.com/color/48/apple-pay.png" alt="Apple Pay" title="Apple Pay">
     <img src="https://img.icons8.com/color/48/google-pay.png" alt="Google Pay" title="Google Pay">
+  </div>
+
+  <label>
+    <input type="checkbox" name="Fatturazione" value="Accetta">
+    Vuoi usare l'indirizzo di fatturazione per la consegna?
+  </label>
+
+  <div class="settings-section">
+    <h2>Impostazioni Account</h2>
+
+    <!-- Modifica dati account -->
+    <h3>Modifica nome o e-mail:</h3>
+    <a href="${pageContext.request.contextPath}/FILE_JSP/Profilo.jsp" class="button-link">Modifica</a>
+
+    <!-- Indirizzo di fatturazione -->
+
+    <%
+      List<Indirizzo> indirizzi = (List<Indirizzo>) request.getAttribute("listaIndirizzi");
+    %>
+
+
+    <label for="indirizzo">Indirizzo di fatturazione:</label>
+    <select id="indirizzo" name="indirizzo" required onchange="selectFatturazione(this)">
+      <option value="">-- Seleziona un indirizzo --</option>
+
+      <%
+        if(indirizzi != null){
+          for (Indirizzo i : indirizzi){
+      %>
+
+      <option value="<%= i.getID_Indirizzo()%>">
+        <%= i.getCap()%> <%= i.getCittà()%> <%= i.getCivico()%> <%= i.getVia()%>
+      </option>
+      <%
+          }
+        }
+      %>
+    </select>
   </div>
 
   <%
