@@ -1,6 +1,6 @@
-package DataManagement.Fatturazione;
+package Model.Fatturazione;
 
-import DataManagement.*;
+import Model.*;
 import com.itextpdf.io.font.PdfEncodings;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
@@ -205,7 +205,7 @@ public class Fattura {
         document.setMargins(20, 20, 20, 20);
 
         try {
-            String imagePath = "src/main/java/DataManagement/Fatturazione/isologo.png";
+            String imagePath = "src/main/java/Model/Fatturazione/isologo.png";
             ImageData imageData = ImageDataFactory.create(imagePath);
             Image logo = new Image(imageData).scaleToFit(200, 200);
             document.add(logo);
@@ -219,13 +219,13 @@ public class Fattura {
                 .setMarginBottom(20));
 
         // Dati cliente
-        document.add(new Paragraph(titolo_fattuarazione));
-//        document.add(new Paragraph(f.getNomeFatturato() +" " + f.getCognomeFatturato() + "\n" + f.getViaFatturato() + " " + f.getCAP_Fatturato() + " " + f.getCittàFatturato() + " " + f.getProvinciaFatturato() + "\n" + f.getCF_fatturato())
-//                .setFontSize(10)
-//                .setMarginBottom(20));
+//        document.add(new Paragraph(titolo_fattuarazione));
+//        Document add = document.add(new Paragraph(this.nomeFatturato + " " + this.cognomeFatturato + "\n" + f.getViaFatturato() + " " + f.getCAP_Fatturato() + " " + f.getCittàFatturato() + " " + f.getProvinciaFatturato() + "\n" + f.getCF_fatturato())
+//                        .setFontSize(10)
+//               .setMarginBottom(20));
 
-        // Tabella dei prodotti/servizi
-        float[] columnWidths = {4, 1, 2, 2}; // Descrizione, Quantità, Prezzo Unitario, Totale
+                // Tabella dei prodotti/servizi
+                ; float[] columnWidths = {4, 1, 2, 2}; // Descrizione, Quantità, Prezzo Unitario, Totale
         Table table = new Table(UnitValue.createPercentArray(columnWidths)).useAllAvailableWidth();
         table.addHeaderCell("Descrizione");
         table.addHeaderCell("Q.tà");
