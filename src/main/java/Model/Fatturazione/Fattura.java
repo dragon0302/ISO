@@ -1,6 +1,6 @@
-package DataManagement.Fatturazione;
+package Model.Fatturazione;
 
-import DataManagement.*;
+import Model.*;
 import com.itextpdf.io.font.PdfEncodings;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
@@ -205,7 +205,7 @@ public class Fattura {
         document.setMargins(20, 20, 20, 20);
 
         try {
-            String imagePath = "src/main/java/DataManagement/Fatturazione/isologo.png";
+            String imagePath = "src/main/java/Model/Fatturazione/isologo.png";
             ImageData imageData = ImageDataFactory.create(imagePath);
             Image logo = new Image(imageData).scaleToFit(200, 200);
             document.add(logo);

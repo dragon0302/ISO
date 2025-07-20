@@ -21,11 +21,10 @@ public class Impostazzioni extends HttpServlet {
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response){
 
-    HttpSession session = request.getSession();
-    Utente utente = (Utente) session.getAttribute("utente");;
-
     try {
 
+      HttpSession session = request.getSession();
+      Utente utente = (Utente) session.getAttribute("utente");
       List<MetodoPagamento> metodiPagamento = metodoPagamentoDAO.getMetodiPagamento(utente.getCf());
       request.setAttribute("metodiPagamento", metodiPagamento);
       List<Indirizzo> indirizzi = indirizzoDAO.getIndirizzo(utente.getCf());
