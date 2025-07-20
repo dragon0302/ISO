@@ -65,5 +65,5 @@ CREATE TABLE ordine(
    ID_carrello int,
    ID_indirizzo int,
    foreign key (ID_carrello) references carrello (ID_carrello) ON DELETE CASCADE ON UPDATE CASCADE,
-   foreign key (ID_indirizzo) references indirizzo (ID_indirizzo) ON DELETE CASCADE ON UPDATE CASCADE,
+   foreign key (ID_indirizzo) references indirizzo (ID_indirizzo) ON DELETE CASCADE ON UPDATE CASCADE
 );

@@ -7,15 +7,13 @@ public class Ordine {
     String prodotti;
     Integer ID_carrello;
     Integer ID_indirizzo;
-    String Numerocarta;
 
-    public Ordine(java.sql.Date data_ordine, Float totale, String prodotti, Integer ID_carrello,Integer ID_indirizzo, String Numerocarta) {
+    public Ordine(java.sql.Date data_ordine, Float totale, String prodotti, Integer ID_carrello,Integer ID_indirizzo) {
         this.data_ordine = data_ordine;
         this.totale = totale;
         this.prodotti = prodotti;
         this.ID_carrello = ID_carrello;
         this.ID_indirizzo = ID_indirizzo;
-        this.Numerocarta = Numerocarta;
     }
 
     public Integer getIdOrdine() {return idOrdine;}
@@ -35,13 +33,5 @@ public class Ordine {
 
     public void setID_indirizzo(Integer ID_indirizzo) {
         this.ID_indirizzo = ID_indirizzo;
-    }
-
-    public String getNumerocarta() {
-        return Numerocarta;
-    }
-
-    public void setNumerocarta(String numerocarta) {
-        Numerocarta = numerocarta;
     }
 }
