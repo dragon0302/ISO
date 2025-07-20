@@ -52,15 +52,6 @@ CREATE TABLE metodoPagamento(
     foreign key (CF_utente) references Utente (CF) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE ordine(
-   ID_ordine integer  primary key NOT NULL auto_increment,
-   Data_ordine DATE not null,
-   Prezzo_tot float not null check ( Prezzo_tot > 0 ),
-   Lista_prodotti varchar(500),
-   ID_carrello int,
-   foreign key (ID_carrello) references carrello (ID_carrello) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
 CREATE TABLE indirizzo (
    ID_indirizzo INT PRIMARY KEY NOT NULL auto_increment,
    città VARCHAR(50) NOT NULL,
@@ -74,4 +65,17 @@ CREATE TABLE indirizzo (
    Fatturazione TINYINT(1) DEFAULT 0 NOT NULL,
    CF_utente CHAR(16),
    foreign key (CF_utente) references Utente (CF) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE ordine(
+   ID_ordine integer  primary key NOT NULL auto_increment,
+   Data_ordine DATE not null,
+   Prezzo_tot float not null check ( Prezzo_tot > 0 ),
+   Lista_prodotti varchar(500),
+   ID_carrello int,
+   ID_indirizzo int,
+   NumeroCarta VARCHAR(16),
+   foreign key (ID_carrello) references carrello (ID_carrello) ON DELETE CASCADE ON UPDATE CASCADE,
+   foreign key (ID_indirizzo) references indirizzo (ID_indirizzo) ON DELETE CASCADE ON UPDATE CASCADE,
+   foreign key (NumeroCarta) references metodoPagamento (NumeroCarta) ON DELETE CASCADE ON UPDATE CASCADE
 );

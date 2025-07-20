@@ -48,7 +48,7 @@ public class selectDefault extends HttpServlet {
 
     }
 
-    response.sendRedirect(request.getContextPath() + "/Impostazioni");
+    response.sendRedirect(request.getContextPath() + "/Impostazioni.jsp");
 
   }
 
