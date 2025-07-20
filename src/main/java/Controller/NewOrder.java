@@ -29,6 +29,8 @@ public class NewOrder extends HttpServlet {
             List<Prodotto> prodotti = (List<Prodotto>) session.getAttribute("carrello");
             float PrezzoTotale = (float) session.getAttribute("prezzotatale");
             Utente utente = (Utente) session.getAttribute("utente");
+            Integer ID_indirizzo = (Integer) session.getAttribute("ID_indirizzo");
+            String Numerocarta = (String) session.getAttribute("Numerocarta");
 
             for (Prodotto prodotto : prodotti) {
 
@@ -38,8 +40,9 @@ public class NewOrder extends HttpServlet {
                     idProdotti += prodotto.getId_prodotto() + ",";
                 }
             }
+            System.out.println("prova");
 
-            Ordine ordine = new Ordine(Date.valueOf(LocalDate.now()),PrezzoTotale,idProdotti,carrelloDAO.GetIdCarrello(utente.getCf()));
+            Ordine ordine = new Ordine(Date.valueOf(LocalDate.now()),PrezzoTotale,idProdotti,carrelloDAO.GetIdCarrello(utente.getCf()),ID_indirizzo,Numerocarta);
             ordineDAO.DoSave(ordine);
 
             response.sendRedirect("Catalogo");

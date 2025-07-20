@@ -26,11 +26,13 @@ public class OrdineDAOImplement implements OrdineDAO {
         PreparedStatement query = null;
         try {
             conn = ds.getConnection();
-            query = conn.prepareStatement("INSERT INTO " + TABLE_NAME + "(Data_Ordine,Prezzo_tot,Lista_prodotti,ID_carrello)" + " VALUES (?,?,?,?)");
+            query = conn.prepareStatement("INSERT INTO " + TABLE_NAME + "(Data_Ordine,Prezzo_tot,Lista_prodotti,ID_carrello,ID_indirizzo,NumeroCarta)" + " VALUES (?,?,?,?,?,?)");
             query.setDate(1, ordine.getData_ordine());
             query.setFloat(2, ordine.getTotale());
             query.setString(3, ordine.getProdotti());
             query.setInt(4, ordine.getID_carrello());
+            query.setInt(5, ordine.getID_indirizzo());
+            query.setString(6,ordine.getNumerocarta());
             query.executeUpdate();
         } catch (Exception e) {
             System.out.println("Naming Exeption: " + e.getMessage());
@@ -61,7 +63,9 @@ public class OrdineDAOImplement implements OrdineDAO {
                 Float prezzo = rs.getFloat(3);
                 String prodotti = rs.getString(4);
                 Integer id_carrello = rs.getInt(5);
-                Ordine o = new Ordine(data_ordine,prezzo,prodotti,id_carrello);
+                Integer id_indirizzo = rs.getInt(6);
+                String Numerocarta = rs.getString(7);
+                Ordine o = new Ordine(data_ordine,prezzo,prodotti,id_carrello,id_indirizzo,Numerocarta);
                 o.setID_carrello(id_ordine);
                 l.add(o);
             }
@@ -87,7 +91,9 @@ public class OrdineDAOImplement implements OrdineDAO {
                 Float prezzo = rs.getFloat(3);
                 String prodotti = rs.getString(4);
                 Integer id_carrello = rs.getInt(5);
-                Ordine o = new Ordine(data_ordine,prezzo,prodotti,id_carrello);
+                Integer id_indirizzo = rs.getInt(6);
+                String Numerocarta = rs.getString(7);
+                Ordine o = new Ordine(data_ordine,prezzo,prodotti,id_carrello,id_indirizzo,Numerocarta);
                 o.setIdOrdine(id_ordine);
                 l.add(o);
             }
@@ -118,9 +124,11 @@ public class OrdineDAOImplement implements OrdineDAO {
                 Float prezzo = rs.getFloat(3);
                 String prodotti = rs.getString(4);
                 Integer id_carrello = rs.getInt(5);
-                Ordine ordine = new Ordine(DataOrdine,prezzo,prodotti,id_carrello);
-                ordine.setIdOrdine(id_ordine);
-                ordini.add(ordine);
+                Integer id_indirizzo = rs.getInt(6);
+                String Numerocarta = rs.getString(7);
+                Ordine o = new Ordine(DataOrdine,prezzo,prodotti,id_carrello,id_indirizzo,Numerocarta);
+                o.setIdOrdine(id_ordine);
+                ordini.add(o);
             }
 
         }catch (Exception e) {
