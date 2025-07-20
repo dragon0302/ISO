@@ -19,7 +19,7 @@ public class CheckUtente extends HttpServlet {
             if (utente == null) {
                 response.sendRedirect("FILE_JSP/Log_in.jsp");
             }else{
-                response.sendRedirect("FILE_JSP/Pagamento.jsp");
+                response.sendRedirect(request.getContextPath() + "/Payment");
             }
         }catch (Exception e){
             e.printStackTrace();

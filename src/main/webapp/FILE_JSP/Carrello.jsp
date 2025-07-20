@@ -75,7 +75,7 @@
 
             </div>
 
-        <%if (prodotti.isEmpty()){%>
+<%--        <%if (prodotti.isEmpty()){%>--%>
         <div class="box-acquista">
             <form action="${pageContext.request.contextPath}/CheckUtente" method="post">
                 <div class="spese-spedizione">
@@ -88,9 +88,9 @@
                     .
                 </div>
                 <div style="text-align: center;">
-                    <button type="submit" class="btn-aggiungi">
-                        Vai al pagamento
-                    </button>
+                        <button type="submit" class="btn-aggiungi">
+                            Vai al pagamento
+                        </button>
                     <div>
                         .
                     </div>
@@ -100,7 +100,7 @@
                 </div>
             </form>
         </div>
-    <%}%>
+<%--    <%}%>--%>
     </div>
 <div class="footer-bar">
     <a href="${pageContext.request.contextPath}/FILE_JSP/About_Us.jsp" class="btn-link">About Us</a>
