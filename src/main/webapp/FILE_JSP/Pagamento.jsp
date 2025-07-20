@@ -11,7 +11,6 @@
 <%@ page import="com.mysql.cj.Session" %>
 <%@ page import="Model.Utente" %>
 <%@ page import="Model.Indirizzo" %>
-<%@ page import="Model.MetodoPagamento" %>
 <%
   // Recupero l'utente loggato dalla sessione
   Utente utente = (Utente) session.getAttribute("utente");
@@ -94,26 +93,6 @@
           }
         }
       %>
-<%--    </select>--%>
-
-<%--    <label for="indirizzo">Metodo Pagamento:</label>--%>
-<%--    <select name="metodoPagamentoId" required onchange="SelezionaMetodoPagamento(this)">--%>
-<%--      <option value="">--- Seleziona un metodo ---</option>--%>
-<%--      <%--%>
-<%--        List<MetodoPagamento> metodi = (List<MetodoPagamento>) request.getAttribute("metodiPagamento");--%>
-<%--        if(metodi != null){--%>
-<%--          for(MetodoPagamento m : metodi){--%>
-<%--      %>--%>
-
-<%--      <option value="<%= m.getNumerocarta()%>">--%>
-<%--        **** **** **** <%=m.getUltime4Cifre()%> (scadenza: <%=m.getDataScadenza()%>) (Tipo: <%=m.getTipo()%>)--%>
-<%--      </option>--%>
-
-<%--      <%--%>
-<%--          }--%>
-<%--        }--%>
-<%--      %>--%>
-<%--    </select>--%>
   </div>
 
   <%
@@ -150,27 +129,6 @@
     }
 
 </script>
-<%--<script>
-
-  function pagamentoDefault(select){
-    if (select.value){
-      const form = document.createElement('form');
-      form.method = 'POST';
-      form.action = '${pageContext.request.contextPath}/SelectIndirizzo';
-
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = 'MetodoPagamento';
-      input.value = select.value;
-
-      form.appendChild(input);
-      document.body.appendChild(form);
-      form.submit();
-    }
-  }
-
-</script>--%>
-
 
 <div class="footer-bar">
   <a href="${pageContext.request.contextPath}/FILE_JSP/About_Us.jsp" class="btn-link">About Us</a>

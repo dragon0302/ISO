@@ -16,12 +16,6 @@ VALUES
     ( 'Giacca di pelle', 'L', 'Giacca nera in vera pelle', 'Rock', 90, 22),
     ( 'Stivali borchiati', '42', 'Stivali con borchie metalliche', 'Goth', 72.72, 22);
 
-INSERT INTO metodoPagamento (CF_Utente, NumeroCarta, DataScadenza, CVV, Tipo, Default_pagamento)
-VALUES
-    ('DRKPTR70M26A345S', '4539148803436467', '2025-05-01', 777, 'Prepagata', 0),
-    ('RSSMRA85P12F205Z', '5312345678901234', '2026-07-15', 123, 'Credito', 1),
-    ('BNCLRA90T15C789Y', '3714496353984310', '2027-09-23', 456, 'Debito', 0);
-
 INSERT INTO indirizzo (CF_Utente, città, Provincia, CAP, Via, Civico, Indirizzo2, Note, Fatturazione)
 VALUES
     ('RSSMRA85P12F205Z', 'Roma', 'RM', '00185', 'Via dei Fori Imperiali', '10', 'Interno 3', 'Suonare Rossi', 1),

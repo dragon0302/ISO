@@ -16,21 +16,10 @@ public class SelectIndirizzo extends HttpServlet {
 
     HttpSession session = request.getSession();
     Integer Indirizzo = null;
-//    Integer metodoPagamento = null;
-
-//    if (request.getParameter("MetodoPagamento") != null) {
-//      metodoPagamento = Integer.parseInt(request.getParameter("MetodoPagamento"));
-//    }
 
     if (request.getParameter("indirizzoConsegnia") != null) {
       Indirizzo = Integer.parseInt(request.getParameter("indirizzoConsegnia"));
     }
-
-//    if (metodoPagamento != null) {
-//
-//      session.setAttribute("ID_pagamento", metodoPagamento);
-//
-//    }
 
     if (Indirizzo != null) {
 

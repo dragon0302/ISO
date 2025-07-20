@@ -15,7 +15,6 @@ import java.sql.SQLException;
 public class selectDefault extends HttpServlet {
 
   IndirizzoDAO indirizzoDAO = new IndirizzoDAOImplement();
-  MetodoPagamentoDAO metodoPagamentoDAO = new MetodoPagamentoDAOImplement();
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -31,17 +30,6 @@ public class selectDefault extends HttpServlet {
 
       try {
         indirizzoDAO.setDefaultIndirizzo(indirizzoFatturazione, utente.getCf());
-      } catch (SQLException e) {
-        throw new RuntimeException(e);
-      }
-
-    }
-
-    if(pagamentoDefault != null){
-      System.out.println(pagamentoDefault);
-
-      try {
-        metodoPagamentoDAO.setPagamentoDefault(pagamentoDefault, utente.getCf());
       } catch (SQLException e) {
         throw new RuntimeException(e);
       }

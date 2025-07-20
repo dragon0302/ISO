@@ -7,9 +7,6 @@ VALUES (?,?);
 INSERT INTO prodotto (ID_prodotto, Nome, Taglia, Descrizione, Categoria)
 VALUES (?,?,?,?,?,?);
 
-INSERT INTO metodoPagamento (CF_Utente, NumeroCarta, DataScadenza, CVV, Tipo, Default_pagamento)
-VALUES (?,?,?,?,?,?);
-
 INSERT INTO ordine (ID_ordine, Data_ordine, Prezzo_tot, ID_carrello)
 VALUES (?,?,?,?);
 

@@ -42,16 +42,6 @@ CREATE TABLE acquisto(
     FOREIGN KEY (ID_Prodotto) references prodotto(ID_prodotto) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE metodoPagamento(
-    NumeroCarta VARCHAR(16) PRIMARY KEY NOT NULL,
-    DataScadenza date NOT NULL,
-    CVV INT NOT NULL check ( CVV >= 100 && CVV < 1000 ),
-    Tipo VARCHAR(20) NOT NULL,
-    Default_pagamento BOOLEAN NOT NULL,
-    CF_utente CHAR(16),
-    foreign key (CF_utente) references Utente (CF) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
 CREATE TABLE indirizzo (
    ID_indirizzo INT PRIMARY KEY NOT NULL auto_increment,
    città VARCHAR(50) NOT NULL,
@@ -74,8 +64,6 @@ CREATE TABLE ordine(
    Lista_prodotti varchar(500),
    ID_carrello int,
    ID_indirizzo int,
-   NumeroCarta VARCHAR(16),
    foreign key (ID_carrello) references carrello (ID_carrello) ON DELETE CASCADE ON UPDATE CASCADE,
    foreign key (ID_indirizzo) references indirizzo (ID_indirizzo) ON DELETE CASCADE ON UPDATE CASCADE,
-   foreign key (NumeroCarta) references metodoPagamento (NumeroCarta) ON DELETE CASCADE ON UPDATE CASCADE
 );

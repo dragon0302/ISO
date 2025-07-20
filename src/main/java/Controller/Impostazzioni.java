@@ -16,7 +16,6 @@ import java.util.List;
 @WebServlet("/Impostazioni")
 public class Impostazzioni extends HttpServlet {
 
-  MetodoPagamentoDAO metodoPagamentoDAO = new MetodoPagamentoDAOImplement();
   IndirizzoDAO indirizzoDAO = new IndirizzoDAOImplement();
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response){
@@ -25,8 +24,6 @@ public class Impostazzioni extends HttpServlet {
 
       HttpSession session = request.getSession();
       Utente utente = (Utente) session.getAttribute("utente");
-      List<MetodoPagamento> metodiPagamento = metodoPagamentoDAO.getMetodiPagamento(utente.getCf());
-      request.setAttribute("metodiPagamento", metodiPagamento);
       List<Indirizzo> indirizzi = indirizzoDAO.getIndirizzo(utente.getCf());
 
       request.setAttribute("listaIndirizzi", indirizzi);
