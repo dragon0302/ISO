@@ -296,4 +296,45 @@ public class OrdineDAOImplement implements OrdineDAO {
             }
         }
     }
+
+    public List<Prodotto> getProdottiByUser(int ID_carrello) throws SQLException{
+
+        Connection conn = null;
+        PreparedStatement query9 = null;
+        List<Prodotto> prodotti = new ArrayList<>();
+        ProdottoDAO prodottoDAO = new ProdottoDAOImplement();
+
+        try {
+            conn = ds.getConnection();
+            query9 = conn.prepareStatement("SELECT Lista_prodotti FROM " + TABLE_NAME + " WHERE ID_carrello = ?");
+
+            query9.setInt(1, ID_carrello);
+            ResultSet rs = query9.executeQuery();
+
+            while (rs.next()) {
+                String[] liste = new String[]{rs.getString(1)};
+                String[] listep = liste[0].split(",");
+                for (String p : listep) {
+
+                    if (prodotti.contains(prodottoDAO.getProdottoByID(Integer.parseInt(p)))){
+                        continue;
+                    }
+
+                    prodotti.add(prodottoDAO.getProdottoByID(Integer.parseInt(p)));
+                }
+            }
+
+        }finally {
+            try {
+                if (query9 != null) {
+                    query9.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+        return prodotti;
+    }
 }

@@ -132,7 +132,7 @@
                     <h2>Pulsanti amministratore</h2>
 
                     <!-- cerca per nome utente -->
-                    <form action="cerca_per_nome_utente" method="POST" class="settings-option">
+                    <form action="Showproduct" method="POST" class="settings-option">
                         <label for="nomeUtente">Cerca Utente: </label>
                         <input type="text" id="nomeUtente" name="nomeUtente" placeholder="Inserisci nome utente" required>
                         <button type="submit">Cerca</button>
