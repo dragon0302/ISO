@@ -11,5 +11,6 @@ public interface CarrelloDAO {
     public Integer GetIdCarrello(String CF) throws SQLException;
     public Boolean CeckProdotto(int idProdotto,String CF_utene) throws SQLException;
     public List<String> GetProductCarello(int idcarello) throws SQLException;
+    public void remuveProcductCarello(String idprodotto, String cfUtente) throws SQLException;
 
 }
