@@ -7,4 +7,5 @@ public interface OrdineDAO {
     public ArrayList<Ordine> getOrdersByUser (int ID_carrello) throws SQLException;
     public ArrayList<Ordine> getOrdersByData(java.sql.Date d1, java.sql.Date d2) throws SQLException;
     public ArrayList<Prodotto> getProdotti(int IdOrdine) throws SQLException;
+//    public int getIdIndirizzo(int IdOrdine) throws SQLException;
 }
