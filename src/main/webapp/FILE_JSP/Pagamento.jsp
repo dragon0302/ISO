@@ -16,126 +16,126 @@
   Utente utente = (Utente) session.getAttribute("utente");
 %>
 <!DOCTYPE html>
-<html lang="it">
-<head>
-  <meta charset="UTF-8">
-  <title>Pagamento</title>
+  <html lang="it">
+  <head>
+    <meta charset="UTF-8">
+    <title>Pagamento</title>
 
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/sfondo.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/Pagamento.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/sfondo.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/FILE_CSS/Pagamento.css">
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pagamento</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pagamento</title>
 
-<body>
+  <body>
 
-<script src="${pageContext.request.contextPath}/Javascript/Passweor_error.js"></script>
-<script src="${pageContext.request.contextPath}/Javascript/CatalogFilter.js"></script>
-<script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
-<script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
+    <script src="${pageContext.request.contextPath}/Javascript/Passweor_error.js"></script>
+    <script src="${pageContext.request.contextPath}/Javascript/CatalogFilter.js"></script>
+    <script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
+    <script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
 
-<header>
-  <div class="top-header">
-    <div>
+    <header>
+      <div class="top-header">
+        <div>
+          <%
+            if(utente == null){
+              request.setAttribute("isAmministratore", null);
+            }else{
+              request.setAttribute("isAmministratore", utente.isAmministratore());
+            }
+          %>
+          <jsp:include page="/FILE_JSP/header.jsp" />
+        </div>
+      </div> <!-- fine top-header -->
+    </header>
+
+    <main>
+      <h2>Conferma il pagamento</h2>
+      <p>Seleziona un metodo di pagamento tra quelli disponibili.</p>
+
+      <div class="payment-methods">
+        <form action="${pageContext.request.contextPath}/PaymentAutorization" method="post">
+          <button>
+            <img src="https://img.icons8.com/color/48/paypal.png" alt="PayPal" title="PayPal">
+          </button>
+        </form>
+        <img src="https://img.icons8.com/color/48/visa.png" alt="Visa" title="Visa">
+        <img src="https://img.icons8.com/color/48/mastercard.png" alt="MasterCard" title="MasterCard">
+        <img src="https://img.icons8.com/color/48/amex.png" alt="American Express" title="American Express">
+        <img src="https://img.icons8.com/color/48/discover.png" alt="Discover" title="Discover">
+        <img src="https://img.icons8.com/color/48/apple-pay.png" alt="Apple Pay" title="Apple Pay">
+        <img src="https://img.icons8.com/color/48/google-pay.png" alt="Google Pay" title="Google Pay">
+      </div>
+
+      <div class="select-ardress">
+
+        <h2>Selezziona indirizzo</h2>
+
+        <%
+          List<Indirizzo> indirizzi = (List<Indirizzo>) request.getAttribute("listaIndirizzi");
+        %>
+
+
+        <label for="indirizzo">Indirizzo consegnia:</label>
+        <select id="indirizzo" name="indirizzo" required onchange="SelectIndirizzo(this)">
+          <option value="">-- Seleziona un indirizzo --</option>
+
+          <%
+            if(indirizzi != null){
+              for (Indirizzo i : indirizzi){
+          %>
+
+          <option value="<%= i.getID_Indirizzo()%>">
+            <%= i.getCap()%> <%= i.getCittà()%> <%= i.getCivico()%> <%= i.getVia()%>
+          </option>
+          <%
+              }
+            }
+          %>
+      </div>
+
       <%
-        if(utente == null){
-          request.setAttribute("isAmministratore", null);
-        }else{
-          request.setAttribute("isAmministratore", utente.isAmministratore());
+        String esito = (String) request.getAttribute("esitoPagamento");
+        if ("successo".equals(esito)) {
+      %>
+      <div class="payment-message success">Pagamento effettuato con successo!</div>
+      <%
+      } else if ("errore".equals(esito)) {
+      %>
+      <div class="payment-message error">Errore durante il pagamento. Riprova.</div>
+      <%
         }
       %>
-      <jsp:include page="/FILE_JSP/header.jsp" />
+    </main>
+
+    <script>
+
+        function SelectIndirizzo(select){
+            if (select.value){
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '${pageContext.request.contextPath}/SelectIndirizzo';
+
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'indirizzoConsegnia';
+                input.value = select.value;
+
+                form.appendChild(input);
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+
+    </script>
+
+    <div class="footer-bar">
+      <a href="${pageContext.request.contextPath}/FILE_JSP/About_Us.jsp" class="btn-link">About Us</a>
+      <a href="${pageContext.request.contextPath}/FILE_JSP/Contattaci.jsp" class="btn-link">Contattaci</a>
+      <a href="${pageContext.request.contextPath}/FILE_JSP/Termini_e_condizioni.jsp" class="btn-link">Termini e condizioni</a>
+      <a href="${pageContext.request.contextPath}/FILE_JSP/Assistenza.jsp" class="btn-link">Assistenza</a>
     </div>
-  </div> <!-- fine top-header -->
-</header>
 
-<main>
-  <h2>Conferma il pagamento</h2>
-  <p>Seleziona un metodo di pagamento tra quelli disponibili.</p>
-
-  <div class="payment-methods">
-    <form action="${pageContext.request.contextPath}/PaymentAutorization" method="post">
-      <button>
-        <img src="https://img.icons8.com/color/48/paypal.png" alt="PayPal" title="PayPal">
-      </button>
-    </form>
-    <img src="https://img.icons8.com/color/48/visa.png" alt="Visa" title="Visa">
-    <img src="https://img.icons8.com/color/48/mastercard.png" alt="MasterCard" title="MasterCard">
-    <img src="https://img.icons8.com/color/48/amex.png" alt="American Express" title="American Express">
-    <img src="https://img.icons8.com/color/48/discover.png" alt="Discover" title="Discover">
-    <img src="https://img.icons8.com/color/48/apple-pay.png" alt="Apple Pay" title="Apple Pay">
-    <img src="https://img.icons8.com/color/48/google-pay.png" alt="Google Pay" title="Google Pay">
-  </div>
-
-  <div class="select-ardress">
-
-    <h2>Selezziona indirizzo</h2>
-
-    <%
-      List<Indirizzo> indirizzi = (List<Indirizzo>) request.getAttribute("listaIndirizzi");
-    %>
-
-
-    <label for="indirizzo">Indirizzo consegnia:</label>
-    <select id="indirizzo" name="indirizzo" required onchange="SelectIndirizzo(this)">
-      <option value="">-- Seleziona un indirizzo --</option>
-
-      <%
-        if(indirizzi != null){
-          for (Indirizzo i : indirizzi){
-      %>
-
-      <option value="<%= i.getID_Indirizzo()%>">
-        <%= i.getCap()%> <%= i.getCittà()%> <%= i.getCivico()%> <%= i.getVia()%>
-      </option>
-      <%
-          }
-        }
-      %>
-  </div>
-
-  <%
-    String esito = (String) request.getAttribute("esitoPagamento");
-    if ("successo".equals(esito)) {
-  %>
-  <div class="payment-message success">Pagamento effettuato con successo!</div>
-  <%
-  } else if ("errore".equals(esito)) {
-  %>
-  <div class="payment-message error">Errore durante il pagamento. Riprova.</div>
-  <%
-    }
-  %>
-</main>
-
-<script>
-
-    function SelectIndirizzo(select){
-        if (select.value){
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = '${pageContext.request.contextPath}/SelectIndirizzo';
-
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'indirizzoConsegnia';
-            input.value = select.value;
-
-            form.appendChild(input);
-            document.body.appendChild(form);
-            form.submit();
-        }
-    }
-
-</script>
-
-<div class="footer-bar">
-  <a href="${pageContext.request.contextPath}/FILE_JSP/About_Us.jsp" class="btn-link">About Us</a>
-  <a href="${pageContext.request.contextPath}/FILE_JSP/Contattaci.jsp" class="btn-link">Contattaci</a>
-  <a href="${pageContext.request.contextPath}/FILE_JSP/Termini_e_condizioni.jsp" class="btn-link">Termini e condizioni</a>
-  <a href="${pageContext.request.contextPath}/FILE_JSP/Assistenza.jsp" class="btn-link">Assistenza</a>
-</div>
-
-</body>
+  </body>
 </html>
