@@ -184,6 +184,55 @@ header {
     list-style: none;
 }
 
+/* Per far apparire il menu quando si passa col mouse sul contenitore (hover) */
+#userContainer:hover #userMenu {
+    display: block;
+}
+
+/* Stile lista dentro il menu */
+#userMenu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#userMenu li {
+    padding: 8px 12px;
+}
+
+#userMenu li:hover {
+    background-color: #f0f0f0;
+}
+
+#userMenu li button {
+    width: 100%;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
+}
+
+/* Pulsante ⋮ posizionato in alto a destra della card prodotto */
+.menu-button {
+    position: absolute;           /* Posiziona il pulsante rispetto al contenitore .box */
+    top: 10px;                   /* Distanza dal bordo superiore */
+    right: 10px;                 /* Distanza dal bordo destro */
+    background: none;            /* Sfondo trasparente */
+    border: none;                /* Nessun bordo */
+    font-size: 20px;             /* Dimensione del carattere */
+    cursor: pointer;             /* Cambia il cursore in mano al passaggio */
+    color: #ccc;                 /* Colore del testo grigio chiaro */
+    padding: 4px 8px;            /* Spaziatura interna */
+    border-radius: 6px;          /* Angoli arrotondati */
+    transition: background-color 0.2s; /* Transizione dolce per hover */
+}
+
+/* Cambio colore di sfondo quando si passa sopra col mouse */
+.menu-button:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Sfondo leggermente più chiaro */
+}
+
 /* TITOLI SEZIONE (es: Novità, Prodotti più acquistati) */
 main h2 {
     font-size: 2rem;
