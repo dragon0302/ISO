@@ -1,5 +1,4 @@
 <%@ page import="Model.Prodotto" %>
-<%@ page import="java.util.List" %>
 
 <%
     Prodotto p = (Prodotto) request.getAttribute("prodotto");

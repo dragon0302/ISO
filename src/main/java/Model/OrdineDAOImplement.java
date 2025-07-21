@@ -6,6 +6,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class OrdineDAOImplement implements OrdineDAO {
@@ -278,9 +279,9 @@ public class OrdineDAOImplement implements OrdineDAO {
             if (rs.next()) {
                 quantity = rs.getString(1);
             }
-            char[] quantities = quantity.toCharArray();
-            for (char c : quantity.toCharArray()) {
-                quantityes.add(Character.getNumericValue(c));
+            String[] quantities = quantity.split(",");
+            for (String c : quantities) {
+                quantityes.add(Integer.valueOf(c));
             }
             return quantityes;
         }finally {
