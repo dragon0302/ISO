@@ -26,11 +26,11 @@ VALUES
     ('DRKPTR70M26A345S', 'L''Aquila', 'AQ', 65342, 'Via vattelappesca', '2', 'A', 'nessuno', 'nessuna', 0);
 
 
-INSERT INTO ordine (Data_ordine, Prezzo_tot, ID_carrello,ID_indirizzo,NumeroCarta)
+INSERT INTO ordine (Data_ordine, Prezzo_tot, ID_carrello,ID_indirizzo)
 VALUES
-    ( '2025-03-31', 2300, 1,1,4539148803436467),
-    ( '2025-04-01', 1500, 2,2,5312345678901234),
-    ( '2025-04-02', 800, 3,3,5312345678901234);
+    ( '2025-03-31', 2300, 1,1),
+    ( '2025-04-01', 1500, 2,2),
+    ( '2025-04-02', 800, 3,3);
 
 INSERT INTO acquisto( CodiceSconto, Quantita, ID_Carello, ID_Prodotto)
 VALUES
