@@ -11,6 +11,7 @@
 <%@ page import="com.mysql.cj.Session" %>
 <%@ page import="Model.Utente" %>
 <%@ page import="Model.Indirizzo" %>
+<%@ page import="java.util.ArrayList" %>
 <%
   // Recupero l'utente loggato dalla sessione
   Utente utente = (Utente) session.getAttribute("utente");
@@ -52,6 +53,41 @@
 
 <main>
   <h2>Conferma il pagamento</h2>
+
+  <div class="box-prodotti">
+    <%
+      // Recupera i prodotti dal database
+      ArrayList<Prodotto> prodotti = (ArrayList<Prodotto>) session.getAttribute("carrello");
+      ArrayList<Integer> quantita = (ArrayList<Integer>) session.getAttribute("Quantità");
+      Float prezzotatale = (Float) session.getAttribute("prezzotatale");
+      Float spesespedizione = (Float) session.getAttribute("spesespedizione");
+
+      //Visualizza la barra orizzontale per ogni prodotto -->
+      if (prodotti != null){
+        for (int i = 0; i < prodotti.size(); i++) {
+    %>
+    <div class="product-bar">
+      <!-- Immagine -->
+      <!--img src="<//%= prodotto.getImmagine() %>" alt="Immagine prodotto"-->
+
+      <!-- Descrizione -->
+      <div class="descrizione">
+        <%= prodotti.get(i).getDescrizione() %>
+      </div>
+
+      <!-- Prezzo e quantità -->
+      <div class="prezzo-quantita">
+        <div class="prezzo">€ <%= prodotti.get(i).getPrezzo() %></div>
+        <lab for="numero">Scegli un numero:</lab>
+        <input onchange="aggiornaQuantita(<%= prodotti.get(i).getId_prodotto()%>,this,<%= prodotti.get(i).getPrezzo()%>)" type="number" id="numero" name="numero" min="0" max="100" step="1" value= <%= quantita.get(i) %>>
+      </div>
+    </div>
+    <%  }
+    %>
+    <%}%>
+
+  </div>
+
   <p>Seleziona un metodo di pagamento tra quelli disponibili.</p>
 
   <div class="payment-methods">
