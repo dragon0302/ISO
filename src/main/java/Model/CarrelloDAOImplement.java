@@ -263,4 +263,33 @@ public class CarrelloDAOImplement implements CarrelloDAO {
 
     }
 
+    public void remouveProduct(int idCarrello) throws SQLException{
+
+        Connection conn = null;
+        PreparedStatement query7 = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query7 = conn.prepareStatement("UPDATE " + TABLE_NAME + " SET Lista_prodotti = '' WHERE ID_carrello = ?");
+
+            query7.setInt(1,idCarrello);
+            query7.execute();
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (query7 != null) {
+                    query7.close();
+                }
+            }finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+
+    }
+
 }

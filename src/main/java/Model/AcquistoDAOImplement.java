@@ -233,4 +233,44 @@ public class AcquistoDAOImplement implements AcquistoDAO {
 
     }
 
+    public ArrayList<Integer> getAqquistiByUser(int ID_carrello) throws SQLException{
+
+        Connection conn = null;
+        PreparedStatement query7 = null;
+        ArrayList<Integer> IDaqquisti = new ArrayList<>();
+
+        try{
+
+            conn = ds.getConnection();
+            query7 = conn.prepareStatement("select ID_acquisto from " + TABLE_NAME + " where ID_Carello = ?");
+
+            query7.setInt(1, ID_carrello);
+            ResultSet rs = query7.executeQuery();
+
+            while (rs.next()) {
+
+                IDaqquisti.add(rs.getInt(1));
+
+            }
+
+            return IDaqquisti;
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query7 != null) {
+                    query7.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+
+        return IDaqquisti;
+
+    }
+
 }

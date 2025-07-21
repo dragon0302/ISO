@@ -49,7 +49,7 @@ public class NewOrder extends HttpServlet {
 
             for (int id : IDaqquisti) {
 
-                acquistoDAO.remouveAqquisto(id);
+                acquistoDAO.remuveAcquisto(id);
 
             }
 

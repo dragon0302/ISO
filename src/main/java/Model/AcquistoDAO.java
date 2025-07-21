@@ -10,6 +10,7 @@ public interface AcquistoDAO {
     public void UpdateQuantity(int ProdottoID, int IDcarello, char segnio) throws SQLException;
     public Integer GetQuntita(int IDcarello,int ProdottoID) throws SQLException;
     public Integer getIdAcquisto(int IDprodotto, int Idcarello) throws SQLException;
+    public ArrayList<Integer> getAqquistiByUser(int ID_carrello) throws SQLException;
     public void remuveAcquisto(int idAcquisto) throws SQLException;
 
 }
