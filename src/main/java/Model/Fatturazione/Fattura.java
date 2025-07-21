@@ -38,12 +38,13 @@ public class Fattura {
     private String provinciaFatturato;
     private String CAP_Fatturato;
     private String tipoPagamento;
-    private String listaProdotti;
+    private List<Prodotto> listaProdotti;
+    private List<Integer> quantitaProdotti;
     private Date dataFatturazione;
     private StatoFattura statoFattura;
     private StatoPagamento statoPagamento;
 
-    public Fattura(Ordine ordine, Utente utente, Indirizzo indirizzo, StatoFattura statoFattura, StatoPagamento statoPagamento) throws SQLException {
+    public Fattura(Ordine ordine, Utente utente, Indirizzo indirizzo, StatoFattura statoFattura, StatoPagamento statoPagamento, OrdineDAO odao) throws SQLException {
         this.CF_fatturato = utente.getCf();
         this.nomeFatturato = utente.getNome();
         this.cognomeFatturato = utente.getCognome();
@@ -54,9 +55,8 @@ public class Fattura {
         this.cittàFatturato = indirizzo.getCittà();
         this.provinciaFatturato = indirizzo.getProvincia();
         this.CAP_Fatturato = indirizzo.getCap();
-        this.tipoPagamento = "PayPal";
-        this.listaProdotti = ordine.getProdotti();
-        this.dataFatturazione = ordine.getData_ordine();
+        this.listaProdotti = odao.getProdotti(ordine.getIdOrdine());
+        this.quantitaProdotti = odao.getQuantityByID(ordine.getIdOrdine());
         this.statoFattura = statoFattura;
         this.statoPagamento = statoPagamento;
     }
@@ -149,11 +149,11 @@ public class Fattura {
         this.tipoPagamento = tipoPagamento;
     }
 
-    public String getListaProdotti() {
+    public List<Prodotto> getListaProdotti() {
         return listaProdotti;
     }
 
-    public void setListaProdotti(String listaProdotti) {
+    public void setListaProdotti(List<Prodotto> listaProdotti) {
         this.listaProdotti = listaProdotti;
     }
 
@@ -184,7 +184,7 @@ public class Fattura {
     public void CreatePDF() throws IOException {
 
         Float totale = (float) 0;
-        String dest = "fattura.pdf";
+        String dest = "C:\\Users\\vxvit\\Desktop\\fattura.pdf";
         PdfWriter writer = new PdfWriter(dest);
         PdfDocument pdf = new PdfDocument(writer);
         Document document = new Document(pdf, PageSize.A4);
@@ -204,14 +204,14 @@ public class Fattura {
 
         document.setMargins(20, 20, 20, 20);
 
-        try {
-            String imagePath = "src/main/java/Model/Fatturazione/isologo.png";
-            ImageData imageData = ImageDataFactory.create(imagePath);
-            Image logo = new Image(imageData).scaleToFit(200, 200);
-            document.add(logo);
-        } catch (Exception e) {
-            System.out.println("Logo non trovato o non valido.");
-        }
+//        try {
+//            String imagePath = "src/main/webapp/Immagini/isologo.png";
+//            ImageData imageData = ImageDataFactory.create(imagePath);
+//            Image logo = new Image(imageData).scaleToFit(200, 200);
+//            document.add(logo);
+//        } catch (Exception e) {
+//            System.out.println("Logo non trovato o non valido.");
+//        }
 
         document.add(new Paragraph(titolo));
         document.add(new Paragraph("ISO 16 S.r.l.\n Via Giovanni Paolo II 123, 00100 Roma\nP.IVA: 01234567890")
@@ -219,36 +219,55 @@ public class Fattura {
                 .setMarginBottom(20));
 
         // Dati cliente
-//        document.add(new Paragraph(titolo_fattuarazione));
-//        Document add = document.add(new Paragraph(this.nomeFatturato + " " + this.cognomeFatturato + "\n" + f.getViaFatturato() + " " + f.getCAP_Fatturato() + " " + f.getCittàFatturato() + " " + f.getProvinciaFatturato() + "\n" + f.getCF_fatturato())
-//                        .setFontSize(10)
-//               .setMarginBottom(20));
+        document.add(new Paragraph(titolo_fattuarazione));
+        Document add = document.add(new Paragraph(this.nomeFatturato + " " + this.cognomeFatturato + "\n" + getViaFatturato() + " " + getCAP_Fatturato() + " " + getCittàFatturato() + " " + getProvinciaFatturato() + "\n" + getCF_fatturato())
+                .setFontSize(10)
+                .setMarginBottom(20));
 
-                // Tabella dei prodotti/servizi
-                ; float[] columnWidths = {4, 1, 2, 2}; // Descrizione, Quantità, Prezzo Unitario, Totale
+        // Tabella dei prodotti/servizi
+        ;
+        float[] columnWidths = {4, 1, 2, 2}; // Descrizione, Prezzo per Unità, Totale
         Table table = new Table(UnitValue.createPercentArray(columnWidths)).useAllAvailableWidth();
+        table.addHeaderCell("ID");
         table.addHeaderCell("Descrizione");
-        table.addHeaderCell("Q.tà");
-        table.addHeaderCell("Prezzo Unit.");
-        table.addHeaderCell("Totale");
-        while (!listaProdotti.isEmpty()) {
-            Prodotto p;
-            table.addCell("");
-            table.addCell("");
-            table.addCell("");
-            table.addCell("");
-
-            document.add(table);
-
-            document.add(new Paragraph("\nTotale imponibile: € 0,00\nIVA (22%): € 0,00\n**Totale Fattura: € 0,00**")
-                    .setFontSize(12)
-                    .setMarginTop(20));
-
-            document.add(new Paragraph("\nGrazie mille per averci scelto!")
-                    .setFontSize(10));
-
-            document.close();
-            System.out.println("Fattura generata: " + dest);
+        table.addHeaderCell("Prezzo Unitario");
+        table.addHeaderCell("Quantità");
+        table.addHeaderCell("IVA (%)");
+        table.addHeaderCell("Totale (€)");
+        table.addHeaderCell("IVA (€)");
+        table.addHeaderCell("Totale IVA Inclusa (€)");
+        double p_iva,p_prezzototale,p_prezzosenzaiva;
+        double iva = 0,prezzototale = 0,prezzosenzaiva = 0;
+        System.out.println(quantitaProdotti.size());
+        for (int i = 0; i < listaProdotti.size(); i++) {
+            System.out.println("Ciclo:"+ i);
+            Prodotto p = listaProdotti.get(i);
+            int q = quantitaProdotti.get(i);
+            p_iva = (p.getPrezzo()*22/100);
+            p_prezzosenzaiva = (p.getPrezzo()-p_iva);
+            p_prezzototale = (p_prezzosenzaiva * q);
+            iva+=p_iva;
+            prezzosenzaiva+=p_prezzosenzaiva;
+            prezzototale+=p_prezzototale;
+            table.addCell(String.valueOf(p.getId_prodotto())); //id prodotto
+            table.addCell(String.valueOf(p.getDescrizione())); //descrizione
+            table.addCell(String.valueOf(p.getPrezzo())); //prezzo unitario
+            table.addCell(String.valueOf(q)); // quantità
+            table.addCell(String.valueOf(p.getIva())); // IVA (%)
+            table.addCell(String.valueOf(p_prezzosenzaiva)); //TOTALE SENZA IVA
+            table.addCell(String.valueOf(p_iva)); // IVA IN EURO
+            table.addCell(String.valueOf(p_prezzototale)); // TOTALE CON IVA
         }
+        document.add(table);
+
+        document.add(new Paragraph("\nTotale imponibile (€): " + prezzosenzaiva +"\nTotale IVA (€): " + iva + "\n**Totale Fattura (IVA INCLUSA):" + prezzototale )
+                .setFontSize(12)
+                .setMarginTop(20));
+
+        document.add(new Paragraph("\nGrazie mille per averci scelto! **ROCK AND ROLL NEVER DIES!**")
+                .setFontSize(10));
+
+        document.close();
+        System.out.println("Fattura generata: " + dest);
     }
 }

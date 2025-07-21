@@ -4,10 +4,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -149,4 +146,46 @@ public class IndirizzoDAOImplement implements IndirizzoDAO {
         }
 
     }
+
+    public Indirizzo getIndirizzoByID(int ID_Indirizzo) throws SQLException{
+
+        Connection conn = null;
+        PreparedStatement query3 = null;
+        ResultSet resultSet = null;
+        Indirizzo indirizzo = null;
+
+        try {
+            conn = ds.getConnection();
+            query3 = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " where ID_indirizzo = ?");
+            query3.setInt(1,ID_Indirizzo);
+            resultSet = query3.executeQuery();
+            if (resultSet.next()) {
+                int id = resultSet.getInt(1);
+                String citta = resultSet.getString(2);
+                String provincia = resultSet.getString(3);
+                String cap = resultSet.getString(4);
+                String via = resultSet.getString(5);
+                int civico = resultSet.getInt(6);
+                String scala = resultSet.getString(7);
+                String indirizzo2 = resultSet.getString(8);
+                String note = resultSet.getString(9);
+                boolean fatturazione = resultSet.getBoolean(10);
+                String CF_Utente = resultSet.getString(11);
+                indirizzo = new Indirizzo(citta,provincia,cap,via,civico,scala,indirizzo2,note,fatturazione,CF_Utente);
+                indirizzo.setID_Indirizzo(id);
+            }
+            return indirizzo;
+        }finally {
+            try {
+                if (query3 != null) {
+                    query3.close();
+                }
+            }finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+
 }
