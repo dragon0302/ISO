@@ -73,7 +73,8 @@
                     <span>Banner</span>
                 </div>
 
-                <% if(utente != null && utente.isAmministratore()){
+                <%
+                    if(utente != null && utente.isAmministratore()){
                 %>
                 <button class="banner-btn" onclick="openAddProductModal()">+</button>
 
