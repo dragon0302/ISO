@@ -18,6 +18,7 @@ public class NewOrder extends HttpServlet {
 
     OrdineDAO ordineDAO = new OrdineDAOImplement();
     CarrelloDAO carrelloDAO = new CarrelloDAOImplement();
+    AcquistoDAO acquistoDAO = new AcquistoDAOImplement();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -44,7 +45,18 @@ public class NewOrder extends HttpServlet {
             Ordine ordine = new Ordine(Date.valueOf(LocalDate.now()),PrezzoTotale,idProdotti,carrelloDAO.GetIdCarrello(utente.getCf()),ID_indirizzo);
             ordineDAO.DoSave(ordine);
 
+            List<Integer> IDaqquisti = acquistoDAO.getAqquistiByUser(carrelloDAO.GetIdCarrello(utente.getCf()));
+
+            for (int id : IDaqquisti) {
+
+                acquistoDAO.remouveAqquisto(id);
+
+            }
+
+            carrelloDAO.remouveProduct(carrelloDAO.GetIdCarrello(utente.getCf()));
+
             response.sendRedirect("Catalogo");
+
 
         }catch (Exception e) {
             e.printStackTrace();

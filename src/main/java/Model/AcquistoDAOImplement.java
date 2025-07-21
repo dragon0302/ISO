@@ -163,4 +163,73 @@ public class AcquistoDAOImplement implements AcquistoDAO {
         }
         return null;
     }
+
+    public void remouveAqquisto(int idAqquisto) throws SQLException{
+
+        Connection conn = null;
+        PreparedStatement query6 = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query6 = conn.prepareStatement("delete from " + TABLE_NAME + " where ID_acquisto = ?");
+
+            query6.setInt(1, idAqquisto);
+            query6.execute();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query6 != null) {
+                    query6.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+
+    }
+
+    public ArrayList<Integer> getAqquistiByUser(int ID_carrello) throws SQLException{
+
+        Connection conn = null;
+        PreparedStatement query7 = null;
+        ArrayList<Integer> IDaqquisti = new ArrayList<>();
+
+        try{
+
+            conn = ds.getConnection();
+            query7 = conn.prepareStatement("select ID_acquisto from " + TABLE_NAME + " where ID_Carello = ?");
+
+            query7.setInt(1, ID_carrello);
+            ResultSet rs = query7.executeQuery();
+
+            while (rs.next()) {
+
+                IDaqquisti.add(rs.getInt(1));
+
+            }
+
+            return IDaqquisti;
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query7 != null) {
+                    query7.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+
+        return IDaqquisti;
+
+    }
 }
