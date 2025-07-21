@@ -279,8 +279,8 @@ public class OrdineDAOImplement implements OrdineDAO {
                 quantity = rs.getString(1);
             }
             char[] quantities = quantity.toCharArray();
-            for (int c : quantities) {
-                quantityes.add(c);
+            for (char c : quantity.toCharArray()) {
+                quantityes.add(Character.getNumericValue(c));
             }
             return quantityes;
         }finally {
