@@ -188,4 +188,14 @@ public class OrdineDAOImplement implements OrdineDAO {
 
     }
 
+
+    public int getIdIndirizzo(int IdOrdine) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query6 = null;
+        ResultSet rs = null;
+        try{
+            conn = ds.getConnection();
+            query6 = conn.prepareStatement("SELECT  FROM " + TABLE_NAME + " WHERE ID_carrello = ?");
+        }
+    }
 }
