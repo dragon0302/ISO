@@ -2,6 +2,7 @@ package Model;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface AcquistoDAO {
 
@@ -12,5 +13,5 @@ public interface AcquistoDAO {
     public Integer getIdAcquisto(int IDprodotto, int Idcarello) throws SQLException;
     public ArrayList<Integer> getAqquistiByUser(int ID_carrello) throws SQLException;
     public void remuveAcquisto(int idAcquisto) throws SQLException;
-
+    public List<Integer> getQuantitaProdotti(int IDcarello) throws SQLException;
 }

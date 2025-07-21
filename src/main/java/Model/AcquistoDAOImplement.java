@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AcquistoDAOImplement implements AcquistoDAO {
 
@@ -273,4 +274,35 @@ public class AcquistoDAOImplement implements AcquistoDAO {
 
     }
 
+    public List<Integer> getQuantitaProdotti(int IDcarello) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query6 = null;
+        List<Integer> quantitaProdotti = new ArrayList<>();
+
+        try{
+            conn = ds.getConnection();
+            query6 = conn.prepareStatement("SELECT Quantita FROM " + TABLE_NAME + " WHERE ID_Carello = ?");
+
+            query6.setInt(1, IDcarello);
+            ResultSet rs = query6.executeQuery();
+            while (rs.next()) {
+                int Quantita = rs.getInt(1);
+                quantitaProdotti.add(Quantita);
+            }
+            return  quantitaProdotti;
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query6 != null) {
+                    query6.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+        return quantitaProdotti;
+    }
 }
