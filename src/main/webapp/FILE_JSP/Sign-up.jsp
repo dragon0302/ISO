@@ -136,7 +136,6 @@
                             <%} else if (erroreEmailRegex != null) {%>
                             <%=erroreEmailRegex%>
                             <%}%>
-                            %>
                         </div>
 
                         <div class="form-group full-width">

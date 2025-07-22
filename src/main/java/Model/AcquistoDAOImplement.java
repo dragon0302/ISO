@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AcquistoDAOImplement implements AcquistoDAO {
 
@@ -164,7 +165,7 @@ public class AcquistoDAOImplement implements AcquistoDAO {
         return null;
     }
 
-    public void remouveAqquisto(int idAqquisto) throws SQLException{
+    public void remuveAcquisto(int idAcquisto) throws SQLException{
 
         Connection conn = null;
         PreparedStatement query6 = null;
@@ -172,9 +173,10 @@ public class AcquistoDAOImplement implements AcquistoDAO {
         try {
 
             conn = ds.getConnection();
-            query6 = conn.prepareStatement("delete from " + TABLE_NAME + " where ID_acquisto = ?");
+            query6 = conn.prepareStatement("DELETE FROM " + TABLE_NAME + " WHERE ID_acquisto = ?");
 
-            query6.setInt(1, idAqquisto);
+            query6.setInt(1, idAcquisto);
+
             query6.execute();
 
         }catch (Exception e) {
@@ -190,6 +192,45 @@ public class AcquistoDAOImplement implements AcquistoDAO {
                 }
             }
         }
+
+    }
+
+    public Integer getIdAcquisto(int IDprodotto, int Idcarello) throws SQLException{
+
+        Connection conn = null;
+        PreparedStatement query7 = null;
+        Integer idAcquisto = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query7 = conn.prepareStatement("select ID_acquisto from " + TABLE_NAME + " where (ID_prodotto = ? and ID_Carello = ?)");
+
+            query7.setInt(1, IDprodotto);
+            query7.setInt(2, Idcarello);
+
+            ResultSet rs = query7.executeQuery();
+
+            if (rs.next()) {
+                idAcquisto = rs.getInt(1);
+                return idAcquisto;
+            }
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query7 != null) {
+                    query7.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+
+        return idAcquisto;
 
     }
 
@@ -231,5 +272,37 @@ public class AcquistoDAOImplement implements AcquistoDAO {
 
         return IDaqquisti;
 
+    }
+
+    public List<Integer> getQuantitaProdotti(int IDcarello) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query6 = null;
+        List<Integer> quantitaProdotti = new ArrayList<>();
+
+        try{
+            conn = ds.getConnection();
+            query6 = conn.prepareStatement("SELECT Quantita FROM " + TABLE_NAME + " WHERE ID_Carello = ?");
+
+            query6.setInt(1, IDcarello);
+            ResultSet rs = query6.executeQuery();
+            while (rs.next()) {
+                int Quantita = rs.getInt(1);
+                quantitaProdotti.add(Quantita);
+            }
+            return  quantitaProdotti;
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query6 != null) {
+                    query6.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+        return quantitaProdotti;
     }
 }

@@ -26,11 +26,13 @@ public class NewOrder extends HttpServlet {
 
             HttpSession session = request.getSession();
             String idProdotti = null;
+            String quantities = null;
 
             List<Prodotto> prodotti = (List<Prodotto>) session.getAttribute("carrello");
             float PrezzoTotale = (float) session.getAttribute("prezzotatale");
             Utente utente = (Utente) session.getAttribute("utente");
             Integer ID_indirizzo = (Integer) session.getAttribute("ID_indirizzo");
+            List<Integer> quantita = (List<Integer>) session.getAttribute("Quantità");
 
             for (Prodotto prodotto : prodotti) {
 
@@ -40,16 +42,24 @@ public class NewOrder extends HttpServlet {
                     idProdotti += prodotto.getId_prodotto() + ",";
                 }
             }
+            for (Integer quantity : quantita) {
+
+                if (quantities == null) {
+                    quantities = quantity + ",";
+                }else {
+                    quantities += quantity + ",";
+                }
+            }
             System.out.println("prova");
 
-            Ordine ordine = new Ordine(Date.valueOf(LocalDate.now()),PrezzoTotale,idProdotti,carrelloDAO.GetIdCarrello(utente.getCf()),ID_indirizzo);
+            Ordine ordine = new Ordine(Date.valueOf(LocalDate.now()),PrezzoTotale,idProdotti,quantities,carrelloDAO.GetIdCarrello(utente.getCf()),ID_indirizzo);
             ordineDAO.DoSave(ordine);
 
             List<Integer> IDaqquisti = acquistoDAO.getAqquistiByUser(carrelloDAO.GetIdCarrello(utente.getCf()));
 
             for (int id : IDaqquisti) {
 
-                acquistoDAO.remouveAqquisto(id);
+                acquistoDAO.remuveAcquisto(id);
 
             }
 

@@ -18,12 +18,10 @@
 </head>
 <body>
 
-<script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
-<script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
-
 <script src="${pageContext.request.contextPath}/Javascript/CatalogFilter.js"></script>
 <script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
 <script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
+<script src="${pageContext.request.contextPath}/Javascript/Cart.js"></script>
 
 <header>
     <div class="top-header">
@@ -65,7 +63,7 @@
             <!-- Prezzo e quantità -->
             <div class="prezzo-quantita">
                 <div class="prezzo">€ <%= prodotti.get(i).getPrezzo() %></div>
-                <label for="numero">Scegli un numero:</label>
+                <lab for="numero">Scegli un numero:</lab>
                     <input onchange="aggiornaQuantita(<%= prodotti.get(i).getId_prodotto()%>,this,<%= prodotti.get(i).getPrezzo()%>)" type="number" id="numero" name="numero" min="0" max="100" step="1" value= <%= quantita.get(i) %>>
             </div>
         </div>
@@ -81,21 +79,21 @@
                 <div class="spese-spedizione">
                     Spese di spedizione: € <%= spesespedizione%>
                 </div>
-                <div class="prezzo-totale">
+                <div id="prezzo-totale" class="prezzo-totale" style="margin-bottom: 20px">
                     Prezzo Totale: <%= prezzotatale%>
                 </div>
-                <div>
-                    .
-                </div>
+<%--                <div>--%>
+<%--                    .--%>
+<%--                </div>--%>
                 <div style="text-align: center;">
-                        <button type="submit" class="btn-aggiungi">
-                            Vai al pagamento
-                        </button>
-                    <div>
-                        .
-                    </div>
+                    <button type="submit" class="btn-aggiungi">
+                        Vai al pagamento
+                    </button>
+<%--                    <div>--%>
+<%--                        .--%>
+<%--                    </div>--%>
                 </div>
-                <div class="info-text">
+                <div class="info-text" style="margin-top: 20px">
                     Effettuando l'ordine, accetti i Termini e le Condizioni.
                 </div>
             </form>

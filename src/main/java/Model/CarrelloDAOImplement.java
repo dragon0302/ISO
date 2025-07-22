@@ -231,6 +231,38 @@ public class CarrelloDAOImplement implements CarrelloDAO {
         return null;
     }
 
+    public void remuveProcductCarello(String idprodotto, String cfUtente) throws SQLException{
+
+        Connection conn = null;
+        PreparedStatement query7 = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query7 = conn.prepareStatement("update " + TABLE_NAME + " set  Lista_prodotti = trim(both ',' from replace(concat(',', Lista_prodotti, ','), concat(',',?,','),',')) WHERE (Lista_prodotti LIKE concat('%', ? ,'%') and CF_utente = ?)");
+
+            query7.setString(1,idprodotto);
+            query7.setString(2,idprodotto);
+            query7.setString(3,cfUtente);
+            query7.execute();
+
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (query7 != null) {
+                    query7.close();
+                }
+            }finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+
+    }
+
     public void remouveProduct(int idCarrello) throws SQLException{
 
         Connection conn = null;

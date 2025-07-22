@@ -49,12 +49,6 @@ public class UpdateCarrello extends HttpServlet {
                 if (Objects.equals(ids.get(i), String.valueOf(productId))) {
                     int quantita = cookieManagemnt.getCookieProductQuantity(ids.get(i));
 
-                    System.out.println(quantita);
-
-                    if (quantita == 0) {
-                        rimozioneProdotto();
-                    }
-
                     try {
                         if (quantita > quantity) {
                             cookieManagemnt.updateCookieProductQuantity(response, String.valueOf(productId), 1);
@@ -75,10 +69,6 @@ public class UpdateCarrello extends HttpServlet {
             try {
                 int quantita = acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), productId);
 
-                if (quantita == 0) {
-                    rimozioneProdotto();
-                }
-
                 if (quantita < quantity) {
                     acquistoDAO.UpdateQuantity(productId, carrelloDAO.GetIdCarrello(utente.getCf()), '+');
                     prezzoTotale += prezzo;
@@ -86,9 +76,19 @@ public class UpdateCarrello extends HttpServlet {
                     acquistoDAO.UpdateQuantity(productId, carrelloDAO.GetIdCarrello(utente.getCf()), '-');
                     prezzoTotale -= prezzo;
                 }
+
+                quantita = acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), productId);
+
+                if (quantita == 0) {
+
+                    carrelloDAO.remuveProcductCarello(String.valueOf(productId),utente.getCf());
+                    acquistoDAO.remuveAcquisto(acquistoDAO.getIdAcquisto(productId,carrelloDAO.GetIdCarrello(utente.getCf())));
+
+                }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+
         }
 
         json.addProperty("success", true);
@@ -98,12 +98,6 @@ public class UpdateCarrello extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().print(json);
-
-    }
-
-    public void rimozioneProdotto(){
-
-        System.out.println("rimozioneProdotto");
 
     }
 

@@ -62,6 +62,7 @@ CREATE TABLE ordine(
    Data_ordine DATE not null,
    Prezzo_tot float not null check ( Prezzo_tot > 0 ),
    Lista_prodotti varchar(500),
+    Lista_quantita varchar(500),
    ID_carrello int,
    ID_indirizzo int,
    foreign key (ID_carrello) references carrello (ID_carrello) ON DELETE CASCADE ON UPDATE CASCADE,

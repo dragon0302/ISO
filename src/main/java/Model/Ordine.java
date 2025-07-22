@@ -5,13 +5,15 @@ public class Ordine {
     java.sql.Date data_ordine;
     Float totale;
     String prodotti;
+    String quantita;
     Integer ID_carrello;
     Integer ID_indirizzo;
 
-    public Ordine(java.sql.Date data_ordine, Float totale, String prodotti, Integer ID_carrello,Integer ID_indirizzo) {
+    public Ordine(java.sql.Date data_ordine, Float totale, String prodotti,String quantita, Integer ID_carrello,Integer ID_indirizzo) {
         this.data_ordine = data_ordine;
         this.totale = totale;
         this.prodotti = prodotti;
+        this.quantita = quantita;
         this.ID_carrello = ID_carrello;
         this.ID_indirizzo = ID_indirizzo;
     }
@@ -26,6 +28,8 @@ public class Ordine {
     public void setID_carrello(Integer ID_carrello) {this.ID_carrello = ID_carrello;}
     public String getProdotti() {return prodotti;}
     public void setProdotti(String prodotti) {this.prodotti = prodotti;}
+    public String getQuantita() {return quantita;}
+    public void setQuantita(String quantita) {this.quantita = quantita;}
 
     public Integer getID_indirizzo() {
         return ID_indirizzo;

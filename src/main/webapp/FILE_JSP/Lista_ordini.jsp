@@ -56,11 +56,10 @@
                     List<Ordine> ordini = (List<Ordine>) session.getAttribute("ordine");
                     List<Prodotto> prodotti = new ArrayList<>();
 
-                    System.out.println(ordini == null);
                     if (ordini != null && !ordini.isEmpty()) {
                         List<List<Prodotto>> Listaprodotti = (List<List<Prodotto>>) session.getAttribute("ListeProdotti");
                         for (int i = 0;i < ordini.size(); i++) {
-                          System.out.println("numero ordine: " + ordini.get(i).getIdOrdine());
+
             %>
             <div class="order-box">
                 <div class="order-info">
@@ -80,7 +79,7 @@
                           //prendere la funzione che da i prodotti dell'ordine e creare classe apposita per la gesione delle immagini
                     prodotti = Listaprodotti.get(i);
                             for (int g = 0; g < prodotti.size(); g++){
-                              System.out.println("Numero Prodotto: " + prodotti.get(g).getId_prodotto());
+
 
                             /*String imgPath = (prodotti != null && !prodotti.isEmpty())
                                     ? prodotti.get(0).getImmagine() // es. "img/prodotto1.jpg"
@@ -110,11 +109,13 @@
             %>
                 </div>
             </div>
+            <form action="${pageContext.request.contextPath}/FatturaServlet" method="get">
+                <input type="hidden" id="idordine" name="idordine" value="<%= ordini.get(i).getIdOrdine()%>">
+                <button type="submit" class="login-btn" >Scarica fattura</button>
+            </form>
                 <%
                         }
                 %>
-
-            <button type="submit" class="login-btn">Scarica fattura</button>
 
             <%}else { %>
             <p>Non hai ancora effettuato ordini.</p>

@@ -16,6 +16,7 @@
 <%@ page import="Model.Utente" %>
 <%@ page import="Model.Indirizzo" %>
 <%@ page import="java.util.List" %>
+<%@ page import="Model.Prodotto" %>
 
 <%
     // Recupero l'utente loggato dalla sessione
@@ -121,6 +122,59 @@
                         <button type="submit" class="delete-btn">Elimina</button>
                     </form>
                 </div>
+
+                <%
+                    if(utente != null && utente.isAmministratore()){
+                %>
+
+                <!-- SEZIONE 5: SEZIONE AMMINISTRATORE -->
+                <div class="administretor-section">
+                    <h2>Pulsanti amministratore</h2>
+
+                    <!-- cerca per nome utente -->
+                    <form action="Showproduct" method="POST" class="settings-option">
+                        <label for="nomeUtente">Cerca Utente: </label>
+                        <input type="text" id="nomeUtente" name="nomeUtente" placeholder="Inserisci nome utente" required>
+                        <button type="submit">Cerca</button>
+                    </form>
+
+                    <!-- Elimina account -->
+                    <form action="${pageContext.request.contextPath}/Catalogo" method="get">
+                        <label for="giorni">Cerca per data: </label>
+                        <input type="number" id="giorni" name="giorni" min="1" max="365" placeholder="Max giorni" required>
+                        <button class="btn-link" type="submit">Ricerca</button>
+                    </form>
+                </div>
+
+                <div class="product-slider">
+                    <%
+                        List<Prodotto> prodottiNovita = (List<Prodotto>) request.getAttribute("prodottiNovita");
+                        if (prodottiNovita != null) {
+                            for (Prodotto p : prodottiNovita) {
+                                request.setAttribute("prodotto", p);
+//                                request.setAttribute("path", paths.get(p.getId_prodotto() - 1));
+                                if(utente == null){
+                                    request.setAttribute("isAmministratore", null);
+                                }else{
+                                    request.setAttribute("isAmministratore", utente.isAmministratore());
+                                }
+                    %>
+                    <jsp:include page="/FILE_JSP/prodottoBox.jsp"/>
+
+
+                    <%
+                        }
+                    } else {
+                    %>
+                    <p>Nessun prodotto trovato.</p>
+                    <%
+                        }
+                    %>
+                </div>
+
+                <%
+                    }
+                %>
 
             </div>
         </main>
