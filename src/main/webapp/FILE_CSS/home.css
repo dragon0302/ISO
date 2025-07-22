@@ -157,6 +157,11 @@
     cursor: pointer;
 }
 
+.img-b{
+    height: 34vh;
+    width: 100%;
+}
+
 /* ----- BANNER ----- */
 
 .banner {
