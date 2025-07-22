@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="DataManagement.Prodotto" %>
+<%@ page import="Model.Prodotto" %>
 <%@ page import="com.mysql.cj.Session" %>
-<%@ page import="DataManagement.Utente" %>
+<%@ page import="Model.Utente" %>
 <%@ page import="java.util.ArrayList" %>
 <%
     // Recupero l'utente loggato dalla sessione
@@ -18,12 +18,10 @@
 </head>
 <body>
 
-<script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
-<script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
-
 <script src="${pageContext.request.contextPath}/Javascript/CatalogFilter.js"></script>
 <script src="${pageContext.request.contextPath}/Javascript/Barra_di_ricerca.js"></script>
 <script src="${pageContext.request.contextPath}/Javascript/Barra_ricerca_function.js"></script>
+<script src="${pageContext.request.contextPath}/Javascript/Cart.js"></script>
 
 <header>
     <div class="top-header">
@@ -47,6 +45,7 @@
             ArrayList<Prodotto> prodotti = (ArrayList<Prodotto>) session.getAttribute("carrello");
             ArrayList<Integer> quantita = (ArrayList<Integer>) session.getAttribute("Quantità");
             Float prezzotatale = (Float) session.getAttribute("prezzotatale");
+            Float spesespedizione = (Float) session.getAttribute("spesespedizione");
 
             //Visualizza la barra orizzontale per ogni prodotto -->
             if (prodotti != null){
@@ -64,31 +63,43 @@
             <!-- Prezzo e quantità -->
             <div class="prezzo-quantita">
                 <div class="prezzo">€ <%= prodotti.get(i).getPrezzo() %></div>
-                <label for="numero">Scegli un numero:</label>
+                <lab for="numero">Scegli un numero:</lab>
                     <input onchange="aggiornaQuantita(<%= prodotti.get(i).getId_prodotto()%>,this,<%= prodotti.get(i).getPrezzo()%>)" type="number" id="numero" name="numero" min="0" max="100" step="1" value= <%= quantita.get(i) %>>
             </div>
         </div>
             <%  }
                 %>
-
-            <div>
-                <div class="PT">Prezzo Totale</div>
-                <div id="prezzo-totale" class="prezzo-totale"><%= prezzotatale%> </div>
-            </div>
         <%}%>
 
             </div>
 
-
+<%--        <%if (prodotti.isEmpty()){%>--%>
         <div class="box-acquista">
             <form action="${pageContext.request.contextPath}/CheckUtente" method="post">
-                <button type="submit" class="btn-aggiungi">
-                    Vai al pagamento
-                </button>
+                <div class="spese-spedizione">
+                    Spese di spedizione: € <%= spesespedizione%>
+                </div>
+                <div id="prezzo-totale" class="prezzo-totale">
+                    Prezzo Totale: <%= prezzotatale%>
+                </div>
+                <div>
+                    .
+                </div>
+                <div style="text-align: center;">
+                        <button type="submit" class="btn-aggiungi">
+                            Vai al pagamento
+                        </button>
+                    <div>
+                        .
+                    </div>
+                </div>
+                <div class="info-text">
+                    Effettuando l'ordine, accetti i Termini e le Condizioni.
+                </div>
             </form>
         </div>
+<%--    <%}%>--%>
     </div>
-
 <div class="footer-bar">
     <a href="${pageContext.request.contextPath}/FILE_JSP/About_Us.jsp" class="btn-link">About Us</a>
     <a href="${pageContext.request.contextPath}/FILE_JSP/Contattaci.jsp" class="btn-link">Contattaci</a>

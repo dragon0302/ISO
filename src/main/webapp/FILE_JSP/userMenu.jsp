@@ -1,4 +1,4 @@
-<%@ page import="DataManagement.Utente" %>
+<%@ page import="Model.Utente" %>
 <a class="btn card-btn" href=${pageContext.request.contextPath}/"carrello">Carrello</a>
 
 <div id="userContainer">

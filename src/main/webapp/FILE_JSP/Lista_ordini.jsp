@@ -7,10 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="DataManagement.Prodotto" %>
+<%@ page import="Model.Prodotto" %>
 <%@ page import="com.mysql.cj.Session" %>
-<%@ page import="DataManagement.Utente" %>
-<%@ page import="DataManagement.Ordine" %>
+<%@ page import="Model.Utente" %>
+<%@ page import="Model.Ordine" %>
 <%@ page import="java.util.ArrayList" %>
 <%
     // Recupero l'utente loggato dalla sessione
@@ -56,11 +56,10 @@
                     List<Ordine> ordini = (List<Ordine>) session.getAttribute("ordine");
                     List<Prodotto> prodotti = new ArrayList<>();
 
-                    System.out.println(ordini == null);
                     if (ordini != null && !ordini.isEmpty()) {
                         List<List<Prodotto>> Listaprodotti = (List<List<Prodotto>>) session.getAttribute("ListeProdotti");
                         for (int i = 0;i < ordini.size(); i++) {
-                          System.out.println("numero ordine: " + ordini.get(i).getIdOrdine());
+
             %>
             <div class="order-box">
                 <div class="order-info">
@@ -80,7 +79,7 @@
                           //prendere la funzione che da i prodotti dell'ordine e creare classe apposita per la gesione delle immagini
                     prodotti = Listaprodotti.get(i);
                             for (int g = 0; g < prodotti.size(); g++){
-                              System.out.println("Numero Prodotto: " + prodotti.get(g).getId_prodotto());
+
 
                             /*String imgPath = (prodotti != null && !prodotti.isEmpty())
                                     ? prodotti.get(0).getImmagine() // es. "img/prodotto1.jpg"
@@ -105,12 +104,18 @@
                         </div>
                     </div>
 
-            <%      }%>
+            <%
+                            }
+            %>
                 </div>
             </div>
-                <% }
-            %>
-
+            <form action="${pageContext.request.contextPath}/FatturaServlet" method="get">
+                <input type="hidden" id="idordine" name="idordine" value="<%= ordini.get(i).getIdOrdine()%>">
+                <button type="submit" class="login-btn" >Scarica fattura</button>
+            </form>
+                <%
+                        }
+                %>
 
             <%}else { %>
             <p>Non hai ancora effettuato ordini.</p>

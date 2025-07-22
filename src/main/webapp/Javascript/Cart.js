@@ -18,6 +18,11 @@ function aggiornaQuantita(ID,Quantity,prezzo){
         .then(date => {
             console.log("risposta del server: ", date)
             document.getElementById('prezzo-totale').innerHTML = date["prezzototale"];
+            const productBar = Quantity.closest('.product-bar');
+
+            if (newQuantity === '0') {
+                productBar.remove()
+            }
         })
         .catch(error => console.error('Errore: ', error))
 }

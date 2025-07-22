@@ -48,14 +48,13 @@
 .prezzo-totale {
     font-weight: bold;
     flex: 1;
-    text-align: right;
+    text-align: center;
     color: #000000;
 }
 
-.PT{
-    font-weight: bold;
-    flex: 1;
-    text-align: right;
+.spese-spedizione{
+    flex: 2;
+    text-align: center;
     color: #000000;
 }
 

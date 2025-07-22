@@ -24,10 +24,9 @@ CREATE TABLE carrello(
 CREATE TABLE prodotto(
      ID_prodotto INTEGER PRIMARY KEY NOT NULL auto_increment,
      Nome VARCHAR(20) NOT NULL,
-     MediaValutazione DOUBLE NOT NULL check ( MediaValutazione >= 0 && MediaValutazione <= 10 ),
      Taglia VARCHAR(3) NOT NULL,
      Descrizione VARCHAR(500) NOT NULL,
-     Categoria VARCHAR(20) NOT NULL,
+     Categoria VARCHAR(300) NOT NULL,
      Prezzo DOUBLE NOT NULL,
      Iva Integer not null ,
      DataInserimento DATE not null default (curdate())
@@ -43,25 +42,6 @@ CREATE TABLE acquisto(
     FOREIGN KEY (ID_Prodotto) references prodotto(ID_prodotto) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE metodoPagamento(
-    NumeroCarta VARCHAR(16) PRIMARY KEY NOT NULL,
-    DataScadenza date NOT NULL,
-    CVV INT NOT NULL check ( CVV >= 100 && CVV < 1000 ),
-    Tipo VARCHAR(20) NOT NULL,
-    Default_pagamento BOOLEAN NOT NULL,
-    CF_utente CHAR(16),
-    foreign key (CF_utente) references Utente (CF) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-CREATE TABLE ordine(
-   ID_ordine integer  primary key NOT NULL auto_increment,
-   Data_ordine DATE not null,
-   Prezzo_tot float not null check ( Prezzo_tot > 0 ),
-   Lista_prodotti varchar(500),
-   ID_carrello int,
-   foreign key (ID_carrello) references carrello (ID_carrello) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
 CREATE TABLE indirizzo (
    ID_indirizzo INT PRIMARY KEY NOT NULL auto_increment,
    città VARCHAR(50) NOT NULL,
@@ -75,4 +55,16 @@ CREATE TABLE indirizzo (
    Fatturazione TINYINT(1) DEFAULT 0 NOT NULL,
    CF_utente CHAR(16),
    foreign key (CF_utente) references Utente (CF) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE ordine(
+   ID_ordine integer  primary key NOT NULL auto_increment,
+   Data_ordine DATE not null,
+   Prezzo_tot float not null check ( Prezzo_tot > 0 ),
+   Lista_prodotti varchar(500),
+    Lista_quantita varchar(500),
+   ID_carrello int,
+   ID_indirizzo int,
+   foreign key (ID_carrello) references carrello (ID_carrello) ON DELETE CASCADE ON UPDATE CASCADE,
+   foreign key (ID_indirizzo) references indirizzo (ID_indirizzo) ON DELETE CASCADE ON UPDATE CASCADE
 );

@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="DataManagement.Utente" %>
+<%@ page import="Model.Utente" %>
 <%
     // Recupero l'utente loggato dalla sessione
     Utente utente = (Utente) session.getAttribute("utente");

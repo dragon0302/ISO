@@ -10,23 +10,11 @@ VALUES
     ( 'RSSMRA85P12F205Z'),
     ( 'BNCLRA90T15C789Y');
 
-INSERT INTO prodotto (Nome, MediaValutazione, Taglia, Descrizione, Categoria, Prezzo, iva)
+INSERT INTO prodotto (Nome, Taglia, Descrizione, Categoria, Prezzo, iva)
 VALUES
-    ( 'Maglia del cazzo', 5, 'XL', 'è una maglia con un cazzo', 'Rock', 12.5, 22),
-    ( 'Giacca di pelle', 4.5, 'L', 'Giacca nera in vera pelle', 'Rock', 90, 22),
-    ( 'Stivali borchiati', 4.8, '42', 'Stivali con borchie metalliche', 'Goth', 72.72, 22);
-
-INSERT INTO metodoPagamento (CF_Utente, NumeroCarta, DataScadenza, CVV, Tipo, Default_pagamento)
-VALUES
-    ('DRKPTR70M26A345S', '4539148803436467', '2025-05-01', 777, 'Prepagata', 0),
-    ('RSSMRA85P12F205Z', '5312345678901234', '2026-07-15', 123, 'Credito', 1),
-    ('BNCLRA90T15C789Y', '3714496353984310', '2027-09-23', 456, 'Debito', 0);
-
-INSERT INTO ordine (Data_ordine, Prezzo_tot, ID_carrello)
-VALUES
-    ( '2025-03-31', 2300, 1),
-    ( '2025-04-01', 1500, 2),
-    ( '2025-04-02', 800, 3);
+    ( 'Maglia dei Nirvana', 'XL', 'è una maglia dei Nirvana serve davvero altro', 'Rock', 12.5, 22),
+    ( 'Giacca di pelle', 'L', 'Giacca nera in vera pelle', 'Rock', 90, 22),
+    ( 'Stivali borchiati', '42', 'Stivali con borchie metalliche', 'Goth', 72.72, 22);
 
 INSERT INTO indirizzo (CF_Utente, città, Provincia, CAP, Via, Civico, Indirizzo2, Note, Fatturazione)
 VALUES
@@ -36,6 +24,14 @@ VALUES
 INSERT INTO indirizzo (CF_Utente, città, Provincia, CAP, Via, Civico, Scala, Indirizzo2, Note, Fatturazione)
 VALUES
     ('DRKPTR70M26A345S', 'L''Aquila', 'AQ', 65342, 'Via vattelappesca', '2', 'A', 'nessuno', 'nessuna', 0);
+
+
+INSERT INTO ordine (Data_ordine, Prezzo_tot, ID_carrello,ID_indirizzo)
+VALUES
+    ( '2025-03-31', 2300, 1,1),
+    ( '2025-04-01', 1500, 2,2),
+    ( '2025-04-02', 800, 3,3);
+
 INSERT INTO acquisto( CodiceSconto, Quantita, ID_Carello, ID_Prodotto)
 VALUES
     (1,2,1,1),

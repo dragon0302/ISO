@@ -7,9 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="DataManagement.Prodotto" %>
+<%@ page import="Model.Prodotto" %>
 <%@ page import="com.mysql.cj.Session" %>
-<%@ page import="DataManagement.Utente" %>
+<%@ page import="Model.Utente" %>
+<%@ page import="Model.Indirizzo" %>
 <%
   // Recupero l'utente loggato dalla sessione
   Utente utente = (Utente) session.getAttribute("utente");
@@ -67,6 +68,33 @@
     <img src="https://img.icons8.com/color/48/google-pay.png" alt="Google Pay" title="Google Pay">
   </div>
 
+  <div class="select-ardress">
+
+    <h2>Selezziona indirizzo</h2>
+
+    <%
+      List<Indirizzo> indirizzi = (List<Indirizzo>) request.getAttribute("listaIndirizzi");
+    %>
+
+
+    <label for="indirizzo">Indirizzo consegnia:</label>
+    <select id="indirizzo" name="indirizzo" required onchange="SelectIndirizzo(this)">
+      <option value="">-- Seleziona un indirizzo --</option>
+
+      <%
+        if(indirizzi != null){
+          for (Indirizzo i : indirizzi){
+      %>
+
+      <option value="<%= i.getID_Indirizzo()%>">
+        <%= i.getCap()%> <%= i.getCittà()%> <%= i.getCivico()%> <%= i.getVia()%>
+      </option>
+      <%
+          }
+        }
+      %>
+  </div>
+
   <%
     String esito = (String) request.getAttribute("esitoPagamento");
     if ("successo".equals(esito)) {
@@ -81,6 +109,26 @@
   %>
 </main>
 
+<script>
+
+    function SelectIndirizzo(select){
+        if (select.value){
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '${pageContext.request.contextPath}/SelectIndirizzo';
+
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'indirizzoConsegnia';
+            input.value = select.value;
+
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+        }
+    }
+
+</script>
 
 <div class="footer-bar">
   <a href="${pageContext.request.contextPath}/FILE_JSP/About_Us.jsp" class="btn-link">About Us</a>

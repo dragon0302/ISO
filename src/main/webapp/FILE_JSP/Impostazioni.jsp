@@ -13,10 +13,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="DataManagement.Utente" %>
-<%@ page import="DataManagement.Indirizzo" %>
+<%@ page import="Model.Utente" %>
+<%@ page import="Model.Indirizzo" %>
 <%@ page import="java.util.List" %>
-<%@ page import="DataManagement.MetodoPagamento" %>
 
 <%
     // Recupero l'utente loggato dalla sessione
@@ -98,31 +97,6 @@
                 <!-- SEZIONE 2: IMPOSTAZIONI ACQUISTO -->
                 <div class="settings-section">
                     <h2>Impostazioni Acquisto</h2>
-
-                    <!-- Metodo di pagamento preferito -->
-                    <div class="settings-option">
-                        <label>Metodo di pagamento preferito</label>
-
-                            <select name="metodoPagamentoId" required onchange="pagamentoDefault(this)">
-                                <option value="">--- Seleziona un metodo ---</option>
-                                <%
-                                    List<MetodoPagamento> metodi = (List<MetodoPagamento>) request.getAttribute("metodiPagamento");
-                                    if(metodi != null){
-                                        for(MetodoPagamento m : metodi){
-                                %>
-
-                                <option value="<%= m.getNumerocarta()%>">
-                                    **** **** **** <%=m.getUltime4Cifre()%> (scadenza: <%=m.getDataScadenza()%>) (Tipo: <%=m.getTipo()%>)
-                                </option>
-
-                                <%
-                                        }
-                                    }
-                                %>
-                            </select>
-
-                        <a href="${pageContext.request.contextPath}/FILE_JSP/metodo_di_pagamento.jsp" class="button-link">Aggiungi</a>
-                    </div>
 
                     <!-- Storico ordini -->
                     <form action="${pageContext.request.contextPath}/Ordini" method="GET" class="settings-option">

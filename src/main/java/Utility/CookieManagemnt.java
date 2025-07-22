@@ -107,12 +107,16 @@ public class CookieManagemnt {
                     if (operazione == 0) {
                         quantita++;
                     } else if (operazione == 1) {
-                        quantita--;;
+                        quantita--;
                     }else {
                         System.out.println("erroere operazzione errata");
                     }
-                    // Ricostruisci l'item
-                    item = "(I" + prodottoID + "!" + quantita + ")";
+                    if (quantita != 0) {
+                        // Ricostruisci l'item
+                        item = "(I" + prodottoID + "!" + quantita + ")";
+                    }else {
+                        continue;
+                    }
                 }
                 newCartValue.append(item);
 
@@ -120,8 +124,15 @@ public class CookieManagemnt {
                     newCartValue.append("-");
                 }
             }
-            cookieCart.setValue(newCartValue.toString());
-            response.addCookie(cookieCart);
+
+            if (!newCartValue.toString().isEmpty()) {
+                cookieCart.setValue(newCartValue.toString());
+                response.addCookie(cookieCart);
+            }else {
+                cookieCart.setMaxAge(0);
+                cookieCart.setPath("/ISO_16_war_exploded");
+                response.addCookie(cookieCart);
+            }
         }
 
     }

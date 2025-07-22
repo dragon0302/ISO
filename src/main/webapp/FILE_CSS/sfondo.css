@@ -352,6 +352,12 @@ a.btn-link:hover {
     margin-top: 6px;
 }
 
+.info-text{
+    text-align: center;
+    color: #222222;
+    text-size:8px;
+}
+
 /* MEDIA QUERY: per schermi piccoli (telefono) */
 @media (min-width: 481px) and (max-width: 1024px) {
 

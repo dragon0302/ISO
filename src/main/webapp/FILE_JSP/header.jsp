@@ -1,4 +1,4 @@
-<%@ page import="DataManagement.Utente" %>
+<%@ page import="Model.Utente" %>
 <%
   Utente utente = (Utente) session.getAttribute("utente");
   Boolean admin = (Boolean) request.getAttribute("isAmministratore");
