@@ -79,21 +79,21 @@
                 <div class="spese-spedizione">
                     Spese di spedizione: € <%= spesespedizione%>
                 </div>
-                <div id="prezzo-totale" class="prezzo-totale">
+                <div id="prezzo-totale" class="prezzo-totale" style="margin-bottom: 20px">
                     Prezzo Totale: <%= prezzotatale%>
                 </div>
-                <div>
-                    .
-                </div>
+<%--                <div>--%>
+<%--                    .--%>
+<%--                </div>--%>
                 <div style="text-align: center;">
-                        <button type="submit" class="btn-aggiungi">
-                            Vai al pagamento
-                        </button>
-                    <div>
-                        .
-                    </div>
+                    <button type="submit" class="btn-aggiungi">
+                        Vai al pagamento
+                    </button>
+<%--                    <div>--%>
+<%--                        .--%>
+<%--                    </div>--%>
                 </div>
-                <div class="info-text">
+                <div class="info-text" style="margin-top: 20px">
                     Effettuando l'ordine, accetti i Termini e le Condizioni.
                 </div>
             </form>

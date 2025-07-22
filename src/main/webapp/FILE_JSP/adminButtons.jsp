@@ -21,22 +21,22 @@
   </div>
 
   <a class="btn card-btn" href="${pageContext.request.contextPath}/carrello">Carrello</a>
-  <button class="login-btn" onclick="openAddFilterModal()">Aggiungi Filtro</button>
+<%--  <button class="login-btn" onclick="openAddFilterModal()">Aggiungi Filtro</button>--%>
 
-  <div id="addFilterModal" class="modal" style="display:none;">
-    <div class="modal-content">
-      <span class="close" onclick="closeAddFilterModal()">&times;</span>
-      <h2>Aggiungi Nuovo Filtro</h2>
-      <form action="GestioneFiltri" method="post">
-        <input type="hidden" name="action" value="addFilter">
-        <label for="filterName">Nome Filtro:</label>
-        <input type="text" id="filterName" name="filterName" required>
-        <label for="filterValue">Valore Filtro:</label>
-        <input type="text" id="filterValue" name="filterValue" required>
-        <button type="submit" class="btn-submit">Salva Filtro</button>
-      </form>
-    </div>
-  </div>
+<%--  <div id="addFilterModal" class="modal" style="display:none;">--%>
+<%--    <div class="modal-content">--%>
+<%--      <span class="close" onclick="closeAddFilterModal()">&times;</span>--%>
+<%--      <h2>Aggiungi Nuovo Filtro</h2>--%>
+<%--      <form action="GestioneFiltri" method="post">--%>
+<%--        <input type="hidden" name="action" value="addFilter">--%>
+<%--        <label for="filterName">Nome Filtro:</label>--%>
+<%--        <input type="text" id="filterName" name="filterName" required>--%>
+<%--        <label for="filterValue">Valore Filtro:</label>--%>
+<%--        <input type="text" id="filterValue" name="filterValue" required>--%>
+<%--        <button type="submit" class="btn-submit">Salva Filtro</button>--%>
+<%--      </form>--%>
+<%--    </div>--%>
+<%--  </div>--%>
 
   <script>
     function openAddFilterModal() {
