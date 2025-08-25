@@ -233,7 +233,7 @@
 }
 
 /* Immagine del prodotto */
-.product-image {
+img {
     width: 100%;
     object-fit: cover;
     border-radius: 8px;
@@ -447,12 +447,11 @@ main h2 {
 
     /* Product slider in scroll singolo */
     .product-slider {
-        display: flow;
         gap: 12px;
         padding: 10px;
         overflow-x: scroll;
         width: 85%;
-        height: 40vh;
+        height: 50vh;
     }
 
     .product {
