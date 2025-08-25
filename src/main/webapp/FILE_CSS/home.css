@@ -200,11 +200,12 @@
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
-    gap: 10px;
+    gap: 20px;
     padding: 10px 0;
     scroll-snap-type: x mandatory;
     max-width: 1200px;
     margin: 20px auto;
+    height: 70vh;
 }
 
 /* Singolo prodotto (card) */
@@ -233,14 +234,19 @@
 }
 
 /* Immagine del prodotto */
-img {
-    width: 100%;
+.oggetti {
+    width: 80%;
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 10px;
     max-width: 100%;
     height: auto;
     display: block;
+}
+
+.product-image{
+    display: flex;
+    justify-content: center;
 }
 
 /* Titolo del prodotto */
@@ -494,6 +500,8 @@ main h2 {
 @media (min-width: 1025px) and (max-width: 1400px) {
     .product-slider {
         gap: 14px;
+        height: 55vh;
+        width: 90%;
     }
 
     .product {
