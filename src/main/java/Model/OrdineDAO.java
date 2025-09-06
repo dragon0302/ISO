@@ -12,4 +12,5 @@ public interface OrdineDAO {
     public int getIdIndirizzo(int IdOrdine) throws SQLException;
     public Ordine getOrdineByID(int IdOrdine) throws SQLException;
     public List<Integer> getQuantityByID(int IdOrdine) throws SQLException;
+    public List<Prodotto> getProdottiByUser(int ID_carrello) throws SQLException;
 }

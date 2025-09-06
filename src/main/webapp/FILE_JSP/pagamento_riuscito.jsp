@@ -21,8 +21,9 @@
 <div class="success-box">
   <h1>Pagamento Completato</h1>
   <p>Il tuo pagamento è andato a buon fine. Grazie per la fiducia!</p>
-  <p>Riceverai una conferma via email a breve.</p>
-  <a href="<%= request.getContextPath() %>/Catalogo">Torna alla Home</a>
+  <p>Per concludere il pagamento torna alla home.</p>
+  <a href="<%= request.getContextPath() %>/NewOrder">Torna alla Home</a>
+  <p>Nel caso non si torni alla home l'ordine non verrà salvato.</p>
 </div>
 
 </body>

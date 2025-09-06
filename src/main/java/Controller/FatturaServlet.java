@@ -23,7 +23,7 @@ public class FatturaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Utente utente = (Utente) session.getAttribute("utente");
-        String idordine = (String) request.getParameter("idordine");
+        String idordine = request.getParameter("idordine");
 
         Indirizzo indirizzo = null;
         Ordine ordine = null;

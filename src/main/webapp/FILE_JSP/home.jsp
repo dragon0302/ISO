@@ -28,9 +28,9 @@
                 menu.classList.toggle("show");
             }
             //per modificare
-            function openEditModal(id, nome, prezzo, descrizione, filto) {
-                alert("Modifica prodotto: " + nome);
-            }
+            // function openEditModal(id, nome, prezzo, descrizione, filto) {
+            //     alert("Modifica prodotto: " + nome);
+            // }
             //per cancellare
             function openDeleteModal(id) {
                 alert("Elimina prodotto con ID: " + id);
@@ -235,7 +235,7 @@
             <div class="modal-content">
                 <span class="close" onclick="closeEditModal()">&times;</span>
                 <h2>Modifica Prodotto</h2>
-                <form action="ProductCatalogoMenegment" method="post">
+                <form action="${pageContext.request.contextPath}/ProductCatalogoMenegment" method="post">
                     <input type="hidden" name="action" value="modifica">
                     <input type="hidden" name="id_prodotto" id="edit-id">
 
@@ -246,7 +246,7 @@
                     <input type="number" id="edit-prezzo" name="prezzo" step="0.01" required>
 
                     <label for="edit-descrizione">Descrizione:</label>
-                    <textarea id="edit-descrizione" name="descrizione" required></textarea>
+                    <input id="edit-descrizione" name="descrizione" required></input>
 
                     <label for="edit-filtro">filtro</label>
                     <input type="text" id="edit-filtro" name="filtro" required>
@@ -295,7 +295,7 @@
                 document.getElementById("edit-nome").value = nome;
                 document.getElementById("edit-prezzo").value = prezzo;
                 document.getElementById("edit-descrizione").value = descrizione;
-                // document.getCategoriaById("edit-filtro").value = filtro;
+                document.getElementById("edit-filtro").value = filtro;
                 document.getElementById("editProductModal").style.display = "block";
             }
 

@@ -37,8 +37,8 @@ public class PaymentService {
 
         RedirectUrls redirectUrls = new RedirectUrls();
         String baseUrl = "http://localhost:8080/ISO_16_war_exploded";
-        String cancelURL = baseUrl + "/Catalogo";
-        String returnURL = baseUrl + "/NewOrder";
+        String cancelURL = baseUrl + "/FILE_JSP/pagamento_fallito.jsp";
+        String returnURL = baseUrl + "/FILE_JSP/pagamento_riuscito.jsp";
         redirectUrls.setCancelUrl(cancelURL);
         redirectUrls.setReturnUrl(returnURL);
 
