@@ -23,7 +23,6 @@ public class ProductCartMenegment extends HttpServlet {
             Utente utente = (Utente) request.getSession().getAttribute("utente");
             CookieManagemnt cm = new CookieManagemnt(request);
             String redirectPage = null;
-            Boolean contenuto = true;
 
             if(utente == null) {
                 if (prodottoID != null) {
@@ -35,8 +34,9 @@ public class ProductCartMenegment extends HttpServlet {
                     carrelloDAO.ProdottoCarello(Integer.parseInt(prodottoID), carrelloDAO.GetIdCarrello(utente.getCf()));
                     Acquisto acquisto = new Acquisto(false,1, carrelloDAO.GetIdCarrello(utente.getCf()),Integer.parseInt(prodottoID));
                     acquistoDAO.DoSave(acquisto);
+                    System.out.println(acquisto);
                 }else {
-                    acquistoDAO.UpdateQuantity(Integer.parseInt(prodottoID), carrelloDAO.GetIdCarrello(utente.getCf()), '+');
+                    acquistoDAO.UpdateQuantity(Integer.parseInt(prodottoID), carrelloDAO.GetIdCarrello(utente.getCf()), 1);
                 }
             }
 

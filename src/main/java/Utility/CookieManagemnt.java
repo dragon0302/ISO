@@ -72,6 +72,42 @@ public class CookieManagemnt {
         }
     }
 
+    public void updateCookieProductQuantity(HttpServletResponse response,String prodottoID,int newquantita) {
+
+        StringBuilder newCartValue = new StringBuilder();
+
+        if(CartValue != null) {
+            String[] Cprodotti = CartValue.split("-");
+
+            for (int i = 0; i < Cprodotti.length; i++) {
+                String item = Cprodotti[i];
+                if (item.contains("I" + prodottoID)) {
+                    // modifico la quantita di prodotti nel carello
+                    item = "(I" + prodottoID + "!" + newquantita + ")";
+                }
+                newCartValue.append(item);
+
+                if (i < Cprodotti.length - 1) {
+                    newCartValue.append("-");
+                }
+            }
+
+            String updatedValue = newCartValue.toString();
+
+            if (!updatedValue.isEmpty()) {
+
+                CartValue = updatedValue;
+                cookieCart.setValue(updatedValue);
+                response.addCookie(cookieCart);
+            }else {
+                cookieCart.setMaxAge(0);
+                cookieCart.setPath("/ISO_16_war_exploded");
+                response.addCookie(cookieCart);
+            }
+        }
+
+    }
+
     public int getCookieProductQuantity(String prodottoID) {
 
 
@@ -83,58 +119,12 @@ public class CookieManagemnt {
                 if (item.contains("I" + prodottoID)) {
                     // Estrai la quantità
                     quantita = Integer.parseInt(item.split("!")[1].split("\\)")[0]);
+                    System.out.println("quantita" + Integer.parseInt(item.split("!")[1].split("\\)")[0]));
                 }
             }
             return quantita;
         }
         return 0;
-    }
-
-    public void updateCookieProductQuantity(HttpServletResponse response,String prodottoID,int operazione) {
-
-        StringBuilder newCartValue = new StringBuilder();
-
-        int quantita = 0;
-
-        if(CartValue != null) {
-            String[] Cprodotti = CartValue.split("-");
-
-            for (int i = 0; i < Cprodotti.length; i++) {
-                String item = Cprodotti[i];
-                if (item.contains("I" + prodottoID)) {
-                    // Estrai e incrementa quantità
-                    quantita = Integer.parseInt(item.split("!")[1].split("\\)")[0]);
-                    if (operazione == 0) {
-                        quantita++;
-                    } else if (operazione == 1) {
-                        quantita--;
-                    }else {
-                        System.out.println("erroere operazzione errata");
-                    }
-                    if (quantita != 0) {
-                        // Ricostruisci l'item
-                        item = "(I" + prodottoID + "!" + quantita + ")";
-                    }else {
-                        continue;
-                    }
-                }
-                newCartValue.append(item);
-
-                if (i < Cprodotti.length - 1) {
-                    newCartValue.append("-");
-                }
-            }
-
-            if (!newCartValue.toString().isEmpty()) {
-                cookieCart.setValue(newCartValue.toString());
-                response.addCookie(cookieCart);
-            }else {
-                cookieCart.setMaxAge(0);
-                cookieCart.setPath("/ISO_16_war_exploded");
-                response.addCookie(cookieCart);
-            }
-        }
-
     }
 
     public List<String> AllCookieId(){
@@ -161,6 +151,30 @@ public class CookieManagemnt {
             }
         }
         return false;
+    }
+
+    public void RemouveProduct(HttpServletResponse response, String prodottoID) {
+
+        String[] Cprodotti = CartValue.split("-");
+        List<String> remainingProducr = new ArrayList<>();
+
+        for (String item : Cprodotti) {
+
+            if (!item.contains("I" + prodottoID)) {
+                remainingProducr.add(item);
+            }
+
+        }
+
+        cookieCart.setValue(String.join("-", remainingProducr));
+        if (!cookieCart.getValue().isEmpty()) {
+            response.addCookie(cookieCart);
+        }else {
+            cookieCart.setMaxAge(0);
+            cookieCart.setPath("/ISO_16_war_exploded");
+            response.addCookie(cookieCart);
+        }
+
     }
 
 }
