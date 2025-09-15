@@ -1,6 +1,6 @@
 drop schema  ISO16;
 create schema ISO16;
-
+use ISO16;
 CREATE TABLE Utente (
     CF CHAR(16) PRIMARY KEY NOT NULL check ( char_length(CF) = 16 ),
     NomeUtente VARCHAR(50) NOT NULL,
@@ -23,9 +23,9 @@ CREATE TABLE carrello(
 
 CREATE TABLE prodotto(
      ID_prodotto INTEGER PRIMARY KEY NOT NULL auto_increment,
-     Nome VARCHAR(20) NOT NULL,
+     Nome VARCHAR(2000) NOT NULL,
      Taglia VARCHAR(3) NOT NULL,
-     Descrizione VARCHAR(500) NOT NULL,
+     Descrizione VARCHAR(5000) NOT NULL,
      Categoria VARCHAR(300) NOT NULL,
      Prezzo DOUBLE NOT NULL,
      Iva Integer not null ,

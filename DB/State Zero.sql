@@ -1,3 +1,5 @@
+USE iso16;
+
 INSERT INTO Utente (CF, NomeUtente, Password,Salt, Nome, Cognome ,Email, Sesso, DataNascita, Amministratore)
 VALUES
     ('DRKPTR70M26A345S', 'Nicola', 'cYX5/07EyQgA8Ah63IN2/dmpsnMt4e8QturmmZ4/RPM=' , 'Q2584p0qUxGwarulk9VK5w==', 'Peater', 'Dark',  'c@r.v' ,'M', '1970-08-26', 0),

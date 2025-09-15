@@ -30,7 +30,7 @@ public class ProdottoDAOImplement implements ProdottoDAO{
         PreparedStatement query = null;
         try {
             conn = ds.getConnection();
-            query = conn.prepareStatement("INSERT INTO " + TABLE_NAME +  "(Nome,  Taglia, Descrizione, Categoria,Prezzo,Iva) VALUES (?,?,?,?,?,?,?)");
+            query = conn.prepareStatement("INSERT INTO " + TABLE_NAME +  "(Nome,  Taglia, Descrizione, Categoria,Prezzo,Iva) VALUES (?,?,?,?,?,?)");
 
             query.setString(1, prodotto.getNome());
             query.setString(2, prodotto.getTaglia());
