@@ -19,11 +19,12 @@
 
 <!-- Box contenuto -->
 <div class="success-box">
-  <h1>Pagamento Completato</h1>
+  <h1>Rock N Roll Baby!</h1>
   <p>Il tuo pagamento è andato a buon fine. Grazie per la fiducia!</p>
-  <p>Per concludere il pagamento torna alla home.</p>
+  <p>Per concludere il pagamento ed inviare l'ordine torna alla home.</p>
   <a href="<%= request.getContextPath() %>/NewOrder">Torna alla Home</a>
-  <p>Nel caso non si torni alla home l'ordine non verrà salvato.</p>
+  <p>Nel caso NON si torni alla home l'ordine non verrà salvato.</p>
+  <p>Troverai il riepilogo dell'ordine e la ricevuta d'acquisto (fattura) nell'area riservata</p>
 </div>
 
 </body>
