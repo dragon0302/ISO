@@ -90,7 +90,7 @@ public class Carrello extends HttpServlet {
         //verifico se i campi sono inizzializzati
         prezzototale = VerIniCampi(Nquantita,carrello,prezzototale, session);
 
-        //mi faccio dare gli di dei prodotti che sono presenti nel carello all'interno del database
+        //mi faccio dare gli id dei prodotti che sono presenti nel carello all'interno del database
         ids = carrelloDAO.GetProductCarello(carrelloDAO.GetIdCarrello(utente.getCf()));
 
         //verifico se ci prodotti nel carello
@@ -124,6 +124,7 @@ public class Carrello extends HttpServlet {
       if (prezzototale != 0.0F) {
         prezzototale+=spesespedizione;
       }
+
       session.setAttribute("carrello", carrello);
       session.setAttribute("Quantità", Nquantita);
       session.setAttribute("prezzotatale", prezzototale);
