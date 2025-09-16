@@ -2,15 +2,16 @@
 <%@ page import="java.util.List" %>
 <%@ page import="Model.Prodotto" %>
 <%@ page import="Model.Utente" %>
+ <%@ page import="java.util.Map" %>
 
-<%
+ <%
     // Recupero l'utente loggato dalla sessione
     Utente utente = (Utente) session.getAttribute("utente");
     // Controllo se c'è un filtro attivo
     String filtro = (String) request.getAttribute("Filter");
     boolean filtroAttivo = filtro != null && !filtro.isEmpty();
     List<Prodotto> prodottiFiltro = (List<Prodotto>) request.getAttribute("prodottiFiltro");
-    List<String> paths = (List<String>) application.getAttribute("Paths");
+     Map<String, String> imageMap = (Map<String, String>) application.getAttribute("Paths");
 %>
 
 <!DOCTYPE html>
@@ -83,7 +84,7 @@
                     <div class="modal-content">
                         <span class="close" onclick="closeAddProductModal()">&times;</span>
                         <h2>Aggiungi Prodotto</h2>
-                        <form action="ProductCatalogoMenegment" method="post">
+                        <form action="ProductCatalogoMenegment" method="post" enctype="multipart/form-data">
 
                             <label for="imageInput">Aggiungi immagine</label>
                             <input type="file" name="immagine" id="imageInput" accept="image/*" required>
@@ -118,7 +119,7 @@
                     <% for (Prodotto p : prodottiFiltro) { %>
                     <%
                     request.setAttribute("prodotto", p);
-                    request.setAttribute("path", paths.get(p.getId_prodotto() - 1));
+                    request.setAttribute("path", imageMap.get(p.getNome()));
                         if(utente == null){
                             request.setAttribute("isAmministratore", null);
                         }else{
@@ -158,7 +159,7 @@
                         if (prodottiNovita != null) {
                             for (Prodotto p : prodottiNovita) {
                             request.setAttribute("prodotto", p);
-                            request.setAttribute("path", paths.get(p.getId_prodotto() - 1));
+                            request.setAttribute("path", imageMap.get(p.getNome()));
                                 if(utente == null){
                                     request.setAttribute("isAmministratore", null);
                                 }else{
@@ -198,7 +199,8 @@
                         if (prodottiPopolari != null) {
                             for (Prodotto p : prodottiPopolari) {
                             request.setAttribute("prodotto", p);
-                            request.setAttribute("path", paths.get(p.getId_prodotto() - 1));
+                            System.out.println(imageMap.get(p.getNome()));
+                            request.setAttribute("path", imageMap.get(p.getNome()));
                                 if(utente == null){
                                     request.setAttribute("isAmministratore", null);
                                 }else{

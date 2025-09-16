@@ -13,7 +13,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebListener
 public class ImagePathInitializer implements ServletContextListener {
@@ -22,7 +24,8 @@ public class ImagePathInitializer implements ServletContextListener {
 
   public void contextInitialized(ServletContextEvent sce) {
 
-    List<String> paths = new ArrayList<>();
+    //List<String> paths = new ArrayList<>();
+    Map<String, String> imageMap = new HashMap<>();
 
     try {
 
@@ -36,17 +39,19 @@ public class ImagePathInitializer implements ServletContextListener {
 
         if (Files.exists(percorsoImmagine)) {
 
-          paths.add("/Immagini/" + prodotto.getNome() + ".jpg");
+          imageMap.put(prodotto.getNome(), "/Immagini/" + prodotto.getNome() + ".jpg");
+          //paths.add("/Immagini/" + prodotto.getNome() + ".jpg");
 
         } else {
 
-          paths.add("/Immagini/" + "ironmaden.png");
+          imageMap.put(prodotto.getNome(), "/Immagini/" + "ironmaden.png");
+          //paths.add("/Immagini/" + "ironmaden.png");
 
         }
 
       }
 
-      ctx.setAttribute("Paths", paths);
+      ctx.setAttribute("Paths", imageMap);
 
     } catch (SQLException e) {
       throw new RuntimeException(e);
