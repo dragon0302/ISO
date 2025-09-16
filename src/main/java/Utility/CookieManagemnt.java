@@ -119,7 +119,6 @@ public class CookieManagemnt {
                 if (item.contains("I" + prodottoID)) {
                     // Estrai la quantità
                     quantita = Integer.parseInt(item.split("!")[1].split("\\)")[0]);
-                    System.out.println("quantita" + Integer.parseInt(item.split("!")[1].split("\\)")[0]));
                 }
             }
             return quantita;

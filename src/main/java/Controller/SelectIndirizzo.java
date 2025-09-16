@@ -23,7 +23,6 @@ public class SelectIndirizzo extends HttpServlet {
 
     if (Indirizzo != null) {
 
-      System.out.println("indirizzo");
       session.setAttribute("ID_indirizzo", Indirizzo);
 
     }

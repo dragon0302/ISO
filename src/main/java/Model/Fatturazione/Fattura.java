@@ -117,8 +117,6 @@ public class Fattura {
         for (int i = 0; i < listaProdotti.size(); i++) {
             Prodotto p = listaProdotti.get(i);
             int q = quantitaProdotti.get(i);
-            System.out.println(p.getId_prodotto() + p.getNome());
-            System.out.println(q);
             double prezzoUnitario = p.getPrezzo();
             double percentualeIVA = p.getIva();
             double totaleProdotto = prezzoUnitario * q;

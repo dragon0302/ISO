@@ -74,7 +74,6 @@ public class Signup extends HttpServlet {
                 request.setAttribute("erroreNomeUtenteRegex", erroreNomeUtenteRegex);
                 request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             }else if (!PASSWORD_REGEX.matcher(Password).matches()) {
-                System.out.println(Password);
                 request.setAttribute("errorePasswordRegex", errorePasswordRegex);
                 request.getRequestDispatcher("/FILE_JSP/Sign-up.jsp").forward(request, response);
             }else if(utenteDAO.CFEsistente(CF)){

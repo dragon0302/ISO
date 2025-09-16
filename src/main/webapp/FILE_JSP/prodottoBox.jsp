@@ -19,6 +19,7 @@
 
         <div class="product-image">
             <!-- Immagine prodotto (metti il path corretto nell'attributo src) -->
+
             <img class="oggetti" src=" <%= request.getContextPath() + path %>" alt="Immagine Prodotto">
         </div>
 

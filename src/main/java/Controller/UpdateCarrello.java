@@ -47,12 +47,10 @@ public class UpdateCarrello extends HttpServlet {
 
             for (int i = 0; i < ids.size(); i++) {
 
-                System.out.println("id:" + ids.get(i));
                 if (Objects.equals(ids.get(i), String.valueOf(productId))) {
                     int quantita = cookieManagemnt.getCookieProductQuantity(ids.get(i));
 
                     if (quantity == 0){
-                        System.out.println("errore");
                         cookieManagemnt.RemouveProduct(response, String.valueOf(productId));
                     }else if (quantita != quantity) {
                         cookieManagemnt.updateCookieProductQuantity(response, String.valueOf(productId), quantity);
@@ -62,8 +60,6 @@ public class UpdateCarrello extends HttpServlet {
 
                 try {
                     prezzoTotale += (prodottoDAO.GetPrezzo(Integer.parseInt(ids.get(i))) * cookieManagemnt.getCookieProductQuantity(ids.get(i)));
-                    System.out.println("prezzo: " + prodottoDAO.GetPrezzo(Integer.parseInt(ids.get(i))));
-                    System.out.println("quantita cp: " + cookieManagemnt.getCookieProductQuantity(ids.get(i)));
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -75,7 +71,6 @@ public class UpdateCarrello extends HttpServlet {
             try {
                 int quantita = acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), productId);
 
-                System.out.println(quantity);
                 if (quantity == 0){
                     acquistoDAO.remuveAcquisto(acquistoDAO.getIdAcquisto(productId,carrelloDAO.GetIdCarrello(utente.getCf())));
                     carrelloDAO.remuveProcductCarello(String.valueOf(productId),utente.getCf());
@@ -87,8 +82,6 @@ public class UpdateCarrello extends HttpServlet {
                 for (int i = 0; i < ids.size(); i++){
 
                     prezzoTotale += (prodottoDAO.GetPrezzo(Integer.parseInt(String.valueOf(ids.get(i)))) * acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), Integer.parseInt(ids.get(i))));
-                    System.out.println("prezzo: " + prodottoDAO.GetPrezzo(Integer.parseInt(String.valueOf(ids.get(i)))));
-                    System.out.println("quantita: " + acquistoDAO.GetQuntita(carrelloDAO.GetIdCarrello(utente.getCf()), Integer.parseInt(ids.get(i))));
 
                 }
             } catch (SQLException e) {
@@ -101,7 +94,6 @@ public class UpdateCarrello extends HttpServlet {
             prezzoTotale += spesespedizione;
         }
 
-        System.out.println("prezzo totale: " + prezzoTotale);
         json.addProperty("success", true);
         json.addProperty("prezzototale", prezzoTotale);
         session.setAttribute("prezzotatale", prezzoTotale);

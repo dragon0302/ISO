@@ -50,7 +50,6 @@ public class NewOrder extends HttpServlet {
                     quantities += quantity + ",";
                 }
             }
-            System.out.println("prova");
 
             Ordine ordine = new Ordine(Date.valueOf(LocalDate.now()),PrezzoTotale,idProdotti,quantities,carrelloDAO.GetIdCarrello(utente.getCf()),ID_indirizzo);
             ordineDAO.DoSave(ordine);

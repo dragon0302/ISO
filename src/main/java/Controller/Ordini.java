@@ -30,8 +30,6 @@ public class Ordini extends HttpServlet {
 
       List<Ordine> listaOrdini = ordineDAO.getOrdersByUser(carrelloDAO.GetIdCarrello(utente.getCf()));
 
-      System.out.println(listaOrdini == null);
-
       session.setAttribute("ordine", listaOrdini);
 
       for (Ordine ordine : listaOrdini) {

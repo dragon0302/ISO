@@ -23,7 +23,7 @@ CREATE TABLE carrello(
 
 CREATE TABLE prodotto(
      ID_prodotto INTEGER PRIMARY KEY NOT NULL auto_increment,
-     Nome VARCHAR(20) NOT NULL,
+     Nome VARCHAR(20) NOT NULL unique ,
      Taglia VARCHAR(3) NOT NULL,
      Descrizione VARCHAR(500) NOT NULL,
      Categoria VARCHAR(300) NOT NULL,
