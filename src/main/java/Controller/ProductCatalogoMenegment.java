@@ -59,8 +59,9 @@ public class ProductCatalogoMenegment extends HttpServlet {
             float prezzo = Float.parseFloat(request.getParameter("price"));
             String descrizzione = request.getParameter("productDescrizione");
             String categoria = request.getParameter("filtro");
+            String taglia = request.getParameter("taglia");
+            int iva = Integer.parseInt(request.getParameter("iva"));
             Part filePart = request.getPart("immagine");
-            String fileName = filePart.getSubmittedFileName();
 
 //            System.out.println(fileName);
 //            System.out.println(ctx.getRealPath("/Immagini"));
@@ -79,7 +80,7 @@ public class ProductCatalogoMenegment extends HttpServlet {
             ctx.setAttribute("Paths", imageMap);
             //TODO aggungere il percorso dell'immagine alla lista delle immagini
 
-            Prodotto prodotto = new Prodotto(nome,"l",descrizzione,categoria,prezzo,12);
+            Prodotto prodotto = new Prodotto(nome,taglia,descrizzione,categoria,prezzo,iva);
             prodottoDAO.doSave(prodotto);
 
           }

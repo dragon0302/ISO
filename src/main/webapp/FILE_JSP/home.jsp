@@ -101,7 +101,7 @@
                             <input type="text" id="taglia" name="taglia" required><br><br>
 
                             <label for="iva">Iva:</label>
-                            <input type="number" id="iva" name="iva" step="4" required><br><br>
+                            <input type="number" id="iva" name="iva" required><br><br>
 
                             <label for="edit-descrizione">Descrizione:</label>
                             <input type="text" id="productDescrizione" name="productDescrizione" required><br><br>

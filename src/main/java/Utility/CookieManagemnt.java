@@ -176,4 +176,12 @@ public class CookieManagemnt {
 
     }
 
+    public void RemouveCoockieCart(HttpServletResponse response) {
+
+        cookieCart.setMaxAge(0);
+        cookieCart.setPath("/ISO_16_war_exploded");
+        response.addCookie(cookieCart);
+
+    }
+
 }
