@@ -140,7 +140,6 @@
 
                         <div class="form-group full-width">
                             <input type="submit" value="Registrati">
-<%--     aggiungere questo redirect   (response.sendRedirect("login.jsp");)--%>
                         </div>
                     </form>
                 </div>

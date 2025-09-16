@@ -27,7 +27,7 @@
 
 <!-- Box contenuto -->
 <div class="success-box">
-    <h1>Pagamento Fallito</h1>
+    <h1>C'è qualquadra che non cosa...</h1>
     <p>Si è verificato un errore durante la transazione.</p>
     <p>Verrai reindirizzato alla home tra <strong id="countdown">60</strong> secondi.</p>
     <p>Oppure puoi <a href="<%= request.getContextPath() %>/Catalogo">tornarci subito</a>.</p>

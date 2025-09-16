@@ -59,6 +59,9 @@
                 %>
                 <div class="field-error"><%= Errore_USER_PASS %></div>
                 <% } %>
+                <div class="form-group">
+                    <p style="color: black; margin-top: 2px ">Se non hai un account, <a href="Sign-up.jsp">Registrati</a></p>
+                </div>
             </form>
         </div>
 
