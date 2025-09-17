@@ -23,7 +23,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class Fattura {
-    OrdineDAOImplement oDAO = new OrdineDAOImplement();
     private String CF_fatturato;
     private String nomeFatturato;
     private String cognomeFatturato;
@@ -60,9 +59,9 @@ public class Fattura {
 
     // Getter e setter omessi per brevità (già corretti nel tuo codice)
 
-    public void CreatePDF() throws IOException {
-        String imagePath = "C:\\Users\\vxvit\\IdeaProjects\\ISO\\src\\main\\webapp\\Immagini\\isologo.png";
-        String dest = "C:\\Users\\vxvit\\Desktop\\fattura.pdf";
+    public void CreatePDF(String desktopLink, String immageLogoLink) throws IOException {
+        String imagePath = immageLogoLink;
+        String dest = desktopLink;
         PdfWriter writer = new PdfWriter(dest);
         PdfDocument pdf = new PdfDocument(writer);
         Document document = new Document(pdf, PageSize.A4);
