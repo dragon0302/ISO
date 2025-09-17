@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -41,9 +42,11 @@ public class FatturaServlet extends HttpServlet {
         OrdineDAO odao = new OrdineDAOImplement();
         try {
             fattura = new Fattura(ordine,utente,indirizzo,sf,sp,odao);
-            fattura.CreatePDF();
+            fattura.CreatePDF(System.getProperty("user.home") + File.separator + "Desktop/Fattura.pdf", request.getServletContext().getRealPath("/Immagini/isologo.png"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        response.sendRedirect("Impostazioni");
     }
 }

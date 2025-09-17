@@ -78,7 +78,6 @@ public class ProductCatalogoMenegment extends HttpServlet {
             imageMap.put(nome, filePath);
 
             ctx.setAttribute("Paths", imageMap);
-            //TODO aggungere il percorso dell'immagine alla lista delle immagini
 
             Prodotto prodotto = new Prodotto(nome,taglia,descrizzione,categoria,prezzo,iva);
             prodottoDAO.doSave(prodotto);

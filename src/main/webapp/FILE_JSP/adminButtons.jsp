@@ -14,7 +14,7 @@
     <ul>
       <li><a href="${pageContext.request.contextPath}/FILE_JSP/Profilo.jsp">Profilo</a></li>
       <li><a href="${pageContext.request.contextPath}/Impostazioni">Impostazioni</a></li>
-      <form action="Logout" method="get">
+      <form action="${pageContext.request.contextPath}/Logout" method="get">
         <li><button>Log-out</button></li>
       </form>
     </ul>

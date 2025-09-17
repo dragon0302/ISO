@@ -26,7 +26,7 @@ public class ProdottoS extends HttpServlet {
 
       request.setAttribute("Prodotto", prodotto);
 
-      RequestDispatcher dispatcher = request.getRequestDispatcher("/Prodotto.jsp");
+      RequestDispatcher dispatcher = request.getRequestDispatcher("/FILE_JSP/Prodotto.jsp");
       dispatcher.forward(request, response);
 
     }catch (Exception e) {

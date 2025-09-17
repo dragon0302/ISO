@@ -1,5 +1,5 @@
 <%@ page import="Model.Utente" %>
-<a class="btn card-btn" href=${pageContext.request.contextPath}/"carrello">Carrello</a>
+<a class="btn card-btn" href="${pageContext.request.contextPath}/carrello">Carrello</a>
 
 <div id="userContainer">
 <%--  <span class="username" onclick="toggleUserMenu()">--%>
@@ -17,7 +17,7 @@
         <ul>
             <li><a href="${pageContext.request.contextPath}/FILE_JSP/Profilo.jsp">Profilo</a></li>
             <li><a href="${pageContext.request.contextPath}/FILE_JSP/Impostazioni.jsp">Impostazioni</a></li>
-            <form action="Logout" method="get">
+            <form action="${pageContext.request.contextPath}/Logout" method="get">
                 <li><button>Log-out</button></li>
             </form>
         </ul>
