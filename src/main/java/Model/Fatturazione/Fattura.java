@@ -130,7 +130,7 @@ public class Fattura {
             totaleLordo += totaleProdotto;
 
             table.addCell(String.valueOf(p.getId_prodotto()));
-            table.addCell(p.getDescrizione());
+            table.addCell(p.getNome());
             table.addCell(String.format("%.2f", prezzoUnitario));
             table.addCell(String.valueOf(q));
             table.addCell(String.format("%.2f", percentualeIVA));
