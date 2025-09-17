@@ -2,15 +2,16 @@
 <%@ page import="java.util.List" %>
 <%@ page import="Model.Prodotto" %>
 <%@ page import="Model.Utente" %>
+ <%@ page import="java.util.Map" %>
 
-<%
+ <%
     // Recupero l'utente loggato dalla sessione
     Utente utente = (Utente) session.getAttribute("utente");
     // Controllo se c'è un filtro attivo
     String filtro = (String) request.getAttribute("Filter");
     boolean filtroAttivo = filtro != null && !filtro.isEmpty();
     List<Prodotto> prodottiFiltro = (List<Prodotto>) request.getAttribute("prodottiFiltro");
-    List<String> paths = (List<String>) application.getAttribute("Paths");
+     Map<String, String> imageMap = (Map<String, String>) application.getAttribute("Paths");
 %>
 
 <!DOCTYPE html>
@@ -70,7 +71,7 @@
 
             <section class="content">
                 <div class="banner">
-                    <span>Banner</span>
+                    <img src="${pageContext.request.contextPath}/Immagini/banner.png" alt="Banner" />
                 </div>
 
                 <%
@@ -83,7 +84,7 @@
                     <div class="modal-content">
                         <span class="close" onclick="closeAddProductModal()">&times;</span>
                         <h2>Aggiungi Prodotto</h2>
-                        <form action="ProductCatalogoMenegment" method="post">
+                        <form action="ProductCatalogoMenegment" method="post" enctype="multipart/form-data">
 
                             <label for="imageInput">Aggiungi immagine</label>
                             <input type="file" name="immagine" id="imageInput" accept="image/*" required>
@@ -95,6 +96,12 @@
 
                             <label for="price">Prezzo (€):</label>
                             <input type="number" id="price" name="price" step="0.01" required><br><br>
+
+                            <label for="taglia">Taglia:</label>
+                            <input type="text" id="taglia" name="taglia" required><br><br>
+
+                            <label for="iva">Iva:</label>
+                            <input type="number" id="iva" name="iva" required><br><br>
 
                             <label for="edit-descrizione">Descrizione:</label>
                             <input type="text" id="productDescrizione" name="productDescrizione" required><br><br>
@@ -118,7 +125,7 @@
                     <% for (Prodotto p : prodottiFiltro) { %>
                     <%
                     request.setAttribute("prodotto", p);
-                    request.setAttribute("path", paths.get(p.getId_prodotto() - 1));
+                    request.setAttribute("path", imageMap.get(p.getNome()));
                         if(utente == null){
                             request.setAttribute("isAmministratore", null);
                         }else{
@@ -158,7 +165,7 @@
                         if (prodottiNovita != null) {
                             for (Prodotto p : prodottiNovita) {
                             request.setAttribute("prodotto", p);
-                            request.setAttribute("path", paths.get(p.getId_prodotto() - 1));
+                            request.setAttribute("path", imageMap.get(p.getNome()));
                                 if(utente == null){
                                     request.setAttribute("isAmministratore", null);
                                 }else{
@@ -198,7 +205,8 @@
                         if (prodottiPopolari != null) {
                             for (Prodotto p : prodottiPopolari) {
                             request.setAttribute("prodotto", p);
-                            request.setAttribute("path", paths.get(p.getId_prodotto() - 1));
+                            System.out.println(imageMap.get(p.getNome()));
+                            request.setAttribute("path", imageMap.get(p.getNome()));
                                 if(utente == null){
                                     request.setAttribute("isAmministratore", null);
                                 }else{
@@ -290,10 +298,12 @@
 
         <!-- Script JS per il form della modifica-->
         <script>
-            function openEditModal(id, nome, prezzo, descrizione, filtro) {
+            function openEditModal(id, nome, prezzo, iva, taglia, descrizione, filtro) {
                 document.getElementById("edit-id").value = id;
                 document.getElementById("edit-nome").value = nome;
                 document.getElementById("edit-prezzo").value = prezzo;
+                document.getElementById("iva").value = iva;
+                document.getElementById("taglia").value = taglia;
                 document.getElementById("edit-descrizione").value = descrizione;
                 document.getElementById("edit-filtro").value = filtro;
                 document.getElementById("editProductModal").style.display = "block";

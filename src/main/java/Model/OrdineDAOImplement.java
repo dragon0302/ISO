@@ -209,10 +209,10 @@ public class OrdineDAOImplement implements OrdineDAO {
             query6 = conn.prepareStatement("SELECT ID_indirizzo FROM " + TABLE_NAME + " WHERE ID_ordine = ?");
             query6.setInt(1, IdOrdine);
             rs = query6.executeQuery();
-            System.out.println("stampa");
+
             if (rs.next()) {
                 id_indirizzo = rs.getInt(1);
-                System.out.println("id_indirizzo: " + id_indirizzo);
+
             }
         }catch (Exception e) {
             System.out.println("Naming Exeption: " + e.getMessage());

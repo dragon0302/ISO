@@ -67,7 +67,6 @@ public class AcquistoDAOImplement implements AcquistoDAO {
             query2 = conn.prepareStatement("select distinct ID_prodotto from " + TABLE_NAME + " where Quantita >= ?");
 
             query2.setInt(1,quantita);
-            System.out.println(quantita);
 
             ResultSet rs = query2.executeQuery();
 

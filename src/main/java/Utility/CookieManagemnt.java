@@ -119,7 +119,6 @@ public class CookieManagemnt {
                 if (item.contains("I" + prodottoID)) {
                     // Estrai la quantità
                     quantita = Integer.parseInt(item.split("!")[1].split("\\)")[0]);
-                    System.out.println("quantita" + Integer.parseInt(item.split("!")[1].split("\\)")[0]));
                 }
             }
             return quantita;
@@ -174,6 +173,14 @@ public class CookieManagemnt {
             cookieCart.setPath("/ISO_16_war_exploded");
             response.addCookie(cookieCart);
         }
+
+    }
+
+    public void RemouveCoockieCart(HttpServletResponse response) {
+
+        cookieCart.setMaxAge(0);
+        cookieCart.setPath("/ISO_16_war_exploded");
+        response.addCookie(cookieCart);
 
     }
 
