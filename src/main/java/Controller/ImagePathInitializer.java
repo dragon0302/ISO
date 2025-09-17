@@ -24,7 +24,6 @@ public class ImagePathInitializer implements ServletContextListener {
 
   public void contextInitialized(ServletContextEvent sce) {
 
-    //List<String> paths = new ArrayList<>();
     Map<String, String> imageMap = new HashMap<>();
 
     try {
@@ -40,13 +39,10 @@ public class ImagePathInitializer implements ServletContextListener {
         if (Files.exists(percorsoImmagine)) {
 
           imageMap.put(prodotto.getNome(), "/Immagini/" + prodotto.getNome() + ".jpg");
-          //paths.add("/Immagini/" + prodotto.getNome() + ".jpg");
 
         } else {
 
           imageMap.put(prodotto.getNome(), "/Immagini/" + "ironmaden.png");
-          //paths.add("/Immagini/" + "ironmaden.png");
-
         }
 
       }

@@ -205,7 +205,6 @@
                         if (prodottiPopolari != null) {
                             for (Prodotto p : prodottiPopolari) {
                             request.setAttribute("prodotto", p);
-                            System.out.println(imageMap.get(p.getNome()));
                             request.setAttribute("path", imageMap.get(p.getNome()));
                                 if(utente == null){
                                     request.setAttribute("isAmministratore", null);
