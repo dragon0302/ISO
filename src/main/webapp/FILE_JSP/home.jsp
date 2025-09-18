@@ -253,7 +253,13 @@
                     <input type="number" id="edit-prezzo" name="prezzo" step="0.01" required>
 
                     <label for="edit-descrizione">Descrizione:</label>
-                    <input id="edit-descrizione" name="descrizione" required></input>
+                    <input id="edit-descrizione" name="descrizione" required>
+
+                    <label for="taglia">Taglia:</label>
+                    <input type="text" id="taglia" name="taglia" required><br>
+
+                    <label for="iva">Iva:</label>
+                    <input type="number" id="iva" name="iva" required><br>
 
                     <label for="edit-filtro">filtro</label>
                     <input type="text" id="edit-filtro" name="filtro" required>

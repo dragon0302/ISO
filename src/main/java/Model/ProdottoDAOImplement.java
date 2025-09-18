@@ -338,6 +338,34 @@ public class ProdottoDAOImplement implements ProdottoDAO{
         }
     }
 
+    public void editIva(Prodotto prodotto,String new_iva) throws SQLException {
+        Connection conn = null;
+        PreparedStatement query = null;
+
+        try {
+
+            conn = ds.getConnection();
+            query = conn.prepareStatement("UPDATE " + TABLE_NAME + " SET Iva = ? WHERE ID_Prodotto = ?");
+            query.setString(1, new_iva);
+            query.setInt(2, prodotto.getId_prodotto());
+
+            query.execute();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (query != null) {
+                    query.close();
+                }
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+        }
+    }
+
     public void editTaglia(Prodotto prodotto,String new_taglia) throws SQLException {
         Connection conn = null;
         PreparedStatement query = null;

@@ -10,8 +10,10 @@
         <% if (admin != null) { %>
         <button class="menu-button" onclick="toggleBoxOption(this)">&#8942;</button>
         <div class="box-option">
-            <button onclick="openEditModal(<%= p.getId_prodotto() %>, '<%= p.getNome() %>', <%= p.getPrezzo() %>, '<%= p.getDescrizione() %>', '<%=p.getCategoria()%>')">Modifica</button>
-            <form action="eliminaProdotto" method="POST" class="settings-option" onsubmit="return confirm('Sei sicuro di voler eliminare il prodotto?');">
+            <button onclick="openEditModal(<%= p.getId_prodotto() %>, '<%= p.getNome() %>', '<%= p.getPrezzo() %>',  '<%= p.getIva() %>', '<%= p.getTaglia() %>', '<%= p.getDescrizione() %>', '<%=p.getCategoria()%>')">Modifica</button>
+            <form action="${pageContext.request.contextPath}/ProductCatalogoMenegment" method="POST" class="settings-option" onsubmit="return confirm('Sei sicuro di voler eliminare il prodotto?');">
+                <input type="hidden" name="action" value="elimina">
+                <input type="hidden" name="id" value="<%= p.getId_prodotto() %>">
                 <button onclick="openDeleteModal(<%= p.getId_prodotto() %>)">Elimina</button>
             </form>
         </div>

@@ -47,11 +47,17 @@ public class ProductCatalogoMenegment extends HttpServlet {
             String nome = request.getParameter("nome");
             float prezzo = Float.parseFloat(request.getParameter("prezzo"));
             String descrizzione = request.getParameter("descrizione");
+            String taglia = request.getParameter("taglia");
+            int iva = Integer.parseInt(request.getParameter("iva"));
+            String filtro = request.getParameter("filtro");
 
             Prodotto prodotto = prodottoDAO.getProdottoByID(prodottoID);
             prodottoDAO.editNomeProdotto(prodotto, nome);
             prodottoDAO.editPrezzo(prodotto, prezzo);
             prodottoDAO.editDescrizione(prodotto, descrizzione);
+            prodottoDAO.editTaglia(prodotto, taglia);
+            prodottoDAO.editIva(prodotto, String.valueOf(iva));
+            prodottoDAO.editCategoria(prodotto, filtro);
 
           } else if (action.equals("nuovo")) {
 
@@ -83,6 +89,9 @@ public class ProductCatalogoMenegment extends HttpServlet {
 
             prodottoDAO.doSave(prodotto);
 
+          }else if (action.equals("elimina")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            prodottoDAO.deleteProdotto(id);
           }
 
         } catch (SQLException e) {
