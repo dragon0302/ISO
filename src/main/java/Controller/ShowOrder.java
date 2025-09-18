@@ -27,6 +27,8 @@ public class ShowOrder extends HttpServlet {
 
             request.setAttribute("ordini", ordini);
 
+            response.sendRedirect("/FILE_JSP/Impostazioni.jsp");
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
