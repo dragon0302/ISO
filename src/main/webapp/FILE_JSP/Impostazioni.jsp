@@ -66,7 +66,7 @@
                     <h2>Impostazioni Account</h2>
 
                     <!-- Modifica dati account -->
-                        <h3>Modifica nome o e-mail:</h3>
+                        <h3 style="color: black">Modifica nome o e-mail:</h3>
                         <a href="${pageContext.request.contextPath}/FILE_JSP/Profilo.jsp" class="button-link">Modifica</a>
 
                     <!-- Indirizzo di fatturazione -->

@@ -80,6 +80,7 @@ public class ProductCatalogoMenegment extends HttpServlet {
             ctx.setAttribute("Paths", imageMap);
 
             Prodotto prodotto = new Prodotto(nome,taglia,descrizzione,categoria,prezzo,iva);
+
             prodottoDAO.doSave(prodotto);
 
           }

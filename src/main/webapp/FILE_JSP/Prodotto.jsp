@@ -52,7 +52,7 @@
 <div class="product-container">
     <div class="product-image">
         <!-- Immagine prodotto (metti il path corretto nell'attributo src) -->
-        <!--img src="<!%= prodotto.getImmaginePath() != null ? prodotto.getImmaginePath() : "placeholder.jpg" %>" alt="Immagine Prodotto"-->
+<%--        <img src="<!%= prodotto.getImmaginePath() != null ? prodotto.getImmaginePath() : "placeholder.jpg" %>" alt="Immagine Prodotto">--%>
     </div>
     <div class="product-details">
         <h2 class="product-name"><%= prodotto.getNome() %></h2>
