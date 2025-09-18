@@ -1,4 +1,3 @@
-USE iso16;
 
 INSERT INTO Utente (CF, NomeUtente, Password,Salt, Nome, Cognome ,Email, Sesso, DataNascita, Amministratore)
 VALUES
